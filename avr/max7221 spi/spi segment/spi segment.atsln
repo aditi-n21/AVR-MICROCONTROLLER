@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "spi", "spi\spi.cproj", "{AE9DC502-12AF-4794-A332-120D36334435}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE9DC502-12AF-4794-A332-120D36334435}.Debug|AVR.ActiveCfg = Debug|AVR
+		{AE9DC502-12AF-4794-A332-120D36334435}.Debug|AVR.Build.0 = Debug|AVR
+		{AE9DC502-12AF-4794-A332-120D36334435}.Release|AVR.ActiveCfg = Release|AVR
+		{AE9DC502-12AF-4794-A332-120D36334435}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

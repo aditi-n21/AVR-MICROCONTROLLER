@@ -1,0 +1,215 @@
+C51 COMPILER V9.01   TEMP                                                                  09/01/2014 15:51:16 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE TEMP
+OBJECT MODULE PLACED IN temp.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE temp.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          # include<reg51.h>
+   2          
+   3          sbit dq = P3^5; // connect with DS1820 Data pin
+   4          sbit led=P3^7;
+   5          sbit rs=P3^0;
+   6          sbit en=P3^1;
+   7          
+   8          void delay_ms(int j)
+   9          {
+  10   1      unsigned char i;
+  11   1      
+  12   1      for(;j;j--)
+  13   1      for(i=122;i<=0;i--);
+  14   1      }
+  15          
+  16          void data_lcd(unsigned char dat)
+  17          {
+  18   1      P2=dat;
+  19   1      rs=1;
+  20   1      en=1;
+  21   1      delay_ms(200);
+  22   1      en=0;
+  23   1      }
+  24          void cmd_lcd(unsigned char cmd)
+  25          {
+  26   1      P2=cmd;
+  27   1      rs=0;
+  28   1      en=1;
+  29   1      delay_ms(200);
+  30   1      en=0;
+  31   1      }
+  32          
+  33          void init_lcd()
+  34          {
+  35   1      cmd_lcd(0x38);
+  36   1      cmd_lcd(0x01);
+  37   1      cmd_lcd(0x0e);
+  38   1      cmd_lcd(0x06);
+  39   1      
+  40   1      }
+  41          
+  42          void str_lcd(unsigned char *p)
+  43          { 
+  44   1      while(*p)
+  45   1      data_lcd(*p++);
+  46   1      }
+  47          
+  48          
+  49          void delayus(int us)
+  50          {
+  51   1      int i;
+  52   1      for (i=0; i<us; i++);
+  53   1      }
+  54          
+  55          bit reset(void)
+C51 COMPILER V9.01   TEMP                                                                  09/01/2014 15:51:16 PAGE 2   
+
+  56          {
+  57   1      bit presence;
+  58   1      dq = 0;
+  59   1      delayus(29);
+  60   1      dq = 1;
+  61   1      delayus(3);
+  62   1      presence = dq;
+  63   1      delayus(25);
+  64   1      return(presence);
+  65   1      }
+  66          
+  67          bit readbit(void)
+  68          {
+  69   1      unsigned char i=0;
+  70   1      dq = 0;
+  71   1      dq=1;
+  72   1      for (i=0; i < 3; i++);
+  73   1      return(dq);
+  74   1      }
+  75          
+  76          
+  77          void writebit(bit Dbit)
+  78          {
+  79   1      unsigned char i=0;
+  80   1      dq=0;
+  81   1      dq = Dbit?1:0;
+  82   1      delayus(5);
+  83   1      dq = 1;
+  84   1      }
+  85          
+  86          unsigned char readbyte(void)
+  87          {
+  88   1      unsigned char i;
+  89   1      unsigned char din = 0;
+  90   1      for (i=0;i<8;i++)
+  91   1      {
+  92   2      din|=readbit()? 0x01<<i:din;
+  93   2      delayus(6);
+  94   2      }
+  95   1      return(din);
+  96   1      }
+  97          
+  98          void writebyte(unsigned char dout)
+  99          {
+ 100   1      unsigned char i;
+ 101   1      for (i=0; i<8; i++)
+ 102   1      {
+ 103   2      writebit((bit)(dout & 0x1));
+ 104   2      dout = dout >> 1;
+ 105   2      }
+ 106   1      delayus(5);
+ 107   1      }
+ 108          
+ 109          unsigned char * ReadTemp()
+ 110          {
+ 111   1      unsigned char n;
+ 112   1      unsigned char buff[2]=0;
+ 113   1      reset();
+ 114   1      
+ 115   1      writebyte(0xcc);
+ 116   1      writebyte(0x44);
+ 117   1      
+C51 COMPILER V9.01   TEMP                                                                  09/01/2014 15:51:16 PAGE 3   
+
+ 118   1      while (readbyte()==0xff);
+ 119   1      delay_ms(500);
+ 120   1      
+ 121   1      reset();
+ 122   1      
+ 123   1      writebyte(0xcc);
+ 124   1      writebyte(0xbe);
+ 125   1      
+ 126   1      
+ 127   1      for (n=0; n<9; n++)
+ 128   1      buff[n]=readbyte();
+ 129   1      
+ 130   1      return buff;
+ 131   1      }
+ 132          
+ 133          void int_lcd(int dat)
+ 134          {
+ 135   1      int str[5]={0},i=0;
+ 136   1      if(dat==0)
+ 137   1      data_lcd('0');
+ 138   1      else
+ 139   1      while(dat>0)
+ 140   1      {
+ 141   2      str[i]= (dat%10)+48;
+ 142   2      dat=dat/10;
+ 143   2      i++;
+ 144   2      }
+ 145   1      i--; 
+ 146   1      for(;i>=0;i--)
+ 147   1      data_lcd(str[i]);
+ 148   1      }
+ 149          
+ 150           
+ 151          void main()
+ 152          {
+ 153   1      unsigned char tp,*temp,t=0x00;
+ 154   1      init_lcd();
+ 155   1      cmd_lcd(0x80);
+ 156   1      while(1)
+ 157   1      {
+ 158   2       
+ 159   2      temp=ReadTemp();
+ 160   2      
+ 161   2      temp[1]=temp[1]&0x07;
+ 162   2      
+ 163   2      tp=temp[0]>>4;
+ 164   2      temp[1]=temp[1]<<4;
+ 165   2      
+ 166   2      tp=tp+temp[1];
+ 167   2      
+ 168   2      cmd_lcd(0x80);
+ 169   2      
+ 170   2      str_lcd("Temp :- ");
+ 171   2      
+ 172   2      cmd_lcd(0x89);
+ 173   2      
+ 174   2      int_lcd(tp);
+ 175   2      data_lcd(223);
+ 176   2      if(tp<35)
+ 177   2      {
+ 178   3      led=1;
+ 179   3      }
+C51 COMPILER V9.01   TEMP                                                                  09/01/2014 15:51:16 PAGE 4   
+
+ 180   2      else
+ 181   2      {
+ 182   3      led=0;
+ 183   3      }
+ 184   2      
+ 185   2      }
+ 186   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    611    ----
+   CONSTANT SIZE    =     21    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      23
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----       2
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

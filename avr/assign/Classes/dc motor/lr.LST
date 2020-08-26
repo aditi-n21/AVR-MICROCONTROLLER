@@ -1,0 +1,78 @@
+C51 COMPILER V9.05   LR                                                                    02/16/2013 00:45:13 PAGE 1   
+
+
+C51 COMPILER V9.05, COMPILATION OF MODULE LR
+OBJECT MODULE PLACED IN lr.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE lr.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg51.h>
+   2          sbit sw = P1^0;
+   3          sbit sw1 = P1^1;
+   4          sbit sw2 = P1^2;
+   5          //sbit sw3 = P1^3;
+   6          sbit mot1A=P2^0;
+   7          sbit mot1B=P2^1;
+   8          sbit mot2A=P2^2;
+   9          sbit mot2B=P2^3;
+  10          void delay(unsigned char);
+  11          void main()
+  12          {        sw=sw1=sw2=1;
+  13   1          // mot1A=mot1B=mot2A=mot2B==0;
+  14   1               while(1)
+  15   1         {
+  16   2              if((sw==0)&&(sw==1)&&(sw2==0))
+  17   2                   {
+  18   3                       mot1A=1;
+  19   3                       mot1B=0;
+  20   3                       delay(10);
+  21   3                       mot2A=1;
+  22   3                       mot2B=0;
+  23   3                       delay(10);
+  24   3                       }
+  25   2               if((sw==1)&&(sw==0)&&(sw2==0))
+  26   2                   {
+  27   3                       mot1A=0;
+  28   3                       mot1B=0;
+  29   3                       delay(10);
+  30   3                       mot2A=1;
+  31   3                       mot2B=0;
+  32   3                       delay(10);
+  33   3                       }
+  34   2              if((sw==0)&&(sw==0)&&(sw2==1))
+  35   2                   {
+  36   3                       mot1A=1;
+  37   3                       mot1B=0;
+  38   3                       delay(10);
+  39   3                       mot2A=0;
+  40   3                       mot2B=0;
+  41   3                       delay(10);
+  42   3                       }
+  43   2              
+  44   2         
+  45   2         }
+  46   1      }
+  47          void delay(unsigned char msec)   // Function for delay
+  48          {
+  49   1              unsigned char i;
+  50   1              unsigned int j;
+  51   1              for(i=0;i<msec;i++)
+  52   1                      for(j=0;j<1275;j++);
+  53   1      } 
+
+
+C51 COMPILER V9.05   LR                                                                    02/16/2013 00:45:13 PAGE 2   
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    104    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

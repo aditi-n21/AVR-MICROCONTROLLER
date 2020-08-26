@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "i2c_m", "i2c_m\i2c_m.cproj", "{7091291F-812A-42F2-9D7C-38A51F6BE092}"
+EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "i2c_s", "i2c_s\i2c_s.cproj", "{AADAD886-5E50-40C2-BD24-F1F718A2244A}"
+EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "clock+rtc", "clock+rtc\clock+rtc.cproj", "{D958F9BC-52C8-43FC-B2C7-D54BA01B8322}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7091291F-812A-42F2-9D7C-38A51F6BE092}.Debug|AVR.ActiveCfg = Debug|AVR
+		{7091291F-812A-42F2-9D7C-38A51F6BE092}.Debug|AVR.Build.0 = Debug|AVR
+		{7091291F-812A-42F2-9D7C-38A51F6BE092}.Release|AVR.ActiveCfg = Release|AVR
+		{7091291F-812A-42F2-9D7C-38A51F6BE092}.Release|AVR.Build.0 = Release|AVR
+		{AADAD886-5E50-40C2-BD24-F1F718A2244A}.Debug|AVR.ActiveCfg = Debug|AVR
+		{AADAD886-5E50-40C2-BD24-F1F718A2244A}.Debug|AVR.Build.0 = Debug|AVR
+		{AADAD886-5E50-40C2-BD24-F1F718A2244A}.Release|AVR.ActiveCfg = Release|AVR
+		{AADAD886-5E50-40C2-BD24-F1F718A2244A}.Release|AVR.Build.0 = Release|AVR
+		{D958F9BC-52C8-43FC-B2C7-D54BA01B8322}.Debug|AVR.ActiveCfg = Debug|AVR
+		{D958F9BC-52C8-43FC-B2C7-D54BA01B8322}.Debug|AVR.Build.0 = Debug|AVR
+		{D958F9BC-52C8-43FC-B2C7-D54BA01B8322}.Release|AVR.ActiveCfg = Release|AVR
+		{D958F9BC-52C8-43FC-B2C7-D54BA01B8322}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

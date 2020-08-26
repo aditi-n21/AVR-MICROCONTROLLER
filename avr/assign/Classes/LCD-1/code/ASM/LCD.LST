@@ -1,0 +1,89 @@
+LCD                                                                                                           PAGE 1
+
+                       1    ;W.A.P to display OK in LCD(2 lines & 16 Charac.)
+                       2    
+                       3    
+                       4    $mod51
+  00A0                 5    lcd equ p2
+  0090                 6    rs equ p1.0
+  0091                 7    rw equ p1.1
+  0092                 8    e equ p1.2
+0000                   9    org 00h
+0000 7438             10            mov a,#38h
+0002 113E             11            acall comnwrt
+0004 1158             12            acall delay
+0006 740E             13            mov a,#0eh
+0008 113E             14            acall comnwrt
+000A 1158             15            acall delay
+000C 7401             16            mov a,#01h
+000E 113E             17            acall comnwrt
+0010 1158             18            acall delay
+0012 7406             19            mov a,#06h
+0014 113E             20            acall comnwrt
+0016 1158             21            acall delay
+0018 7484             22     mov a,#84h
+001A 113E             23            acall comnwrt
+001C 1158             24            acall delay
+001E 744D             25            mov a,#'M'
+0020 114B             26            acall comndata
+0022 1158             27            acall delay
+0024 7461             28            mov a,#'a'
+0026 114B             29            acall comndata
+0028 1158             30            acall delay
+002A 746E             31    mov a,#'n'
+002C 114B             32            acall comndata
+002E 1158             33            acall delay
+0030 746F             34    mov a,#'o'
+0032 114B             35            acall comndata
+0034 1158             36            acall delay
+0036 746A             37    mov a,#'j'
+0038 114B             38            acall comndata
+003A 1158             39            acall delay
+003C 80FE             40    ag: sjmp ag
+                      41    
+003E                  42    comnwrt:
+003E F5A0             43            mov lcd,a
+0040 C290             44            clr rs
+0042 C291             45            clr rw
+0044 D292             46            setb e
+0046 1158             47            acall delay
+0048 C292             48            clr e
+004A 22               49            ret
+004B                  50    comndata:
+                      51    
+004B F5A0             52            mov lcd,a
+004D D290             53            setb rs
+004F C291             54            clr rw
+0051 D292             55            setb e
+0053 1158             56            acall delay
+0055 C292             57            clr e
+0057 22               58            ret
+LCD                                                                                                           PAGE 2
+
+                      59    
+0058                  60    delay:
+0058 7FFF             61            mov r7,#255
+005A 7EFF             62    la2:    mov r6,#0ffh
+005C DEFE             63    la1:    djnz r6,la1
+005E DFFA             64            djnz r7,la2
+0060 22               65            ret
+                      66    end
+                      67    
+                      68    
+                      69    
+
+VERSION 1.2h ASSEMBLY COMPLETE, 0 ERRORS FOUND
+LCD                                                                                                           PAGE 3
+
+AG . . . . . . . . . . . . . . .  C ADDR  003CH  
+COMNDATA . . . . . . . . . . . .  C ADDR  004BH  
+COMNWRT. . . . . . . . . . . . .  C ADDR  003EH  
+DELAY. . . . . . . . . . . . . .  C ADDR  0058H  
+E. . . . . . . . . . . . . . . .    NUMB  0092H  
+LA1. . . . . . . . . . . . . . .  C ADDR  005CH  
+LA2. . . . . . . . . . . . . . .  C ADDR  005AH  
+LCD. . . . . . . . . . . . . . .    NUMB  00A0H  
+P1 . . . . . . . . . . . . . . .  D ADDR  0090H  PREDEFINED  
+P2 . . . . . . . . . . . . . . .  D ADDR  00A0H  PREDEFINED  
+RS . . . . . . . . . . . . . . .    NUMB  0090H  
+RW . . . . . . . . . . . . . . .    NUMB  0091H  

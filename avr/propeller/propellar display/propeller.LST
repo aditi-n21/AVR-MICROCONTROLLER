@@ -1,0 +1,314 @@
+A51 MACRO ASSEMBLER  PROPELLER                                                            09/05/2014 15:52:26 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02
+OBJECT MODULE PLACED IN propeller.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE propeller.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;$include (reg51.inc)
+                       2     
+                       3     
+                       4     
+                       5     
+                       6     
+                       7     ;T0 interrupt
+0000                   8     org 000h
+0000 2100              9     ajmp main
+                      10     
+000B                  11     org 000BH
+000B 3122             12     acall interr
+000D 75B0FF           13     mov p3,#0ffH
+0010 32               14     reti
+                      15     
+                      16     ;EXT0 interrupt
+                      17     
+0003                  18     org 0003H
+0003 3130             19     acall interr1
+0005 32               20     reti
+                      21     
+                      22     
+0230                  23     org 230h
+0230                  24     lookup:
+0230 827C7C7C         25     db 10000010b,01111100b,01111100b,01111100b,10000010b,11111110b,10111100b,00000000b,11111100
+                             b,11111110b,10111100b,01110010b,01110100b,01101100b,10011100b
+0234 82FEBC00                
+0238 FCFEBC72                
+023C 746C9C                  
+023F 7A7C5C2C         26     db 01111010b,01111100b,01011100b,00101100b,01110010b,11100110b,11010110b,10110110b,00000000
+                             b,11110110b,00001100b,01101100b,01101100b,01101100b,01110010b
+0243 72E6D6B6                
+0247 00F60C6C                
+024B 6C6C72                  
+024E 826C6C6C         27     db 10000010b,01101100b,01101100b,01101100b,11110010b,00111100b,01111010b,01110110b,01101110
+                             b,00011110b,11100000b,00001100b,01101100b,00001100b,11100000b
+0252 F23C7A76                
+0256 6E1EE00C                
+025A 6C0CE0                  
+025D 9E6C6C6C         28     db 10011110b,01101100b,01101100b,01101100b,10000010b
+0261 82                      
+                      29                                   
+0285                  30     org 285h
+0285 806E6E6E         31     db 10000000b,01101110b,01101110b,01101110b,10000000b,00000000b,01101100b,01101100b,10001100
+                             b,11110010b,10000010b,01111100b,01111100b,01111100b,01111100b
+0289 80006C6C                
+028D 8CF2827C                
+0291 7C7C7C                  
+0294 7C007C7C         32     db 01111100b,00000000b,01111100b,01111100b,10000010b,00000000b,01101100b,01101100b,01111100
+                             b,01111100b,00000000b,01101110b,01101110b,01111110b,01111110b
+0298 82006C6C                
+029C 7C7C006E                
+02A0 6E7E7E                  
+02A3 007C6C6C         33     db 00000000b,01111100b,01101100b,01101100b,01100000b,00000000b,11101110b,11101110b,11101110
+                             b,00000000b,11111110b,01111100b,00000000b,01111100b,11111110b
+02A7 6000EEEE                
+02AB EE00FE7C                
+02AF 007CFE                  
+A51 MACRO ASSEMBLER  PROPELLER                                                            09/05/2014 15:52:26 PAGE     2
+
+02B2 FA7C027E         34     db 11111010b,01111100b,00000010b,01111110b,11111110b,00000000b,11101110b,11010110b,10111010
+                             b,01111100b,00000000b,11111100b,11111100b,11111100b,11111100b
+02B6 FE00EED6                
+02BA BA7C00FC                
+02BE FCFCFC                  
+02C1 007ECE7E         35     db 00000000b,01111110b,11001110b,01111110b,00000000b,00000000b,10011110b,11101110b,11110010
+                             b,00000000b,00000000b,01111100b,01111100b,01111100b,00000000b
+02C5 00009EEE                
+02C9 F200007C                
+02CD 7C7C00                  
+02D0 006E6E6E         36     db 00000000b,01101110b,01101110b,01101110b,10011110b,10000010b,01111100b,01110100b,01111000
+                             b,10000000b,00000000b,01101110b,01100110b,01101010b,10011100b
+02D4 9E827C74                
+02D8 7880006E                
+02DC 666A9C                  
+02DF 986C6C6C         37     db 10011000b,01101100b,01101100b,01101100b,10110010b,01111110b,01111110b,00000000b,01111110
+                             b,01111110b,00000000b,11111100b,11111100b,11111100b,00000000b
+02E3 B27E7E00                
+02E7 7E7E00FC                
+02EB FCFC00                  
+02EE 06FAFCFA         38     db 00000110b,11111010b,11111100b,11111010b,00000110b,00000010b,11111100b,11110010b,11111100
+                             b,00000010b,00111000b,11010110b,11101110b,11010110b,00111000b
+02F2 0602FCF2                
+02F6 FC0238D6                
+02FA EED638                  
+02FD 3EDEE0DE         39     db 00111110b,11011110b,11100000b,11011110b,00111110b,01111000b,01110100b,01101100b,01011100
+                             b,00111100b,11111111b,11111111b,11111111b,11111111b,11111111b
+0301 3E78746C                
+0305 5C3CFFFF                
+0309 FFFFFF                  
+                      40     
+                      41     ;Main Function
+0100                  42     org 0100h
+0100                  43     main:
+0100 75A883           44     mov ie,#83H
+0103 8501B8           45     mov ip,01H
+0106 758912           46     mov tmod,#12H
+0109 758C00           47     mov th0,#00h
+010C 758A00           48     mov tl0,#00h
+010F D288             49     setb it0
+0111 75B0FF           50     mov p3,#0FFh
+                      51     
+0114 3158             52     acall ramc
+0116 758D00           53     mov th1,#00h
+0119 758B00           54     mov tl1,#00h
+011C D28C             55     setb tr0
+011E D28E             56     setb tr1
+0120 2120             57     here: ajmp here
+                      58     
+                      59      
+0122                  60     interr:   ;T0 interrupt
+0122 BEFF06           61     cjne r6,#0ffh,sk
+0125 7E00             62     mov r6,#00h
+0127 3168             63     acall disp
+0129 8002             64     sjmp sk1
+012B                  65     sk:
+012B 7EFF             66     mov r6,#0ffh
+012D                  67     sk1:
+012D C28D             68     clr tf0
+012F 22               69     ret
+                      70     
+                      71     
+                      72     ; EXT0 interruupt
+0130                  73     interr1:
+0130 C28E             74     clr tr1
+0132 C28C             75     clr tr0
+A51 MACRO ASSEMBLER  PROPELLER                                                            09/05/2014 15:52:26 PAGE     3
+
+0134 E58D             76     mov a,th1
+0136 F9               77     mov r1,a
+0137 E58B             78     mov a,tl1
+0139 F8               79     mov r0,a 
+013A 7B00             80     mov r3,#00h
+013C 7AA0             81     mov r2,#160
+013E D126             82     acall div16_16
+0140 EA               83     mov a,r2
+0141 95FF             84     subb a,0ffh
+0143 F58C             85     mov th0,a
+0145 F58A             86     mov tl0,a
+0147 758D00           87     mov th1,#00h
+014A 758B00           88     mov tl1,#00h
+014D D28E             89     setb tr1
+014F D28C             90     setb tr0
+0151 7823             91     mov r0,#23h
+0153 7D00             92     mov r5,#00h
+0155 7E00             93     mov r6,#00h
+0157 22               94     ret
+                      95     
+0158                  96     ramc:    
+0158 900600           97     mov dptr,#600h
+015B 7F1E             98     mov r7,#30
+015D 7840             99     mov r0,#40h
+                     100     
+015F                 101     loop1:
+015F EF              102     mov a,r7
+0160 9401            103     subb a,#01h
+0162 93              104     movc a,@a+dptr
+0163 F6              105     mov @r0,a
+0164 18              106     dec r0
+0165 DFF8            107     djnz r7,loop1
+0167 22              108     ret
+                     109     
+0168                 110      disp: 
+0168 BD0511          111                     cjne r5,#5,continue
+016B E6              112                     mov a,@r0
+016C B45B05          113                     cjne a,#'[',space
+016F 7590FF          114                     mov p1,#11111111b
+0172 8003            115                     sjmp cont
+0174                 116                     space:  
+0174 7590FE          117                     mov p1,#11111110b
+0177                 118                     cont:
+0177 08              119                     inc r0
+0178 7D00            120                     mov r5,#00h
+017A 218C            121                     ajmp neglect
+017C                 122                     continue:               
+017C E6              123                     mov a,@r0       ; moves ASCII from RAM to R0
+017D C3              124                     clr c
+017E 9430            125                     subb A,#30h     ;
+0180 75F005          126                     mov b,#05       ; ASCII to Adress conversion
+0183 A4              127                     mul AB          ;
+0184 900230          128                     mov dptr,#230h  
+0187 2D              129                     add a,r5        ; Memory offset
+0188 93              130                movc A,@A+DPTR       
+0189 F590            131                mov p1,a
+018B 0D              132                     inc r5
+018C                 133                     neglect:
+018C 22              134                     ret
+                     135              
+                     136      
+0600                 137      org 600h
+0600                 138     msg:
+0600 50524F50        139          db 'PROPELLER[DISPLAY[[[[[[[[[[[[[[[[[[[[',0
+0604 454C4C45                
+0608 525B4449                
+A51 MACRO ASSEMBLER  PROPELLER                                                            09/05/2014 15:52:26 PAGE     4
+
+060C 53504C41                
+0610 595B5B5B                
+0614 5B5B5B5B                
+0618 5B5B5B5B                
+061C 5B5B5B5B                
+0620 5B5B5B5B                
+0624 5B00                    
+                     140          
+                     141          
+                     142          
+0626                 143     div16_16:
+0626 C3              144       CLR C       ;Clear carry initially
+0627 7C00            145       MOV R4,#00h ;Clear R4 working variable initially
+0629 7D00            146       MOV R5,#00h ;CLear R5 working variable initially
+062B 75F000          147       MOV B,#00h  ;Clear B since B will count the number of left-shifted bits
+062E                 148     div1:
+062E 05F0            149       INC B      ;Increment counter for each left shift
+0630 EA              150       MOV A,R2   ;Move the current divisor low byte into the accumulator
+0631 33              151       RLC A      ;Shift low-byte left, rotate through carry to apply highest bit to high-byte
+0632 FA              152       MOV R2,A   ;Save the updated divisor low-byte
+0633 EB              153       MOV A,R3   ;Move the current divisor high byte into the accumulator
+0634 33              154       RLC A      ;Shift high-byte left high, rotating in carry from low-byte
+0635 FB              155       MOV R3,A   ;Save the updated divisor high-byte
+0636 50F6            156       JNC div1   ;Repeat until carry flag is set from high-byte
+0638                 157     div2:        ;Shift right the divisor
+0638 EB              158       MOV A,R3   ;Move high-byte of divisor into accumulator
+0639 13              159       RRC A      ;Rotate high-byte of divisor right and into carry
+063A FB              160       MOV R3,A   ;Save updated value of high-byte of divisor
+063B EA              161       MOV A,R2   ;Move low-byte of divisor into accumulator
+063C 13              162       RRC A      ;Rotate low-byte of divisor right, with carry from high-byte
+063D FA              163       MOV R2,A   ;Save updated value of low-byte of divisor
+063E C3              164       CLR C      ;Clear carry, we don't need it anymore
+063F 8907            165       MOV 07h,R1 ;Make a safe copy of the dividend high-byte
+0641 8806            166       MOV 06h,R0 ;Make a safe copy of the dividend low-byte
+0643 E8              167       MOV A,R0   ;Move low-byte of dividend into accumulator
+0644 9A              168       SUBB A,R2  ;Dividend - shifted divisor = result bit (no factor, only 0 or 1)
+0645 F8              169       MOV R0,A   ;Save updated dividend 
+0646 E9              170       MOV A,R1   ;Move high-byte of dividend into accumulator
+0647 9B              171       SUBB A,R3  ;Subtract high-byte of divisor (all together 16-bit substraction)
+0648 F9              172       MOV R1,A   ;Save updated high-byte back in high-byte of divisor
+0649 5004            173       JNC div3   ;If carry flag is NOT set, result is 1
+064B A907            174       MOV R1,07h ;Otherwise result is 0, save copy of divisor to undo subtraction
+064D A806            175       MOV R0,06h
+064F                 176     div3:
+064F B3              177       CPL C      ;Invert carry, so it can be directly copied into result
+0650 EC              178       MOV A,R4 
+0651 33              179       RLC A      ;Shift carry flag into temporary result
+0652 FC              180       MOV R4,A   
+0653 ED              181       MOV A,R5
+0654 33              182       RLC A
+0655 FD              183       MOV R5,A              
+0656 D5F0DF          184       DJNZ B,div2 ;Now count backwards and repeat until "B" is zero
+0659 AB05            185       MOV R3,05h  ;Move result to R3/R2
+065B AA04            186       MOV R2,04h  ;Move result to R3/R2
+065D 22              187       RET
+                     188     
+                     189          
+                     190     end
+                             
+                             
+                              
+                             
+A51 MACRO ASSEMBLER  PROPELLER                                                            09/05/2014 15:52:26 PAGE     5
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+CONT . . . . . . .  C ADDR   0177H   A   
+CONTINUE . . . . .  C ADDR   017CH   A   
+DISP . . . . . . .  C ADDR   0168H   A   
+DIV1 . . . . . . .  C ADDR   062EH   A   
+DIV16_16 . . . . .  C ADDR   0626H   A   
+DIV2 . . . . . . .  C ADDR   0638H   A   
+DIV3 . . . . . . .  C ADDR   064FH   A   
+HERE . . . . . . .  C ADDR   0120H   A   
+IE . . . . . . . .  D ADDR   00A8H   A   
+INTERR . . . . . .  C ADDR   0122H   A   
+INTERR1. . . . . .  C ADDR   0130H   A   
+IP . . . . . . . .  D ADDR   00B8H   A   
+IT0. . . . . . . .  B ADDR   0088H.0 A   
+LOOKUP . . . . . .  C ADDR   0230H   A   
+LOOP1. . . . . . .  C ADDR   015FH   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+MSG. . . . . . . .  C ADDR   0600H   A   
+NEGLECT. . . . . .  C ADDR   018CH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+RAMC . . . . . . .  C ADDR   0158H   A   
+SK . . . . . . . .  C ADDR   012BH   A   
+SK1. . . . . . . .  C ADDR   012DH   A   
+SPACE. . . . . . .  C ADDR   0174H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

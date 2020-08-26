@@ -1,0 +1,71 @@
+KEY_SEG                                                                                                       PAGE 1
+
+                       1    $mod51
+  00A0                 2    row0 equ p2.0
+  00A1                 3    row1 equ p2.1
+  00A2                 4    row2 equ p2.2
+  00A5                 5    col0 equ p2.5
+  00A6                 6    col1 equ p2.6
+  00A7                 7    col2 equ p2.7
+0000                   8    org 00h
+0000 75A007            9            mov p2,#07h
+0003 C2A5             10    ag1:    clr col0
+0005 D2A6             11            setb col1
+0007 D2A7             12            setb col2
+0009 20A005           13            jb row0,r11
+000C 7590F9           14            mov p1,#0f9h
+000F 804C             15            sjmp ag
+0011 20A105           16    r11:    jb row1,r22
+0014 759099           17            mov p1,#99h
+0017 8044             18            sjmp ag
+0019 20A205           19    r22:    jb row2,r33
+001C 7590F8           20            mov p1,#0f8h
+001F 803C             21            sjmp ag
+0021 D2A5             22    r33:    setb col0
+0023 C2A6             23            clr col1
+0025 D2A7             24            setb col2
+0027 20A005           25            jb row0,r44
+002A 7590A4           26            mov p1,#0a4h
+002D 802E             27            sjmp ag
+002F 20A105           28    r44:    jb row1,r55
+0032 759092           29            mov p1,#092h
+0035 8026             30            sjmp ag
+0037 20A205           31    r55:    jb row2,r66
+003A 759080           32            mov p1,#80h
+003D 801E             33            sjmp ag
+003F D2A5             34    r66:    setb col0
+0041 D2A6             35            setb col1
+0043 C2A7             36            clr col2
+0045 20A005           37            jb row0,r77
+0048 7590B0           38            mov p1,#0b0h
+004B 8010             39            sjmp ag
+004D 20A105           40    r77:    jb row1,r88
+0050 759082           41            mov p1,#82h
+0053 8008             42            sjmp ag
+0055 20A2AB           43    r88:    jb row2,ag1
+0058 759090           44            mov p1,#90h
+005B 8000             45            sjmp ag
+005D 80A4             46    ag:     sjmp ag1
+                      47            end
+
+VERSION 1.2h ASSEMBLY COMPLETE, 0 ERRORS FOUND
+KEY_SEG                                                                                                       PAGE 2
+
+AG . . . . . . . . . . . . . . .  C ADDR  005DH  
+AG1. . . . . . . . . . . . . . .  C ADDR  0003H  
+COL0 . . . . . . . . . . . . . .    NUMB  00A5H  
+COL1 . . . . . . . . . . . . . .    NUMB  00A6H  
+COL2 . . . . . . . . . . . . . .    NUMB  00A7H  
+P1 . . . . . . . . . . . . . . .  D ADDR  0090H  PREDEFINED  
+P2 . . . . . . . . . . . . . . .  D ADDR  00A0H  PREDEFINED  
+R11. . . . . . . . . . . . . . .  C ADDR  0011H  
+R22. . . . . . . . . . . . . . .  C ADDR  0019H  
+R33. . . . . . . . . . . . . . .  C ADDR  0021H  
+R44. . . . . . . . . . . . . . .  C ADDR  002FH  
+R55. . . . . . . . . . . . . . .  C ADDR  0037H  
+R66. . . . . . . . . . . . . . .  C ADDR  003FH  
+R77. . . . . . . . . . . . . . .  C ADDR  004DH  
+R88. . . . . . . . . . . . . . .  C ADDR  0055H  
+ROW0 . . . . . . . . . . . . . .    NUMB  00A0H  
+ROW1 . . . . . . . . . . . . . .    NUMB  00A1H  
+ROW2 . . . . . . . . . . . . . .    NUMB  00A2H  

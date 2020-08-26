@@ -1,0 +1,65 @@
+DTMF                                                                                                          PAGE 1
+
+                       1    $mod51
+0000                   2    org 00h
+0000 7590FF            3    mov p1,#0ffh
+0003 E590              4    ag: mov a,p1
+0005 540F              5            anl a,#0fh
+0007 B40D05            6            cjne a,#00001101b,la1
+000A 75A0F0            7            mov p2,#11110000b
+000D 80F4              8            sjmp ag
+000F                   9    la1:
+000F E590             10            mov a,p1
+0011 540F             11            anl a,#0fh
+0013 B40A05           12            cjne a,#00001010b,la2
+0016 75A0F3           13            mov p2,#11110011b
+0019 80E8             14            sjmp ag
+001B                  15    la2:
+001B E590             16            mov a,p1
+001D 540F             17            anl a,#0fh
+001F B40F05           18            cjne a,#00001111b,la3
+0022 75A0F8           19            mov p2,#11111000b
+0025 80DC             20            sjmp ag         
+0027                  21    la3:
+0027 E590             22            mov a,p1
+0029 540F             23            anl a,#0fh
+002B B40B05           24            cjne a,#00001011b,la4
+002E 75A0F4           25            mov p2,#11110100b
+0031 80D0             26            sjmp ag 
+0033                  27    la4:
+0033 E590             28            mov a,p1
+0035 540F             29            anl a,#0fh
+0037 B40D05           30            cjne a,#00001101b,la5
+003A 75A0F2           31            mov p2,#11110010b
+003D 80C4             32            sjmp ag
+003F                  33    la5:
+003F E590             34            mov a,p1
+0041 540F             35            anl a,#0fh
+0043 B40905           36            cjne a,#00001001b,la6
+0046 75A0F1           37            mov p2,#11110001b
+0049 80B8             38            sjmp ag
+004B                  39    la6:
+004B E590             40            mov a,p1
+004D 540F             41            anl a,#0fh
+004F B40EB1           42            cjne a,#00001110b,ag
+0052 75A0FF           43            mov p2,#11111111b
+0055 80AC             44            sjmp ag
+                      45    
+                      46    
+                      47    end     
+                      48    
+                      49    
+                      50    
+
+VERSION 1.2h ASSEMBLY COMPLETE, 0 ERRORS FOUND
+DTMF                                                                                                          PAGE 2
+
+AG . . . . . . . . . . . . . . .  C ADDR  0003H  
+LA1. . . . . . . . . . . . . . .  C ADDR  000FH  
+LA2. . . . . . . . . . . . . . .  C ADDR  001BH  
+LA3. . . . . . . . . . . . . . .  C ADDR  0027H  
+LA4. . . . . . . . . . . . . . .  C ADDR  0033H  
+LA5. . . . . . . . . . . . . . .  C ADDR  003FH  
+LA6. . . . . . . . . . . . . . .  C ADDR  004BH  
+P1 . . . . . . . . . . . . . . .  D ADDR  0090H  PREDEFINED  
+P2 . . . . . . . . . . . . . . .  D ADDR  00A0H  PREDEFINED  

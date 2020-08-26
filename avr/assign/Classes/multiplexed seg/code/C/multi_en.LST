@@ -1,0 +1,133 @@
+C51 COMPILER V9.05   MULTI_EN                                                              01/24/2013 16:06:31 PAGE 1   
+
+
+C51 COMPILER V9.05, COMPILATION OF MODULE MULTI_EN
+OBJECT MODULE PLACED IN multi_en.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE multi_en.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          
+   2          #include <reg51.h>
+   3          #define msec 1
+   4          unsigned int num=0;
+   5          sbit dig_ctrl_4=P1^3;  //Declare the control or enable pins of seven segments
+   6          sbit dig_ctrl_3=P1^2;
+   7          sbit dig_ctrl_2=P1^1;
+   8          sbit dig_ctrl_1=P1^0;
+   9          unsigned int digi_val[10]={0x40,0xF9,0x24,0x30,0x19,0x12,0x02,0xF8,0x00,0x10};
+  10          unsigned int dig_1,dig_2,dig_3,dig_4,test=0;
+  11          unsigned char dig_disp=0;
+  12          sbit up=P3^5;  //up pin to make counter count up
+  13          sbit down=P3^6;  //down pin to make counter count down
+  14          
+  15          void init()  // to initialize the output pins and Timer0
+  16          {
+  17   1      up=down=1;
+  18   1      dig_ctrl_4 = 0;
+  19   1      dig_ctrl_3 = 0;
+  20   1      dig_ctrl_2 = 0;
+  21   1      dig_ctrl_1 = 0;
+  22   1      TMOD=0x01;
+  23   1      TL0=0xf6;
+  24   1      TH0=0xFf;
+  25   1      IE=0x82;
+  26   1      TR0=1;
+  27   1      }
+  28          
+  29          void delay()  //To provide delay a small time delay 
+  30          {
+  31   1          TMOD=0x01;
+  32   1          TL0=0x36;
+  33   1          TH0=0xF6;
+  34   1          TR0=1;
+  35   1          while(TF0==0);
+  36   1          TR0=0;
+  37   1          TF0=0;
+  38   1      }
+  39          
+  40          void display() interrupt 1  // Function to display the digits on seven segmnet. For more details refer sev
+             -en segment multiplexing.
+  41          {
+  42   1      TL0=0x36;
+  43   1          TH0=0xf6;
+  44   1      P2=0xFF;
+  45   1      dig_ctrl_1 = dig_ctrl_3 = dig_ctrl_2 = dig_ctrl_4 = 0;
+  46   1      dig_disp++;
+  47   1      dig_disp=dig_disp%4;
+  48   1      switch(dig_disp)
+  49   1      {
+  50   2       
+  51   2        case 0:
+  52   2        P2= digi_val[dig_1];
+  53   2        dig_ctrl_1 = 1;
+  54   2        break;
+C51 COMPILER V9.05   MULTI_EN                                                              01/24/2013 16:06:31 PAGE 2   
+
+  55   2      
+  56   2        case 1:
+  57   2        P2= digi_val[dig_2];
+  58   2        dig_ctrl_2 = 1;
+  59   2        break;
+  60   2      
+  61   2        case 2:
+  62   2        P2= digi_val[dig_3];
+  63   2        dig_ctrl_3 = 1;
+  64   2        break;
+  65   2       
+  66   2        case 3:
+  67   2        P2= digi_val[dig_4];
+  68   2        dig_ctrl_4 = 1;
+  69   2        break;
+  70   2      }
+  71   1      }
+  72          
+  73          void main()
+  74          {
+  75   1         init();
+  76   1         while(1)
+  77   1         {
+  78   2        if(up==0&&down==1)  //check if up pin is pressed
+  79   2           {
+  80   3         test++;
+  81   3              num=test;
+  82   3              dig_4=num%10;
+  83   3            num=num/10;
+  84   3              dig_3=num%10;
+  85   3            num=num/10;
+  86   3              dig_2=num%10;
+  87   3            dig_1=num/10;
+  88   3            if(test==9999)
+  89   3           test=0;
+  90   3          }
+  91   2          if(up==1&&down==0)  //check if down pin is pressed
+  92   2          {
+  93   3         test--;
+  94   3              num=test;
+  95   3              dig_4=num%10;
+  96   3         num=num/10;
+  97   3              dig_3=num%10;
+  98   3         num=num/10;
+  99   3              dig_2=num%10;
+ 100   3            dig_1=num/10;
+ 101   3           if(test==0)
+ 102   3           test=9999;
+ 103   3        }
+ 104   2      }
+ 105   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    396    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     33    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+C51 COMPILER V9.05   MULTI_EN                                                              01/24/2013 16:06:31 PAGE 3   
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

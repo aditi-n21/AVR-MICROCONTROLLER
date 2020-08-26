@@ -1,0 +1,5 @@
+org 00h
+HERE: MOV P1,#00h
+MOV P1,#0FFh
+SJMP HERE
+END

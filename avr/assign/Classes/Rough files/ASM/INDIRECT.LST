@@ -1,0 +1,27 @@
+INDIRECT                                                                                                      PAGE 1
+
+                       1    $mod51
+0000                   2    org 00h
+0000 751102            3    mov 11h,#02h
+0003 751204            4    mov 12h,#04h
+0006 751306            5    mov 13h,#06h
+0009 751408            6    mov 14h,#08h
+000C 7811              7    mov r0,#11h
+000E E6                8    mov a,@r0
+000F F9                9    mov r1,a
+0010 08               10    inc r0
+0011 E6               11    mov a,@r0
+0012 FA               12    mov r2,a
+0013 08               13    inc r0
+0014 E6               14    mov a,@r0
+0015 FB               15    mov r3,a
+0016 08               16    inc r0
+0017 E6               17    mov a,@r0
+0018 FC               18    mov r4,a
+0019 08               19    inc r0
+                      20    
+                      21    END
+
+VERSION 1.2h ASSEMBLY COMPLETE, 0 ERRORS FOUND
+INDIRECT                                                                                                      PAGE 2
+

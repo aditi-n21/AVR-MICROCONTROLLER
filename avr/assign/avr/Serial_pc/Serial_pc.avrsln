@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# AvrStudio Solution File, Format Version 11.00
+Project("{D1100916-62DA-4D80-A9B4-55A1E7CCEEB3}") = "Serial_pc", "Serial_pc.avrgccproj", "{47DA1228-A8A7-4A52-9BA0-3D9B0E2E009D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{47DA1228-A8A7-4A52-9BA0-3D9B0E2E009D}.Debug|AVR.ActiveCfg = Debug|AVR
+		{47DA1228-A8A7-4A52-9BA0-3D9B0E2E009D}.Debug|AVR.Build.0 = Debug|AVR
+		{47DA1228-A8A7-4A52-9BA0-3D9B0E2E009D}.Release|AVR.ActiveCfg = Release|AVR
+		{47DA1228-A8A7-4A52-9BA0-3D9B0E2E009D}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

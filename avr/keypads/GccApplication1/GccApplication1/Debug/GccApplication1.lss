@@ -1,0 +1,245 @@
+
+GccApplication1.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000012c  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .stab         000006cc  00000000  00000000  00000180  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  2 .stabstr      00000085  00000000  00000000  0000084c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_aranges 00000080  00000000  00000000  000008d8  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   00000339  00000000  00000000  00000958  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 0000009f  00000000  00000000  00000c91  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   000002a5  00000000  00000000  00000d30  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  00000034  00000000  00000000  00000fd8  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    000000ba  00000000  00000000  0000100c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d4 e0       	ldi	r29, 0x04	; 4
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	ec e2       	ldi	r30, 0x2C	; 44
+  68:	f1 e0       	ldi	r31, 0x01	; 1
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a0 36       	cpi	r26, 0x60	; 96
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+
+00000076 <__do_clear_bss>:
+  76:	10 e0       	ldi	r17, 0x00	; 0
+  78:	a0 e6       	ldi	r26, 0x60	; 96
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	a0 36       	cpi	r26, 0x60	; 96
+  82:	b1 07       	cpc	r27, r17
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 86 00 	call	0x10c	; 0x10c <main>
+  8a:	0c 94 94 00 	jmp	0x128	; 0x128 <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <keysence>:
+#define key_in PINB
+#define key PORTB
+#define seg PORTC
+void keysence(void)
+{
+	key&=~(1<<col1);
+  92:	c0 98       	cbi	0x18, 0	; 24
+	key|=(1<<col2)|(1<<col3);
+  94:	88 b3       	in	r24, 0x18	; 24
+  96:	86 60       	ori	r24, 0x06	; 6
+  98:	88 bb       	out	0x18, r24	; 24
+	if(bit_is_clear(key_in,rw1))
+  9a:	b3 99       	sbic	0x16, 3	; 22
+  9c:	02 c0       	rjmp	.+4      	; 0xa2 <keysence+0x10>
+	{
+		seg=0x06;
+  9e:	86 e0       	ldi	r24, 0x06	; 6
+  a0:	85 bb       	out	0x15, r24	; 21
+	}
+	if(bit_is_clear(key_in,rw2))
+  a2:	b4 99       	sbic	0x16, 4	; 22
+  a4:	02 c0       	rjmp	.+4      	; 0xaa <keysence+0x18>
+	{
+		seg=0x66;
+  a6:	86 e6       	ldi	r24, 0x66	; 102
+  a8:	85 bb       	out	0x15, r24	; 21
+	}
+	if(bit_is_clear(key_in,rw3))
+  aa:	b5 99       	sbic	0x16, 5	; 22
+  ac:	02 c0       	rjmp	.+4      	; 0xb2 <keysence+0x20>
+	{
+		seg=0x07;
+  ae:	87 e0       	ldi	r24, 0x07	; 7
+  b0:	85 bb       	out	0x15, r24	; 21
+	}
+	if(bit_is_clear(key_in,rw4))
+  b2:	b6 99       	sbic	0x16, 6	; 22
+  b4:	02 c0       	rjmp	.+4      	; 0xba <keysence+0x28>
+	{
+		seg=0x77;
+  b6:	87 e7       	ldi	r24, 0x77	; 119
+  b8:	85 bb       	out	0x15, r24	; 21
+	}
+	
+	key&=~(1<<col2);
+  ba:	c1 98       	cbi	0x18, 1	; 24
+	key|=(1<<col1)|(1<<col3);
+  bc:	88 b3       	in	r24, 0x18	; 24
+  be:	85 60       	ori	r24, 0x05	; 5
+  c0:	88 bb       	out	0x18, r24	; 24
+	if(bit_is_clear(key_in,rw1))
+  c2:	b3 99       	sbic	0x16, 3	; 22
+  c4:	02 c0       	rjmp	.+4      	; 0xca <keysence+0x38>
+	{
+		seg=0x5b;
+  c6:	8b e5       	ldi	r24, 0x5B	; 91
+  c8:	85 bb       	out	0x15, r24	; 21
+	}
+	if(bit_is_clear(key_in,rw2))
+  ca:	b4 99       	sbic	0x16, 4	; 22
+  cc:	02 c0       	rjmp	.+4      	; 0xd2 <keysence+0x40>
+	{
+		seg=0x6d;
+  ce:	8d e6       	ldi	r24, 0x6D	; 109
+  d0:	85 bb       	out	0x15, r24	; 21
+	}
+	if(bit_is_clear(key_in,rw3))
+  d2:	b5 99       	sbic	0x16, 5	; 22
+  d4:	02 c0       	rjmp	.+4      	; 0xda <keysence+0x48>
+	{
+		seg=0x7f;
+  d6:	8f e7       	ldi	r24, 0x7F	; 127
+  d8:	85 bb       	out	0x15, r24	; 21
+	}
+	if(bit_is_clear(key_in,rw4))
+  da:	b6 99       	sbic	0x16, 6	; 22
+  dc:	02 c0       	rjmp	.+4      	; 0xe2 <keysence+0x50>
+	{
+		seg=0x3f;
+  de:	8f e3       	ldi	r24, 0x3F	; 63
+  e0:	85 bb       	out	0x15, r24	; 21
+	}
+	
+	key&=~(1<<col3);
+  e2:	c2 98       	cbi	0x18, 2	; 24
+	key|=(1<<col2)|(1<<col1);
+  e4:	88 b3       	in	r24, 0x18	; 24
+  e6:	83 60       	ori	r24, 0x03	; 3
+  e8:	88 bb       	out	0x18, r24	; 24
+	if(bit_is_clear(key_in,rw1))
+  ea:	b3 99       	sbic	0x16, 3	; 22
+  ec:	02 c0       	rjmp	.+4      	; 0xf2 <keysence+0x60>
+	{
+		seg=0x4f;
+  ee:	8f e4       	ldi	r24, 0x4F	; 79
+  f0:	85 bb       	out	0x15, r24	; 21
+	}
+	if(bit_is_clear(key_in,rw2))
+  f2:	b4 99       	sbic	0x16, 4	; 22
+  f4:	02 c0       	rjmp	.+4      	; 0xfa <keysence+0x68>
+	{
+		seg=0x7d;
+  f6:	8d e7       	ldi	r24, 0x7D	; 125
+  f8:	85 bb       	out	0x15, r24	; 21
+	}
+	if(bit_is_clear(key_in,rw3))
+  fa:	b5 99       	sbic	0x16, 5	; 22
+  fc:	02 c0       	rjmp	.+4      	; 0x102 <keysence+0x70>
+	{
+		seg=0x6f;
+  fe:	8f e6       	ldi	r24, 0x6F	; 111
+ 100:	85 bb       	out	0x15, r24	; 21
+	}
+	
+	if(bit_is_clear(key_in,rw4))
+ 102:	b6 99       	sbic	0x16, 6	; 22
+ 104:	02 c0       	rjmp	.+4      	; 0x10a <keysence+0x78>
+	{
+		seg=0x39;
+ 106:	89 e3       	ldi	r24, 0x39	; 57
+ 108:	85 bb       	out	0x15, r24	; 21
+ 10a:	08 95       	ret
+
+0000010c <main>:
+}
+int main(void)
+{
+	
+	
+	DDRC=0xff;
+ 10c:	8f ef       	ldi	r24, 0xFF	; 255
+ 10e:	84 bb       	out	0x14, r24	; 20
+	DDRB&=~((1<<rw1)|(1<<rw2)|(1<<rw3)|(1<<rw4));
+ 110:	87 b3       	in	r24, 0x17	; 23
+ 112:	87 78       	andi	r24, 0x87	; 135
+ 114:	87 bb       	out	0x17, r24	; 23
+	DDRB|=(1<<col1)|(1<<col2)|(1<<col3);
+ 116:	87 b3       	in	r24, 0x17	; 23
+ 118:	87 60       	ori	r24, 0x07	; 7
+ 11a:	87 bb       	out	0x17, r24	; 23
+	PORTB|=(1<<rw1)|(1<<rw2)|(1<<rw3)|(1<<rw4);
+ 11c:	88 b3       	in	r24, 0x18	; 24
+ 11e:	88 67       	ori	r24, 0x78	; 120
+ 120:	88 bb       	out	0x18, r24	; 24
+	while(1)
+	{
+		keysence();
+ 122:	0e 94 49 00 	call	0x92	; 0x92 <keysence>
+ 126:	fd cf       	rjmp	.-6      	; 0x122 <main+0x16>
+
+00000128 <_exit>:
+ 128:	f8 94       	cli
+
+0000012a <__stop_program>:
+ 12a:	ff cf       	rjmp	.-2      	; 0x12a <__stop_program>

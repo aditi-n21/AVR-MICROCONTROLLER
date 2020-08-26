@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# AvrStudio Solution File, Format Version 11.00
+Project("{D1100916-62DA-4D80-A9B4-55A1E7CCEEB3}") = "ADC", "ADC.avrgccproj", "{CA26A837-AEB2-4113-A25E-7DDBA3D05040}"
+EndProject
+Project("{D1100916-62DA-4D80-A9B4-55A1E7CCEEB3}") = "ADc_LCD", "..\ADc_LCD\ADc_LCD.avrgccproj", "{A9DD3536-5A80-48C0-96BC-A7DC1C6C3013}"
+EndProject
+Project("{D1100916-62DA-4D80-A9B4-55A1E7CCEEB3}") = "ADC_multi", "ADC_multi\ADC_multi.avrgccproj", "{FB53DAA2-A06C-4930-AB0C-9E08A9285BFF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CA26A837-AEB2-4113-A25E-7DDBA3D05040}.Debug|AVR.ActiveCfg = Debug|AVR
+		{CA26A837-AEB2-4113-A25E-7DDBA3D05040}.Debug|AVR.Build.0 = Debug|AVR
+		{CA26A837-AEB2-4113-A25E-7DDBA3D05040}.Release|AVR.ActiveCfg = Release|AVR
+		{CA26A837-AEB2-4113-A25E-7DDBA3D05040}.Release|AVR.Build.0 = Release|AVR
+		{A9DD3536-5A80-48C0-96BC-A7DC1C6C3013}.Debug|AVR.ActiveCfg = Debug|AVR
+		{A9DD3536-5A80-48C0-96BC-A7DC1C6C3013}.Debug|AVR.Build.0 = Debug|AVR
+		{A9DD3536-5A80-48C0-96BC-A7DC1C6C3013}.Release|AVR.ActiveCfg = Release|AVR
+		{A9DD3536-5A80-48C0-96BC-A7DC1C6C3013}.Release|AVR.Build.0 = Release|AVR
+		{FB53DAA2-A06C-4930-AB0C-9E08A9285BFF}.Debug|AVR.ActiveCfg = Debug|AVR
+		{FB53DAA2-A06C-4930-AB0C-9E08A9285BFF}.Debug|AVR.Build.0 = Debug|AVR
+		{FB53DAA2-A06C-4930-AB0C-9E08A9285BFF}.Release|AVR.ActiveCfg = Release|AVR
+		{FB53DAA2-A06C-4930-AB0C-9E08A9285BFF}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

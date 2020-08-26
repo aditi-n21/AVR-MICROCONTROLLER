@@ -1,0 +1,180 @@
+C51 COMPILER V9.01   ARLC                                                                  02/16/2015 16:59:54 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE ARLC
+OBJECT MODULE PLACED IN arlc.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE arlc.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #include<string.h>
+   3          #define LCD P1 
+   4          
+   5          sbit RS=P3^7; 
+   6          sbit RW=P3^6;
+   7          sbit EN=P3^5;
+   8          sbit sense1=P3^0;
+   9          sbit sense2=P3^1;
+  10          sbit relay1=P3^2;
+  11          sbit relay2=P3^3;
+  12           
+  13          void lcd_cmd(unsigned char);
+  14          void lcd_data(unsigned char);
+  15          void lcd_init(void);
+  16          void lcd_str(unsigned char *);
+  17          void delay_ms(unsigned int);
+  18          
+  19           unsigned int cnt=0; 
+  20          void main(void)
+  21          {
+  22   1       sense1=sense2=1;
+  23   1      
+  24   1          lcd_init();
+  25   1               lcd_cmd(0x80);
+  26   1                         lcd_str("AUTOMATIC ROOM");
+  27   1                          lcd_cmd(0xc0);
+  28   1                         lcd_str("LIGHT CONTROLLER");
+  29   1                         delay_ms(500);
+  30   1                          lcd_cmd(0x01);
+  31   1                         lcd_str("MADE BY:-");
+  32   1                          lcd_cmd(0xc0);
+  33   1                         lcd_str("Vipul Sharma");
+  34   1                          delay_ms(500);      
+  35   1                                 lcd_cmd(0x01);
+  36   1                          
+  37   1          while(1)
+  38   1      {   
+  39   2              
+  40   2                              lcd_cmd(0x80);
+  41   2                         lcd_str("No.of persons");
+  42   2                         lcd_cmd(0x8e);
+  43   2                         lcd_data(cnt+48);
+  44   2                          delay_ms(20);  
+  45   2         if(sense1==1)
+  46   2                { 
+  47   3                 cnt++;
+  48   3                         delay_ms(20);
+  49   3                 lcd_cmd(0x80);
+  50   3                         lcd_str("Entry Detected ");
+  51   3                        delay_ms(100); 
+  52   3                lcd_cmd(0x01);
+  53   3                               if(cnt<=0)
+  54   3                   {
+  55   4                               break;
+C51 COMPILER V9.01   ARLC                                                                  02/16/2015 16:59:54 PAGE 2   
+
+  56   4                                
+  57   4                                }
+  58   3                                else
+  59   3                                {
+  60   4                                lcd_cmd(0xc0);
+  61   4                     lcd_str("LIGHTS ON ");
+  62   4                                 // delay_ms(20);
+  63   4                                      relay1=0;
+  64   4                                relay2=0;
+  65   4                                // delay_ms(200);
+  66   4                               
+  67   4                                }
+  68   3                          } 
+  69   2        
+  70   2        if(sense2==1)
+  71   2                { 
+  72   3                
+  73   3                       //  delay_ms(500); 
+  74   3                      lcd_cmd(0x01);
+  75   3                       if(cnt<=1)
+  76   3                  {
+  77   4                               lcd_cmd(0xc0);
+  78   4                     lcd_str("LIGHTS OFF");
+  79   4                                          cnt=0;
+  80   4                                        relay1=1;
+  81   4                                                relay2=1;
+  82   4                       } 
+  83   3                       else
+  84   3                       {
+  85   4                          cnt--;
+  86   4                       
+  87   4                 lcd_cmd(0x80);
+  88   4                         lcd_str("Exit Detected ");
+  89   4                           delay_ms(100);
+  90   4                              lcd_cmd(0x01);
+  91   4                       }
+  92   3                } 
+  93   2                              
+  94   2                             
+  95   2                  
+  96   2              }
+  97   1                 
+  98   1      }
+  99          
+ 100          void delay_ms(unsigned int i)
+ 101          {
+ 102   1      unsigned int j;
+ 103   1                  while(i-->0)
+ 104   1                  {
+ 105   2                              for(j=0;j<500;j++)
+ 106   2                              {
+ 107   3                                          ;
+ 108   3                              }
+ 109   2                  }
+ 110   1      }           
+ 111          
+ 112          
+ 113          void lcd_init() 
+ 114          {
+ 115   1      lcd_cmd(0x38);
+ 116   1      lcd_cmd(0x01);
+ 117   1      lcd_cmd(0x06);
+C51 COMPILER V9.01   ARLC                                                                  02/16/2015 16:59:54 PAGE 3   
+
+ 118   1      lcd_cmd(0x0E);
+ 119   1      lcd_cmd(0x80);
+ 120   1      }
+ 121          void lcd_cmd(unsigned char value) 
+ 122          {
+ 123   1      LCD=value;
+ 124   1      RS=0;
+ 125   1      RW=0;
+ 126   1      EN=1;
+ 127   1      delay_ms(2);
+ 128   1      EN=0;
+ 129   1      }
+ 130          void lcd_data(unsigned char value) 
+ 131          {
+ 132   1      LCD=value;
+ 133   1      RS=1;
+ 134   1      RW=0;
+ 135   1      EN=1;
+ 136   1      delay_ms(2);
+ 137   1      EN=0;
+ 138   1      }
+ 139          
+ 140          void lcd_str(unsigned char *s)
+ 141          {
+ 142   1      /*      unsigned char l,j;
+ 143   1              l=strlen(s);
+ 144   1              //for(j=0;j<l;j++)
+ 145   1                      while(*s!='\0')
+ 146   1                      {
+ 147   1                              lcd_data(*s);
+ 148   1                              s++;
+ 149   1                      //      delay(100);
+ 150   1                      }*/
+ 151   1      while(*s)
+ 152   1      lcd_data(*s++);
+ 153   1      } 
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    392    ----
+   CONSTANT SIZE    =    122    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

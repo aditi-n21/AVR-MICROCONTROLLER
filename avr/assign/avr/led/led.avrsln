@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# AvrStudio Solution File, Format Version 11.00
+Project("{D1100916-62DA-4D80-A9B4-55A1E7CCEEB3}") = "led", "led\led.avrgccproj", "{0F8E66CD-F7B0-4D22-982D-37CF578B665E}"
+EndProject
+Project("{D1100916-62DA-4D80-A9B4-55A1E7CCEEB3}") = "s_led", "s_led\s_led.avrgccproj", "{C1D46BC9-E68B-47AD-BBB7-FB4F07CF9A83}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0F8E66CD-F7B0-4D22-982D-37CF578B665E}.Debug|AVR.ActiveCfg = Debug|AVR
+		{0F8E66CD-F7B0-4D22-982D-37CF578B665E}.Debug|AVR.Build.0 = Debug|AVR
+		{0F8E66CD-F7B0-4D22-982D-37CF578B665E}.Release|AVR.ActiveCfg = Release|AVR
+		{0F8E66CD-F7B0-4D22-982D-37CF578B665E}.Release|AVR.Build.0 = Release|AVR
+		{C1D46BC9-E68B-47AD-BBB7-FB4F07CF9A83}.Debug|AVR.ActiveCfg = Debug|AVR
+		{C1D46BC9-E68B-47AD-BBB7-FB4F07CF9A83}.Debug|AVR.Build.0 = Debug|AVR
+		{C1D46BC9-E68B-47AD-BBB7-FB4F07CF9A83}.Release|AVR.ActiveCfg = Release|AVR
+		{C1D46BC9-E68B-47AD-BBB7-FB4F07CF9A83}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

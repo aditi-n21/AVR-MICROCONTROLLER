@@ -1,0 +1,35 @@
+A51 MACRO ASSEMBLER  START                                                                01/20/2013 12:56:29 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02a
+OBJECT MODULE PLACED IN start.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE start.a SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 00h
+0000 D2D4              2     setb psw.4
+0002 C2D3              3     clr psw.3
+0004 7855              4     mov r0,#55h
+0006 7922              5     mov r1,#22h
+0008 7A33              6     mov r2,#33h
+000A C2D4              7     clr psw.4
+000C C2D3              8     clr psw.3
+000E 7844              9     mov r0,#44h
+0010 7911             10     mov r1,#11h
+                      11     END
+A51 MACRO ASSEMBLER  START                                                                01/20/2013 12:56:29 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+PSW. . . . . . . .  D ADDR   00D0H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

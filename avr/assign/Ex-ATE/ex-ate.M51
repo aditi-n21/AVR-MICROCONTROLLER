@@ -1,0 +1,229 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        02/22/2014  14:09:44  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE STARTUP.obj, ex-ate.obj TO ex-ate
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  STARTUP.obj (?C_STARTUP)
+  ex-ate.obj (EX_ATE)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  ex-ate (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0001H     UNIT         ?DT?EX_ATE
+            IDATA   0009H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     00A4H     UNIT         ?PR?MAIN?EX_ATE
+            CODE    08A4H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0930H     002CH     UNIT         ?PR?_DELAY?EX_ATE
+            CODE    095CH     0008H     UNIT         ?PR?RECV?EX_ATE
+            CODE    0964H     0004H     UNIT         ?C_INITSEG
+
+
+
+OVERLAY MAP OF MODULE:   ex-ate (?C_STARTUP)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?EX_ATE
+  +--> ?C_INITSEG
+
+?PR?MAIN?EX_ATE
+  +--> ?PR?RECV?EX_ATE
+  +--> ?PR?_DELAY?EX_ATE
+
+
+
+SYMBOL TABLE OF MODULE:  ex-ate (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:08A4H         SEGMENT       ?C_C51STARTUP
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/22/2014  14:09:44  PAGE 2
+
+
+  I:0009H         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:08A7H         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:08A4H         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:08A4H         LINE#         133
+  C:08A6H         LINE#         134
+  C:08A7H         LINE#         135
+  C:08A8H         LINE#         136
+  C:08AAH         LINE#         185
+  C:08ADH         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        EX_ATE
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  C:093CH         PUBLIC        _delay
+  B:0098H.0       PUBLIC        RI
+  C:0800H         PUBLIC        main
+  D:0099H         PUBLIC        SBUF
+  C:095CH         PUBLIC        recv
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0008H         PUBLIC        cnt
+  D:008DH         PUBLIC        TH1
+  B:00B0H.2       PUBLIC        sense1
+  B:00B0H.3       PUBLIC        sense2
+  B:0088H.6       PUBLIC        TR1
+  B:00B0H.7       PUBLIC        mot1a
+  B:00B0H.5       PUBLIC        mot2a
+  B:00B0H.6       PUBLIC        mot1b
+  B:00B0H.4       PUBLIC        mot2b
+  B:0090H.0       PUBLIC        led1
+  B:0090H.1       PUBLIC        led2
+  B:0090H.2       PUBLIC        led3
+  -------         PROC          MAIN
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/22/2014  14:09:44  PAGE 3
+
+
+  -------         DO            
+  D:0007H         SYMBOL        a
+  -------         ENDDO         
+  C:0800H         LINE#         21
+  C:0800H         LINE#         22
+  C:0800H         LINE#         24
+  C:0804H         LINE#         26
+  C:0807H         LINE#         27
+  C:080AH         LINE#         28
+  C:080DH         LINE#         29
+  C:080FH         LINE#         30
+  C:080FH         LINE#         31
+  C:080FH         LINE#         33
+  C:0812H         LINE#         34
+  C:081FH         LINE#         35
+  C:081FH         LINE#         36
+  C:081FH         LINE#         37
+  C:0822H         LINE#         38
+  C:0824H         LINE#         42
+  C:0824H         LINE#         43
+  C:0827H         LINE#         44
+  C:0829H         LINE#         45
+  C:0829H         LINE#         46
+  C:082CH         LINE#         47
+  C:0830H         LINE#         48
+  C:0830H         LINE#         49
+  C:0832H         LINE#         50
+  C:0834H         LINE#         51
+  C:0834H         LINE#         52
+  C:0836H         LINE#         53
+  C:083BH         LINE#         54
+  C:083BH         LINE#         55
+  C:083DH         LINE#         56
+  C:0841H         LINE#         57
+  C:0843H         LINE#         58
+  C:0845H         LINE#         60
+  C:0845H         LINE#         61
+  C:084BH         LINE#         62
+  C:084EH         LINE#         63
+  C:084EH         LINE#         64
+  C:0850H         LINE#         65
+  C:0850H         LINE#         66
+  C:0853H         LINE#         67
+  C:0853H         LINE#         68
+  C:0853H         LINE#         69
+  C:0856H         LINE#         70
+  C:0856H         LINE#         71
+  C:0856H         LINE#         72
+  C:0859H         LINE#         73
+  C:0861H         LINE#         74
+  C:0867H         LINE#         76
+  C:086FH         LINE#         77
+  C:0872H         LINE#         78
+  C:087AH         LINE#         80
+  C:087AH         LINE#         81
+  C:087DH         LINE#         82
+  C:087DH         LINE#         83
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/22/2014  14:09:44  PAGE 4
+
+
+  C:087DH         LINE#         84
+  C:0880H         LINE#         85
+  C:0888H         LINE#         86
+  C:088EH         LINE#         87
+  C:0896H         LINE#         88
+  C:0899H         LINE#         89
+  C:08A1H         LINE#         90
+  C:08A1H         LINE#         92
+  -------         ENDPROC       MAIN
+  C:0938H         SYMBOL        L?0035
+  -------         PROC          L?0034
+  -------         ENDPROC       L?0034
+  C:0938H         SYMBOL        L?0035
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        msec
+  -------         DO            
+  D:0004H         SYMBOL        i
+  D:0002H         SYMBOL        j
+  -------         ENDDO         
+  C:093CH         LINE#         103
+  C:093CH         LINE#         104
+  C:093CH         LINE#         106
+  C:0946H         LINE#         107
+  C:095BH         LINE#         108
+  -------         ENDPROC       _DELAY
+  -------         PROC          RECV
+  -------         DO            
+  D:0007H         SYMBOL        value
+  -------         ENDDO         
+  C:095CH         LINE#         125
+  C:095CH         LINE#         126
+  C:095CH         LINE#         127
+  C:095EH         LINE#         128
+  C:0961H         LINE#         129
+  C:0963H         LINE#         130
+  C:0963H         LINE#         131
+  -------         ENDPROC       RECV
+  -------         ENDMOD        EX_ATE
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 00EAH BYTE (11%) *
+******************************************************************************
+
+Program Size: data=10.0 xdata=0 code=363
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

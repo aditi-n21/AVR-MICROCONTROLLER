@@ -1,0 +1,35 @@
+C51 COMPILER V9.05   MOTOR                                                                 02/25/2013 14:51:06 PAGE 1   
+
+
+C51 COMPILER V9.05, COMPILATION OF MODULE MOTOR
+OBJECT MODULE PLACED IN MOTOR.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE MOTOR.C BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg51.h>
+   2          sbit mot1a=P2^0;
+   3          void main()
+   4          {
+   5   1       while(1)
+   6   1       {
+   7   2        mot1a=0;
+   8   2       
+   9   2       
+  10   2       }
+  11   1      
+  12   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =      4    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

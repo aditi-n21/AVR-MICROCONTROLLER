@@ -1,0 +1,115 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        06/26/2016  21:55:15  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE main.obj TO ExternalISR0
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  ExternalISR0 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0002H     UNIT         ?DT?MAIN
+            IDATA   000AH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0003H     ABSOLUTE     
+                    0006H     000DH                  *** GAP ***
+            CODE    0013H     0003H     ABSOLUTE     
+                    0016H     07EAH                  *** GAP ***
+            CODE    0800H     00D4H     UNIT         ?PR?EXT0ISR?MAIN
+            CODE    08D4H     000EH     UNIT         ?PR?MAIN?MAIN
+            CODE    08E2H     000CH     UNIT         ?C_C51STARTUP
+            CODE    08EEH     0004H     UNIT         ?PR?EXT1ISR?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   ExternalISR0 (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  ExternalISR0 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A8H         PUBLIC        IE
+  C:08D4H         PUBLIC        main
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/26/2016  21:55:15  PAGE 2
+
+
+  B:0088H.0       PUBLIC        IT0
+  B:0088H.2       PUBLIC        IT1
+  C:0800H         PUBLIC        Ext0ISR
+  C:08EEH         PUBLIC        Ext1ISR
+  D:0008H         PUBLIC        i
+  -------         PROC          EXT0ISR
+  C:0800H         LINE#         4
+  C:0804H         LINE#         6
+  C:0807H         LINE#         7
+  C:081DH         LINE#         8
+  C:0820H         LINE#         9
+  C:0836H         LINE#         10
+  C:0839H         LINE#         11
+  C:084FH         LINE#         12
+  C:0852H         LINE#         13
+  C:0868H         LINE#         14
+  C:086BH         LINE#         15
+  C:0881H         LINE#         16
+  C:0884H         LINE#         17
+  C:089AH         LINE#         18
+  C:089DH         LINE#         19
+  C:08B3H         LINE#         20
+  C:08B6H         LINE#         21
+  C:08CCH         LINE#         22
+  C:08CFH         LINE#         24
+  -------         ENDPROC       EXT0ISR
+  -------         PROC          EXT1ISR
+  C:08EEH         LINE#         26
+  C:08EEH         LINE#         28
+  C:08F1H         LINE#         29
+  -------         ENDPROC       EXT1ISR
+  -------         PROC          MAIN
+  C:08D4H         LINE#         31
+  C:08D4H         LINE#         32
+  C:08D4H         LINE#         33
+  C:08D7H         LINE#         34
+  C:08D9H         LINE#         35
+  C:08DBH         LINE#         36
+  C:08DDH         LINE#         37
+  C:08E0H         LINE#         38
+  C:08E0H         LINE#         39
+  C:08E0H         LINE#         41
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 00ECH BYTE (11%) *
+******************************************************************************
+
+Program Size: data=11.0 xdata=0 code=251
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

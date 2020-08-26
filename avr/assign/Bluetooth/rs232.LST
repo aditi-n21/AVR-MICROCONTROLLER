@@ -1,0 +1,79 @@
+C51 COMPILER V9.02   RS232                                                                 12/07/2012 17:27:30 PAGE 1   
+
+
+C51 COMPILER V9.02, COMPILATION OF MODULE RS232
+OBJECT MODULE PLACED IN rs232.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE rs232.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          // Program to test serial communication of controller with PC using hyper terminal
+   2          #include<reg51.h>
+   3          
+   4          void ini()     // Initialize Timer 1 for serial communication
+   5          {
+   6   1      TMOD=0x20;  //Timer1, mode 2, baud rate 9600 bps
+   7   1      TH1=0XFD; 
+   8   1      SCON=0x50;
+   9   1      TR1=1;
+  10   1      }
+  11          
+  12          void recieve()  //Function to receive serial data
+  13          {
+  14   1      unsigned char value;
+  15   1      while(RI==0);
+  16   1      value=SBUF;
+  17   1      if(value=='A')
+  18   1      {
+  19   2      P3=0x01;
+  20   2      }
+  21   1      else
+  22   1      if(value=='B')
+  23   1      {
+  24   2      P3=0x02;
+  25   2      }
+  26   1      else
+  27   1      if(value=='C')
+  28   1      {
+  29   2      P3=0x04;
+  30   2      }
+  31   1      //P1=value;
+  32   1      RI=0;
+  33   1      }
+  34          
+  35          /*void transmit()  // Funtion to transmit serial data
+  36          {
+  37          P2=P1-32;
+  38          SBUF=P2;
+  39          while(TI==0);
+  40          TI=0;
+  41          SBUF=P1;
+  42          while(TI==0);
+  43          TI=0;
+  44          }*/
+  45          
+  46          void main()
+  47          {
+  48   1      while(1)
+  49   1      {
+  50   2        ini();
+  51   2        recieve();
+  52   2        //transmit();
+  53   2      }
+  54   1      }
+
+C51 COMPILER V9.02   RS232                                                                 12/07/2012 17:27:30 PAGE 2   
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     50    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

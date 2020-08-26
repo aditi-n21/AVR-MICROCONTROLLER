@@ -1,0 +1,24 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+D:\CETPA\Classes\LCD-1\code\C\lcd.uvproj
+Project File Date:  03/24/2013
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling lcd.c...
+lcd.c(1): warning C500: LICENSE ERROR (R207: REGISTRY READ ERROR)
+linking...
+Program Size: data=14.0 xdata=0 code=272
+creating hex file from "lcd"...
+"lcd" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling lcd.c...
+lcd.c(1): warning C500: LICENSE ERROR (R207: REGISTRY READ ERROR)
+linking...
+Program Size: data=14.0 xdata=0 code=272
+creating hex file from "lcd"...
+"lcd" - 0 Error(s), 1 Warning(s).

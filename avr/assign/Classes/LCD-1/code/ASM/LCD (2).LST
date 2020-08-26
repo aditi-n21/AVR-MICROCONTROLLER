@@ -1,0 +1,94 @@
+LCD(2)^1                                                                                                      PAGE 1
+
+                       1    $mod51
+  00A0                 2    lcd equ p2
+  0090                 3    rs equ p1.0
+  0091                 4    rw equ p1.1
+  0092                 5    e equ p1.2
+0000                   6    org 00h
+                       7    
+0000 1109              8            acall lcdini
+0002 900200            9            mov dptr,#show1
+0005 1133             10            acall comndata
+0007 80FE             11    ag:     sjmp ag
+                      12    
+                      13    
+0009                  14    lcdini:
+0009 7438             15            mov a,#38h
+000B 1126             16            acall comnwrt
+000D 114C             17            acall delay
+000F 740E             18            mov a,#0eh
+0011 1126             19            acall comnwrt
+0013 114C             20            acall delay
+0015 7401             21            mov a,#01h
+0017 1126             22            acall comnwrt
+0019 7406             23            mov a,#06h
+001B 1126             24            acall comnwrt
+001D 114C             25            acall delay
+001F 7480             26            mov a,#80h
+0021 1126             27            acall comnwrt
+0023 114C             28            acall delay
+0025 22               29            ret
+0026                  30    comnwrt:
+0026 F5A0             31            mov lcd,a
+0028 C290             32            clr rs
+002A C291             33            clr rw
+002C D292             34            setb e
+002E 114C             35            acall delay
+0030 C292             36            clr e
+0032 22               37            ret
+0033                  38    comndata:
+0033                  39    nxt:    
+0033 E4               40            clr a
+0034 93               41            movc a,@a+dptr
+0035 B40002           42            cjne a,#00h,in
+0038 8011             43            sjmp out
+003A F5A0             44    in:     mov lcd,a
+003C D290             45            setb rs
+003E C291             46            clr rw
+0040 D292             47            setb e
+0042 114C             48            acall delay
+0044 C292             49            clr e
+0046 A3               50            inc dptr
+0047 114C             51            acall delay
+0049 80E8             52            sjmp nxt
+004B 22               53    out:    ret
+                      54    
+004C                  55    delay:
+004C 7FFF             56            mov r7,#255
+004E 7EFF             57    la2:    mov r6,#0ffh
+0050 DEFE             58    la1:    djnz r6,la1
+LCD(2)^1                                                                                                      PAGE 2
+
+0052 DFFA             59            djnz r7,la2
+0054 22               60            ret
+                      61    
+0200                  62    org 200h
+0200 57656C43         63    show1: db 'WelCome To CETPA',0
+0204 6F6D6520   
+0208 546F2043   
+020C 45545041   
+0210 00         
+                      64    
+                      65    end
+
+VERSION 1.2h ASSEMBLY COMPLETE, 0 ERRORS FOUND
+LCD(2)^1                                                                                                      PAGE 3
+
+AG . . . . . . . . . . . . . . .  C ADDR  0007H  
+COMNDATA . . . . . . . . . . . .  C ADDR  0033H  
+COMNWRT. . . . . . . . . . . . .  C ADDR  0026H  
+DELAY. . . . . . . . . . . . . .  C ADDR  004CH  
+E. . . . . . . . . . . . . . . .    NUMB  0092H  
+IN . . . . . . . . . . . . . . .  C ADDR  003AH  
+LA1. . . . . . . . . . . . . . .  C ADDR  0050H  
+LA2. . . . . . . . . . . . . . .  C ADDR  004EH  
+LCD. . . . . . . . . . . . . . .    NUMB  00A0H  
+LCDINI . . . . . . . . . . . . .  C ADDR  0009H  
+NXT. . . . . . . . . . . . . . .  C ADDR  0033H  
+OUT. . . . . . . . . . . . . . .  C ADDR  004BH  
+P1 . . . . . . . . . . . . . . .  D ADDR  0090H  PREDEFINED  
+P2 . . . . . . . . . . . . . . .  D ADDR  00A0H  PREDEFINED  
+RS . . . . . . . . . . . . . . .    NUMB  0090H  
+RW . . . . . . . . . . . . . . .    NUMB  0091H  
+SHOW1. . . . . . . . . . . . . .  C ADDR  0200H  

@@ -1,0 +1,31 @@
+ROTATE                                                                                                        PAGE 1
+
+                       1    $mod51
+0000                   2    org 00h
+0000 74FE              3    mov a,#0feh
+0002 F590              4    here: mov P1,A
+0004 1109              5    acall delay
+0006 03                6    RR A
+0007 80F9              7    sjmp here
+                       8    
+                       9    
+0009                  10    delay:
+0009 78FF             11    mov r0,#255
+000B 79FF             12    ag1: mov r1,#255
+000D 7B0A             13    ag2: mov r3,#10
+000F DBFE             14    ag: djnz r3,ag
+0011 D9FA             15    djnz r1,ag2
+0013 D8F6             16    djnz r0,ag1
+0015 22               17    ret
+                      18    
+                      19    END
+
+VERSION 1.2h ASSEMBLY COMPLETE, 0 ERRORS FOUND
+ROTATE                                                                                                        PAGE 2
+
+AG . . . . . . . . . . . . . . .  C ADDR  000FH  
+AG1. . . . . . . . . . . . . . .  C ADDR  000BH  
+AG2. . . . . . . . . . . . . . .  C ADDR  000DH  
+DELAY. . . . . . . . . . . . . .  C ADDR  0009H  
+HERE . . . . . . . . . . . . . .  C ADDR  0002H  
+P1 . . . . . . . . . . . . . . .  D ADDR  0090H  PREDEFINED  

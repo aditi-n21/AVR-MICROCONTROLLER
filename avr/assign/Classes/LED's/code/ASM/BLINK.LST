@@ -1,0 +1,35 @@
+BLINK                                                                                                         PAGE 1
+
+                       1    $mod51
+0000                   2    org 00h
+0000 759000            3    here: mov P1,#00000000b
+0003 75B000            4    mov P3,#00000000b
+0006 75A000            5    mov P2,#00000000b
+0009 1118              6    acall delay
+000B 7590FF            7    mov P1,#0ffh
+000E 75B0FF            8    mov P3,#0ffh
+0011 75A0FF            9    mov P2,#0ffh
+0014 1118             10    acall delay
+0016 80E8             11    sjmp here
+                      12    
+0018                  13    delay: 
+0018 78FF             14    mov r0,#255
+001A 79E1             15    back2: mov r1,#225
+001C 7A0A             16    back1: mov r2,#10
+001E DAFE             17    back: djnz r2,back
+0020 D9FA             18    djnz r1, back1
+0022 D8F6             19    djnz r0, back2
+0024 22               20    ret
+                      21    end
+
+VERSION 1.2h ASSEMBLY COMPLETE, 0 ERRORS FOUND
+BLINK                                                                                                         PAGE 2
+
+BACK . . . . . . . . . . . . . .  C ADDR  001EH  
+BACK1. . . . . . . . . . . . . .  C ADDR  001CH  
+BACK2. . . . . . . . . . . . . .  C ADDR  001AH  
+DELAY. . . . . . . . . . . . . .  C ADDR  0018H  
+HERE . . . . . . . . . . . . . .  C ADDR  0000H  
+P1 . . . . . . . . . . . . . . .  D ADDR  0090H  PREDEFINED  
+P2 . . . . . . . . . . . . . . .  D ADDR  00A0H  PREDEFINED  
+P3 . . . . . . . . . . . . . . .  D ADDR  00B0H  PREDEFINED  

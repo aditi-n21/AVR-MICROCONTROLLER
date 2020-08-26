@@ -1,0 +1,25 @@
+INDEXED                                                                                                       PAGE 1
+
+                       1    $mod51
+0000                   2    org 00h
+0000                   3    back: 
+0000 900150            4    mov dptr,#150h
+0003                   5    here: 
+0003 F590              6    mov P1,A
+0005 E4                7    clr a
+0006 93                8    movc a,@a+dptr
+0007 A3                9    inc dptr
+0008 B400F8           10    cjne a,#0h,here
+000B 80F3             11    sjmp back
+                      12    
+0150                  13    org 150h
+0150 4D414E4F         14    DB 'MANOJ',0
+0154 4A00       
+                      15    END
+
+VERSION 1.2h ASSEMBLY COMPLETE, 0 ERRORS FOUND
+INDEXED                                                                                                       PAGE 2
+
+BACK . . . . . . . . . . . . . .  C ADDR  0000H  
+HERE . . . . . . . . . . . . . .  C ADDR  0003H  
+P1 . . . . . . . . . . . . . . .  D ADDR  0090H  PREDEFINED  

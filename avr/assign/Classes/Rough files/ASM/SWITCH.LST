@@ -1,0 +1,37 @@
+SWITCH                                                                                                        PAGE 1
+
+                       1    $mod51
+0000                   2    org 00h
+  0090                 3    sw1 equ p1.0
+  0091                 4    sw2 equ p1.1
+  00A0                 5    led1 equ p2.0
+  00A1                 6    led2 equ p2.1
+0000 D290              7    setb sw1
+0002 D291              8    setb sw2
+0004 309002            9    go: jnb sw1,here
+0007 8004             10    sjmp back
+0009 C2A0             11    here: clr led1
+000B D2A1             12    setb led2
+                      13    
+000D 309102           14    back:jnb sw2,ag 
+0010 80F2             15    sjmp go
+0012 C2A1             16    ag: clr led2
+0014 D2A0             17    setb led1
+                      18    
+0016 80EC             19    sjmp go
+                      20    END
+                      21    
+
+VERSION 1.2h ASSEMBLY COMPLETE, 0 ERRORS FOUND
+SWITCH                                                                                                        PAGE 2
+
+AG . . . . . . . . . . . . . . .  C ADDR  0012H  
+BACK . . . . . . . . . . . . . .  C ADDR  000DH  
+GO . . . . . . . . . . . . . . .  C ADDR  0004H  
+HERE . . . . . . . . . . . . . .  C ADDR  0009H  
+LED1 . . . . . . . . . . . . . .    NUMB  00A0H  
+LED2 . . . . . . . . . . . . . .    NUMB  00A1H  
+P1 . . . . . . . . . . . . . . .  D ADDR  0090H  PREDEFINED  
+P2 . . . . . . . . . . . . . . .  D ADDR  00A0H  PREDEFINED  
+SW1. . . . . . . . . . . . . . .    NUMB  0090H  
+SW2. . . . . . . . . . . . . . .    NUMB  0091H  

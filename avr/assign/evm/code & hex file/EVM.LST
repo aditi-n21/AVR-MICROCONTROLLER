@@ -1,0 +1,294 @@
+EVM                                                                                                           PAGE 1
+
+                       1    $mod51
+  0080                 2    in equ p0
+  00A4                 3    scl bit p2.4
+  00A5                 4    sda bit p2.5
+0000                   5    org 0h
+0000 020020            6    ljmp main1
+0003                   7    org 0003h
+0003 020088            8    ljmp intrupt
+0020                   9    org 0020h
+0020 D2B2             10    main1: setb p3.2
+0022 75A881           11    mov ie,#81h
+0025 D288             12    setb tcon.0
+0027 758920           13    mov tmod,#20h
+002A 759850           14    mov scon,#50h
+002D 758DFD           15    mov th1,#-3
+0030 D28E             16    setb tr1
+0032 D2A4             17    setb scl
+0034 D2A5             18    setb sda
+0036 D2A6             19    setb p2.6 
+0038 7D00             20    mov r5,#00h
+003A 7E00             21    mov r6,#00h
+003C 7F00             22    mov r7,#00h
+003E 7580FE           23    main: mov in,#11111110b
+0041 E580             24    mov a,in
+0043 54FE             25    anl a,#11111110b
+0045 B4FE02           26    cjne a,#11111110b,j
+0048 80F4             27    sjmp main
+004A E580             28    j: mov a,in
+004C 20E111           29    jb acc.1,j2
+004F 0D               30    inc r5
+0050 C2A6             31    clr  p2.6
+0052 3132             32    acall delay1
+0054 3132             33    acall delay1
+0056 D2A6             34    setb p2.6
+0058 3081FD           35    busy1: jnb p0.1,busy1
+005B 0200AA           36    ljmp eewrite
+005E 80DE             37    sjmp main
+0060 20E211           38    j2: jb acc.2,j3
+0063 0E               39    inc r6
+0064 C2A6             40    clr  p2.6
+0066 3132             41    acall delay1
+0068 3132             42    acall delay1
+006A D2A6             43    setb p2.6
+006C 3082FD           44    busy2: jnb p0.2,busy2
+006F 0200C0           45    ljmp Iewrite
+0072 80CA             46    sjmp main
+0074 20E30F           47    j3: jb acc.3,j4
+0077 0F               48    inc r7
+0078 C2A6             49    clr  p2.6
+007A 3132             50    acall delay1
+007C 3132             51    acall delay1
+007E D2A6             52    setb p2.6
+0080 3083FD           53    busy3: jnb p0.3,busy3
+0083 0200D6           54    ljmp IIwrite
+0086 80B6             55    j4: sjmp main
+0088                  56    intrupt: 
+0088 90014A           57    mov dptr,#mydata0
+008B 3170             58    acall routs
+EVM                                                                                                           PAGE 2
+
+008D 317C             59    acall delay_15ms
+008F 7905             60    mov r1,#05h
+0091 318D             61    acall step
+0093 900156           62    mov dptr,#mydata1
+0096 3170             63    acall routs
+0098 317C             64    acall delay_15ms
+009A 7906             65    mov r1,#06h
+009C 318D             66    acall step
+009E 900163           67    mov dptr,#mydata2
+00A1 3170             68    acall routs
+00A3 317C             69    acall delay_15ms
+00A5 7907             70    mov r1,#07h
+00A7 318D             71    acall step
+00A9 32               72    reti
+00AA 74A0             73    eewrite: mov a,#10100000b
+00AC 11EC             74    acall i2cstart
+00AE 3106             75    acall i2cwrite    
+00B0 7405             76    mov a,#05h
+00B2 F530             77    mov 30h,a
+00B4 3106             78    acall i2cwrite
+00B6 ED               79    mov a,r5
+00B7 3106             80    acall i2cwrite
+00B9 11F9             81    acall i2cstop
+00BB 313B             82    acall jkl
+00BD 02003E           83    ljmp main
+00C0 74A0             84    Iewrite: mov a,#10100000b
+00C2 11EC             85    acall i2cstart
+00C4 3106             86    acall i2cwrite    
+00C6 7406             87    mov a,#06h
+00C8 F530             88    mov 30h,a
+00CA 3106             89    acall i2cwrite
+00CC EE               90    mov a,r6
+00CD 3106             91    acall i2cwrite
+00CF 11F9             92    acall i2cstop
+00D1 313B             93    acall jkl 
+00D3 02003E           94    ljmp main
+00D6 74A0             95    IIwrite: mov a,#10100000b
+00D8 11EC             96    acall i2cstart
+00DA 3106             97    acall i2cwrite    
+00DC 7407             98    mov a,#07h
+00DE F530             99    mov 30h,a
+00E0 3106            100    acall i2cwrite
+00E2 EF              101    mov a,r7
+00E3 3106            102    acall i2cwrite
+00E5 11F9            103    acall i2cstop
+00E7 313B            104    acall jkl 
+00E9 02003E          105    ljmp main
+00EC D2A5            106    i2cstart: setb sda
+00EE 312D            107    acall delay
+00F0 D2A4            108    setb scl
+00F2 312D            109    acall delay
+00F4 C2A5            110    clr sda
+00F6 C2A4            111    clr scl
+00F8 22              112    ret
+00F9 C2A4            113    i2cstop: clr scl
+00FB C2A5            114    clr sda
+00FD D2A4            115    setb scl
+00FF 312D            116    acall delay
+EVM                                                                                                           PAGE 3
+
+0101 D2A5            117    setb sda
+0103 A2A5            118    mov c,sda
+0105 22              119    ret
+0106 7808            120    i2cwrite: mov r0,#08h
+0108 33              121    i2cwrite_loop: rlc a
+0109 92A5            122    mov sda,c
+010B D2A4            123    setb scl
+010D 312D            124    acall delay
+010F C2A4            125    clr scl
+0111 D8F5            126    djnz r0,i2cwrite_loop   
+0113 A2A5            127    mov c,sda
+0115 D2A4            128    setb scl
+0117 312D            129    acall delay             
+0119 C2A4            130    clr scl
+011B 22              131    ret     
+011C A2A5            132    i2cread: mov c,sda
+011E 7808            133    mov r0,#8
+0120 33              134    rlc a
+0121 D2A4            135    i2cread_loop: setb scl
+0123 A2A5            136    mov c,sda
+0125 33              137    rlc a
+0126 312D            138    acall delay
+0128 C2A4            139    clr scl
+012A D8F5            140    djnz r0,i2cread_loop
+012C 22              141    ret     
+012D 7C64            142    delay: mov r4,#100
+012F DCFE            143    loop: djnz r4,loop
+0131 22              144    ret
+0132 7CFF            145    delay1: mov r4,#0ffh
+0134 79FF            146    jll: mov r1,#0ffh
+0136 D9FE            147    jl: djnz r1,jl
+0138 DCFA            148    djnz r4,jll
+013A 22              149    ret
+013B 74A0            150    jkl: mov a,#10100000b
+013D 11EC            151    acall i2cstart
+013F 3106            152    acall i2cwrite
+0141 7400            153    mov a,#00h
+0143 3106            154    acall i2cwrite
+0145 311C            155    acall i2cread
+0147 11F9            156    acall i2cstop
+0149 22              157    ret
+014A 564F5445        158    mydata0: db 'VOTER NO.1=',0
+014E 52204E4F   
+0152 2E313D00   
+0156 20564F54        159    mydata1: db ' VOTER NO.2=',0
+015A 4552204E   
+015E 4F2E323D   
+0162 00         
+0163 20564F54        160    mydata2: db ' VOTER NO.3=',0
+0167 4552204E   
+016B 4F2E333D   
+016F 00         
+                     161    
+0170 E4              162    routs: clr a
+0171 93              163    movc a,@a+dptr
+0172 6005            164    jz here
+0174 3185            165    acall display
+0176 A3              166    inc dptr
+EVM                                                                                                           PAGE 4
+
+0177 80F7            167    sjmp routs
+0179 317C            168    here: acall delay_15ms
+017B 22              169    ret
+017C 7B04            170    delay_15ms: mov r3,#4h
+017E 7AFF            171    loop14: mov r2,#0ffh
+0180 DAFE            172    loop1: djnz r2,loop1
+0182 DBFA            173    djnz r3,loop14
+0184 22              174    ret
+0185 F599            175    display: mov sbuf,a
+0187 3099FD          176    loopi: jnb ti,loopi
+018A C299            177    clr ti
+018C 22              178    ret
+018D 74A0            179    step: mov a,#10100000b
+018F 11EC            180    acall i2cstart
+0191 3106            181    acall i2cwrite
+0193 E9              182    mov a,r1
+0194 3106            183    acall i2cwrite
+0196 11F9            184    acall i2cstop
+0198 11EC            185    acall i2cstart
+019A 74A1            186    mov a,#10100001b
+019C 3106            187    acall i2cwrite
+019E 311C            188    acall i2cread
+01A0 11F9            189    acall i2cstop
+01A2 F533            190    mov 33h,a
+01A4 E9              191    mov a,r1
+01A5 B40508          192    cjne a,#05h,kl
+01A8 853334          193    mov 34h,33h
+01AB E533            194    mov a,33h
+01AD 31C3            195    acall sett
+01AF 22              196    ret
+01B0 B40608          197    kl: cjne a,#06h,kl1
+01B3 853335          198    mov 35h,33h
+01B6 E533            199    mov a,33h
+01B8 31C3            200    acall sett
+01BA 22              201    ret
+01BB 853336          202    kl1: mov 36h,33h
+01BE E533            203    mov a,33h
+01C0 31C3            204    acall sett
+01C2 22              205    ret
+01C3 D4              206    sett: da a
+01C4 F537            207    mov 37h,a
+01C6 54F0            208    anl a,#0f0h
+01C8 C4              209    swap a
+01C9 2430            210    add a,#30h
+01CB F550            211    mov 50h,a
+01CD 3185            212    acall display
+01CF E537            213    mov a,37h
+01D1 540F            214    anl a,#0fh
+01D3 2430            215    add a,#30h
+01D5 F551            216    mov 51h,a
+01D7 3185            217    acall display
+01D9 22              218    ret
+                     219    end
+                     220    
+
+VERSION 1.2h ASSEMBLY COMPLETE, 0 ERRORS FOUND
+EVM                                                                                                           PAGE 5
+
+ACC. . . . . . . . . . . . . . .  D ADDR  00E0H  PREDEFINED  
+BUSY1. . . . . . . . . . . . . .  C ADDR  0058H  
+BUSY2. . . . . . . . . . . . . .  C ADDR  006CH  
+BUSY3. . . . . . . . . . . . . .  C ADDR  0080H  
+DELAY. . . . . . . . . . . . . .  C ADDR  012DH  
+DELAY1 . . . . . . . . . . . . .  C ADDR  0132H  
+DELAY_15MS . . . . . . . . . . .  C ADDR  017CH  
+DISPLAY. . . . . . . . . . . . .  C ADDR  0185H  
+EEWRITE. . . . . . . . . . . . .  C ADDR  00AAH  
+HERE . . . . . . . . . . . . . .  C ADDR  0179H  
+I2CREAD. . . . . . . . . . . . .  C ADDR  011CH  
+I2CREAD_LOOP . . . . . . . . . .  C ADDR  0121H  
+I2CSTART . . . . . . . . . . . .  C ADDR  00ECH  
+I2CSTOP. . . . . . . . . . . . .  C ADDR  00F9H  
+I2CWRITE . . . . . . . . . . . .  C ADDR  0106H  
+I2CWRITE_LOOP. . . . . . . . . .  C ADDR  0108H  
+IE . . . . . . . . . . . . . . .  D ADDR  00A8H  PREDEFINED  
+IEWRITE. . . . . . . . . . . . .  C ADDR  00C0H  
+IIWRITE. . . . . . . . . . . . .  C ADDR  00D6H  
+IN . . . . . . . . . . . . . . .    NUMB  0080H  
+INTRUPT. . . . . . . . . . . . .  C ADDR  0088H  
+J. . . . . . . . . . . . . . . .  C ADDR  004AH  
+J2 . . . . . . . . . . . . . . .  C ADDR  0060H  
+J3 . . . . . . . . . . . . . . .  C ADDR  0074H  
+J4 . . . . . . . . . . . . . . .  C ADDR  0086H  
+JKL. . . . . . . . . . . . . . .  C ADDR  013BH  
+JL . . . . . . . . . . . . . . .  C ADDR  0136H  
+JLL. . . . . . . . . . . . . . .  C ADDR  0134H  
+KL . . . . . . . . . . . . . . .  C ADDR  01B0H  
+KL1. . . . . . . . . . . . . . .  C ADDR  01BBH  
+LOOP . . . . . . . . . . . . . .  C ADDR  012FH  
+LOOP1. . . . . . . . . . . . . .  C ADDR  0180H  
+LOOP14 . . . . . . . . . . . . .  C ADDR  017EH  
+LOOPI. . . . . . . . . . . . . .  C ADDR  0187H  
+MAIN . . . . . . . . . . . . . .  C ADDR  003EH  
+MAIN1. . . . . . . . . . . . . .  C ADDR  0020H  
+MYDATA0. . . . . . . . . . . . .  C ADDR  014AH  
+MYDATA1. . . . . . . . . . . . .  C ADDR  0156H  
+MYDATA2. . . . . . . . . . . . .  C ADDR  0163H  
+P0 . . . . . . . . . . . . . . .  D ADDR  0080H  PREDEFINED  
+P2 . . . . . . . . . . . . . . .  D ADDR  00A0H  PREDEFINED  
+P3 . . . . . . . . . . . . . . .  D ADDR  00B0H  PREDEFINED  
+ROUTS. . . . . . . . . . . . . .  C ADDR  0170H  
+SBUF . . . . . . . . . . . . . .  D ADDR  0099H  PREDEFINED  
+SCL. . . . . . . . . . . . . . .  B ADDR  00A4H  
+SCON . . . . . . . . . . . . . .  D ADDR  0098H  PREDEFINED  
+SDA. . . . . . . . . . . . . . .  B ADDR  00A5H  
+SETT . . . . . . . . . . . . . .  C ADDR  01C3H  
+STEP . . . . . . . . . . . . . .  C ADDR  018DH  
+TCON . . . . . . . . . . . . . .  D ADDR  0088H  PREDEFINED  
+TH1. . . . . . . . . . . . . . .  D ADDR  008DH  PREDEFINED  
+TI . . . . . . . . . . . . . . .  B ADDR  0099H  PREDEFINED  
+TMOD . . . . . . . . . . . . . .  D ADDR  0089H  PREDEFINED  
+TR1. . . . . . . . . . . . . . .  B ADDR  008EH  PREDEFINED  

@@ -1,0 +1,31 @@
+LED                                                                                                           PAGE 1
+
+                       1    $mod51
+0000                   2    org 00h
+0000                   3    here: 
+0000 759055            4    mov P1,#55h
+0003 110C              5    acall delay
+0005 7590AA            6    mov P1,#0aah
+0008 110C              7    acall delay
+                       8    
+000A 80F4              9    sjmp here
+                      10    
+000C                  11    delay:
+000C 78FF             12    mov r0,#255
+000E 7932             13    ag1: mov r1,#50
+0010 7B0A             14    ag2: mov r3,#10
+0012 DBFE             15    ag: djnz r3,ag
+0014 D9FA             16    djnz r1,ag2
+0016 D8F6             17    djnz r0,ag1
+0018 22               18    ret
+                      19    end
+
+VERSION 1.2h ASSEMBLY COMPLETE, 0 ERRORS FOUND
+LED                                                                                                           PAGE 2
+
+AG . . . . . . . . . . . . . . .  C ADDR  0012H  
+AG1. . . . . . . . . . . . . . .  C ADDR  000EH  
+AG2. . . . . . . . . . . . . . .  C ADDR  0010H  
+DELAY. . . . . . . . . . . . . .  C ADDR  000CH  
+HERE . . . . . . . . . . . . . .  C ADDR  0000H  
+P1 . . . . . . . . . . . . . . .  D ADDR  0090H  PREDEFINED  

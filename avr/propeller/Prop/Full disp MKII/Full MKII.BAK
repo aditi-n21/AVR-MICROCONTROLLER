@@ -1,0 +1,193 @@
+$include(reg51.inc)
+
+
+
+
+;T0 interrupt
+org 000h
+ajmp main
+
+org 000BH
+acall interr
+mov p3,#0ffH
+reti
+
+;EXT0 interrupt
+
+org 0003H
+acall interr1
+reti
+
+
+org 230h
+lookup:
+db 10000010b,01111100b,01111100b,01111100b,10000010b,11111110b,10111100b,00000000b,11111100b,11111110b,10111100b,01110010b,01110100b,01101100b,10011100b
+db 01111010b,01111100b,01011100b,00101100b,01110010b,11100110b,11010110b,10110110b,00000000b,11110110b,00001100b,01101100b,01101100b,01101100b,01110010b
+db 10000010b,01101100b,01101100b,01101100b,11110010b,00111100b,01111010b,01110110b,01101110b,00011110b,11100000b,00001100b,01101100b,00001100b,11100000b
+db 10011110b,01101100b,01101100b,01101100b,10000010b
+                              
+org 285h
+db 10000000b,01101110b,01101110b,01101110b,10000000b,00000000b,01101100b,01101100b,10001100b,11110010b,10000010b,01111100b,01111100b,01111100b,01111100b
+db 01111100b,00000000b,01111100b,01111100b,10000010b,00000000b,01101100b,01101100b,01111100b,01111100b,00000000b,01101110b,01101110b,01111110b,01111110b
+db 00000000b,01111100b,01101100b,01101100b,01100000b,00000000b,11101110b,11101110b,11101110b,00000000b,11111110b,01111100b,00000000b,01111100b,11111110b
+db 11111010b,01111100b,00000010b,01111110b,11111110b,00000000b,11101110b,11010110b,10111010b,01111100b,00000000b,11111100b,11111100b,11111100b,11111100b
+db 00000000b,01111110b,11001110b,01111110b,00000000b,00000000b,10011110b,11101110b,11110010b,00000000b,00000000b,01111100b,01111100b,01111100b,00000000b
+db 00000000b,01101110b,01101110b,01101110b,10011110b,10000010b,01111100b,01110100b,01111000b,10000000b,00000000b,01101110b,01100110b,01101010b,10011100b
+db 10011000b,01101100b,01101100b,01101100b,10110010b,01111110b,01111110b,00000000b,01111110b,01111110b,00000000b,11111100b,11111100b,11111100b,00000000b
+db 00000110b,11111010b,11111100b,11111010b,00000110b,00000010b,11111100b,11110010b,11111100b,00000010b,00111000b,11010110b,11101110b,11010110b,00111000b
+db 00111110b,11011110b,11100000b,11011110b,00111110b,01111000b,01110100b,01101100b,01011100b,00111100b,11111111b,11111111b,11111111b,11111111b,11111111b,
+
+;Main Function
+org 0100h
+main:
+mov ie,#83H
+mov ip,01H
+mov tmod,#12H
+mov th0,#00h
+mov tl0,#00h
+setb it0
+mov p3,#0FFh
+setb tr0
+mov r3,#00h
+mov r2,#01h
+acall ramc
+mov th1,#00h
+mov tl1,#00h
+setb tr1
+here: ajmp here
+
+ 
+interr:   ;T0 interrupt
+cjne r6,#0ffh,sk
+mov r6,#00h
+acall disp
+sjmp sk1
+sk:
+mov r6,#0ffh
+sk1:
+clr tf0
+ret
+
+
+; EXT0 interruupt
+interr1:
+clr tr1
+clr tr0
+mov a,th1
+mov r1,a
+mov a,tl1
+mov r0,a 
+mov r3,#00h
+mov r2,#160
+acall div16_16
+mov a,r2
+subb a,0ffh
+mov th0,a
+mov tl0,a
+mov th1,#00h
+mov tl1,#00h
+setb tr1
+setb tr0
+mov r0,#23h
+mov r5,#00h
+mov r6,#00h
+ret
+
+ramc:    
+mov dptr,#600h
+mov r7,#29
+mov r0,#40h
+
+loop1:
+mov a,r7
+movc a,@a+dptr
+mov @r0,a
+dec r0
+djnz r7,loop1
+ret
+
+ disp: 
+		cjne r5,#5,continue
+		mov a,@r0
+		cjne a,#'[',space
+		mov p1,#11111111b
+		sjmp cont
+		space:	
+		mov p1,#11111110b
+		cont:
+		inc r0
+		mov r5,#00h
+		ajmp neglect
+		continue:		
+		mov a,@r0       ; moves ASCII from RAM to R0
+		clr c
+		subb A,#30h     ;
+		mov b,#05       ; ASCII to Adress conversion
+		mul AB          ;
+		mov dptr,#230h  
+		add a,r5        ; Memory offset
+	   movc A,@A+DPTR	
+	   mov p1,a
+		inc r5
+		neglect:
+		ret
+         
+ 
+ org 600h
+msg:
+     db 'PROPELLER[DISPLAY[[[[[[[[[[[[[[[[[[[[',0
+     
+     
+     
+div16_16:
+  CLR C       ;Clear carry initially
+  MOV R4,#00h ;Clear R4 working variable initially
+  MOV R5,#00h ;CLear R5 working variable initially
+  MOV B,#00h  ;Clear B since B will count the number of left-shifted bits
+div1:
+  INC B      ;Increment counter for each left shift
+  MOV A,R2   ;Move the current divisor low byte into the accumulator
+  RLC A      ;Shift low-byte left, rotate through carry to apply highest bit to high-byte
+  MOV R2,A   ;Save the updated divisor low-byte
+  MOV A,R3   ;Move the current divisor high byte into the accumulator
+  RLC A      ;Shift high-byte left high, rotating in carry from low-byte
+  MOV R3,A   ;Save the updated divisor high-byte
+  JNC div1   ;Repeat until carry flag is set from high-byte
+div2:        ;Shift right the divisor
+  MOV A,R3   ;Move high-byte of divisor into accumulator
+  RRC A      ;Rotate high-byte of divisor right and into carry
+  MOV R3,A   ;Save updated value of high-byte of divisor
+  MOV A,R2   ;Move low-byte of divisor into accumulator
+  RRC A      ;Rotate low-byte of divisor right, with carry from high-byte
+  MOV R2,A   ;Save updated value of low-byte of divisor
+  CLR C      ;Clear carry, we don't need it anymore
+  MOV 07h,R1 ;Make a safe copy of the dividend high-byte
+  MOV 06h,R0 ;Make a safe copy of the dividend low-byte
+  MOV A,R0   ;Move low-byte of dividend into accumulator
+  SUBB A,R2  ;Dividend - shifted divisor = result bit (no factor, only 0 or 1)
+  MOV R0,A   ;Save updated dividend 
+  MOV A,R1   ;Move high-byte of dividend into accumulator
+  SUBB A,R3  ;Subtract high-byte of divisor (all together 16-bit substraction)
+  MOV R1,A   ;Save updated high-byte back in high-byte of divisor
+  JNC div3   ;If carry flag is NOT set, result is 1
+  MOV R1,07h ;Otherwise result is 0, save copy of divisor to undo subtraction
+  MOV R0,06h
+div3:
+  CPL C      ;Invert carry, so it can be directly copied into result
+  MOV A,R4 
+  RLC A      ;Shift carry flag into temporary result
+  MOV R4,A   
+  MOV A,R5
+  RLC A
+  MOV R5,A		
+  DJNZ B,div2 ;Now count backwards and repeat until "B" is zero
+  MOV R3,05h  ;Move result to R3/R2
+  MOV R2,04h  ;Move result to R3/R2
+  RET
+
+     
+end
+
+
+ 
+

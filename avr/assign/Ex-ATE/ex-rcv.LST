@@ -1,0 +1,290 @@
+C51 COMPILER V9.51   EX_RCV                                                                02/21/2014 18:49:52 PAGE 1   
+
+
+C51 COMPILER V9.51, COMPILATION OF MODULE EX_RCV
+OBJECT MODULE PLACED IN ex-rcv.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ex-rcv.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1           #include<reg51.h>
+   2          #define LCD P0
+   3          
+   4          sbit RS=P2^0; //connect p3.0 to rs pin of lcd
+   5          sbit RW=P2^1; //connect p3.1 to en pin of lcd
+   6          sbit EN=P2^2; //connect p3.2 to en pin of lcd
+   7          sbit blue=P1^0;
+   8          sbit RED= P1^3;
+   9          sbit Yellow= P1^2;
+  10          sbit Green= P1^1;
+  11          //sbit mode4= P2^3;
+  12          sbit led_red=P3^3;
+  13          sbit led_yellow=P3^2;
+  14          sbit led_green=P3^1;
+  15          sbit led_blue=P3^0;
+  16          
+  17          sbit buzz=P2^3;
+  18          //sbit led4=P2^7;
+  19          sbit motor= P2^4;
+  20          sbit motor2=P2^7; 
+  21          
+  22          void delay(unsigned int);
+  23          void delay_ms(unsigned int);
+  24          void init_lcd(void);
+  25          void cmd_lcd(unsigned char);
+  26          void write_lcd(unsigned char);
+  27          void display_lcd(unsigned char *);
+  28          unsigned char keysense(void);
+  29          
+  30          
+  31          unsigned char pwm_width,cnt=0;
+  32          bit pwm_flag = 0;
+  33          
+  34          void timer0() interrupt 1 {
+  35   1              if(!pwm_flag) { //Start of High level
+  36   2                      pwm_flag = 1;   //Set flag
+  37   2                      motor = 1;     //Set PWM o/p pin
+  38   2                  motor2=1;
+  39   2                      TH0 = pwm_width;        //Load timer
+  40   2                      TF0 = 0;                //Clear interrupt flag
+  41   2                      return;         //Return
+  42   2              }
+  43   1              else {  //Start of Low level
+  44   2                      pwm_flag = 0;   //Clear flag
+  45   2                      motor = 0;     //Clear PWM o/p pin
+  46   2                       motor2=0;
+  47   2                      TH0 = 255 - pwm_width;  //Load timer
+  48   2                      TF0 = 0;        //Clear Interrupt flag
+  49   2                      return;         //return
+  50   2              }
+  51   1      }
+  52          
+  53          void main()
+  54          {
+  55   1        unsigned char k;  
+C51 COMPILER V9.51   EX_RCV                                                                02/21/2014 18:49:52 PAGE 2   
+
+  56   1       //TMOD=0x20;
+  57   1        //TH1=0xd2;
+  58   1        RED=Yellow=Green=blue=1;
+  59   1       TMOD = 0x20;
+  60   1        TH0=0x00;
+  61   1        //motor=0;
+  62   1            //  pwm_width = 250;
+  63   1              EA = 1;
+  64   1              ET0 = 1;
+  65   1              TR0 = 1;
+  66   1          init_lcd();
+  67   1          cmd_lcd(0x80);
+  68   1          display_lcd(" WELCOME TO SELF ");
+  69   1          cmd_lcd(0xc0);
+  70   1          display_lcd("    CONTROLLED ");
+  71   1        delay(20);
+  72   1        cmd_lcd(0x01);
+  73   1        cmd_lcd(0x80);
+  74   1          display_lcd("  LOCOMOTIVE   ");
+  75   1          cmd_lcd(0xc0);
+  76   1          display_lcd(" MADE BY:-");
+  77   1          cmd_lcd(0x01);
+  78   1          cmd_lcd(0x80);
+  79   1          display_lcd("MANISHA,ARIBA");
+  80   1          cmd_lcd(0xc0);
+  81   1          display_lcd("RUCHI & VIVEK ");
+  82   1      delay(20);
+  83   1        cmd_lcd(0x01);
+  84   1       while(1)
+  85   1       { 
+  86   2         k=keysense();
+  87   2         switch(k)
+  88   2         {
+  89   3          case 1:  
+  90   3                 led_red=0;led_yellow=1;led_green=1;led_blue=1;
+  91   3               pwm_width = 250;
+  92   3          //cmd_lcd(0x01);
+  93   3             cmd_lcd(0x80);
+  94   3          display_lcd("     stop     ");
+  95   3        cmd_lcd(0x01);
+  96   3           break;
+  97   3        case 2:
+  98   3               led_red=1;led_yellow=0;led_green=1;led_blue=1;
+  99   3        pwm_width = 126;
+ 100   3        buzz=0;
+ 101   3        //cmd_lcd(0x01);
+ 102   3         cmd_lcd(0x80);
+ 103   3          display_lcd("    50 % SPEED  ");
+ 104   3      delay_ms(10);
+ 105   3        buzz=1;
+ 106   3          cmd_lcd(0x01);
+ 107   3           break;
+ 108   3          case 3:
+ 109   3               led_red=1;led_yellow=1;led_green=0;led_blue=1;
+ 110   3            pwm_width = 00;
+ 111   3          //cmd_lcd(0x01);
+ 112   3          cmd_lcd(0x80);
+ 113   3          display_lcd("   100% SPEED ");
+ 114   3        cmd_lcd(0x01);
+ 115   3       break;
+ 116   3          case 4: 
+ 117   3              led_red=1;led_yellow=1;led_green=1;led_blue=0;
+C51 COMPILER V9.51   EX_RCV                                                                02/21/2014 18:49:52 PAGE 3   
+
+ 118   3               pwm_width = 250;
+ 119   3          //    cmd_lcd(0x01);
+ 120   3          if(cnt==0)
+ 121   3          {
+ 122   4            cnt++;
+ 123   4            cmd_lcd(0x01);
+ 124   4             cmd_lcd(0x80);
+ 125   4          display_lcd("RAMPUR STATION");
+ 126   4            cmd_lcd(0xc5);
+ 127   4            display_lcd("STOP");
+ 128   4            delay(100);
+ 129   4            cmd_lcd(0x01);
+ 130   4             cmd_lcd(0x80);
+ 131   4          display_lcd("NEXT STATION");
+ 132   4            cmd_lcd(0xc0);
+ 133   4            display_lcd("PANTNAGAR");
+ 134   4            delay(100);
+ 135   4          }
+ 136   3          else if(cnt==1)
+ 137   3          {
+ 138   4            cnt++;
+ 139   4            cmd_lcd(0x01);
+ 140   4             cmd_lcd(0x80);
+ 141   4          display_lcd("PANTNAGAR STATION");
+ 142   4            cmd_lcd(0xc5);
+ 143   4            display_lcd("STOP");
+ 144   4            delay(100);
+ 145   4            cmd_lcd(0x01);
+ 146   4             cmd_lcd(0x80);
+ 147   4          display_lcd("NEXT STATION");
+ 148   4            cmd_lcd(0xc0);
+ 149   4            display_lcd(" LALKUAN  ");
+ 150   4            delay(100);
+ 151   4          }
+ 152   3          else
+ 153   3          {
+ 154   4            cnt=0;
+ 155   4            cnt++;
+ 156   4              cmd_lcd(0x01);
+ 157   4             cmd_lcd(0x80);
+ 158   4          display_lcd("LALKUAN STATION");
+ 159   4            cmd_lcd(0xc5);
+ 160   4            display_lcd("STOP");
+ 161   4            delay(100);
+ 162   4            cmd_lcd(0x01);
+ 163   4             cmd_lcd(0x80);
+ 164   4          display_lcd("NEXT STATION");
+ 165   4            cmd_lcd(0xc0);
+ 166   4            display_lcd("RAMPUR");
+ 167   4            delay(100);
+ 168   4          }
+ 169   3            cmd_lcd(0x01);
+ 170   3      break;
+ 171   3       default:  
+ 172   3             break;
+ 173   3         }
+ 174   2       } 
+ 175   1      }
+ 176          void delay(unsigned int msec)
+ 177          {
+ 178   1        unsigned int i,j;
+ 179   1        for(i=0;i<msec;i++)
+C51 COMPILER V9.51   EX_RCV                                                                02/21/2014 18:49:52 PAGE 4   
+
+ 180   1          for(j=0;j<1275;j++);
+ 181   1      }
+ 182          unsigned char keysense(void)
+ 183          {
+ 184   1      if(RED==0)
+ 185   1         return(1);
+ 186   1      else if(Yellow==0)
+ 187   1         return(2);
+ 188   1      else if(Green==0)
+ 189   1         return(3);
+ 190   1      else if(blue==0)
+ 191   1         return(4);
+ 192   1      else
+ 193   1          return(0);
+ 194   1      
+ 195   1      }
+ 196          /*void timer(unsigned char msec)   // Function for timer
+ 197          {
+ 198            unsigned char i;
+ 199            TR1=1;
+ 200            for(i=0;i<msec;i++)
+ 201            {
+ 202              while(TF1==0);
+ 203              TF1=0;
+ 204            }
+ 205            TR1=0;
+ 206          } */
+ 207          void delay_ms(unsigned int i)
+ 208          {
+ 209   1      unsigned int j;
+ 210   1                  while(i-->0)
+ 211   1                  {
+ 212   2                              for(j=0;j<500;j++)
+ 213   2                              {
+ 214   3                                          ;
+ 215   3                              }
+ 216   2                  }
+ 217   1      }           
+ 218          //initialize lcd
+ 219          void init_lcd(void)
+ 220          {                           
+ 221   1      cmd_lcd(0x38); //8 bit initialize, 5x7 character font, 16x2 display
+ 222   1      delay_ms(5);
+ 223   1      cmd_lcd(0x0e); //lcd on, cursor on
+ 224   1      delay_ms(5);
+ 225   1      cmd_lcd(0x06); //right shift cursor automatically after each character is displayed
+ 226   1      delay_ms(5);
+ 227   1      cmd_lcd(0x01); //clear lcd
+ 228   1      delay_ms(5);
+ 229   1      cmd_lcd (0x80);
+ 230   1        delay_ms(5);
+ 231   1      
+ 232   1      }
+ 233          //transmit command or instruction to lcd
+ 234          void cmd_lcd(unsigned char c)
+ 235          {
+ 236   1      EN=1;
+ 237   1      RW=0;//set enable pin
+ 238   1      RS=0; //clear register select pin
+ 239   1      LCD=c; //load 8 bit data
+ 240   1      delay_ms(5); //delay 2 milliseconds
+ 241   1      EN=0; //clear enable pin
+C51 COMPILER V9.51   EX_RCV                                                                02/21/2014 18:49:52 PAGE 5   
+
+ 242   1      
+ 243   1      }
+ 244          //transmit a character to be displayed on lcd
+ 245          void write_lcd(unsigned char c)
+ 246          {
+ 247   1      EN=1; //set enable pin
+ 248   1      RW=0;
+ 249   1      RS=1; //set register select pin
+ 250   1      LCD=c;  //load 8 bit data
+ 251   1      delay_ms(5); //delay 2 milliseconds 
+ 252   1      EN=0; //clear enable pin
+ 253   1      }
+ 254          //transmit a string to be displayed on lcd
+ 255          void display_lcd(unsigned char *s)
+ 256          {
+ 257   1      while(*s)
+ 258   1      write_lcd(*s++);
+ 259   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    724    ----
+   CONSTANT SIZE    =    232    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

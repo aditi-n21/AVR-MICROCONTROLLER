@@ -1,0 +1,24 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+D:\CETPA\Classes\LED's\code\C\led_pattern.uvproj
+Project File Date:  05/04/2013
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling led_pattern.c...
+led_pattern.c(1): warning C500: LICENSE ERROR (R207: REGISTRY READ ERROR)
+linking...
+Program Size: data=9.0 xdata=0 code=56
+creating hex file from "led_pattern"...
+"led_pattern" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling led_pattern.c...
+led_pattern.c(1): warning C500: LICENSE ERROR (R207: REGISTRY READ ERROR)
+linking...
+Program Size: data=9.0 xdata=0 code=56
+creating hex file from "led_pattern"...
+"led_pattern" - 0 Error(s), 1 Warning(s).

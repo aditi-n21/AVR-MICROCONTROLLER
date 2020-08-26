@@ -1,0 +1,40 @@
+DRDGFT                                                                                                        PAGE 1
+
+                       1    $mod51
+0000                   2    org 00h
+  0090                 3    s1 equ p1.0
+  0091                 4    s2 equ p1.1
+  0092                 5    s3 equ p1.2
+  0093                 6    s4 equ p1.3
+0000 75900F            7    mov p1,#0fh
+0003 209005            8    ag1: jb s1,r11
+0006 75A001            9    mov p2,#00000001b    ; left
+0009 801B             10    sjmp ag
+000B 209105           11    r11: jb s2,r22
+000E 75A00A           12    mov p2,#0ah          ;backward
+0011 8013             13    sjmp ag
+0013 209205           14    r22: jb s3,r33
+0016 75A004           15    mov p2,#04h            ; right
+0019 800B             16    sjmp ag
+001B 209305           17    r33: jb s4,r44
+001E 75A005           18    mov p2,#05h
+0021 8003             19    sjmp ag
+0023 75A000           20    r44: mov p2,#00h
+0026 80DB             21    ag: sjmp ag1
+                      22    END
+
+VERSION 1.2h ASSEMBLY COMPLETE, 0 ERRORS FOUND
+DRDGFT                                                                                                        PAGE 2
+
+AG . . . . . . . . . . . . . . .  C ADDR  0026H  
+AG1. . . . . . . . . . . . . . .  C ADDR  0003H  
+P1 . . . . . . . . . . . . . . .  D ADDR  0090H  PREDEFINED  
+P2 . . . . . . . . . . . . . . .  D ADDR  00A0H  PREDEFINED  
+R11. . . . . . . . . . . . . . .  C ADDR  000BH  
+R22. . . . . . . . . . . . . . .  C ADDR  0013H  
+R33. . . . . . . . . . . . . . .  C ADDR  001BH  
+R44. . . . . . . . . . . . . . .  C ADDR  0023H  
+S1 . . . . . . . . . . . . . . .    NUMB  0090H  
+S2 . . . . . . . . . . . . . . .    NUMB  0091H  
+S3 . . . . . . . . . . . . . . .    NUMB  0092H  
+S4 . . . . . . . . . . . . . . .    NUMB  0093H  

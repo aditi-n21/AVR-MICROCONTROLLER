@@ -1,0 +1,59 @@
+C51 COMPILER V9.05   MUTITRY                                                               01/25/2013 18:37:53 PAGE 1   
+
+
+C51 COMPILER V9.05, COMPILATION OF MODULE MUTITRY
+OBJECT MODULE PLACED IN mutitry.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE mutitry.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #define disp P2
+   3          sbit seg1=P1^0;
+   4          sbit seg2=P1^1;
+   5          
+   6          void delay(unsigned char msec);
+   7          unsigned char num[]={0xC0,0xF9,0xA4,0xB0,0x99,0x92,0x82,0xF8,0x80,0x90};        
+   8          
+   9          void main()
+  10          { unsigned char i,j,k;
+  11   1       seg1=seg2=0;
+  12   1        while(1)
+  13   1        {
+  14   2        for(j=0;j<10;j++)
+  15   2              {  
+  16   3              for(i=0;i<10;i++)
+  17   3              { 
+  18   4                      seg2=1;
+  19   4                disp=num[i];
+  20   4              delay(50);
+  21   4                 seg1=1; 
+  22   4                    disp=num[j];
+  23   4      delay(5);
+  24   4                 seg1=0;
+  25   4                seg2=0;
+  26   4                  }
+  27   3         }
+  28   2        }
+  29   1      }
+*** WARNING C280 IN LINE 10 OF mutitry.c: 'k': unreferenced local variable
+  30          void delay(unsigned char msec)
+  31          {
+  32   1      unsigned int p,q;
+  33   1      for(p=0;p<msec;p++)
+  34   1        for(q=0;q<1275;q++);
+  35   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     99    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     10       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

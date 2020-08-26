@@ -1,0 +1,246 @@
+C51 COMPILER V9.05   TEMP                                                                  01/21/2012 11:25:54 PAGE 1   
+
+
+C51 COMPILER V9.05, COMPILATION OF MODULE TEMP
+OBJECT MODULE PLACED IN temp.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE temp.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #include<math.h>
+   3          
+   4          
+   5          #define adc_input P1
+   6          #define dataport P0
+   7          #define sec 100
+   8          sbit rs = P2^4;
+   9          sbit rw = P2^5;
+  10          sbit e = P2^6;
+  11          
+  12          sbit wr= P3^7;
+  13          sbit rd= P3^6;
+  14          sbit intr=P3^5;
+  15          
+  16          void convertAndDisplay(unsigned char value);
+  17          void MSdelay(unsigned int value);
+  18          void lcd(void);
+  19          void writecmd(unsigned char);
+  20          void writedata(unsigned char);
+  21          void delay(unsigned int);
+  22          void writestr(unsigned char *s);
+  23          
+  24          
+  25          //int test_intermediate3=0, test_final=0,test_intermediate1[10],test_intermediate2[3]={0,0,0};
+  26          
+  27          void delay(unsigned int msec )
+  28          {
+  29   1      int i ,j ;
+  30   1      for(i=0;i<msec;i++)
+  31   1        for(j=0; j<1275; j++);
+  32   1      }
+  33          
+  34          void writecmd(unsigned char item)  //Function to send command to LCD
+  35          {
+  36   1      dataport = item;
+  37   1      rs= 0;
+  38   1      rw=0;
+  39   1      e=1;
+  40   1      delay(1);
+  41   1      e=0;
+  42   1      return;
+  43   1      }
+  44          
+  45          void writedata(unsigned char item) //Function to send data to LCD
+  46          {
+  47   1      dataport = item;
+  48   1      rs= 1;
+  49   1      rw=0;
+  50   1      e=1;
+  51   1      delay(1);
+  52   1      e=0;
+  53   1      //delay(100);
+  54   1      return;
+  55   1      }
+C51 COMPILER V9.05   TEMP                                                                  01/21/2012 11:25:54 PAGE 2   
+
+  56          
+  57          void writestr(unsigned char *str)  // Function to send string to LCD
+  58          {
+  59   1      int i=0;
+  60   1      while(str[i]!='\0')
+  61   1      {
+  62   2        writedata(str[i]);
+  63   2        i++;
+  64   2        delay(10);
+  65   2      }
+  66   1      return;
+  67   1      }
+  68          
+  69          
+  70          /*void delaylcd(unsigned char a)
+  71          {
+  72            int i,j;
+  73            for(i=0;i<a;i++)
+  74                          for(j=0;j<1275;j++);
+  75          }
+  76          void writestr(unsigned char *s)
+  77          {       
+  78                  unsigned char l,i;
+  79                  l=strlen(s);
+  80                  for(i=0;i<l;i++)
+  81                  {
+  82                          writedata(*s);
+  83                          s++;
+  84                  }
+  85          }
+  86          
+  87          void writecmd(unsigned char a)
+  88          {
+  89                  RS=0;
+  90                  P0=a;
+  91          //      RW=0;
+  92                  EN=1;
+  93                  delaylcd(5);
+  94                  EN=0;
+  95                  return;
+  96          }
+  97          
+  98          void writedata(unsigned char b)
+  99          {
+ 100                  RS=1;
+ 101                  P0=b;
+ 102          //      RW=0;
+ 103                  EN=1;
+ 104                  delaylcd(5);
+ 105                  EN=0;
+ 106                  return;
+ 107          } */
+ 108          void lcd(void)
+ 109          {
+ 110   1              writecmd(0x38);
+ 111   1              writecmd(0x0c);
+ 112   1              writecmd(0x01);
+ 113   1              writecmd(0x06);
+ 114   1              writecmd(0x80);
+ 115   1      }
+ 116          
+ 117                  
+C51 COMPILER V9.05   TEMP                                                                  01/21/2012 11:25:54 PAGE 3   
+
+ 118          
+ 119          void convertAndDisplay(unsigned char value)
+ 120                   {
+ 121   1                 /* unsigned char x,d1,d2,d3;
+ 122   1                      x=value/10;
+ 123   1                      d1=value%10;
+ 124   1                      d2=x%10;
+ 125   1                      d3=x%10;
+ 126   1                      writecmd(0x86);
+ 127   1                      writecmd(0x0E);
+ 128   1                      writedata(d1);          
+ 129   1                      MSdelay(50);
+ 130   1                      writedata(d2);
+ 131   1                      MSdelay(50);
+ 132   1                      writedata(d3);
+ 133   1                      MSdelay(50);       */
+ 134   1               unsigned char x=0,b=0,n=0,i;
+ 135   1                      unsigned int len[8], sum = 0;
+ 136   1       
+ 137   1        for(i=0;i<=7;i++)
+ 138   1        {     x=value/10;
+ 139   2          b=value%10;
+ 140   2              value=value/10;
+ 141   2          len[i]= b;
+ 142   2        }
+ 143   1        for(i=0; i <= 7; i++) 
+ 144   1        {
+ 145   2           n=len[i]*pow(2,i);
+ 146   2           sum = sum + n;
+ 147   2          }
+ 148   1        lcd();
+ 149   1        writestr("TEMP:");
+ 150   1        x=sum/10;
+ 151   1        b=sum%10;
+ 152   1        writecmd(0xc8);
+ 153   1          writedata(x+48); 
+ 154   1              writecmd(0x06);
+ 155   1        writedata(b+48);
+ 156   1        // MSdelay(50);
+ 157   1         /*int s,tf=0;
+ 158   1      tf=value;
+ 159   1      writecmd(0xc1);                         //force lcd to start with IInd line c1 position
+ 160   1      delay(2);
+ 161   1      writestr("TEMP:");
+ 162   1      s=tf/100;
+ 163   1      tf=tf%100;
+ 164   1      writecmd(0xc6);            //force lcd to start with IInd line c8 position
+ 165   1      if(s!=0)
+ 166   1      writedata(s+48);
+ 167   1      else
+ 168   1      {writecmd(0x06);
+ 169   1       s=tf/10;
+ 170   1       tf=tf%10;
+ 171   1       writedata(s+48);
+ 172   1       }
+ 173   1      writedata(tf+48);
+ 174   1      writedata('"');
+ 175   1      writedata('c');
+ 176   1      //writedata(' ');                                                        
+ 177   1      //MSdelay(2); */
+ 178   1      
+ 179   1      }                          
+C51 COMPILER V9.05   TEMP                                                                  01/21/2012 11:25:54 PAGE 4   
+
+ 180                  
+ 181          void MSdelay(unsigned int value)
+ 182                  {
+ 183   1                 unsigned char x,y;
+ 184   1                 for(x=0;x<value;x++)
+ 185   1                  for(y=0;y<1275;y++);
+ 186   1              }
+ 187          void main()
+ 188                  {
+ 189   1                 unsigned char value;
+ 190   1                 P1 =0xFF;
+ 191   1                 //intr = 1;
+ 192   1                      rd = 1;
+ 193   1                       wr = 1;
+ 194   1                 lcd();
+ 195   1                 writestr("PROJECT");
+ 196   1                 
+ 197   1                 while(1)
+ 198   1                 {
+ 199   2                    delay(5);
+ 200   2                         wr = 0;
+ 201   2                        delay(5);
+ 202   2                        wr = 1;
+ 203   2                        lcd();
+ 204   2                 writestr("ON");
+ 205   2                 
+ 206   2                        while(intr==1);
+ 207   2                      rd=0;
+ 208   2                        lcd();
+ 209   2      
+ 210   2                 writestr("TEMPERATURE");
+ 211   2                       
+ 212   2                        value = P1;   
+ 213   2                        convertAndDisplay(value);
+ 214   2                        rd=1;
+ 215   2                        }
+ 216   1               }
+ 217           
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    439    ----
+   CONSTANT SIZE    =     29    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      27
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

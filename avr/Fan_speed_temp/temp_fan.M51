@@ -1,0 +1,292 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        07/18/2016  12:17:47  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE STARTUP.obj, tem_fan.obj TO temp_fan
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  STARTUP.obj (?C_STARTUP)
+  tem_fan.obj (TEM_FAN)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CLDPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?UIDIV)
+
+
+LINK MAP OF MODULE:  temp_fan (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0007H     UNIT         _DATA_GROUP_
+            IDATA   000FH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0081H     UNIT         ?PR?_CONVERTANDDISPLAY?TEM_FAN
+            CODE    0881H     006EH     UNIT         ?C?LIB_CODE
+            CODE    08EFH     0039H     UNIT         ?PR?MAIN?TEM_FAN
+            CODE    0928H     0028H     UNIT         ?PR?INIT_LCD?TEM_FAN
+            CODE    0950H     0027H     UNIT         ?PR?_DELAY_MS?TEM_FAN
+            CODE    0977H     0027H     UNIT         ?CO?TEM_FAN
+            CODE    099EH     0025H     UNIT         ?PR?_DISPLAY_LCD?TEM_FAN
+            CODE    09C3H     0021H     UNIT         ?PR?TEMP?TEM_FAN
+            CODE    09E4H     0011H     UNIT         ?PR?_CMD_LCD?TEM_FAN
+            CODE    09F5H     0011H     UNIT         ?PR?_WRITE_LCD?TEM_FAN
+            CODE    0A06H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   temp_fan (?C_STARTUP)
+
+
+SEGMENT                                  DATA_GROUP 
+  +--> CALLED SEGMENT                  START    LENGTH
+------------------------------------------------------
+?C_C51STARTUP                          -----    -----
+  +--> ?PR?MAIN?TEM_FAN
+
+?PR?MAIN?TEM_FAN                       -----    -----
+  +--> ?PR?INIT_LCD?TEM_FAN
+  +--> ?CO?TEM_FAN
+  +--> ?PR?_DISPLAY_LCD?TEM_FAN
+  +--> ?PR?_CMD_LCD?TEM_FAN
+  +--> ?PR?_DELAY_MS?TEM_FAN
+  +--> ?PR?TEMP?TEM_FAN
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/18/2016  12:17:47  PAGE 2
+
+
+
+?PR?INIT_LCD?TEM_FAN                   -----    -----
+  +--> ?PR?_DELAY_MS?TEM_FAN
+  +--> ?PR?_CMD_LCD?TEM_FAN
+
+?PR?_CMD_LCD?TEM_FAN                   -----    -----
+  +--> ?PR?_DELAY_MS?TEM_FAN
+
+?PR?_DISPLAY_LCD?TEM_FAN               000CH    0003H
+  +--> ?PR?_WRITE_LCD?TEM_FAN
+
+?PR?_WRITE_LCD?TEM_FAN                 -----    -----
+  +--> ?PR?_DELAY_MS?TEM_FAN
+
+?PR?TEMP?TEM_FAN                       -----    -----
+  +--> ?PR?_DELAY_MS?TEM_FAN
+  +--> ?PR?_CONVERTANDDISPLAY?TEM_FAN
+
+?PR?_CONVERTANDDISPLAY?TEM_FAN         0008H    0004H
+  +--> ?PR?_CMD_LCD?TEM_FAN
+  +--> ?PR?_WRITE_LCD?TEM_FAN
+  +--> ?CO?TEM_FAN
+  +--> ?PR?_DISPLAY_LCD?TEM_FAN
+
+
+
+SYMBOL TABLE OF MODULE:  temp_fan (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:0A06H         SEGMENT       ?C_C51STARTUP
+  I:000FH         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:0A09H         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:0A06H         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/18/2016  12:17:47  PAGE 3
+
+
+  C:0A06H         LINE#         133
+  C:0A08H         LINE#         134
+  C:0A09H         LINE#         135
+  C:0A0AH         LINE#         136
+  C:0A0CH         LINE#         185
+  C:0A0FH         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        TEM_FAN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  C:099EH         PUBLIC        _display_lcd
+  B:00A0H.7       PUBLIC        EN
+  B:00A0H.5       PUBLIC        RS
+  C:08EFH         PUBLIC        main
+  B:00A0H.6       PUBLIC        RW
+  C:09C3H         PUBLIC        temp
+  B:00B0H.0       PUBLIC        intr
+  C:09F5H         PUBLIC        _write_lcd
+  C:09E4H         PUBLIC        _cmd_lcd
+  C:0928H         PUBLIC        init_lcd
+  C:0954H         PUBLIC        _delay_ms
+  B:00B0H.2       PUBLIC        rd
+  B:00B0H.1       PUBLIC        wr
+  C:0800H         PUBLIC        _convertAndDisplay
+  -------         PROC          MAIN
+  C:08EFH         LINE#         19
+  C:08EFH         LINE#         20
+  C:08EFH         LINE#         21
+  C:08F2H         LINE#         22
+  C:08FBH         LINE#         23
+  C:0900H         LINE#         24
+  C:0909H         LINE#         25
+  C:0910H         LINE#         26
+  C:0915H         LINE#         27
+  C:091AH         LINE#         28
+  C:0923H         LINE#         29
+  C:0923H         LINE#         30
+  C:0923H         LINE#         31
+  C:0926H         LINE#         32
+  -------         ENDPROC       MAIN
+  -------         PROC          TEMP
+  -------         DO            
+  D:0006H         SYMBOL        value
+  -------         ENDDO         
+  C:09C3H         LINE#         36
+  C:09C3H         LINE#         37
+  C:09C3H         LINE#         38
+  C:09CAH         LINE#         39
+  C:09CCH         LINE#         40
+  C:09D3H         LINE#         41
+  C:09D5H         LINE#         42
+  C:09D8H         LINE#         43
+  C:09DAH         LINE#         44
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/18/2016  12:17:47  PAGE 4
+
+
+  C:09DEH         LINE#         45
+  C:09E1H         LINE#         46
+  C:09E3H         LINE#         47
+  -------         ENDPROC       TEMP
+  -------         PROC          _CONVERTANDDISPLAY
+  D:0002H         SYMBOL        value
+  -------         DO            
+  D:0008H         SYMBOL        D1
+  D:0009H         SYMBOL        D2
+  D:000AH         SYMBOL        D3
+  D:000BH         SYMBOL        D4
+  -------         ENDDO         
+  C:0800H         LINE#         49
+  C:0804H         LINE#         50
+  C:0804H         LINE#         52
+  C:080BH         LINE#         54
+  C:0821H         LINE#         55
+  C:0838H         LINE#         56
+  C:084FH         LINE#         57
+  C:085FH         LINE#         59
+  C:0864H         LINE#         60
+  C:0869H         LINE#         61
+  C:086EH         LINE#         62
+  C:0873H         LINE#         63
+  C:0878H         LINE#         64
+  -------         ENDPROC       _CONVERTANDDISPLAY
+  -------         PROC          INIT_LCD
+  C:0928H         LINE#         68
+  C:0928H         LINE#         69
+  C:0928H         LINE#         70
+  C:092BH         LINE#         71
+  C:0930H         LINE#         72
+  C:0933H         LINE#         73
+  C:0938H         LINE#         74
+  C:093BH         LINE#         75
+  C:0940H         LINE#         76
+  C:0943H         LINE#         77
+  C:0948H         LINE#         78
+  C:094BH         LINE#         79
+  -------         ENDPROC       INIT_LCD
+  -------         PROC          _CMD_LCD
+  D:0007H         SYMBOL        c
+  C:09E4H         LINE#         82
+  C:09E4H         LINE#         83
+  C:09E4H         LINE#         84
+  C:09E6H         LINE#         85
+  C:09E8H         LINE#         86
+  C:09EAH         LINE#         87
+  C:09ECH         LINE#         88
+  C:09EEH         LINE#         89
+  -------         ENDPROC       _CMD_LCD
+  -------         PROC          _WRITE_LCD
+  D:0007H         SYMBOL        c
+  C:09F5H         LINE#         92
+  C:09F5H         LINE#         93
+  C:09F5H         LINE#         94
+  C:09F7H         LINE#         95
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/18/2016  12:17:47  PAGE 5
+
+
+  C:09F9H         LINE#         96
+  C:09FBH         LINE#         97
+  C:09FDH         LINE#         98
+  C:09FFH         LINE#         99
+  -------         ENDPROC       _WRITE_LCD
+  -------         PROC          _DISPLAY_LCD
+  D:000CH         SYMBOL        s
+  C:099EH         LINE#         102
+  C:09A4H         LINE#         103
+  C:09A4H         LINE#         104
+  C:09AFH         LINE#         105
+  C:09C2H         LINE#         106
+  -------         ENDPROC       _DISPLAY_LCD
+  C:0950H         SYMBOL        L?0024
+  -------         PROC          L?0023
+  -------         ENDPROC       L?0023
+  C:0950H         SYMBOL        L?0024
+  -------         PROC          _DELAY_MS
+  D:0006H         SYMBOL        i
+  -------         DO            
+  D:0004H         SYMBOL        j
+  -------         ENDDO         
+  C:0954H         LINE#         108
+  C:0954H         LINE#         109
+  C:0954H         LINE#         111
+  C:0963H         LINE#         112
+  C:0963H         LINE#         113
+  C:096FH         LINE#         114
+  C:096FH         LINE#         116
+  C:0976H         LINE#         117
+  C:0976H         LINE#         118
+  -------         ENDPROC       _DELAY_MS
+  -------         ENDMOD        TEM_FAN
+
+  -------         MODULE        ?C?CLDPTR
+  C:0881H         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?UIDIV
+  C:089AH         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 01A7H BYTE (20%) *
+******************************************************************************
+
+Program Size: data=16.0 xdata=0 code=533
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

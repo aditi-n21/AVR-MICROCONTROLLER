@@ -1,0 +1,47 @@
+C51 COMPILER V9.05   SINGLE_SWITCH                                                         06/06/2016 18:46:58 PAGE 1   
+
+
+C51 COMPILER V9.05, COMPILATION OF MODULE SINGLE_SWITCH
+OBJECT MODULE PLACED IN single_switch.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE single_switch.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg51.h>
+   2          int j,i=0;
+   3          unsigned char arr[]="Vipul Ror";
+   4          void main(void)
+   5          {
+   6   1      TMOD=0x20; //use Timer 1, mode 2
+   7   1      TH1=0xFA; //4800 baud rate
+   8   1      SCON=0x50;
+   9   1      TR1=1;
+  10   1      while(1)
+  11   1      {
+  12   2      for(i=0; i<10; i++) 
+  13   2      {
+  14   3      SBUF = arr[i]; //place value in buffer
+  15   3      while (TI==0);
+  16   3         TI=0;
+  17   3         SBUF = ' ';
+  18   3         SBUF =  ' ';
+  19   3         while(TI==0);
+  20   3         TI=0;
+  21   3         }
+  22   2         for(j=0; j<30000; j++);
+  23   2       }
+  24   1         }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     82    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     14    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

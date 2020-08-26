@@ -1,0 +1,4 @@
+TRANSFER
+"STARTUP.obj",
+"new.obj" 
+TO "new1.LIB"

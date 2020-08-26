@@ -1,0 +1,1 @@
+custom.o: custom.c

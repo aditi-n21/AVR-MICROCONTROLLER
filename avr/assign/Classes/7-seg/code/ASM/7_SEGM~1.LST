@@ -1,0 +1,48 @@
+7_SEGM^1                                                                                                      PAGE 1
+
+                       1    ;WAP to display value from 0 to 9 with a proper delay.
+                       2    
+                       3    
+                       4            $MOD51
+0000                   5            ORG 00H
+0000 7590C0            6    AG:     MOV     P1,#0C0H
+0003 1134              7            ACALL   DELAY
+0005 7590F9            8            MOV     P1,#0F9H
+0008 1134              9            ACALL   DELAY
+000A 7590A4           10            MOV     P1,#0A4H
+000D 1134             11            ACALL   DELAY
+000F 7590B0           12            MOV     P1,#0B0H
+0012 1134             13            ACALL   DELAY
+0014 759099           14            MOV     P1,#99H
+0017 1134             15            ACALL   DELAY
+0019 759092           16            MOV     P1,#92H
+001C 1134             17            ACALL   DELAY
+001E 759082           18            MOV     P1,#82H
+0021 1134             19            ACALL   DELAY
+0023 7590F8           20            MOV     P1,#0F8H
+0026 1134             21            ACALL   DELAY
+0028 759080           22            MOV     P1,#80H
+002B 1134             23            ACALL   DELAY
+002D 759098           24            MOV     P1,#98H
+0030 1134             25            ACALL   DELAY
+0032 80CC             26            SJMP    AG
+                      27    
+0034                  28    DELAY:
+0034 7919             29            MOV     R1,#25
+0036 7AFF             30    L3:     MOV     R2,#255
+0038 7BFF             31    L2:     MOV     R3,#255
+003A DBFE             32    L1:     DJNZ    R3,L1
+003C DAFA             33            DJNZ    R2,L2
+003E D9F6             34            DJNZ    R1,L3
+0040 22               35            RET
+                      36            END
+
+VERSION 1.2h ASSEMBLY COMPLETE, 0 ERRORS FOUND
+7_SEGM^1                                                                                                      PAGE 2
+
+AG . . . . . . . . . . . . . . .  C ADDR  0000H  
+DELAY. . . . . . . . . . . . . .  C ADDR  0034H  
+L1 . . . . . . . . . . . . . . .  C ADDR  003AH  
+L2 . . . . . . . . . . . . . . .  C ADDR  0038H  
+L3 . . . . . . . . . . . . . . .  C ADDR  0036H  
+P1 . . . . . . . . . . . . . . .  D ADDR  0090H  PREDEFINED  

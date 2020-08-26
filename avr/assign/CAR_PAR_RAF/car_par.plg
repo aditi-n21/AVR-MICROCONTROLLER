@@ -1,0 +1,19 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+E:\Embedded\uc\8051\c\car_par.uvproj
+Project File Date:  11/19/2013
+
+<h2>Output:</h2>
+compiling seg_multi.c...
+SEG_MULTI.C(146): warning C280: 'j': unreferenced local variable
+seg_multi.c - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY?SEG_MULTI
+Program Size: data=32.0 xdata=0 code=905
+creating hex file from "car_par"...
+"car_par" - 0 Error(s), 1 Warning(s).

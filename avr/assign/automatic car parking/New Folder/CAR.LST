@@ -1,0 +1,340 @@
+CAR                                                                                                           PAGE 1
+
+                       1    $mod51
+  0090                 2    DB0 EQU P1.0
+  0091                 3    DB1 EQU P1.1
+  0092                 4    DB2 EQU P1.2
+  0093                 5    DB3 EQU P1.3
+  0094                 6    DB4 EQU P1.4
+  0095                 7    DB5 EQU P1.5
+  0096                 8    DB6 EQU P1.6
+  0097                 9    DB7 EQU P1.7
+                      10    
+  00B5                11    EN EQU P3.5
+  00B7                12    RS EQU P3.7
+  00B6                13    RW EQU P3.6
+  0090                14    DATA1 EQU P1
+                      15    
+                      16    ;7-Segment Display
+  00B3                17    enableDIGIT3 EQU P3.3
+  00B2                18    enableDIGIT4 EQU P3.2
+                      19    
+  00C0                20    ZERO   EQU  11000000b
+  00F9                21    ONE    EQU  11111001b
+  00A4                22    TWO    EQU  10100100b
+  00B0                23    THREE  EQU  10110000b
+  0099                24    FOUR   EQU  10011001b
+  0092                25    FIVE   EQU  10010010b
+  0082                26    SIX    EQU  10000010b
+  00F8                27    SEVEN  EQU  11111000b
+  0080                28    EIGHT  EQU  10000000b
+  0090                29    NINE   EQU  10010000b
+  00FF                30    DOT    EQU  11111111b
+                      31    
+0000 7520C0           32    MOV 20h,#ZERO
+0003 7521F9           33    MOV 21h,#ONE
+0006 7522A4           34    MOV 22h,#TWO
+0009 7523B0           35    MOV 23h,#THREE
+000C 752499           36    MOV 24h,#FOUR
+000F 752592           37    MOV 25h,#FIVE
+0012 752682           38    MOV 26h,#SIX
+0015 7527F8           39    MOV 27h,#SEVEN
+0018 752880           40    MOV 28h,#EIGHT
+001B 752990           41    MOV 29h,#NINE
+                      42    
+001E 7820             43    MOV R0, #20h
+0020 7922             44    MOV R1, #22h
+                      45    
+  00A0                46    PDATA EQU P2 ; Connect 8 pins here
+                      47    
+0022 C251             48    CLR 51h
+0024 120097           49    LCALL LCD_WELCOME
+                      50           
+0027                  51    Start:
+0027 20B102           52            JB P3.1, check1
+002A D250             53                    SETB 50h
+002C                  54            check1:
+002C 20B002           55            JB P3.0, check2
+002F D252             56                    SETB 52h
+0031                  57            check2:
+0031 30B108           58                    JNB P3.1, cont1
+CAR                                                                                                           PAGE 2
+
+0034 305005           59                            JNB 50h, cont1
+0037 C250             60                                    CLR 50h
+0039 120126           61                                    LCALL INC_7SEGMENT     
+003C                  62            cont1:
+003C 30B008           63                    JNB P3.0, cont2
+003F 305205           64                            JNB 52h, cont2
+0042 C252             65                                    CLR 52h
+0044 120135           66                                    LCALL DEC_7SEGMENT
+0047                  67            cont2:
+0047 120144           68                    LCALL SHOW_7SEGMENT
+004A 12004F           69                    LCALL SHOW_LCD
+004D 80D8             70    SJMP Start  
+                      71    
+004F                  72    SHOW_LCD:
+004F B6C00B           73            CJNE @R0, #ZERO, welcome
+0052 B7C008           74            CJNE @R1, #ZERO, welcome
+0055 20510B           75                    JB 51h, done_showlcd
+0058 120064           76                    LCALL LCD_FULL
+005B 8006             77            sjmp done_showlcd
+005D                  78            welcome:
+005D 305103           79                    JNB 51h, done_showlcd
+0060 120097           80                    LCALL LCD_WELCOME
+0063                  81            done_showlcd:
+0063 22               82    RET
+0064                  83    LCD_FULL:      
+0064 120175           84            LCALL CLEAR_LCD
+0067 12015C           85            LCALL INIT_LCD
+006A C2B7             86            CLR RS
+006C 759086           87            MOV DATA1,#086H
+006F D2B5             88            SETB EN
+0071 C2B5             89            CLR EN
+0073 12018E           90            LCALL WAIT_LCD
+0076 7446             91            MOV A,#'F'
+0078 120182           92            LCALL WRITE_TEXT
+007B 7455             93            MOV A,#'U'
+007D 120182           94            LCALL WRITE_TEXT
+0080 744C             95            MOV A,#'L'
+0082 120182           96            LCALL WRITE_TEXT
+0085 744C             97            MOV A,#'L'
+0087 120182           98            LCALL WRITE_TEXT
+008A 7421             99            MOV A,#'!'
+008C 120182          100            LCALL WRITE_TEXT
+008F 7421            101            MOV A,#'!'
+0091 120182          102            LCALL WRITE_TEXT
+                     103    
+0094 D251            104            SETB 51h
+0096 22              105    RET
+                     106    
+0097                 107    LCD_WELCOME:
+0097 120175          108            LCALL CLEAR_LCD
+009A 12015C          109            LCALL INIT_LCD
+009D C2B7            110            CLR RS
+009F 759081          111            MOV DATA1,#081h
+00A2 D2B5            112            SETB EN
+00A4 C2B5            113            CLR EN
+00A6 12018E          114            LCALL WAIT_LCD
+                     115           
+00A9 7450            116            MOV A,#'P'
+CAR                                                                                                           PAGE 3
+
+00AB 120182          117            LCALL WRITE_TEXT
+00AE 7441            118            MOV A,#'A'
+00B0 120182          119            LCALL WRITE_TEXT
+00B3 7452            120            MOV A,#'R'
+00B5 120182          121            LCALL WRITE_TEXT
+00B8 744B            122            MOV A,#'K'
+00BA 120182          123            LCALL WRITE_TEXT
+00BD 7449            124            MOV A,#'I'
+00BF 120182          125            LCALL WRITE_TEXT
+00C2 744E            126            MOV A,#'N'
+00C4 120182          127            LCALL WRITE_TEXT
+00C7 7447            128            MOV A,#'G'
+00C9 120182          129            LCALL WRITE_TEXT
+00CC 7420            130            MOV A,#' '
+00CE 120182          131            LCALL WRITE_TEXT
+00D1 7453            132            MOV A,#'S'
+00D3 120182          133            LCALL WRITE_TEXT
+00D6 7450            134            MOV A,#'P'
+00D8 120182          135            LCALL WRITE_TEXT
+00DB 7441            136            MOV A,#'A'
+00DD 120182          137            LCALL WRITE_TEXT
+00E0 7443            138            MOV A,#'C'
+00E2 120182          139            LCALL WRITE_TEXT
+00E5 7445            140            MOV A,#'E'
+00E7 120182          141            LCALL WRITE_TEXT
+                     142           
+00EA C2B7            143            CLR RS
+00EC 7590C3          144            MOV DATA1,#0C3h
+00EF D2B5            145            SETB EN
+00F1 C2B5            146            CLR EN
+00F3 12018E          147            LCALL WAIT_LCD
+                     148           
+00F6 7441            149            MOV A,#'A'
+00F8 120182          150            LCALL WRITE_TEXT
+00FB 7456            151            MOV A,#'V'
+00FD 120182          152            LCALL WRITE_TEXT
+0100 7441            153            MOV A,#'A'
+0102 120182          154            LCALL WRITE_TEXT
+0105 7449            155            MOV A,#'I'
+0107 120182          156            LCALL WRITE_TEXT
+010A 744C            157            MOV A,#'L'
+010C 120182          158            LCALL WRITE_TEXT
+010F 7441            159            MOV A,#'A'
+0111 120182          160            LCALL WRITE_TEXT
+0114 7442            161            MOV A,#'B'
+0116 120182          162            LCALL WRITE_TEXT
+0119 744C            163            MOV A,#'L'
+011B 120182          164            LCALL WRITE_TEXT
+011E 7445            165            MOV A,#'E'
+0120 120182          166            LCALL WRITE_TEXT
+0123 C251            167            CLR 51h
+0125 22              168    RET
+                     169    
+0126                 170    INC_7SEGMENT:
+0126 B7A402          171            CJNE @R1, #TWO, increment
+0129 8009            172            sjmp doneinc
+012B                 173            increment:
+012B B69005          174                    CJNE @R0, #NINE, incr0
+CAR                                                                                                           PAGE 4
+
+012E 7820            175                    MOV R0, #20h
+0130 09              176                    INC R1
+0131 8001            177                    SJMP doneinc
+0133                 178                    incr0:
+0133 08              179                            INC R0
+0134                 180            doneinc:
+0134 22              181    RET
+                     182    
+0135                 183    DEC_7SEGMENT:
+0135 B6C00A          184            CJNE @R0, #ZERO, dec0
+0138 B7C002          185            CJNE @R1, #ZERO, dec1
+013B 8006            186            sjmp donedec
+013D                 187            dec1:
+013D 7829            188                    MOV R0, #29h
+013F 19              189                    DEC R1
+0140 8001            190                    SJMP donedec
+0142                 191            dec0:
+0142 18              192                    DEC R0
+0143                 193            donedec:
+0143 22              194    RET
+                     195    
+0144                 196    SHOW_7SEGMENT:
+0144 75A000          197            MOV PDATA,#00h
+                     198    
+0147 D2B3            199            setb enableDIGIT3
+0149 E7              200            MOV     A,@R1
+014A F5A0            201            MOV PDATA,A
+014C 1201A6          202            LCALL smallDelay
+014F C2B3            203            clr enableDIGIT3
+                     204           
+0151 D2B2            205            setb enableDIGIT4
+0153 E6              206            MOV     A,@R0
+0154 F5A0            207            MOV PDATA,A
+0156 1201A6          208            LCALL smallDelay        
+0159 C2B2            209            clr enableDIGIT4
+015B 22              210    RET    
+                     211    
+015C                 212    INIT_LCD:
+015C C2B7            213            CLR RS
+015E 759038          214            MOV DATA1,#38h
+0161 D2B5            215            SETB EN
+0163 C2B5            216            CLR EN
+0165 12018E          217            LCALL WAIT_LCD
+                     218           
+0168 C2B7            219            CLR RS
+016A 75900C          220            MOV DATA1,#0Ch
+016D D2B5            221            SETB EN
+016F C2B5            222            CLR EN
+0171 12018E          223            LCALL WAIT_LCD
+                     224           
+0174 22              225    RET
+                     226    
+0175                 227    CLEAR_LCD:
+0175 C2B7            228            CLR RS
+0177 759001          229            MOV DATA1,#01h
+017A D2B5            230            SETB EN
+017C C2B5            231            CLR EN
+017E 12018E          232            LCALL WAIT_LCD
+CAR                                                                                                           PAGE 5
+
+0181 22              233    RET
+                     234           
+0182                 235    WRITE_TEXT:
+0182 D2B7            236            SETB RS
+0184 F590            237            MOV DATA1,A
+0186 D2B5            238            SETB EN
+0188 C2B5            239            CLR EN
+018A 12018E          240            LCALL WAIT_LCD
+018D 22              241    RET
+                     242           
+018E                 243    WAIT_LCD:
+018E C2B5            244            CLR EN ;Start LCD command
+0190 C2B7            245            CLR RS ;It's a command
+0192 D2B6            246            SETB RW ;It's a read command
+0194 7590FF          247            MOV DATA1,#0FFh ;Set all pins to FF initially
+0197 D2B5            248            SETB EN ;Clock out command to LCD
+0199 1201A6          249            LCALL smallDelay
+019C E590            250            MOV A,DATA1 ;Read the return value
+019E 20E7ED          251            JB ACC.7,WAIT_LCD ;If bit 7 high, LCD still busy
+01A1 C2B5            252            CLR EN ;Finish the command
+01A3 C2B6            253            CLR RW ;Turn off RW for future commands
+01A5 22              254    RET  
+                     255    
+01A6                 256    smallDelay:
+01A6 C28F            257                    CLR TF1
+01A8 C28E            258                    CLR TR1
+01AA 758D4C          259                    MOV TH1,#76
+01AD 758B01          260                    MOV TL1,#01
+01B0 758901          261                    MOV TMOD,#01
+01B3 D28E            262                    SETB TR1
+01B5 308FFD          263                    JNB TF1,$
+01B8 22              264    RET
+                     265    end
+
+VERSION 1.2h ASSEMBLY COMPLETE, 0 ERRORS FOUND
+CAR                                                                                                           PAGE 6
+
+ACC. . . . . . . . . . . . . . .  D ADDR  00E0H  PREDEFINED  
+CHECK1 . . . . . . . . . . . . .  C ADDR  002CH  
+CHECK2 . . . . . . . . . . . . .  C ADDR  0031H  
+CLEAR_LCD. . . . . . . . . . . .  C ADDR  0175H  
+CONT1. . . . . . . . . . . . . .  C ADDR  003CH  
+CONT2. . . . . . . . . . . . . .  C ADDR  0047H  
+DATA1. . . . . . . . . . . . . .    NUMB  0090H  
+DB0. . . . . . . . . . . . . . .    NUMB  0090H  NOT USED  
+DB1. . . . . . . . . . . . . . .    NUMB  0091H  NOT USED  
+DB2. . . . . . . . . . . . . . .    NUMB  0092H  NOT USED  
+DB3. . . . . . . . . . . . . . .    NUMB  0093H  NOT USED  
+DB4. . . . . . . . . . . . . . .    NUMB  0094H  NOT USED  
+DB5. . . . . . . . . . . . . . .    NUMB  0095H  NOT USED  
+DB6. . . . . . . . . . . . . . .    NUMB  0096H  NOT USED  
+DB7. . . . . . . . . . . . . . .    NUMB  0097H  NOT USED  
+DEC0 . . . . . . . . . . . . . .  C ADDR  0142H  
+DEC1 . . . . . . . . . . . . . .  C ADDR  013DH  
+DEC_7SEGMENT . . . . . . . . . .  C ADDR  0135H  
+DONEDEC. . . . . . . . . . . . .  C ADDR  0143H  
+DONEINC. . . . . . . . . . . . .  C ADDR  0134H  
+DONE_SHOWLCD . . . . . . . . . .  C ADDR  0063H  
+DOT. . . . . . . . . . . . . . .    NUMB  00FFH  NOT USED  
+EIGHT. . . . . . . . . . . . . .    NUMB  0080H  
+EN . . . . . . . . . . . . . . .    NUMB  00B5H  
+ENABLEDIGIT3 . . . . . . . . . .    NUMB  00B3H  
+ENABLEDIGIT4 . . . . . . . . . .    NUMB  00B2H  
+FIVE . . . . . . . . . . . . . .    NUMB  0092H  
+FOUR . . . . . . . . . . . . . .    NUMB  0099H  
+INCR0. . . . . . . . . . . . . .  C ADDR  0133H  
+INCREMENT. . . . . . . . . . . .  C ADDR  012BH  
+INC_7SEGMENT . . . . . . . . . .  C ADDR  0126H  
+INIT_LCD . . . . . . . . . . . .  C ADDR  015CH  
+LCD_FULL . . . . . . . . . . . .  C ADDR  0064H  
+LCD_WELCOME. . . . . . . . . . .  C ADDR  0097H  
+NINE . . . . . . . . . . . . . .    NUMB  0090H  
+ONE. . . . . . . . . . . . . . .    NUMB  00F9H  
+P1 . . . . . . . . . . . . . . .  D ADDR  0090H  PREDEFINED  
+P2 . . . . . . . . . . . . . . .  D ADDR  00A0H  PREDEFINED  
+P3 . . . . . . . . . . . . . . .  D ADDR  00B0H  PREDEFINED  
+PDATA. . . . . . . . . . . . . .    NUMB  00A0H  
+RS . . . . . . . . . . . . . . .    NUMB  00B7H  
+RW . . . . . . . . . . . . . . .    NUMB  00B6H  
+SEVEN. . . . . . . . . . . . . .    NUMB  00F8H  
+SHOW_7SEGMENT. . . . . . . . . .  C ADDR  0144H  
+SHOW_LCD . . . . . . . . . . . .  C ADDR  004FH  
+SIX. . . . . . . . . . . . . . .    NUMB  0082H  
+SMALLDELAY . . . . . . . . . . .  C ADDR  01A6H  
+START. . . . . . . . . . . . . .  C ADDR  0027H  
+TF1. . . . . . . . . . . . . . .  B ADDR  008FH  PREDEFINED  
+TH1. . . . . . . . . . . . . . .  D ADDR  008DH  PREDEFINED  
+THREE. . . . . . . . . . . . . .    NUMB  00B0H  
+TL1. . . . . . . . . . . . . . .  D ADDR  008BH  PREDEFINED  
+TMOD . . . . . . . . . . . . . .  D ADDR  0089H  PREDEFINED  
+TR1. . . . . . . . . . . . . . .  B ADDR  008EH  PREDEFINED  
+TWO. . . . . . . . . . . . . . .    NUMB  00A4H  
+WAIT_LCD . . . . . . . . . . . .  C ADDR  018EH  
+WELCOME. . . . . . . . . . . . .  C ADDR  005DH  
+WRITE_TEXT . . . . . . . . . . .  C ADDR  0182H  
+CAR                                                                                                           PAGE 7
+
+ZERO . . . . . . . . . . . . . .    NUMB  00C0H  

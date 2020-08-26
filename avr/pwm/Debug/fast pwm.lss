@@ -1,0 +1,279 @@
+
+fast pwm.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000019e  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .stab         000006cc  00000000  00000000  000001f4  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  2 .stabstr      00000085  00000000  00000000  000008c0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_aranges 00000080  00000000  00000000  00000948  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   0000036c  00000000  00000000  000009c8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 0000009d  00000000  00000000  00000d34  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   0000028e  00000000  00000000  00000dd1  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  000000f4  00000000  00000000  00001060  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    000000a8  00000000  00000000  00001154  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_loc    000001dd  00000000  00000000  000011fc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 ae 00 	jmp	0x15c	; 0x15c <__vector_3>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 8f 00 	jmp	0x11e	; 0x11e <__vector_19>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d4 e0       	ldi	r29, 0x04	; 4
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	ee e9       	ldi	r30, 0x9E	; 158
+  68:	f1 e0       	ldi	r31, 0x01	; 1
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a0 36       	cpi	r26, 0x60	; 96
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+
+00000076 <__do_clear_bss>:
+  76:	10 e0       	ldi	r17, 0x00	; 0
+  78:	a0 e6       	ldi	r26, 0x60	; 96
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	a0 36       	cpi	r26, 0x60	; 96
+  82:	b1 07       	cpc	r27, r17
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 49 00 	call	0x92	; 0x92 <main>
+  8a:	0c 94 cd 00 	jmp	0x19a	; 0x19a <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <main>:
+ #define ocr_val ((duty*256)/100)
+void t0_pwm_init(void);
+void t2_fastpwm_init(void);
+ 
+int main()
+{			
+  92:	cf 93       	push	r28
+  94:	df 93       	push	r29
+  96:	cd b7       	in	r28, 0x3d	; 61
+  98:	de b7       	in	r29, 0x3e	; 62
+	t0_pwm_init();	 
+  9a:	0e 94 53 00 	call	0xa6	; 0xa6 <t0_pwm_init>
+	t2_fastpwm_init();
+  9e:	0e 94 71 00 	call	0xe2	; 0xe2 <t2_fastpwm_init>
+	sei();
+  a2:	78 94       	sei
+	while(1);
+  a4:	ff cf       	rjmp	.-2      	; 0xa4 <main+0x12>
+
+000000a6 <t0_pwm_init>:
+}
+ 
+void t0_pwm_init()		// initialization for Phase Correct PWM signal using timer 0
+{
+  a6:	cf 93       	push	r28
+  a8:	df 93       	push	r29
+  aa:	cd b7       	in	r28, 0x3d	; 61
+  ac:	de b7       	in	r29, 0x3e	; 62
+	// WGM0[1:0]= 01, for Phase Correct PWM mode
+	// COM0[1:0]= 10, to select non inveting mode
+	// CS0[2:0] =010. for prescaler=8
+		 
+	TCCR0=(1<<WGM00)|(2<<COM00)|(2<<CS00);
+  ae:	83 e5       	ldi	r24, 0x53	; 83
+  b0:	90 e0       	ldi	r25, 0x00	; 0
+  b2:	22 e6       	ldi	r18, 0x62	; 98
+  b4:	fc 01       	movw	r30, r24
+  b6:	20 83       	st	Z, r18
+	DDRB|=(1<<PB3);		// selcet OC0 as output pin
+  b8:	87 e3       	ldi	r24, 0x37	; 55
+  ba:	90 e0       	ldi	r25, 0x00	; 0
+  bc:	27 e3       	ldi	r18, 0x37	; 55
+  be:	30 e0       	ldi	r19, 0x00	; 0
+  c0:	f9 01       	movw	r30, r18
+  c2:	20 81       	ld	r18, Z
+  c4:	28 60       	ori	r18, 0x08	; 8
+  c6:	fc 01       	movw	r30, r24
+  c8:	20 83       	st	Z, r18
+	TIMSK|=(1<<OCIE0);	//enable Output compare interrupt
+  ca:	89 e5       	ldi	r24, 0x59	; 89
+  cc:	90 e0       	ldi	r25, 0x00	; 0
+  ce:	29 e5       	ldi	r18, 0x59	; 89
+  d0:	30 e0       	ldi	r19, 0x00	; 0
+  d2:	f9 01       	movw	r30, r18
+  d4:	20 81       	ld	r18, Z
+  d6:	22 60       	ori	r18, 0x02	; 2
+  d8:	fc 01       	movw	r30, r24
+  da:	20 83       	st	Z, r18
+}
+  dc:	df 91       	pop	r29
+  de:	cf 91       	pop	r28
+  e0:	08 95       	ret
+
+000000e2 <t2_fastpwm_init>:
+ 
+void t2_fastpwm_init()	// initialization for Phase Correct PWM signal using timer 2
+{		
+  e2:	cf 93       	push	r28
+  e4:	df 93       	push	r29
+  e6:	cd b7       	in	r28, 0x3d	; 61
+  e8:	de b7       	in	r29, 0x3e	; 62
+	// WGM2[1:0]= 11, for Fast PWM mode
+	// COM2[1:0]= 10, to select non inveting mode
+	// CS2[2:0] =010. for prescaler=8
+ 
+	TCCR2=(1<<WGM20)|(1<<WGM21)|(2<<COM20)|(2<<CS20);
+  ea:	85 e4       	ldi	r24, 0x45	; 69
+  ec:	90 e0       	ldi	r25, 0x00	; 0
+  ee:	2a e6       	ldi	r18, 0x6A	; 106
+  f0:	fc 01       	movw	r30, r24
+  f2:	20 83       	st	Z, r18
+	DDRD|=(1<<PD7);		// selcet OC2 as output pin
+  f4:	81 e3       	ldi	r24, 0x31	; 49
+  f6:	90 e0       	ldi	r25, 0x00	; 0
+  f8:	21 e3       	ldi	r18, 0x31	; 49
+  fa:	30 e0       	ldi	r19, 0x00	; 0
+  fc:	f9 01       	movw	r30, r18
+  fe:	20 81       	ld	r18, Z
+ 100:	20 68       	ori	r18, 0x80	; 128
+ 102:	fc 01       	movw	r30, r24
+ 104:	20 83       	st	Z, r18
+	TIMSK|=(1<<OCIE2);	//enable Output compare interrupt
+ 106:	89 e5       	ldi	r24, 0x59	; 89
+ 108:	90 e0       	ldi	r25, 0x00	; 0
+ 10a:	29 e5       	ldi	r18, 0x59	; 89
+ 10c:	30 e0       	ldi	r19, 0x00	; 0
+ 10e:	f9 01       	movw	r30, r18
+ 110:	20 81       	ld	r18, Z
+ 112:	20 68       	ori	r18, 0x80	; 128
+ 114:	fc 01       	movw	r30, r24
+ 116:	20 83       	st	Z, r18
+}
+ 118:	df 91       	pop	r29
+ 11a:	cf 91       	pop	r28
+ 11c:	08 95       	ret
+
+0000011e <__vector_19>:
+ 
+ISR(TIMER0_COMP_vect)			// interrupt subroutine
+{
+ 11e:	1f 92       	push	r1
+ 120:	0f 92       	push	r0
+ 122:	0f b6       	in	r0, 0x3f	; 63
+ 124:	0f 92       	push	r0
+ 126:	11 24       	eor	r1, r1
+ 128:	2f 93       	push	r18
+ 12a:	8f 93       	push	r24
+ 12c:	9f 93       	push	r25
+ 12e:	ef 93       	push	r30
+ 130:	ff 93       	push	r31
+ 132:	cf 93       	push	r28
+ 134:	df 93       	push	r29
+ 136:	cd b7       	in	r28, 0x3d	; 61
+ 138:	de b7       	in	r29, 0x3e	; 62
+	OCR0=OCR_value;			// put OCR value
+ 13a:	8c e5       	ldi	r24, 0x5C	; 92
+ 13c:	90 e0       	ldi	r25, 0x00	; 0
+ 13e:	2c ec       	ldi	r18, 0xCC	; 204
+ 140:	fc 01       	movw	r30, r24
+ 142:	20 83       	st	Z, r18
+}
+ 144:	df 91       	pop	r29
+ 146:	cf 91       	pop	r28
+ 148:	ff 91       	pop	r31
+ 14a:	ef 91       	pop	r30
+ 14c:	9f 91       	pop	r25
+ 14e:	8f 91       	pop	r24
+ 150:	2f 91       	pop	r18
+ 152:	0f 90       	pop	r0
+ 154:	0f be       	out	0x3f, r0	; 63
+ 156:	0f 90       	pop	r0
+ 158:	1f 90       	pop	r1
+ 15a:	18 95       	reti
+
+0000015c <__vector_3>:
+ 
+ISR(TIMER2_COMP_vect)			// interrupt subroutine
+{
+ 15c:	1f 92       	push	r1
+ 15e:	0f 92       	push	r0
+ 160:	0f b6       	in	r0, 0x3f	; 63
+ 162:	0f 92       	push	r0
+ 164:	11 24       	eor	r1, r1
+ 166:	2f 93       	push	r18
+ 168:	8f 93       	push	r24
+ 16a:	9f 93       	push	r25
+ 16c:	ef 93       	push	r30
+ 16e:	ff 93       	push	r31
+ 170:	cf 93       	push	r28
+ 172:	df 93       	push	r29
+ 174:	cd b7       	in	r28, 0x3d	; 61
+ 176:	de b7       	in	r29, 0x3e	; 62
+	OCR2=ocr_val;			// put OCR value
+ 178:	83 e4       	ldi	r24, 0x43	; 67
+ 17a:	90 e0       	ldi	r25, 0x00	; 0
+ 17c:	20 e8       	ldi	r18, 0x80	; 128
+ 17e:	fc 01       	movw	r30, r24
+ 180:	20 83       	st	Z, r18
+}
+ 182:	df 91       	pop	r29
+ 184:	cf 91       	pop	r28
+ 186:	ff 91       	pop	r31
+ 188:	ef 91       	pop	r30
+ 18a:	9f 91       	pop	r25
+ 18c:	8f 91       	pop	r24
+ 18e:	2f 91       	pop	r18
+ 190:	0f 90       	pop	r0
+ 192:	0f be       	out	0x3f, r0	; 63
+ 194:	0f 90       	pop	r0
+ 196:	1f 90       	pop	r1
+ 198:	18 95       	reti
+
+0000019a <_exit>:
+ 19a:	f8 94       	cli
+
+0000019c <__stop_program>:
+ 19c:	ff cf       	rjmp	.-2      	; 0x19c <__stop_program>

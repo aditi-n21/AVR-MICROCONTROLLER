@@ -1,0 +1,410 @@
+WASHIN^1                                                                                                      PAGE 1
+
+                       1         $mod51
+                       2      
+  0090                 3            dat equ  p1
+  0097                 4            busy equ p1.7  
+  00B5                 5            rs equ   p3.5
+  00B4                 6            rw equ p3.4
+  00B3                 7            en equ p3.3
+  0082                 8           bzr equ p0.2
+  0080                 9           ledf equ p0.0
+  0081                10           ledb equ p0.1                                             
+                      11    
+                      12           
+                      13           
+                      14    
+0000                  15            org 0000h                       
+0000 010E             16            ajmp main
+                      17    
+0003                  18            org 0003h
+0003 A2B2             19       test: mov c,p3.2
+0005 5003             20            jnc halt
+0007 D282             21            setb p0.2
+0009 32               22            reti
+000A                  23        halt:
+000A C282             24            clr bzr                 ;till zero blow on the bzr
+000C 0103             25            ajmp test 
+                      26                                      
+000E                  27        main:
+000E 75A800           28            mov ie,#00h
+0011 D2AF             29            setb ea
+                      30            ;setb ex0
+0013                  31        here:
+0013 75A000           32           mov p2,#00h
+0016 319D             33           acall ini
+0018 900400           34           mov dptr,#show0
+001B 3160             35           acall read
+001D C280             36           clr ledf        ;p1.0
+001F 3106             37           acall delay
+                      38    
+0021 7401             39           mov a,#01h
+0023 31BE             40           acall command; Now make memory clear cursor home
+0025 90040F           41           mov dptr,#show1
+0028 3160             42           acall read
+002A D2A8             43           setb ex0        ;#############
+002C 74C0             44           mov a,#0c0h
+002E 31BE             45           acall command
+0030 900435           46           mov dptr,#show3
+0033 3160             47           acall read
+0035 3106             48           acall delay   ;Stopage1 time 3 sec rookee
+0037 3106             49           acall delay
+0039 C282             50           clr bzr
+003B 3106             51           acall delay
+                      52           
+003D 7401             53           mov a,#01h
+003F 31BE             54           acall command
+0041 900428           55           mov dptr,#show2
+0044 3160             56           acall read
+0046 74C0             57           mov a,#0c0h
+0048 31BE             58           acall command
+WASHIN^1                                                                                                      PAGE 2
+
+004A 90043B           59           mov dptr,#show4
+004D 3160             60           acall read
+004F D282             61           setb bzr
+0051 314A             62           acall delay10
+0053 316D             63           acall stepperf
+                      64    
+0055 7401             65           mov a,#01h
+0057 31BE             66           acall command
+0059 90040F           67           mov dptr,#show1
+005C 3160             68           acall read
+005E 74C0             69           mov a,#0c0h
+0060 31BE             70           acall command
+0062 90043B           71           mov dptr,#show4
+0065 3160             72           acall read
+0067 3106             73           acall delay   ;Stopage2 time 3 sec shsar
+0069 3106             74           acall delay
+006B C282             75           clr bzr
+006D 3106             76           acall delay
+                      77           
+006F 7401             78           mov a,#01h
+0071 31BE             79           acall command
+0073 900428           80           mov dptr,#show2 ;display ne
+0076 3160             81           acall read
+0078 74C0             82           mov a,#0c0h
+007A 31BE             83           acall command
+007C 900440           84           mov dptr,#show5
+007F 3160             85           acall read
+0081 D282             86           setb bzr
+0083 314A             87           acall delay10
+0085 316D             88           acall stepperf
+                      89    
+0087 7401             90           mov a,#01h
+0089 31BE             91           acall command
+008B 90040F           92           mov dptr,#show1
+008E 3160             93           acall read
+0090 74C0             94           mov a,#0c0h
+0092 31BE             95           acall command
+0094 900440           96           mov dptr,#show5
+0097 3160             97           acall read
+0099 3106             98           acall delay   ;Stopage2 time 3 sec Meerut
+009B 3106             99           acall delay
+009D C282            100           clr bzr
+009F 3106            101           acall delay
+                     102           
+00A1 D280            103           setb ledf     ; p1.0 ;off led at p1.0 for forward journey
+00A3 C281            104           clr ledb  ;      p1.1 ; 0n Led for back ward journey
+                     105    
+00A5 7401            106          mov a,#01h
+00A7 31BE            107          acall command
+00A9 900428          108           mov dptr,#show2 ;display ne    shar
+00AC 3160            109           acall read
+00AE 74C0            110           mov a,#0c0h
+00B0 31BE            111           acall command
+00B2 90043B          112           mov dptr,#show4
+00B5 3160            113           acall read
+00B7 D282            114           setb bzr
+00B9 314A            115           acall delay10
+00BB 3185            116           acall stepperb
+WASHIN^1                                                                                                      PAGE 3
+
+                     117    
+00BD 7401            118           mov a,#01h
+00BF 31BE            119           acall command
+00C1 90040F          120           mov dptr,#show1
+00C4 3160            121           acall read
+00C6 74C0            122           mov a,#0c0h
+00C8 31BE            123           acall command
+00CA 90043B          124           mov dptr,#show4
+00CD 3160            125           acall read
+00CF 3106            126           acall delay   ;Stopage2 time 3 sec shsar
+00D1 3106            127           acall delay
+00D3 C282            128           clr bzr
+00D5 3106            129           acall delay
+                     130          
+00D7 7401            131           mov a,#01h
+00D9 31BE            132           acall command
+00DB 900428          133           mov dptr,#show2 ;display ne     roor
+00DE 3160            134           acall read
+00E0 74C0            135           mov a,#0c0h
+00E2 31BE            136           acall command
+00E4 900435          137           mov dptr,#show3
+00E7 3160            138           acall read     
+00E9 D282            139           setb bzr
+00EB 314A            140           acall delay10
+00ED 3185            141           acall stepperb
+                     142    
+00EF 7401            143           mov a,#01h
+00F1 31BE            144           acall command
+00F3 90040F          145           mov dptr,#show1
+00F6 3160            146           acall read
+00F8 74C0            147           mov a,#0c0h
+00FA 31BE            148           acall command
+00FC 900435          149           mov dptr,#show3
+00FF 3160            150           acall read
+0101 D281            151           setb ledb        ;p1.1
+0103 020013          152          ljmp here
+                     153    
+                     154    
+                     155          ;routine for stepper motor
+                     156           ; Delay Routine
+                     157         ;one sec delay
+0106                 158          delay:
+0106 C0E0            159          push acc
+0108 C000            160          push 00h
+010A C001            161          push 01h
+010C C080            162          push p0
+010E C090            163          push p1
+0110 780E            164            mov r0,#0eh
+0112                 165         loopr:
+0112 74FF            166            mov a,#0ffh
+0114                 167         loopb:
+0114 75F0FF          168            mov b,#0ffh
+0117 D5F0FD          169         loopa: djnz b,loopa
+011A D5E0F7          170                djnz 0e0h,loopb
+011D D8F3            171                djnz r0,loopr
+011F D090            172                pop p1
+0121 D080            173                pop p0
+0123 D001            174                pop 01h
+WASHIN^1                                                                                                      PAGE 4
+
+0125 D000            175                pop 00h
+0127 D0E0            176                pop acc
+0129 22              177                ret
+                     178    
+                     179        ;dlay stepper
+012A                 180         delays:
+012A C0E0            181         push acc
+012C C000            182         push 00h 
+012E C001            183         push 01h
+0130 C080            184         push p0
+0132 C090            185         push p1
+                     186          
+0134 74FF            187         mov a,#0ffh
+0136                 188       loopa1:
+0136 75F00F          189         mov b,#0fh
+0139                 190       loopb1:
+0139 D5F0FD          191         djnz b,loopb1
+013C D5E0F7          192         djnz 0e0h,loopa1
+                     193    
+013F D090            194                pop p1
+0141 D080            195                pop p0
+                     196             
+0143 D001            197         pop 01h
+0145 D000            198         pop 00h
+0147 D0E0            199         pop acc
+0149 22              200         ret
+                     201    
+014A                 202         delay10:
+014A 758901          203         mov tmod,#01h
+014D 758800          204         mov tcon,#00h
+0150 758AF0          205         mov tl0,#0f0h
+0153 758CF8          206         mov th0,#0f8h
+0156 D28C            207         setb tr0
+0158 308DFD          208         no: jnb tf0,no
+015B C28C            209         clr tr0
+015D C28D            210         clr tf0
+015F 22              211         ret
+                     212            ;=============== Routine to read data from prog mem
+                     213    
+0160                 214        read:
+0160 E4              215         nex:  clr a 
+0161 93              216             movc a,@a+dptr
+0162 B43002          217             cjne a,#'0',aga
+0165 8005            218             sjmp down
+0167 31CB            219        aga: acall display
+0169 A3              220             inc dptr
+016A 80F4            221             sjmp nex
+016C                 222        down:
+016C 22              223             ret
+                     224            ;================ stepper routine
+                     225                      
+016D                 226      stepperf:
+016D C0E0            227             push acc
+016F C090            228             push p1
+0171 7488            229             mov a,#88h
+0173 7904            230             mov r1,#04h
+0175                 231        loop1:
+0175 78E0            232             mov r0,#0e0h
+WASHIN^1                                                                                                      PAGE 5
+
+0177 F5A0            233        loop: mov p2,a
+0179 312A            234            acall delays
+017B 03              235            rr a 
+017C D8F9            236            djnz r0,loop
+017E D9F5            237            djnz r1,loop1
+0180 D090            238            pop p1
+0182 D0E0            239            pop acc
+0184 22              240            ret
+                     241    
+                     242     
+0185                 243     stepperb:
+0185 C0E0            244              push acc
+0187 C090            245             push p1
+0189 7488            246             mov a,#88h
+018B 7904            247             mov r1,#04h
+018D                 248        loop12:
+018D 78E0            249             mov r0,#0e0h
+018F F5A0            250        loop0: mov p2,a
+0191 312A            251            acall delays
+0193 23              252            rl a 
+0194 D8F9            253            djnz r0,loop0
+0196 D9F5            254            djnz r1,loop12
+                     255        
+0198 D090            256            pop p1
+019A D0E0            257            pop acc
+                     258           
+019C 22              259          ret
+                     260        ;*******************************************************
+                     261        ;LCD strobe subroutines
+019D                 262          ini:
+019D 7438            263          mov a,#38h
+019F 31BE            264        acall command
+01A1 7438            265         mov a,#38h
+01A3 31BE            266        acall command
+01A5 7438            267         mov a,#38h
+01A7 31BE            268        acall command
+01A9 7438            269         mov a,#38h
+01AB 31BE            270        acall command
+01AD 740E            271        mov a,#0eh
+01AF 31BE            272        acall command
+01B1 7406            273        mov a,#06h
+01B3 31BE            274        acall command
+01B5 7401            275        mov a,#01h
+01B7 31BE            276        acall command
+01B9 7480            277        mov a,#80h
+01BB 31BE            278        acall command
+01BD 22              279        ret
+                     280    
+                     281     
+                     282    
+                     283    
+01BE                 284     command:
+01BE 31D8            285        acall ready
+01C0 F590            286        mov dat,a
+01C2 C2B5            287        clr rs
+01C4 C2B4            288        clr rw
+01C6 D2B3            289        setb en
+01C8 C2B3            290        clr en
+WASHIN^1                                                                                                      PAGE 6
+
+01CA 22              291        ret
+                     292    
+01CB                 293    display:
+01CB 31D8            294        acall ready
+01CD F590            295        mov dat,a
+01CF D2B5            296        setb rs
+01D1 C2B4            297        clr rw
+01D3 D2B3            298        setb en
+01D5 C2B3            299        clr en
+01D7 22              300        ret
+                     301    
+01D8                 302    ready:
+01D8 C2B3            303        clr en
+01DA 7590FF          304        mov dat,#0ffh
+01DD C2B5            305        clr rs
+01DF D2B4            306        setb rw
+01E1                 307    wait:
+01E1 C2B3            308        clr en
+01E3 D2B3            309        setb en
+01E5 2097F9          310        jb busy,wait
+01E8 C2B3            311        clr en
+01EA 22              312        ret
+0400                 313      org 400h
+                     314    
+0400 57656C63        315            show0: db 'Welcome To All','0'
+0404 6F6D6520   
+0408 546F2041   
+040C 6C6C30     
+040F 46494C4C        316            show1: db 'FILL WATER AND DETERGENT','0'
+0413 20574154   
+0417 45522041   
+041B 4E442044   
+041F 45544552   
+0423 47454E54   
+0427 30         
+0428 534F414B        317            show2: db 'SOAK CLOTHES','0'
+042C 20434C4F   
+0430 54484553   
+0434 30         
+0435 52494E53        318            show3: db 'RINSE','0'
+0439 4530       
+043B 57415348        319            show4: db 'WASH','0'
+043F 30         
+0440 44525930        320         show5: db 'DRY','0'
+                     321        end       
+                     322    
+                     323    
+
+VERSION 1.2h ASSEMBLY COMPLETE, 0 ERRORS FOUND
+WASHIN^1                                                                                                      PAGE 7
+
+ACC. . . . . . . . . . . . . . .  D ADDR  00E0H  PREDEFINED  
+AGA. . . . . . . . . . . . . . .  C ADDR  0167H  
+B. . . . . . . . . . . . . . . .  D ADDR  00F0H  PREDEFINED  
+BUSY . . . . . . . . . . . . . .    NUMB  0097H  
+BZR. . . . . . . . . . . . . . .    NUMB  0082H  
+COMMAND. . . . . . . . . . . . .  C ADDR  01BEH  
+DAT. . . . . . . . . . . . . . .    NUMB  0090H  
+DELAY. . . . . . . . . . . . . .  C ADDR  0106H  
+DELAY10. . . . . . . . . . . . .  C ADDR  014AH  
+DELAYS . . . . . . . . . . . . .  C ADDR  012AH  
+DISPLAY. . . . . . . . . . . . .  C ADDR  01CBH  
+DOWN . . . . . . . . . . . . . .  C ADDR  016CH  
+EA . . . . . . . . . . . . . . .  B ADDR  00AFH  PREDEFINED  
+EN . . . . . . . . . . . . . . .    NUMB  00B3H  
+EX0. . . . . . . . . . . . . . .  B ADDR  00A8H  PREDEFINED  
+HALT . . . . . . . . . . . . . .  C ADDR  000AH  
+HERE . . . . . . . . . . . . . .  C ADDR  0013H  
+IE . . . . . . . . . . . . . . .  D ADDR  00A8H  PREDEFINED  
+INI. . . . . . . . . . . . . . .  C ADDR  019DH  
+LEDB . . . . . . . . . . . . . .    NUMB  0081H  
+LEDF . . . . . . . . . . . . . .    NUMB  0080H  
+LOOP . . . . . . . . . . . . . .  C ADDR  0177H  
+LOOP0. . . . . . . . . . . . . .  C ADDR  018FH  
+LOOP1. . . . . . . . . . . . . .  C ADDR  0175H  
+LOOP12 . . . . . . . . . . . . .  C ADDR  018DH  
+LOOPA. . . . . . . . . . . . . .  C ADDR  0117H  
+LOOPA1 . . . . . . . . . . . . .  C ADDR  0136H  
+LOOPB. . . . . . . . . . . . . .  C ADDR  0114H  
+LOOPB1 . . . . . . . . . . . . .  C ADDR  0139H  
+LOOPR. . . . . . . . . . . . . .  C ADDR  0112H  
+MAIN . . . . . . . . . . . . . .  C ADDR  000EH  
+NEX. . . . . . . . . . . . . . .  C ADDR  0160H  
+NO . . . . . . . . . . . . . . .  C ADDR  0158H  
+P0 . . . . . . . . . . . . . . .  D ADDR  0080H  PREDEFINED  
+P1 . . . . . . . . . . . . . . .  D ADDR  0090H  PREDEFINED  
+P2 . . . . . . . . . . . . . . .  D ADDR  00A0H  PREDEFINED  
+P3 . . . . . . . . . . . . . . .  D ADDR  00B0H  PREDEFINED  
+READ . . . . . . . . . . . . . .  C ADDR  0160H  
+READY. . . . . . . . . . . . . .  C ADDR  01D8H  
+RS . . . . . . . . . . . . . . .    NUMB  00B5H  
+RW . . . . . . . . . . . . . . .    NUMB  00B4H  
+SHOW0. . . . . . . . . . . . . .  C ADDR  0400H  
+SHOW1. . . . . . . . . . . . . .  C ADDR  040FH  
+SHOW2. . . . . . . . . . . . . .  C ADDR  0428H  
+SHOW3. . . . . . . . . . . . . .  C ADDR  0435H  
+SHOW4. . . . . . . . . . . . . .  C ADDR  043BH  
+SHOW5. . . . . . . . . . . . . .  C ADDR  0440H  
+STEPPERB . . . . . . . . . . . .  C ADDR  0185H  
+STEPPERF . . . . . . . . . . . .  C ADDR  016DH  
+TCON . . . . . . . . . . . . . .  D ADDR  0088H  PREDEFINED  
+TEST . . . . . . . . . . . . . .  C ADDR  0003H  
+TF0. . . . . . . . . . . . . . .  B ADDR  008DH  PREDEFINED  
+TH0. . . . . . . . . . . . . . .  D ADDR  008CH  PREDEFINED  
+TL0. . . . . . . . . . . . . . .  D ADDR  008AH  PREDEFINED  
+TMOD . . . . . . . . . . . . . .  D ADDR  0089H  PREDEFINED  
+TR0. . . . . . . . . . . . . . .  B ADDR  008CH  PREDEFINED  
+WAIT . . . . . . . . . . . . . .  C ADDR  01E1H  

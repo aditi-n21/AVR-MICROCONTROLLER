@@ -1,0 +1,350 @@
+MACRO ASSEMBLER FULL MKII                                   03/18/10 17:04:18 PAGE     1
+
+
+WIN32 MACRO ASSEMBLER MA51 V06.04.19OBJECT MODULE PLACED IN F:\EXTRA\ARC\PENDRIVE BACKUP\PROJECT 31\PROPELLER CODE\FULL DISP MKII\FULL MKII.OBJ
+ASSEMBLER INVOKED BY: MA51.EXE F:\EXTRA\ARC\PENDRIVE BACKUP\PROJECT 31\PROPELLER CODE\FULL DISP MKII\FULL MKII.A51 OJ(F:\EXTRA\ARC\PENDRIVE BACKUP\PROJECT 31\PROPELLER CODE\FULL DISP MKII\FULL MKII.OBJ) PIN(C:\RIDE\INC;C:\RIDE\INC\51) PIN(C:\RIDE\INC\51\) EP LINES SYNTAX(ASM51) PR(F:\EXTRA\ARC\PENDRIVE BACKUP\PROJECT 31\PROPELLER CODE\FULL DISP MKII\FULL MKII.LST) XR DB PW(80) RB(0) 
+
+LOC     OBJ           LINE    SOURCE
+                         1     $INCLUDE(REG51.INC)
+                        80     
+                        81     
+                        82     
+                        83     
+                        84     ;T0 interrupt
+  0000                  85     ORG 000H
+0000    2100            86     AJMP MAIN
+                        87     
+  000B                  88     ORG 000BH
+000B    3126            89     ACALL INTERR
+000D    75B0FF          90     MOV P3,#0FFH
+0010    32              91     RETI
+                        92     
+                        93     ;EXT0 interrupt
+                        94     
+  0003                  95     ORG 0003H
+0003    3134            96     ACALL INTERR1
+0005    32              97     RETI
+                        98     
+                        99     
+  0230                 100     ORG 230H
+                       101     LOOKUP: 
+0230    827C7C7C       102     DB 10000010B,01111100B,01111100B,01111100B,10000010B,11111110B,10111100B,00000000B,11111100B,11111110B,10111100B,01110010B,01110100B,01101100B,10011100B
+0234    82FEBC00
+0238    FCFEBC72
+023C    746C9C
+023F    7A7C5C2C       103     DB 01111010B,01111100B,01011100B,00101100B,01110010B,11100110B,11010110B,10110110B,00000000B,11110110B,00001100B,01101100B,01101100B,01101100B,01110010B
+0243    72E6D6B6
+0247    00F60C6C
+024B    6C6C72
+024E    826C6C6C       104     DB 10000010B,01101100B,01101100B,01101100B,11110010B,00111100B,01111010B,01110110B,01101110B,00011110B,11100000B,00001100B,01101100B,00001100B,11100000B
+0252    F23C7A76
+0256    6E1EE00C
+025A    6C0CE0
+025D    9E6C6C6C       105     DB 10011110B,01101100B,01101100B,01101100B,10000010B
+0261    82
+                       106                                   
+  0285                 107     ORG 285H
+0285    806E6E6E       108     DB 10000000B,01101110B,01101110B,01101110B,10000000B,00000000B,01101100B,01101100B,10001100B,11110010B,10000010B,01111100B,01111100B,01111100B,01111100B
+0289    80006C6C
+028D    8CF2827C
+0291    7C7C7C
+0294    7C007C7C       109     DB 01111100B,00000000B,01111100B,01111100B,10000010B,00000000B,01101100B,01101100B,01111100B,01111100B,00000000B,01101110B,01101110B,01111110B,01111110B
+0298    82006C6C
+029C    7C7C006E
+02A0    6E7E7E
+02A3    007C6C6C       110     DB 00000000B,01111100B,01101100B,01101100B,01100000B,00000000B,11101110B,11101110B,11101110B,00000000B,11111110B,01111100B,00000000B,01111100B,11111110B
+02A7    6000EEEE
+02AB    EE00FE7C
+02AF    007CFE
+02B2    FA7C027E       111     DB 11111010B,01111100B,00000010B,01111110B,11111110B,00000000B,11101110B,11010110B,10111010B,01111100B,00000000B,11111100B,11111100B,11111100B,11111100B
+02B6    FE00EED6
+02BA    BA7C00FC
+02BE    FCFCFC
+02C1    007ECE7E       112     DB 00000000B,01111110B,11001110B,01111110B,00000000B,00000000B,10011110B,11101110B,11110010B,00000000B,00000000B,01111100B,01111100B,01111100B,00000000B
+02C5    00009EEE
+02C9    F200007C
+02CD    7C7C00
+02D0    006E6E6E       113     DB 00000000B,01101110B,01101110B,01101110B,10011110B,10000010B,01111100B,01110100B,01111000B,10000000B,00000000B,01101110B,01100110B,01101010B,10011100B
+02D4    9E827C74
+02D8    7880006E
+02DC    666A9C
+02DF    986C6C6C       114     DB 10011000B,01101100B,01101100B,01101100B,10110010B,01111110B,01111110B,00000000B,01111110B,01111110B,00000000B,11111100B,11111100B,11111100B,00000000B
+02E3    B27E7E00
+02E7    7E7E00FC
+02EB    FCFC00
+02EE    06FAFCFA       115     DB 00000110B,11111010B,11111100B,11111010B,00000110B,00000010B,11111100B,11110010B,11111100B,00000010B,00111000B,11010110B,11101110B,11010110B,00111000B
+02F2    0602FCF2
+02F6    FC0238D6
+02FA    EED638
+02FD    3EDEE0DE       116     DB 00111110B,11011110B,11100000B,11011110B,00111110B,01111000B,01110100B,01101100B,01011100B,00111100B,11111111B,11111111B,11111111B,11111111B,11111111B,
+0301    3E78746C
+0305    5C3CFFFF
+0309    FFFFFF
+                       117     
+                       118     ;Main Function
+  0100                 119     ORG 0100H
+                       120     MAIN: 
+0100    75A883         121     MOV IE,#83H
+0103    8501B8         122     MOV IP,01H
+0106    758912         123     MOV TMOD,#12H
+0109    758C00         124     MOV TH0,#00H
+010C    758A00         125     MOV TL0,#00H
+010F    D288           126     SETB IT0
+0111    75B0FF         127     MOV P3,#0FFH
+0114    D28C           128     SETB TR0
+0116    7B00           129     MOV R3,#00H
+0118    7A01           130     MOV R2,#01H
+011A    315C           131     ACALL RAMC
+011C    758D00         132     MOV TH1,#00H
+011F    758B00         133     MOV TL1,#00H
+0122    D28E           134     SETB TR1
+0124    2124           135     HERE:  AJMP HERE
+                       136     
+                       137      
+                       138     INTERR:    ;T0 interrupt
+0126    BEFF06         139     CJNE R6,#0FFH,SK
+0129    7E00           140     MOV R6,#00H
+012B    316C           141     ACALL DISP
+012D    8002           142     SJMP SK1
+                       143     SK: 
+012F    7EFF           144     MOV R6,#0FFH
+                       145     SK1: 
+0131    C28D           146     CLR TF0
+0133    22             147     RET
+                       148     
+                       149     
+                       150     ; EXT0 interruupt
+                       151     INTERR1: 
+0134    C28E           152     CLR TR1
+0136    C28C           153     CLR TR0
+0138    E58D           154     MOV A,TH1
+013A    F9             155     MOV R1,A
+013B    E58B           156     MOV A,TL1
+013D    F8             157     MOV R0,A 
+013E    7B00           158     MOV R3,#00H
+0140    7AA0           159     MOV R2,#160
+0142    D126           160     ACALL DIV16_16
+0144    EA             161     MOV A,R2
+0145    95FF           162     SUBB A,0FFH
+0147    F58C           163     MOV TH0,A
+0149    F58A           164     MOV TL0,A
+014B    758D00         165     MOV TH1,#00H
+014E    758B00         166     MOV TL1,#00H
+0151    D28E           167     SETB TR1
+0153    D28C           168     SETB TR0
+0155    7823           169     MOV R0,#23H
+0157    7D00           170     MOV R5,#00H
+0159    7E00           171     MOV R6,#00H
+015B    22             172     RET
+                       173     
+                       174     RAMC:     
+015C    900600         175     MOV DPTR,#600H
+015F    7F1E           176     MOV R7,#30
+0161    7840           177     MOV R0,#40H
+                       178     
+                       179     LOOP1: 
+0163    EF             180     MOV A,R7
+0164    9401           181     SUBB A,#01H
+0166    93             182     MOVC A,@A+DPTR
+0167    F6             183     MOV @R0,A
+0168    18             184     DEC R0
+0169    DFF8           185     DJNZ R7,LOOP1
+016B    22             186     RET
+                       187     
+                       188      DISP:  
+016C    BD0511         189     		CJNE R5,#5,CONTINUE
+016F    E6             190     		MOV A,@R0
+0170    B45B05         191     		CJNE A,#'[',SPACE
+0173    7590FF         192     		MOV P1,#11111111B
+0176    8003           193     		SJMP CONT
+                       194     		SPACE: 	
+0178    7590FE         195     		MOV P1,#11111110B
+                       196     		CONT: 
+017B    08             197     		INC R0
+017C    7D00           198     		MOV R5,#00H
+017E    2190           199     		AJMP NEGLECT
+                       200     		CONTINUE: 		
+0180    E6             201     		MOV A,@R0       ; moves ASCII from RAM to R0
+0181    C3             202     		CLR C
+0182    9430           203     		SUBB A,#30H     ;
+0184    75F005         204     		MOV B,#05       ; ASCII to Adress conversion
+0187    A4             205     		MUL AB          ;
+0188    900230         206     		MOV DPTR,#230H  
+018B    2D             207     		ADD A,R5        ; Memory offset
+018C    93             208     	   MOVC A,@A+DPTR	
+018D    F590           209     	   MOV P1,A
+018F    0D             210     		INC R5
+                       211     		NEGLECT: 
+0190    22             212     		RET
+                       213              
+                       214      
+  0600                 215      ORG 600H
+                       216     MSG: 
+0600    50524F50       217          DB 'PROPELLER[DISPLAY[[[[[[[[[[[[[[[[[[[[',0
+0604    454C4C45
+0608    525B4449
+060C    53504C41
+0610    595B5B5B
+0614    5B5B5B5B
+0618    5B5B5B5B
+061C    5B5B5B5B
+0620    5B5B5B5B
+0624    5B00
+                       218          
+                       219          
+                       220          
+                       221     DIV16_16: 
+0626    C3             222       CLR C       ;Clear carry initially
+0627    7C00           223       MOV R4,#00H ;Clear R4 working variable initially
+0629    7D00           224       MOV R5,#00H ;CLear R5 working variable initially
+062B    75F000         225       MOV B,#00H  ;Clear B since B will count the number of left-shifted bits
+                       226     DIV1: 
+062E    05F0           227       INC B      ;Increment counter for each left shift
+0630    EA             228       MOV A,R2   ;Move the current divisor low byte into the accumulator
+0631    33             229       RLC A      ;Shift low-byte left, rotate through carry to apply highest bit to high-byte
+0632    FA             230       MOV R2,A   ;Save the updated divisor low-byte
+0633    EB             231       MOV A,R3   ;Move the current divisor high byte into the accumulator
+0634    33             232       RLC A      ;Shift high-byte left high, rotating in carry from low-byte
+0635    FB             233       MOV R3,A   ;Save the updated divisor high-byte
+0636    50F6           234       JNC DIV1   ;Repeat until carry flag is set from high-byte
+                       235     DIV2:         ;Shift right the divisor
+0638    EB             236       MOV A,R3   ;Move high-byte of divisor into accumulator
+0639    13             237       RRC A      ;Rotate high-byte of divisor right and into carry
+063A    FB             238       MOV R3,A   ;Save updated value of high-byte of divisor
+063B    EA             239       MOV A,R2   ;Move low-byte of divisor into accumulator
+063C    13             240       RRC A      ;Rotate low-byte of divisor right, with carry from high-byte
+063D    FA             241       MOV R2,A   ;Save updated value of low-byte of divisor
+063E    C3             242       CLR C      ;Clear carry, we don't need it anymore
+063F    8907           243       MOV 07H,R1 ;Make a safe copy of the dividend high-byte
+0641    8806           244       MOV 06H,R0 ;Make a safe copy of the dividend low-byte
+0643    E8             245       MOV A,R0   ;Move low-byte of dividend into accumulator
+0644    9A             246       SUBB A,R2  ;Dividend - shifted divisor = result bit (no factor, only 0 or 1)
+0645    F8             247       MOV R0,A   ;Save updated dividend 
+0646    E9             248       MOV A,R1   ;Move high-byte of dividend into accumulator
+0647    9B             249       SUBB A,R3  ;Subtract high-byte of divisor (all together 16-bit substraction)
+0648    F9             250       MOV R1,A   ;Save updated high-byte back in high-byte of divisor
+0649    5004           251       JNC DIV3   ;If carry flag is NOT set, result is 1
+064B    A907           252       MOV R1,07H ;Otherwise result is 0, save copy of divisor to undo subtraction
+064D    A806           253       MOV R0,06H
+                       254     DIV3: 
+064F    B3             255       CPL C      ;Invert carry, so it can be directly copied into result
+0650    EC             256       MOV A,R4 
+0651    33             257       RLC A      ;Shift carry flag into temporary result
+0652    FC             258       MOV R4,A   
+0653    ED             259       MOV A,R5
+0654    33             260       RLC A
+0655    FD             261       MOV R5,A		
+0656    D5F0DF         262       DJNZ B,DIV2 ;Now count backwards and repeat until "B" is zero
+0659    AB05           263       MOV R3,05H  ;Move result to R3/R2
+065B    AA04           264       MOV R2,04H  ;Move result to R3/R2
+065D    22             265       RET
+                       266     
+                       267          
+                       268     END
+MACRO ASSEMBLER FULL MKII                                   03/18/10 17:04:18 PAGE     0
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES             REFERENCES
+
+DPL. . . . . . . .  D ADDR   0082H   A                          16# 
+P0 . . . . . . . .  D ADDR   0080H   A                          8# 
+P1 . . . . . . . .  D ADDR   0090H   A                          9# 192 195 209 
+NEGLECT. . . . . .  C ADDR   0190H   A                          199 211# 
+B. . . . . . . . .  D ADDR   00F0H   A                          14# 204 225 227 262 
+                                                                
+P2 . . . . . . . .  D ADDR   00A0H   A                          10# 
+RAMC . . . . . . .  C ADDR   015CH   A                          131 174# 
+PS . . . . . . . .  B ADDR   00B8H.4 A                          57# 
+SP . . . . . . . .  D ADDR   0081H   A                          15# 
+P3 . . . . . . . .  D ADDR   00B0H   A                          11# 90 127 
+HERE . . . . . . .  C ADDR   0124H   A                          135# 
+T0 . . . . . . . .  B ADDR   00B0H.4 A                          66# 
+AC . . . . . . . .  B ADDR   00D0H.6 A                          34# 
+CONTINUE . . . . .  C ADDR   0180H   A                          189 200# 
+INTERR1. . . . . .  C ADDR   0134H   A                          96 151# 
+MAIN . . . . . . .  C ADDR   0100H   A                          86 120# 
+REN. . . . . . . .  B ADDR   0098H.4 A                          75# 
+T1 . . . . . . . .  B ADDR   00B0H.5 A                          65# 
+OV . . . . . . . .  B ADDR   00D0H.2 A                          38# 
+EA . . . . . . . .  B ADDR   00A8H.7 A                          50# 
+MSG. . . . . . . .  C ADDR   0600H   A                          216# 
+ACC. . . . . . . .  D ADDR   00E0H   A                          13# 
+WR . . . . . . . .  B ADDR   00B0H.6 A                          64# 
+ET0. . . . . . . .  B ADDR   00A8H.1 A                          54# 
+ET1. . . . . . . .  B ADDR   00A8H.3 A                          52# 
+TF0. . . . . . . .  B ADDR   0088H.5 A                          43# 146 
+LOOP1. . . . . . .  C ADDR   0163H   A                          179# 185 
+TF1. . . . . . . .  B ADDR   0088H.7 A                          41# 
+SPACE. . . . . . .  C ADDR   0178H   A                          191 194# 
+RB8. . . . . . . .  B ADDR   0098H.2 A                          77# 
+TH0. . . . . . . .  D ADDR   008CH   A                          23# 124 163 
+EX0. . . . . . . .  B ADDR   00A8H.0 A                          55# 
+IT0. . . . . . . .  B ADDR   0088H.0 A                          48# 126 
+TH1. . . . . . . .  D ADDR   008DH   A                          24# 132 154 165 
+TB8. . . . . . . .  B ADDR   0098H.3 A                          76# 
+RXD. . . . . . . .  B ADDR   00B0H.0 A                          70# 
+EX1. . . . . . . .  B ADDR   00A8H.2 A                          53# 
+IT1. . . . . . . .  B ADDR   0088H.2 A                          46# 
+IE . . . . . . . .  D ADDR   00A8H   A                          25# 121 
+SK1. . . . . . . .  C ADDR   0131H   A                          142 145# 
+DIV16_16 . . . . .  C ADDR   0626H   A                          160 221# 
+DISP . . . . . . .  C ADDR   016CH   A                          141 188# 
+SM0. . . . . . . .  B ADDR   0098H.7 A                          72# 
+TXD. . . . . . . .  B ADDR   00B0H.1 A                          69# 
+P. . . . . . . . .  B ADDR   00D0H.0 A                          39# 
+SBUF . . . . . . .  D ADDR   0099H   A                          28# 
+TL0. . . . . . . .  D ADDR   008AH   A                          21# 125 164 
+PCON . . . . . . .  D ADDR   0087H   A                          18# 
+SM1. . . . . . . .  B ADDR   0098H.6 A                          73# 
+TL1. . . . . . . .  D ADDR   008BH   A                          22# 133 156 166 
+SM2. . . . . . . .  B ADDR   0098H.5 A                          74# 
+SCON . . . . . . .  D ADDR   0098H   A                          27# 
+DIV1 . . . . . . .  C ADDR   062EH   A                          226# 234 
+CONT . . . . . . .  C ADDR   017BH   A                          193 196# 
+INTERR . . . . . .  C ADDR   0126H   A                          89 138# 
+PT0. . . . . . . .  B ADDR   00B8H.1 A                          60# 
+TMOD . . . . . . .  D ADDR   0089H   A                          20# 123 
+TCON . . . . . . .  D ADDR   0088H   A                          19# 
+DIV2 . . . . . . .  C ADDR   0638H   A                          235# 262 
+PT1. . . . . . . .  B ADDR   00B8H.3 A                          58# 
+RS0. . . . . . . .  B ADDR   00D0H.3 A                          37# 
+DIV3 . . . . . . .  C ADDR   064FH   A                          251 254# 
+RD . . . . . . . .  B ADDR   00B0H.7 A                          63# 
+TR0. . . . . . . .  B ADDR   0088H.4 A                          44# 128 153 168 
+RS1. . . . . . . .  B ADDR   00D0H.4 A                          36# 
+F0 . . . . . . . .  B ADDR   00D0H.5 A                          35# 
+TR1. . . . . . . .  B ADDR   0088H.6 A                          42# 134 152 167 
+PX0. . . . . . . .  B ADDR   00B8H.0 A                          61# 
+ES . . . . . . . .  B ADDR   00A8H.4 A                          51# 
+PX1. . . . . . . .  B ADDR   00B8H.2 A                          59# 
+IP . . . . . . . .  D ADDR   00B8H   A                          26# 122 
+LOOKUP . . . . . .  C ADDR   0230H   A                          101# 
+PSW. . . . . . . .  D ADDR   00D0H   A                          12# 
+RI . . . . . . . .  B ADDR   0098H.0 A                          79# 
+INT0 . . . . . . .  B ADDR   00B0H.2 A                          68# 
+INT1 . . . . . . .  B ADDR   00B0H.3 A                          67# 
+CY . . . . . . . .  B ADDR   00D0H.7 A                          33# 
+DPH. . . . . . . .  D ADDR   0083H   A                          17# 
+TI . . . . . . . .  B ADDR   0098H.1 A                          78# 
+SK . . . . . . . .  C ADDR   012FH   A                          139 143# 
+IE0. . . . . . . .  B ADDR   0088H.1 A                          47# 
+IE1. . . . . . . .  B ADDR   0088H.3 A                          45# 
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    435    ----
+   XDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+REGISTER BANK(S) USED : 0 
+
+ASSEMBLY COMPLETE.   0 WARNING(S)   0 ERROR(S)

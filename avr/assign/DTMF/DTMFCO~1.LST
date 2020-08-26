@@ -1,0 +1,40 @@
+DTMFCO^1                                                                                                      PAGE 1
+
+                       1    $mod51
+0000                   2    org 00h
+0000 7590FF            3    mov p1,#0ffh
+0003 75A000            4    mov p2,#00h
+0006 E590              5    mov a,p1
+0008 B4F702            6    ag: cjne a,#0f7h,la1   
+000B D2A0              7    setb p2.0               ;1st d on
+000D E590              8    la1: mov a,p1
+000F B4FB02            9    cjne a,#0fbh,la2
+0012 D2A1             10    setb p2.1               ;2nd d on
+0014 E590             11    la2: mov a,p1
+0016 B4F302           12    cjne a,#0f3h,la3
+0019 D2A2             13    setb p2.2               ;3rd d on
+001B E590             14    la3: mov a,p1
+001D B4FD02           15    cjne a,#0fdh,la4
+0020 D2A3             16    setb p2.3               ;4th d on
+0022 E590             17    la4: mov a,p1
+0024 B4F503           18    cjne a,#0f5h,la5
+0027 75A0FF           19    mov p2,#0ffh            ;all on
+002A E590             20    la5: mov a,p1
+002C B4FA03           21    cjne a,#0fah,la6
+002F 75A000           22    mov p2,#00h             ;all off
+0032 80D4             23    la6: sjmp ag
+                      24    end
+                      25    
+
+VERSION 1.2h ASSEMBLY COMPLETE, 0 ERRORS FOUND
+DTMFCO^1                                                                                                      PAGE 2
+
+AG . . . . . . . . . . . . . . .  C ADDR  0008H  
+LA1. . . . . . . . . . . . . . .  C ADDR  000DH  
+LA2. . . . . . . . . . . . . . .  C ADDR  0014H  
+LA3. . . . . . . . . . . . . . .  C ADDR  001BH  
+LA4. . . . . . . . . . . . . . .  C ADDR  0022H  
+LA5. . . . . . . . . . . . . . .  C ADDR  002AH  
+LA6. . . . . . . . . . . . . . .  C ADDR  0032H  
+P1 . . . . . . . . . . . . . . .  D ADDR  0090H  PREDEFINED  
+P2 . . . . . . . . . . . . . . .  D ADDR  00A0H  PREDEFINED  

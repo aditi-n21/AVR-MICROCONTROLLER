@@ -1,0 +1,115 @@
+C51 COMPILER V9.51   LCD                                                                   04/17/2014 15:36:14 PAGE 1   
+
+
+C51 COMPILER V9.51, COMPILATION OF MODULE LCD
+OBJECT MODULE PLACED IN lcd.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE lcd.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+*** WARNING C500 IN LINE 1 OF lcd.c: LICENSE ERROR (R207: REGISTRY READ ERROR)
+
+   1          //Program to display numeric digit 0-9 on LCD
+   2          
+   3          #include<reg51.h>
+   4          #include<string.h>
+   5          sbit RS = P3^5;   //Register select (RS) pin
+   6          sbit RW = P3^6;   //Read write (RW) pin
+   7          sbit EN = P3^7;   //Enable (EN) pin
+   8          
+   9          
+  10          void delay(int delay_time)    // Time delay function
+  11          {
+  12   1      int j,k;
+  13   1      for(j=0;j<=delay_time;j++)
+  14   1        for(k=0;k<=1000;k++);
+  15   1      }
+  16          
+  17          void writecmd(unsigned char a)
+  18          {
+  19   1              RS=0;
+  20   1              P1=a;
+  21   1              RW=0;
+  22   1              EN=1;
+  23   1              delay(5);
+  24   1              EN=0;
+  25   1              return;
+  26   1      }
+  27          
+  28          void writedata(unsigned char b)
+  29          {
+  30   1              RS=1;
+  31   1              P1=b;
+  32   1      RW=0;
+  33   1              EN=1;
+  34   1              delay(5);
+  35   1              EN=0;
+  36   1              return;
+  37   1      }
+  38          void writestr(unsigned char *s)
+  39          {       
+  40   1              unsigned char l,i;
+  41   1              l=strlen(s);
+  42   1              for(i=0;i<l;i++)
+  43   1              {
+  44   2                      writedata(*s);
+  45   2                      s++;
+  46   2              }
+  47   1      }
+  48          /*void writestrslow(unsigned char *s)
+  49          {       
+  50              unsigned char l,i;
+  51                  l=strlen(s);
+  52                  for(i=0;i<l;i++)
+  53                  {
+  54                          writedata(*s);
+C51 COMPILER V9.51   LCD                                                                   04/17/2014 15:36:14 PAGE 2   
+
+  55                          s++;
+  56                          msdelay(150);
+  57                  }
+  58          }  */
+  59          void lcd()
+  60          {
+  61   1              writecmd(0x38);
+  62   1              writecmd(0x0c);
+  63   1              writecmd(0x01);
+  64   1              writecmd(0x06);
+  65   1              writecmd(0x80);
+  66   1              
+  67   1      }
+  68          void main()
+  69          {
+  70   1              unsigned char i;
+  71   1      lcd();
+  72   1      writecmd(0x8d);
+  73   1      //      writecmd(0xc5);
+  74   1      writestr("PANTNAGAR....");
+  75   1      while(1)
+  76   1      {
+  77   2              for(i=0;i<28;i++)
+  78   2      {writecmd(0x1c);
+  79   3      delay(25);
+  80   3      }       for(i=0;i<28;i++)
+  81   2      {writecmd(0x18);
+  82   3      //writestr(" ");
+  83   3      delay(25);
+  84   3      }
+  85   2      }
+  86   1      
+  87   1      
+  88   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    197    ----
+   CONSTANT SIZE    =     14    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       5
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

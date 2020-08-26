@@ -1,0 +1,39 @@
+A51 MACRO ASSEMBLER  LED                                                                  12/27/2012 12:05:49 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02a
+OBJECT MODULE PLACED IN led.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE led.a SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 00h
+0000 75A000            2     here: mov P2,#00h
+0003 110C              3     acall delay
+0005 75A0FF            4     mov P2,#0ffh
+0008 110C              5     acall delay
+000A 80F4              6     sjmp here
+                       7     
+000C                   8     delay:
+000C 7805              9            mov r0,#5
+000E D8FE             10                back: djnz r0,back
+0010 22               11                ret
+                      12                end
+A51 MACRO ASSEMBLER  LED                                                                  12/27/2012 12:05:49 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+BACK . . . . . . .  C ADDR   000EH   A   
+DELAY. . . . . . .  C ADDR   000CH   A   
+HERE . . . . . . .  C ADDR   0000H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

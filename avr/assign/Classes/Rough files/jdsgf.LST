@@ -1,0 +1,45 @@
+C51 COMPILER V9.05   JDSGF                                                                 02/21/2013 21:16:11 PAGE 1   
+
+
+C51 COMPILER V9.05, COMPILATION OF MODULE JDSGF
+OBJECT MODULE PLACED IN jdsgf.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE jdsgf.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg51.h>
+   2          sbit sense=P1^1;
+   3          sbit motor1=P1^3;
+   4          sbit motor2=P1^4;
+   5          void main()
+   6          {  sense=1;
+   7   1      
+   8   1         while(1)
+   9   1         {
+  10   2              if(sense==1)
+  11   2                {
+  12   3                 motor1=1;
+  13   3                 motor2=0;
+  14   3                 }
+  15   2               else
+  16   2               {
+  17   3                motor1=0;
+  18   3                 motor2=1;
+  19   3                 }
+  20   2              
+  21   2              }
+  22   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     17    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

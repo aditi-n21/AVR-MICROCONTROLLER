@@ -1,0 +1,145 @@
+C51 COMPILER V9.05   TEM_FAN                                                               07/18/2016 12:17:47 PAGE 1   
+
+
+C51 COMPILER V9.05, COMPILATION OF MODULE TEM_FAN
+OBJECT MODULE PLACED IN tem_fan.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE tem_fan.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg51.h>
+   2          void _nop_(void);
+   3          #define delay_us _nop_(); //generates 1 microsecond
+   4          #define LCD P0
+   5          #define ADC_OUT P1
+   6          sbit RS=P2^5; //connect p3.4 to rs pin of lcd
+   7          sbit RW=P2^6; //connect p3.6 to en pin of lcd
+   8          sbit EN=P2^7; //connect p3.5 to en pin of lcd
+   9          sbit intr = P3^0;
+  10          sbit wr = P3^1;
+  11          sbit rd = P3^2;
+  12          void init_lcd(void);
+  13          void cmd_lcd(unsigned char);
+  14          void write_lcd(unsigned char);
+  15          void display_lcd(unsigned char *);
+  16          void delay_ms(unsigned int);
+  17          void temp();                                                             //for temperature 
+  18          void convertAndDisplay(unsigned int);
+  19          void main()
+  20          {
+  21   1              init_lcd();
+  22   1              display_lcd("FAN SPEED CONT.");
+  23   1              cmd_lcd(0xc3);
+  24   1              display_lcd("ACC. TO TEMP");
+  25   1              delay_ms(100);
+  26   1              cmd_lcd(0x01);
+  27   1              cmd_lcd(0x82);
+  28   1              display_lcd("TEMP:-");
+  29   1         while(1)
+  30   1         {
+  31   2               temp();  
+  32   2         }
+  33   1      }
+  34          
+  35          
+  36          void temp() 
+  37          {         unsigned int value;
+  38   1                  delay_ms(1);
+  39   1                        wr = 0;
+  40   1                        delay_ms(1);
+  41   1                        wr = 1;
+  42   1                      while(intr==1);
+  43   1                        rd=0;
+  44   1                        value = ADC_OUT;      
+  45   1                        convertAndDisplay(value);
+  46   1                        rd=1;
+  47   1      }
+  48                  
+  49          void convertAndDisplay(unsigned int value)
+  50          {
+  51   1              unsigned char D1,D2,D3,D4;
+  52   1              value=value*2;  
+  53   1              //D0 = (value/10000) + 48;
+  54   1              D1 = (value/1000)%10 + 48;
+  55   1              D2 = (value/100)%10 + 48;
+C51 COMPILER V9.05   TEM_FAN                                                               07/18/2016 12:17:47 PAGE 2   
+
+  56   1              D3 = (value/10)%10 + 48;
+  57   1              D4 = (value%10) + 48;
+  58   1      
+  59   1              cmd_lcd(0x8a);
+  60   1              write_lcd(D4);
+  61   1              cmd_lcd(0x89);
+  62   1              write_lcd(D3);
+  63   1              cmd_lcd(0x8b);
+  64   1              display_lcd("'C");
+  65   1                      
+  66   1      }
+  67          //initialize lcd
+  68          void init_lcd(void)
+  69          {                           
+  70   1      delay_ms(10); //delay 10 milliseconds
+  71   1      cmd_lcd(0x0e); //lcd on, cursor on
+  72   1      delay_ms(10);
+  73   1      cmd_lcd(0x38); //8 bit initialize, 5x7 character font, 16x2 display
+  74   1      delay_ms(10);
+  75   1      cmd_lcd(0x06); //right shift cursor automatically after each character is displayed
+  76   1      delay_ms(10);
+  77   1      cmd_lcd(0x01); //clear lcd
+  78   1      delay_ms(10);
+  79   1      cmd_lcd (0x80);
+  80   1      }
+  81          //transmit command or instruction to lcd
+  82          void cmd_lcd(unsigned char c)
+  83          {
+  84   1      EN=1;
+  85   1      RW=0;//set enable pin
+  86   1      RS=0; //clear register select pin
+  87   1      LCD=c; //load 8 bit data
+  88   1      EN=0; //clear enable pin
+  89   1      delay_ms(2); //delay 2 milliseconds
+  90   1      }
+  91          //transmit a character to be displayed on lcd
+  92          void write_lcd(unsigned char c)
+  93          {
+  94   1      EN=1; //set enable pin
+  95   1      RW=0;
+  96   1      RS=1; //set register select pin
+  97   1      LCD=c;  //load 8 bit data
+  98   1      EN=0; //clear enable pin
+  99   1      delay_ms(2); //delay 2 milliseconds
+ 100   1      }
+ 101          //transmit a string to be displayed on lcd
+ 102          void display_lcd(unsigned char *s)
+ 103          {
+ 104   1      while(*s)
+ 105   1      write_lcd(*s++);
+ 106   1      }
+ 107          //generates delay in milli seconds
+ 108          void delay_ms(unsigned int i)
+ 109          {
+ 110   1      unsigned int j;
+ 111   1                  while(i-->0)
+ 112   1                  {
+ 113   2                              for(j=0;j<500;j++)
+ 114   2                              {
+ 115   3                                          ;
+ 116   3                              }
+ 117   2                  }
+C51 COMPILER V9.05   TEM_FAN                                                               07/18/2016 12:17:47 PAGE 3   
+
+ 118   1      }           
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    369    ----
+   CONSTANT SIZE    =     39    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       7
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

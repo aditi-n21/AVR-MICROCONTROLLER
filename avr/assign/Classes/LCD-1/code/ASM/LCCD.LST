@@ -1,0 +1,103 @@
+LCCD                                                                                                          PAGE 1
+
+                       1    ;W.A.P to display OK in LCD(2 lines & 16 Charac.)
+                       2    
+                       3    
+                       4    $mod51
+  0090                 5    lcd equ p1
+  00A0                 6    rs equ p2.0
+  00A1                 7    rw equ p2.1
+  00A2                 8    e equ p2.2
+0000                   9    org 00h
+0000 900155           10    mov dptr,#show1
+0003 E4               11    back1: clr a
+0004 93               12    movc a,@a+dptr
+0005 1130             13    acall comnwrt
+0007 114A             14    acall delay
+0009 A3               15    inc dptr
+000A B400F6           16    cjne a,#0,back1
+                      17    
+                      18            
+                      19            
+000D 900150           20     mov dptr,#show
+0010 E4               21    back: clr a
+0011 93               22    movc a,@a+dptr
+0012 113D             23    acall comndata
+0014 114A             24    acall delay
+0016 A3               25    inc dptr
+0017 B400F6           26    cjne a,#0,back
+                      27    
+001A                  28    ag:  
+001A 7810             29    mov r0,#16
+001C 741C             30    hey: mov a,#1ch
+001E 1130             31    acall comnwrt
+0020 114A             32    acall delay
+0022 D8F8             33    djnz r0,hey
+0024 7810             34    mov r0,#16
+0026 7418             35    hey1: mov a,#18h
+0028 1130             36    acall comnwrt
+002A 114A             37    acall delay
+002C D8F8             38    djnz r0,hey1
+                      39    
+002E 80EA             40    sjmp ag
+                      41    
+0030                  42    comnwrt:
+0030 F590             43            mov lcd,a
+0032 C2A0             44            clr rs
+0034 C2A1             45            clr rw
+0036 D2A2             46            setb e
+0038 114A             47            acall delay
+003A C2A2             48            clr e
+003C 22               49            ret
+003D                  50    comndata:
+                      51    
+003D F590             52            mov lcd,a
+003F D2A0             53            setb rs
+0041 C2A1             54            clr rw
+0043 D2A2             55            setb e
+0045 114A             56            acall delay
+0047 C2A2             57            clr e
+0049 22               58            ret
+LCCD                                                                                                          PAGE 2
+
+                      59    
+004A                  60    delay:
+004A 7FFF             61            mov r7,#255
+004C 7EFF             62    la2:    mov r6,#0ffh
+004E DEFE             63    la1:    djnz r6,la1
+0050 DFFA             64            djnz r7,la2
+0052 22               65            ret
+                      66    
+0150                  67    Org 150h
+0150 414D4954         68    show: DB 'AMIT',0
+0154 00         
+0155 3801060E         69    show1: DB 38h,01h,06h,0eh,80h,0
+0159 8000       
+                      70    end
+                      71    
+                      72    
+                      73    
+                      74    
+                      75    
+
+VERSION 1.2h ASSEMBLY COMPLETE, 0 ERRORS FOUND
+LCCD                                                                                                          PAGE 3
+
+AG . . . . . . . . . . . . . . .  C ADDR  001AH  
+BACK . . . . . . . . . . . . . .  C ADDR  0010H  
+BACK1. . . . . . . . . . . . . .  C ADDR  0003H  
+COMNDATA . . . . . . . . . . . .  C ADDR  003DH  
+COMNWRT. . . . . . . . . . . . .  C ADDR  0030H  
+DELAY. . . . . . . . . . . . . .  C ADDR  004AH  
+E. . . . . . . . . . . . . . . .    NUMB  00A2H  
+HEY. . . . . . . . . . . . . . .  C ADDR  001CH  
+HEY1 . . . . . . . . . . . . . .  C ADDR  0026H  
+LA1. . . . . . . . . . . . . . .  C ADDR  004EH  
+LA2. . . . . . . . . . . . . . .  C ADDR  004CH  
+LCD. . . . . . . . . . . . . . .    NUMB  0090H  
+P1 . . . . . . . . . . . . . . .  D ADDR  0090H  PREDEFINED  
+P2 . . . . . . . . . . . . . . .  D ADDR  00A0H  PREDEFINED  
+RS . . . . . . . . . . . . . . .    NUMB  00A0H  
+RW . . . . . . . . . . . . . . .    NUMB  00A1H  
+SHOW . . . . . . . . . . . . . .  C ADDR  0150H  
+SHOW1. . . . . . . . . . . . . .  C ADDR  0155H  

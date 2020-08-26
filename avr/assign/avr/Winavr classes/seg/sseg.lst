@@ -1,0 +1,124 @@
+   1               		.file	"sseg.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	main
+  18               	main:
+  19               	.LFB6:
+  20               	.LM1:
+  21 0000 DF93      		push r29
+  22 0002 CF93      		push r28
+  23 0004 CDB7      		in r28,__SP_L__
+  24 0006 DEB7      		in r29,__SP_H__
+  25 0008 2A97      		sbiw r28,10
+  26 000a 0FB6      		in __tmp_reg__,__SREG__
+  27 000c F894      		cli
+  28 000e DEBF      		out __SP_H__,r29
+  29 0010 0FBE      		out __SREG__,__tmp_reg__
+  30 0012 CDBF      		out __SP_L__,r28
+  31               	/* prologue: function */
+  32               	/* frame size = 10 */
+  33               	.LM2:
+  34 0014 DE01      		movw r26,r28
+  35 0016 1196      		adiw r26,1
+  36 0018 E0E0      		ldi r30,lo8(C.0.1250)
+  37 001a F0E0      		ldi r31,hi8(C.0.1250)
+  38 001c 8AE0      		ldi r24,lo8(10)
+  39               	.L2:
+  40 001e 0190      		ld r0,Z+
+  41 0020 0D92      		st X+,r0
+  42 0022 8150      		subi r24,lo8(-(-1))
+  43 0024 01F4      		brne .L2
+  44               	.LM3:
+  45 0026 8FEF      		ldi r24,lo8(-1)
+  46 0028 87BB      		out 55-32,r24
+  47 002a 20E0      		ldi r18,lo8(0)
+  48               	.LVL0:
+  49               	.LM4:
+  50 002c BE01      		movw r22,r28
+  51 002e 6F5F      		subi r22,lo8(-(1))
+  52 0030 7F4F      		sbci r23,hi8(-(1))
+  53               	.LBB12:
+  54               	.LBB13:
+  55               	.LBB14:
+  56               	.LBB15:
+  57               	.LM5:
+  58 0032 48EC      		ldi r20,lo8(200)
+  59 0034 50E0      		ldi r21,hi8(200)
+  60               	.LVL1:
+  61               	.L10:
+  62               	.LBE15:
+  63               	.LBE14:
+  64               	.LBE13:
+  65               	.LBE12:
+  66               	.LM6:
+  67 0036 FB01      		movw r30,r22
+  68               	.LVL2:
+  69 0038 E20F      		add r30,r18
+  70 003a F11D      		adc r31,__zero_reg__
+  71 003c 8081      		ld r24,Z
+  72               	.LVL3:
+  73 003e 8095      		com r24
+  74 0040 88BB      		out 56-32,r24
+  75 0042 80E2      		ldi r24,lo8(20000)
+  76 0044 9EE4      		ldi r25,hi8(20000)
+  77               	.LVL4:
+  78               	.L3:
+  79               	.LBB19:
+  80               	.LBB18:
+  81               	.LBB17:
+  82               	.LBB16:
+  83               	.LM7:
+  84 0046 FA01      		movw r30,r20
+  85               	.LVL5:
+  86               	/* #APP */
+  87               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+  88 0048 3197      		1: sbiw r30,1
+  89 004a 01F4      		brne 1b
+  90               	 ;  0 "" 2
+  91               	/* #NOAPP */
+  92               	.LBE16:
+  93               	.LBE17:
+  94               	.LM8:
+  95 004c 0197      		sbiw r24,1
+  96               	.LM9:
+  97 004e 01F4      		brne .L3
+  98               	.LBE18:
+  99               	.LBE19:
+ 100               	.LM10:
+ 101 0050 2F5F      		subi r18,lo8(-(1))
+ 102 0052 2A30      		cpi r18,lo8(10)
+ 103 0054 00F0      		brlo .L10
+ 104 0056 20E0      		ldi r18,lo8(0)
+ 105 0058 00C0      		rjmp .L10
+ 106               	.LFE6:
+ 108               		.data
+ 111               	C.0.1250:
+ 112 0000 C0        		.byte	-64
+ 113 0001 F9        		.byte	-7
+ 114 0002 A4        		.byte	-92
+ 115 0003 B0        		.byte	-80
+ 116 0004 99        		.byte	-103
+ 117 0005 92        		.byte	-110
+ 118 0006 82        		.byte	-126
+ 119 0007 F8        		.byte	-8
+ 120 0008 80        		.byte	-128
+ 121 0009 90        		.byte	-112
+ 146               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 sseg.c
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/ccM1eZXa.s:2      *ABS*:0000003f __SREG__
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/ccM1eZXa.s:3      *ABS*:0000003e __SP_H__
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/ccM1eZXa.s:4      *ABS*:0000003d __SP_L__
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/ccM1eZXa.s:5      *ABS*:00000034 __CCP__
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/ccM1eZXa.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/ccM1eZXa.s:7      *ABS*:00000001 __zero_reg__
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/ccM1eZXa.s:18     .text:00000000 main
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/ccM1eZXa.s:111    .data:00000000 C.0.1250
+
+UNDEFINED SYMBOLS
+__do_copy_data

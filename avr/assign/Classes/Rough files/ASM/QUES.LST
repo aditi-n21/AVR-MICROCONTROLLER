@@ -1,0 +1,21 @@
+QUES                                                                                                          PAGE 1
+
+                       1    
+                       2    $mod51
+0000                   3    org 00h
+0000 D2D4              4    setb psw.4
+0002 C2D3              5    clr psw.3
+0004 7855              6    mov r0,#55h
+0006 7922              7    mov r1,#22h
+0008 7A33              8    mov r2,#33h
+000A C2D4              9    clr psw.4
+000C C2D3             10    clr psw.3
+000E 7844             11    mov r0,#44h
+0010 7911             12    mov r1,#11h
+                      13    
+                      14    END
+
+VERSION 1.2h ASSEMBLY COMPLETE, 0 ERRORS FOUND
+QUES                                                                                                          PAGE 2
+
+PSW. . . . . . . . . . . . . . .  D ADDR  00D0H  PREDEFINED  

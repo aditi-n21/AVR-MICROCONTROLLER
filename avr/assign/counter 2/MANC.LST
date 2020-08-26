@@ -1,0 +1,181 @@
+MANC                                                                                                          PAGE 1
+
+                       1    ;7-Segment Display
+  0000                 2    enableDIGIT3 EQU P3.2
+****--------------------------------------------^
+****ERROR #17: Illegal bit designator
+  0000                 3    enableDIGIT4 EQU P3.3
+****--------------------------------------------^
+****ERROR #17: Illegal bit designator
+                       4    
+  00C0                 5    ZERO   EQU  11000000b
+  00F9                 6    ONE    EQU  11111001b
+  00A4                 7    TWO    EQU  10100100b
+  00B0                 8    THREE  EQU  10110000b
+  0099                 9    FOUR   EQU  10011001b
+  0092                10    FIVE   EQU  10010010b
+  0082                11    SIX    EQU  10000010b
+  00F8                12    SEVEN  EQU  11111000b
+  0080                13    EIGHT  EQU  10000000b
+  0090                14    NINE   EQU  10010000b
+  00FF                15    DOT    EQU  11111111b
+                      16    
+0000 7520C0           17    MOV 20h,#ZERO
+0003 7521F9           18    MOV 21h,#ONE
+0006 7522A4           19    MOV 22h,#TWO
+0009 7523B0           20    MOV 23h,#THREE
+000C 752499           21    MOV 24h,#FOUR
+000F 752592           22    MOV 25h,#FIVE
+0012 752682           23    MOV 26h,#SIX
+0015 7527F8           24    MOV 27h,#SEVEN
+0018 752880           25    MOV 28h,#EIGHT
+001B 752990           26    MOV 29h,#NINE
+                      27    
+001E 7820             28    MOV R0, #20h
+0020 7922             29    MOV R1, #22h
+                      30    
+  0000                31    PDATA EQU P2 ; Connect 8 pins here
+****----------------------------------^
+****ERROR #27: Illegal expression with forward reference
+                      32    
+0022                  33    Start:
+0022 200002           34            JB P3.1, check1
+****-----------------------------------^--^
+****ERROR #2: Undefined symbol
+****ERROR #17: Illegal bit designator
+0025 D250             35                    SETB 50h
+0027                  36            check1:
+0027 200002           37            JB P3.0, check2
+****-----------------------------------^--^
+****ERROR #2: Undefined symbol
+****ERROR #17: Illegal bit designator
+002A D252             38                    SETB 52h
+002C                  39            check2:
+002C 300008           40                    JNB P3.1, cont1
+****--------------------------------------------^--^
+****ERROR #2: Undefined symbol
+****ERROR #17: Illegal bit designator
+002F 305005           41                            JNB 50h, cont1
+0032 C250             42                                    CLR 50h
+0034 12005F           43                                    LCALL INC_7SEGMENT     
+MANC                                                                                                          PAGE 2
+
+0037                  44            cont1:
+0037 300008           45                    JNB P3.0, cont2
+****--------------------------------------------^--^
+****ERROR #2: Undefined symbol
+****ERROR #17: Illegal bit designator
+003A 305205           46                            JNB 52h, cont2
+003D C252             47                                    CLR 52h
+003F 12006E           48                                    LCALL DEC_7SEGMENT
+0042                  49            cont2:
+0042 120047           50                    LCALL SHOW_7SEGMENT
+0045 80DB             51    SJMP Start
+                      52    
+0047                  53    SHOW_7SEGMENT:
+0047 750000           54            MOV PDATA,#00h
+****------------------------------------^
+****ERROR #2: Undefined symbol
+                      55    
+004A D200             56            setb enableDIGIT3
+004C E7               57            MOV     A,@R1
+004D F500             58            MOV PDATA,A
+****------------------------------------^
+****ERROR #2: Undefined symbol
+004F 120000           59            LCALL smallDelay
+****--------------------------------------^
+****ERROR #2: Undefined symbol
+0052 C200             60            clr enableDIGIT3
+                      61           
+0054 D200             62            setb enableDIGIT4
+0056 E6               63            MOV     A,@R0
+0057 F500             64            MOV PDATA,A
+****------------------------------------^
+****ERROR #2: Undefined symbol
+0059 120000           65            LCALL smallDelay        
+****--------------------------------------^
+****ERROR #2: Undefined symbol
+005C C200             66            clr enableDIGIT4
+005E 22               67    RET
+                      68    
+005F                  69    INC_7SEGMENT:
+005F B7A402           70            CJNE @R1, #TWO, increment
+0062 8009             71            sjmp doneinc
+0064                  72            increment:
+0064 B69005           73                    CJNE @R0, #NINE, incr0
+0067 7820             74                    MOV R0, #20h
+0069 09               75                    INC R1
+006A 8001             76                    SJMP doneinc
+006C                  77                    incr0:
+006C 08               78                            INC R0
+006D                  79            doneinc:
+006D 22               80    RET
+                      81    
+006E                  82    DEC_7SEGMENT:
+006E B6C00A           83            CJNE @R0, #ZERO, dec0
+0071 B7C002           84            CJNE @R1, #ZERO, dec1
+0074 8006             85            sjmp donedec
+0076                  86            dec1:
+0076 7829             87                    MOV R0, #29h
+0078 19               88                    DEC R1
+MANC                                                                                                          PAGE 3
+
+0079 8001             89                    SJMP donedec
+007B                  90            dec0:
+007B 18               91                    DEC R0
+007C                  92            donedec:
+007C 22               93    RET
+                      94    end
+
+VERSION 1.2h ASSEMBLY COMPLETE, 16 ERRORS FOUND
+
+ERROR SUMMARY:
+Line #2, ERROR #17: Illegal bit designator
+Line #3, ERROR #17: Illegal bit designator
+Line #31, ERROR #27: Illegal expression with forward reference
+Line #34, ERROR #2: Undefined symbol
+Line #34, ERROR #17: Illegal bit designator
+Line #37, ERROR #2: Undefined symbol
+Line #37, ERROR #17: Illegal bit designator
+Line #40, ERROR #2: Undefined symbol
+Line #40, ERROR #17: Illegal bit designator
+Line #45, ERROR #2: Undefined symbol
+Line #45, ERROR #17: Illegal bit designator
+Line #54, ERROR #2: Undefined symbol
+Line #58, ERROR #2: Undefined symbol
+Line #59, ERROR #2: Undefined symbol
+Line #64, ERROR #2: Undefined symbol
+Line #65, ERROR #2: Undefined symbol
+MANC                                                                                                          PAGE 4
+
+CHECK1 . . . . . . . . . . . . .  C ADDR  0027H  
+CHECK2 . . . . . . . . . . . . .  C ADDR  002CH  
+CONT1. . . . . . . . . . . . . .  C ADDR  0037H  
+CONT2. . . . . . . . . . . . . .  C ADDR  0042H  
+DEC0 . . . . . . . . . . . . . .  C ADDR  007BH  
+DEC1 . . . . . . . . . . . . . .  C ADDR  0076H  
+DEC_7SEGMENT . . . . . . . . . .  C ADDR  006EH  
+DONEDEC. . . . . . . . . . . . .  C ADDR  007CH  
+DONEINC. . . . . . . . . . . . .  C ADDR  006DH  
+DOT. . . . . . . . . . . . . . .    NUMB  00FFH  NOT USED  
+EIGHT. . . . . . . . . . . . . .    NUMB  0080H  
+ENABLEDIGIT3 . . . . . . . . . .    NUMB  0000H  
+ENABLEDIGIT4 . . . . . . . . . .    NUMB  0000H  
+FIVE . . . . . . . . . . . . . .    NUMB  0092H  
+FOUR . . . . . . . . . . . . . .    NUMB  0099H  
+INCR0. . . . . . . . . . . . . .  C ADDR  006CH  
+INCREMENT. . . . . . . . . . . .  C ADDR  0064H  
+INC_7SEGMENT . . . . . . . . . .  C ADDR  005FH  
+NINE . . . . . . . . . . . . . .    NUMB  0090H  
+ONE. . . . . . . . . . . . . . .    NUMB  00F9H  
+P2 . . . . . . . . . . . . . . .                 UNDEFINED  
+P3 . . . . . . . . . . . . . . .                 UNDEFINED  
+PDATA. . . . . . . . . . . . . .                 UNDEFINED  
+SEVEN. . . . . . . . . . . . . .    NUMB  00F8H  
+SHOW_7SEGMENT. . . . . . . . . .  C ADDR  0047H  
+SIX. . . . . . . . . . . . . . .    NUMB  0082H  
+SMALLDELAY . . . . . . . . . . .                 UNDEFINED  
+START. . . . . . . . . . . . . .  C ADDR  0022H  
+THREE. . . . . . . . . . . . . .    NUMB  00B0H  
+TWO. . . . . . . . . . . . . . .    NUMB  00A4H  
+ZERO . . . . . . . . . . . . . .    NUMB  00C0H  

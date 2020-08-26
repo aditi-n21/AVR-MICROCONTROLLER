@@ -1,0 +1,3 @@
+"STARTUP.obj",
+"adc_8051.obj" 
+TO "adc_8051" 

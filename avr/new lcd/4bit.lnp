@@ -1,0 +1,3 @@
+".\Objects\de.obj" 
+TO ".\Objects\4bit" 
+PRINT(".\Listings\4bit.m51")

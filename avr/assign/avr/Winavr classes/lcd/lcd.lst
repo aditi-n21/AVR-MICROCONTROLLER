@@ -1,0 +1,304 @@
+   1               		.file	"lcd.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	writecmd
+  18               	writecmd:
+  19               	.LFB8:
+  20               	.LM1:
+  21               	.LVL0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	.LM2:
+  25 0000 88BB      		out 56-32,r24
+  26               	.LM3:
+  27 0002 D898      		cbi 59-32,0
+  28               	.LM4:
+  29 0004 D998      		cbi 59-32,1
+  30               	.LM5:
+  31 0006 DA9A      		sbi 59-32,2
+  32               	.LBB30:
+  33               	.LBB31:
+  34               	.LBB32:
+  35               	.LBB33:
+  36               	.LM6:
+  37 0008 80E1      		ldi r24,lo8(10000)
+  38 000a 97E2      		ldi r25,hi8(10000)
+  39               	.LVL1:
+  40               	/* #APP */
+  41               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+  42 000c 0197      		1: sbiw r24,1
+  43 000e 01F4      		brne 1b
+  44               	 ;  0 "" 2
+  45               	/* #NOAPP */
+  46               	.LBE33:
+  47               	.LBE32:
+  48               	.LBE31:
+  49               	.LBE30:
+  50               	.LM7:
+  51 0010 DA98      		cbi 59-32,2
+  52               	/* epilogue start */
+  53               	.LM8:
+  54 0012 0895      		ret
+  55               	.LFE8:
+  57               	.global	lcdinit
+  59               	lcdinit:
+  60               	.LFB7:
+  61               	.LM9:
+  62               	/* prologue: function */
+  63               	/* frame size = 0 */
+  64               	.LM10:
+  65 0014 88E3      		ldi r24,lo8(56)
+  66 0016 0E94 0000 		call writecmd
+  67               	.LM11:
+  68 001a 8CE0      		ldi r24,lo8(12)
+  69 001c 0E94 0000 		call writecmd
+  70               	.LM12:
+  71 0020 81E0      		ldi r24,lo8(1)
+  72 0022 0E94 0000 		call writecmd
+  73               	.LM13:
+  74 0026 86E0      		ldi r24,lo8(6)
+  75 0028 0E94 0000 		call writecmd
+  76               	.LM14:
+  77 002c 80E8      		ldi r24,lo8(-128)
+  78 002e 0E94 0000 		call writecmd
+  79               	/* epilogue start */
+  80               	.LM15:
+  81 0032 0895      		ret
+  82               	.LFE7:
+  84               	.global	writedata
+  86               	writedata:
+  87               	.LFB9:
+  88               	.LM16:
+  89               	.LVL2:
+  90               	/* prologue: function */
+  91               	/* frame size = 0 */
+  92               	.LM17:
+  93 0034 88BB      		out 56-32,r24
+  94               	.LM18:
+  95 0036 D89A      		sbi 59-32,0
+  96               	.LM19:
+  97 0038 D998      		cbi 59-32,1
+  98               	.LM20:
+  99 003a DA9A      		sbi 59-32,2
+ 100               	.LBB34:
+ 101               	.LBB35:
+ 102               	.LBB36:
+ 103               	.LBB37:
+ 104               	.LM21:
+ 105 003c 80E1      		ldi r24,lo8(10000)
+ 106 003e 97E2      		ldi r25,hi8(10000)
+ 107               	.LVL3:
+ 108               	/* #APP */
+ 109               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+ 110 0040 0197      		1: sbiw r24,1
+ 111 0042 01F4      		brne 1b
+ 112               	 ;  0 "" 2
+ 113               	/* #NOAPP */
+ 114               	.LBE37:
+ 115               	.LBE36:
+ 116               	.LBE35:
+ 117               	.LBE34:
+ 118               	.LM22:
+ 119 0044 DA98      		cbi 59-32,2
+ 120               	/* epilogue start */
+ 121               	.LM23:
+ 122 0046 0895      		ret
+ 123               	.LFE9:
+ 125               	.global	writestr
+ 127               	writestr:
+ 128               	.LFB10:
+ 129               	.LM24:
+ 130               	.LVL4:
+ 131 0048 0F93      		push r16
+ 132 004a 1F93      		push r17
+ 133 004c CF93      		push r28
+ 134 004e DF93      		push r29
+ 135               	/* prologue: function */
+ 136               	/* frame size = 0 */
+ 137 0050 182F      		mov r17,r24
+ 138               	.LM25:
+ 139 0052 A82F      		mov r26,r24
+ 140 0054 B92F      		mov r27,r25
+ 141               	.LVL5:
+ 142 0056 FD01      		movw r30,r26
+ 143 0058 0190      		ld __tmp_reg__,Z+
+ 144 005a 0020      		tst __tmp_reg__
+ 145 005c 01F4      		brne .-6
+ 146 005e 3197      		sbiw r30,1
+ 147 0060 0E2F      		mov r16,r30
+ 148               	.LVL6:
+ 149 0062 081B      		sub r16,r24
+ 150 0064 282F      		mov r18,r24
+ 151 0066 392F      		mov r19,r25
+ 152 0068 C901      		movw r24,r18
+ 153               	.LVL7:
+ 154 006a EC01      		movw r28,r24
+ 155 006c 00C0      		rjmp .L8
+ 156               	.LVL8:
+ 157               	.L9:
+ 158               	.LM26:
+ 159 006e 8991      		ld r24,Y+
+ 160 0070 0E94 0000 		call writedata
+ 161               	.LVL9:
+ 162               	.L8:
+ 163               	.LM27:
+ 164 0074 9E01      		movw r18,r28
+ 165 0076 211B      		sub r18,r17
+ 166 0078 2017      		cp r18,r16
+ 167 007a 00F0      		brlo .L9
+ 168               	.LVL10:
+ 169               	/* epilogue start */
+ 170               	.LM28:
+ 171 007c DF91      		pop r29
+ 172 007e CF91      		pop r28
+ 173 0080 1F91      		pop r17
+ 174               	.LVL11:
+ 175 0082 0F91      		pop r16
+ 176               	.LVL12:
+ 177 0084 0895      		ret
+ 178               	.LFE10:
+ 180               		.data
+ 181               	.LC0:
+ 182 0000 5745 4C43 		.string	"WELCOME TO CETPA"
+ 182      4F4D 4520 
+ 182      544F 2043 
+ 182      4554 5041 
+ 182      00
+ 183               		.text
+ 184               	.global	main
+ 186               	main:
+ 187               	.LFB6:
+ 188               	.LM29:
+ 189 0086 1F93      		push r17
+ 190 0088 CF93      		push r28
+ 191 008a DF93      		push r29
+ 192               	/* prologue: function */
+ 193               	/* frame size = 0 */
+ 194               	.LM30:
+ 195 008c 8FEF      		ldi r24,lo8(-1)
+ 196 008e 87BB      		out 55-32,r24
+ 197               	.LM31:
+ 198 0090 8ABB      		out 58-32,r24
+ 199               	.LM32:
+ 200 0092 0E94 0000 		call lcdinit
+ 201               	.LM33:
+ 202 0096 80E8      		ldi r24,lo8(-128)
+ 203 0098 0E94 0000 		call writecmd
+ 204               	.LM34:
+ 205 009c 80E0      		ldi r24,lo8(.LC0)
+ 206 009e 90E0      		ldi r25,hi8(.LC0)
+ 207 00a0 0E94 0000 		call writestr
+ 208 00a4 10E0      		ldi r17,lo8(0)
+ 209               	.LVL13:
+ 210               	.LBB38:
+ 211               	.LBB39:
+ 212               	.LBB40:
+ 213               	.LBB41:
+ 214               	.LM35:
+ 215 00a6 C8EC      		ldi r28,lo8(200)
+ 216 00a8 D0E0      		ldi r29,hi8(200)
+ 217 00aa 00C0      		rjmp .L21
+ 218               	.LVL14:
+ 219               	.L14:
+ 220               	.LBE41:
+ 221               	.LBE40:
+ 222               	.LBE39:
+ 223               	.LBE38:
+ 224               	.LM36:
+ 225 00ac 8CE1      		ldi r24,lo8(28)
+ 226               	.LVL15:
+ 227 00ae 0E94 0000 		call writecmd
+ 228               	.LVL16:
+ 229 00b2 80ED      		ldi r24,lo8(2000)
+ 230 00b4 97E0      		ldi r25,hi8(2000)
+ 231               	.LVL17:
+ 232               	.L13:
+ 233               	.LBB45:
+ 234               	.LBB46:
+ 235               	.LBB47:
+ 236               	.LBB48:
+ 237               	.LM37:
+ 238 00b6 FE01      		movw r30,r28
+ 239               	.LVL18:
+ 240               	/* #APP */
+ 241               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+ 242 00b8 3197      		1: sbiw r30,1
+ 243 00ba 01F4      		brne 1b
+ 244               	 ;  0 "" 2
+ 245               	/* #NOAPP */
+ 246               	.LBE48:
+ 247               	.LBE47:
+ 248               	.LM38:
+ 249 00bc 0197      		sbiw r24,1
+ 250               	.LM39:
+ 251 00be 01F4      		brne .L13
+ 252               	.LBE46:
+ 253               	.LBE45:
+ 254               	.LM40:
+ 255 00c0 1F5F      		subi r17,lo8(-(1))
+ 256               	.L21:
+ 257 00c2 1031      		cpi r17,lo8(16)
+ 258 00c4 00F0      		brlo .L14
+ 259 00c6 10E0      		ldi r17,lo8(0)
+ 260               	.LVL19:
+ 261               	.L16:
+ 262               	.LM41:
+ 263 00c8 88E1      		ldi r24,lo8(24)
+ 264               	.LVL20:
+ 265 00ca 0E94 0000 		call writecmd
+ 266               	.LVL21:
+ 267 00ce 80ED      		ldi r24,lo8(2000)
+ 268 00d0 97E0      		ldi r25,hi8(2000)
+ 269               	.LVL22:
+ 270               	.L15:
+ 271               	.LBB49:
+ 272               	.LBB44:
+ 273               	.LBB43:
+ 274               	.LBB42:
+ 275               	.LM42:
+ 276 00d2 FE01      		movw r30,r28
+ 277               	.LVL23:
+ 278               	/* #APP */
+ 279               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+ 280 00d4 3197      		1: sbiw r30,1
+ 281 00d6 01F4      		brne 1b
+ 282               	 ;  0 "" 2
+ 283               	/* #NOAPP */
+ 284               	.LBE42:
+ 285               	.LBE43:
+ 286               	.LM43:
+ 287 00d8 0197      		sbiw r24,1
+ 288               	.LM44:
+ 289 00da 01F4      		brne .L15
+ 290               	.LBE44:
+ 291               	.LBE49:
+ 292               	.LM45:
+ 293 00dc 1F5F      		subi r17,lo8(-(1))
+ 294 00de 1031      		cpi r17,lo8(16)
+ 295 00e0 01F4      		brne .L16
+ 296 00e2 10E0      		ldi r17,lo8(0)
+ 297               	.LVL24:
+ 298 00e4 00C0      		rjmp .L14
+ 299               	.LFE6:
+ 357               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 lcd.c
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/cc2VpHKc.s:2      *ABS*:0000003f __SREG__
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/cc2VpHKc.s:3      *ABS*:0000003e __SP_H__
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/cc2VpHKc.s:4      *ABS*:0000003d __SP_L__
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/cc2VpHKc.s:5      *ABS*:00000034 __CCP__
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/cc2VpHKc.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/cc2VpHKc.s:7      *ABS*:00000001 __zero_reg__
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/cc2VpHKc.s:18     .text:00000000 writecmd
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/cc2VpHKc.s:59     .text:00000014 lcdinit
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/cc2VpHKc.s:86     .text:00000034 writedata
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/cc2VpHKc.s:127    .text:00000048 writestr
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/cc2VpHKc.s:186    .text:00000086 main
+
+UNDEFINED SYMBOLS
+__do_copy_data

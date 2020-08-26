@@ -1,0 +1,43 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+E:\CETPA\Classes\7-seg\code\C\7-seg.uvproj
+Project File Date:  06/12/2012
+
+<h2>Output:</h2>
+compiling 7-seg.c...
+7-seg.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+A51 MACRO ASSEMBLER V8.02b - SN: Eval Version
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2008
+"C:\Keil\C51\BIN\A51.EXE" "STARTUP.A51" SET (SMALL) DEBUG EP
+A51 FATAL ERROR -
+  FILE:       STARTUP.A51
+  ERROR:      FILE DOES NOT EXIST
+A51 TERMINATED.
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+A51 MACRO ASSEMBLER V8.02b - SN: Eval Version
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2008
+"C:\Keil\C51\BIN\A51.EXE" "STARTUP.A51" SET (SMALL) DEBUG EP
+A51 FATAL ERROR -
+  FILE:       STARTUP.A51
+  ERROR:      FILE DOES NOT EXIST
+A51 TERMINATED.
+Target not created
+compiling 7-seg.c...
+7-seg.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+A51 MACRO ASSEMBLER V8.02b - SN: Eval Version
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2008
+"C:\Keil\C51\BIN\A51.EXE" "STARTUP.A51" SET (SMALL) DEBUG EP
+A51 FATAL ERROR -
+  FILE:       STARTUP.A51
+  ERROR:      FILE DOES NOT EXIST
+A51 TERMINATED.
+Target not created

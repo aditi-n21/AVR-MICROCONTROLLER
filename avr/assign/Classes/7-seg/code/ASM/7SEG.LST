@@ -1,0 +1,40 @@
+7SEG                                                                                                          PAGE 1
+
+                       1    $mod51
+0000                   2    org 00h
+0000 900100            3    here1: mov dptr,#100h
+0003                   4    here: 
+0003 E4                5    clr a
+0004 93                6    movc a,@a+dptr
+0005 F5A0              7    mov p2,a
+0007 A3                8    inc dptr
+0008 110F              9    acall delay
+000A B400F6           10    cjne a,#0,here
+000D 80F1             11    sjmp here1
+                      12    
+                      13    
+000F                  14    DELAY:
+000F 7919             15            MOV     R1,#25
+0011 7AFF             16    L3:     MOV     R2,#255
+0013 7BFF             17    L2:     MOV     R3,#255
+0015 DBFE             18    L1:     DJNZ    R3,L1
+0017 DAFA             19            DJNZ    R2,L2
+0019 D9F6             20            DJNZ    R1,L3
+001B 22               21            RET
+                      22    
+0100                  23    org 100h
+0100 3F065B4F         24    db 3fh,06h,5bh,4fh,66h,6dh,7dh,07h,7fh,6fh,0
+0104 666D7D07   
+0108 7F6F00     
+                      25    END
+
+VERSION 1.2h ASSEMBLY COMPLETE, 0 ERRORS FOUND
+7SEG                                                                                                          PAGE 2
+
+DELAY. . . . . . . . . . . . . .  C ADDR  000FH  
+HERE . . . . . . . . . . . . . .  C ADDR  0003H  
+HERE1. . . . . . . . . . . . . .  C ADDR  0000H  
+L1 . . . . . . . . . . . . . . .  C ADDR  0015H  
+L2 . . . . . . . . . . . . . . .  C ADDR  0013H  
+L3 . . . . . . . . . . . . . . .  C ADDR  0011H  
+P2 . . . . . . . . . . . . . . .  D ADDR  00A0H  PREDEFINED  

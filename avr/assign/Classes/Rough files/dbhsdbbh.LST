@@ -1,0 +1,45 @@
+C51 COMPILER V9.51   DBHSDBBH                                                              05/03/2013 12:08:11 PAGE 1   
+
+
+C51 COMPILER V9.51, COMPILATION OF MODULE DBHSDBBH
+OBJECT MODULE PLACED IN dbhsdbbh.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE dbhsdbbh.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #define led P2
+   3          void delay(unsigned char);
+   4          void main()
+   5          {
+   6   1          while(1)
+   7   1          {
+   8   2            led=0x00;
+   9   2            delay(100);
+  10   2            led=0xff;
+  11   2            delay(100);
+  12   2      }
+  13   1      
+  14   1      
+  15   1      }
+  16          void delay(unsigned char msec)
+  17          {
+  18   1        unsigned char i;
+  19   1        unsigned int j;
+  20   1        for(i=0;i<msec;i++)
+  21   1        for(j=0;j<1275;j++);
+  22   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     43    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

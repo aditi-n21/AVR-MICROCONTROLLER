@@ -1,0 +1,508 @@
+
+clock.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000288  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .bss          00000003  00800060  00800060  000002fc  2**0
+                  ALLOC
+  2 .stab         000006cc  00000000  00000000  000002fc  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  3 .stabstr      00000085  00000000  00000000  000009c8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_aranges 000000a0  00000000  00000000  00000a50  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000593  00000000  00000000  00000af0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000189  00000000  00000000  00001083  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000003fd  00000000  00000000  0000120c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000054  00000000  00000000  0000160c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    0000012e  00000000  00000000  00001660  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000000df  00000000  00000000  0000178e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 0b 01 	jmp	0x216	; 0x216 <__vector_6>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d4 e0       	ldi	r29, 0x04	; 4
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e8 e8       	ldi	r30, 0x88	; 136
+  68:	f2 e0       	ldi	r31, 0x02	; 2
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a0 36       	cpi	r26, 0x60	; 96
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+
+00000076 <__do_clear_bss>:
+  76:	10 e0       	ldi	r17, 0x00	; 0
+  78:	a0 e6       	ldi	r26, 0x60	; 96
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	a3 36       	cpi	r26, 0x63	; 99
+  82:	b1 07       	cpc	r27, r17
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 a3 00 	call	0x146	; 0x146 <main>
+  8a:	0c 94 42 01 	jmp	0x284	; 0x284 <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <digitTO7segencoder>:
+}
+
+unsigned char digitTO7segencoder(unsigned char digit, unsigned char common)
+{
+	unsigned char segval;
+	switch(digit)
+  92:	84 30       	cpi	r24, 0x04	; 4
+  94:	59 f1       	breq	.+86     	; 0xec <digitTO7segencoder+0x5a>
+  96:	85 30       	cpi	r24, 0x05	; 5
+  98:	50 f4       	brcc	.+20     	; 0xae <digitTO7segencoder+0x1c>
+  9a:	81 30       	cpi	r24, 0x01	; 1
+  9c:	d9 f0       	breq	.+54     	; 0xd4 <digitTO7segencoder+0x42>
+  9e:	81 30       	cpi	r24, 0x01	; 1
+  a0:	a8 f0       	brcs	.+42     	; 0xcc <digitTO7segencoder+0x3a>
+  a2:	82 30       	cpi	r24, 0x02	; 2
+  a4:	d9 f0       	breq	.+54     	; 0xdc <digitTO7segencoder+0x4a>
+  a6:	83 30       	cpi	r24, 0x03	; 3
+  a8:	09 f0       	breq	.+2      	; 0xac <digitTO7segencoder+0x1a>
+  aa:	4b c0       	rjmp	.+150    	; 0x142 <digitTO7segencoder+0xb0>
+  ac:	1b c0       	rjmp	.+54     	; 0xe4 <digitTO7segencoder+0x52>
+  ae:	87 30       	cpi	r24, 0x07	; 7
+  b0:	49 f1       	breq	.+82     	; 0x104 <digitTO7segencoder+0x72>
+  b2:	88 30       	cpi	r24, 0x08	; 8
+  b4:	30 f4       	brcc	.+12     	; 0xc2 <digitTO7segencoder+0x30>
+  b6:	85 30       	cpi	r24, 0x05	; 5
+  b8:	e9 f0       	breq	.+58     	; 0xf4 <digitTO7segencoder+0x62>
+  ba:	86 30       	cpi	r24, 0x06	; 6
+  bc:	09 f0       	breq	.+2      	; 0xc0 <digitTO7segencoder+0x2e>
+  be:	41 c0       	rjmp	.+130    	; 0x142 <digitTO7segencoder+0xb0>
+  c0:	1d c0       	rjmp	.+58     	; 0xfc <digitTO7segencoder+0x6a>
+  c2:	88 30       	cpi	r24, 0x08	; 8
+  c4:	19 f1       	breq	.+70     	; 0x10c <digitTO7segencoder+0x7a>
+  c6:	89 30       	cpi	r24, 0x09	; 9
+  c8:	e1 f5       	brne	.+120    	; 0x142 <digitTO7segencoder+0xb0>
+  ca:	24 c0       	rjmp	.+72     	; 0x114 <digitTO7segencoder+0x82>
+	{
+		case 0: if(common==1) segval = 0b00111111;
+  cc:	61 30       	cpi	r22, 0x01	; 1
+  ce:	31 f5       	brne	.+76     	; 0x11c <digitTO7segencoder+0x8a>
+  d0:	9f e3       	ldi	r25, 0x3F	; 63
+  d2:	37 c0       	rjmp	.+110    	; 0x142 <digitTO7segencoder+0xb0>
+		        else         segval = ~0b00111111;
+						break;
+	    case 1: if(common==1) segval = 0b00000110;
+  d4:	61 30       	cpi	r22, 0x01	; 1
+  d6:	21 f5       	brne	.+72     	; 0x120 <digitTO7segencoder+0x8e>
+  d8:	96 e0       	ldi	r25, 0x06	; 6
+  da:	33 c0       	rjmp	.+102    	; 0x142 <digitTO7segencoder+0xb0>
+			    else         segval = ~0b00000110;
+			            break;				
+	
+	    case 2: if(common==1) segval = 0b01011011;
+  dc:	61 30       	cpi	r22, 0x01	; 1
+  de:	11 f5       	brne	.+68     	; 0x124 <digitTO7segencoder+0x92>
+  e0:	9b e5       	ldi	r25, 0x5B	; 91
+  e2:	2f c0       	rjmp	.+94     	; 0x142 <digitTO7segencoder+0xb0>
+	            else         segval = ~0b01011011;
+	                    break;
+	
+	    case 3: if(common==1) segval = 0b01001111;
+  e4:	61 30       	cpi	r22, 0x01	; 1
+  e6:	01 f5       	brne	.+64     	; 0x128 <digitTO7segencoder+0x96>
+  e8:	9f e4       	ldi	r25, 0x4F	; 79
+  ea:	2b c0       	rjmp	.+86     	; 0x142 <digitTO7segencoder+0xb0>
+	            else         segval = ~0b01001111;
+	                    break;
+	
+	   case 4: if(common==1) segval = 0b01100110;
+  ec:	61 30       	cpi	r22, 0x01	; 1
+  ee:	f1 f4       	brne	.+60     	; 0x12c <digitTO7segencoder+0x9a>
+  f0:	96 e6       	ldi	r25, 0x66	; 102
+  f2:	27 c0       	rjmp	.+78     	; 0x142 <digitTO7segencoder+0xb0>
+	           else         segval = ~0b01100110;
+	                    break;
+	
+	   case 5: if(common==1) segval = 0b01101101;
+  f4:	61 30       	cpi	r22, 0x01	; 1
+  f6:	e1 f4       	brne	.+56     	; 0x130 <digitTO7segencoder+0x9e>
+  f8:	9d e6       	ldi	r25, 0x6D	; 109
+  fa:	23 c0       	rjmp	.+70     	; 0x142 <digitTO7segencoder+0xb0>
+	           else         segval = ~0b01101101;
+	                    break;
+	
+	   case 6: if(common==1) segval = 0b01111101;
+  fc:	61 30       	cpi	r22, 0x01	; 1
+  fe:	d1 f4       	brne	.+52     	; 0x134 <digitTO7segencoder+0xa2>
+ 100:	9d e7       	ldi	r25, 0x7D	; 125
+ 102:	1f c0       	rjmp	.+62     	; 0x142 <digitTO7segencoder+0xb0>
+	           else         segval = ~0b01111101;
+	                    break;
+	
+	   case 7: if(common==1) segval = 0b00000111;
+ 104:	61 30       	cpi	r22, 0x01	; 1
+ 106:	c1 f4       	brne	.+48     	; 0x138 <digitTO7segencoder+0xa6>
+ 108:	97 e0       	ldi	r25, 0x07	; 7
+ 10a:	1b c0       	rjmp	.+54     	; 0x142 <digitTO7segencoder+0xb0>
+	           else         segval = ~0b00000111;
+	                    break;
+	
+	   case 8: if(common==1) segval = 0b01111111;
+ 10c:	61 30       	cpi	r22, 0x01	; 1
+ 10e:	b1 f4       	brne	.+44     	; 0x13c <digitTO7segencoder+0xaa>
+ 110:	9f e7       	ldi	r25, 0x7F	; 127
+ 112:	17 c0       	rjmp	.+46     	; 0x142 <digitTO7segencoder+0xb0>
+	           else         segval = ~0b01111111;
+	                    break;
+	
+	  case 9: if(common==1) segval = 0b01101111;
+ 114:	61 30       	cpi	r22, 0x01	; 1
+ 116:	a1 f4       	brne	.+40     	; 0x140 <digitTO7segencoder+0xae>
+ 118:	9f e6       	ldi	r25, 0x6F	; 111
+ 11a:	13 c0       	rjmp	.+38     	; 0x142 <digitTO7segencoder+0xb0>
+{
+	unsigned char segval;
+	switch(digit)
+	{
+		case 0: if(common==1) segval = 0b00111111;
+		        else         segval = ~0b00111111;
+ 11c:	90 ec       	ldi	r25, 0xC0	; 192
+ 11e:	11 c0       	rjmp	.+34     	; 0x142 <digitTO7segencoder+0xb0>
+						break;
+	    case 1: if(common==1) segval = 0b00000110;
+			    else         segval = ~0b00000110;
+ 120:	99 ef       	ldi	r25, 0xF9	; 249
+ 122:	0f c0       	rjmp	.+30     	; 0x142 <digitTO7segencoder+0xb0>
+			            break;				
+	
+	    case 2: if(common==1) segval = 0b01011011;
+	            else         segval = ~0b01011011;
+ 124:	94 ea       	ldi	r25, 0xA4	; 164
+ 126:	0d c0       	rjmp	.+26     	; 0x142 <digitTO7segencoder+0xb0>
+	                    break;
+	
+	    case 3: if(common==1) segval = 0b01001111;
+	            else         segval = ~0b01001111;
+ 128:	90 eb       	ldi	r25, 0xB0	; 176
+ 12a:	0b c0       	rjmp	.+22     	; 0x142 <digitTO7segencoder+0xb0>
+	                    break;
+	
+	   case 4: if(common==1) segval = 0b01100110;
+	           else         segval = ~0b01100110;
+ 12c:	99 e9       	ldi	r25, 0x99	; 153
+ 12e:	09 c0       	rjmp	.+18     	; 0x142 <digitTO7segencoder+0xb0>
+	                    break;
+	
+	   case 5: if(common==1) segval = 0b01101101;
+	           else         segval = ~0b01101101;
+ 130:	92 e9       	ldi	r25, 0x92	; 146
+ 132:	07 c0       	rjmp	.+14     	; 0x142 <digitTO7segencoder+0xb0>
+	                    break;
+	
+	   case 6: if(common==1) segval = 0b01111101;
+	           else         segval = ~0b01111101;
+ 134:	92 e8       	ldi	r25, 0x82	; 130
+ 136:	05 c0       	rjmp	.+10     	; 0x142 <digitTO7segencoder+0xb0>
+	                    break;
+	
+	   case 7: if(common==1) segval = 0b00000111;
+	           else         segval = ~0b00000111;
+ 138:	98 ef       	ldi	r25, 0xF8	; 248
+ 13a:	03 c0       	rjmp	.+6      	; 0x142 <digitTO7segencoder+0xb0>
+	                    break;
+	
+	   case 8: if(common==1) segval = 0b01111111;
+	           else         segval = ~0b01111111;
+ 13c:	90 e8       	ldi	r25, 0x80	; 128
+ 13e:	01 c0       	rjmp	.+2      	; 0x142 <digitTO7segencoder+0xb0>
+	                    break;
+	
+	  case 9: if(common==1) segval = 0b01101111;
+	          else         segval = ~0b01101111;
+ 140:	90 e9       	ldi	r25, 0x90	; 144
+	                    break;
+	}
+	return segval;
+}
+ 142:	89 2f       	mov	r24, r25
+ 144:	08 95       	ret
+
+00000146 <main>:
+unsigned char seconds = 0;
+unsigned char digitTO7segencoder(unsigned char digit, unsigned char common);
+ISR(TIMER1_COMPA_vect);
+int main(void)
+{
+	segdataDDR=0xff;
+ 146:	8f ef       	ldi	r24, 0xFF	; 255
+ 148:	87 bb       	out	0x17, r24	; 23
+	segcntrlDDR=0x3f;
+ 14a:	9f e3       	ldi	r25, 0x3F	; 63
+ 14c:	94 bb       	out	0x14, r25	; 20
+	segcntrlport=0xff;
+ 14e:	85 bb       	out	0x15, r24	; 21
+	TCCR1B = (1<<CS12|1<<WGM12);
+ 150:	8c e0       	ldi	r24, 0x0C	; 12
+ 152:	8e bd       	out	0x2e, r24	; 46
+	OCR1A = 15625-1;
+ 154:	88 e0       	ldi	r24, 0x08	; 8
+ 156:	9d e3       	ldi	r25, 0x3D	; 61
+ 158:	9b bd       	out	0x2b, r25	; 43
+ 15a:	8a bd       	out	0x2a, r24	; 42
+	TIMSK = 1<<OCIE1A;
+ 15c:	80 e1       	ldi	r24, 0x10	; 16
+ 15e:	89 bf       	out	0x39, r24	; 57
+	sei();
+ 160:	78 94       	sei
+	  //segdataport = digitTO7segencoder(seconds%10,1);
+	  //segcntrlport = ~0x01;
+	  //segdataport = digitTO7segencoder(seconds/10,1);
+	 // segcntrlport = ~0x02;
+	  
+	  segdataport = digitTO7segencoder(minutes%10,1);
+ 162:	ca e0       	ldi	r28, 0x0A	; 10
+	  segcntrlport = ~0x04;
+ 164:	0f 2e       	mov	r0, r31
+ 166:	fb ef       	ldi	r31, 0xFB	; 251
+ 168:	ef 2e       	mov	r14, r31
+ 16a:	f0 2d       	mov	r31, r0
+	  segdataport = digitTO7segencoder(minutes/10,1);
+	  segcntrlport = ~0x08;
+ 16c:	0f 2e       	mov	r0, r31
+ 16e:	f7 ef       	ldi	r31, 0xF7	; 247
+ 170:	ff 2e       	mov	r15, r31
+ 172:	f0 2d       	mov	r31, r0
+	  
+	  segdataport = digitTO7segencoder(hours%10,1);
+	  segcntrlport = ~0x10;
+ 174:	0f ee       	ldi	r16, 0xEF	; 239
+	  segdataport = digitTO7segencoder(hours/10,1);
+	  segcntrlport = ~0x20;
+ 176:	1f ed       	ldi	r17, 0xDF	; 223
+	OCR1A = 15625-1;
+	TIMSK = 1<<OCIE1A;
+	sei();
+    while(1)
+    {
+      if ((segcntrlpin & 0x40)==0)
+ 178:	9e 99       	sbic	0x13, 6	; 19
+ 17a:	13 c0       	rjmp	.+38     	; 0x1a2 <main+0x5c>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 17c:	8f ef       	ldi	r24, 0xFF	; 255
+ 17e:	90 e7       	ldi	r25, 0x70	; 112
+ 180:	a2 e0       	ldi	r26, 0x02	; 2
+ 182:	81 50       	subi	r24, 0x01	; 1
+ 184:	90 40       	sbci	r25, 0x00	; 0
+ 186:	a0 40       	sbci	r26, 0x00	; 0
+ 188:	e1 f7       	brne	.-8      	; 0x182 <main+0x3c>
+ 18a:	00 c0       	rjmp	.+0      	; 0x18c <main+0x46>
+ 18c:	00 00       	nop
+      {
+		  _delay_ms(200);
+		  if(minutes < 59)
+ 18e:	80 91 61 00 	lds	r24, 0x0061
+ 192:	8b 33       	cpi	r24, 0x3B	; 59
+ 194:	20 f4       	brcc	.+8      	; 0x19e <main+0x58>
+		  minutes++;
+ 196:	8f 5f       	subi	r24, 0xFF	; 255
+ 198:	80 93 61 00 	sts	0x0061, r24
+ 19c:	02 c0       	rjmp	.+4      	; 0x1a2 <main+0x5c>
+		  else
+		  minutes = 0;
+ 19e:	10 92 61 00 	sts	0x0061, r1
+      }
+	  if ((segcntrlpin & 0x80)==0)
+ 1a2:	9f 99       	sbic	0x13, 7	; 19
+ 1a4:	13 c0       	rjmp	.+38     	; 0x1cc <main+0x86>
+ 1a6:	8f ef       	ldi	r24, 0xFF	; 255
+ 1a8:	90 e7       	ldi	r25, 0x70	; 112
+ 1aa:	a2 e0       	ldi	r26, 0x02	; 2
+ 1ac:	81 50       	subi	r24, 0x01	; 1
+ 1ae:	90 40       	sbci	r25, 0x00	; 0
+ 1b0:	a0 40       	sbci	r26, 0x00	; 0
+ 1b2:	e1 f7       	brne	.-8      	; 0x1ac <main+0x66>
+ 1b4:	00 c0       	rjmp	.+0      	; 0x1b6 <main+0x70>
+ 1b6:	00 00       	nop
+	  {
+		  _delay_ms(200);
+		  if(hours < 23)
+ 1b8:	80 91 62 00 	lds	r24, 0x0062
+ 1bc:	87 31       	cpi	r24, 0x17	; 23
+ 1be:	20 f4       	brcc	.+8      	; 0x1c8 <main+0x82>
+		  hours++;
+ 1c0:	8f 5f       	subi	r24, 0xFF	; 255
+ 1c2:	80 93 62 00 	sts	0x0062, r24
+ 1c6:	02 c0       	rjmp	.+4      	; 0x1cc <main+0x86>
+		  else
+		  hours = 0;
+ 1c8:	10 92 62 00 	sts	0x0062, r1
+	  //segdataport = digitTO7segencoder(seconds%10,1);
+	  //segcntrlport = ~0x01;
+	  //segdataport = digitTO7segencoder(seconds/10,1);
+	 // segcntrlport = ~0x02;
+	  
+	  segdataport = digitTO7segencoder(minutes%10,1);
+ 1cc:	80 91 61 00 	lds	r24, 0x0061
+ 1d0:	6c 2f       	mov	r22, r28
+ 1d2:	0e 94 36 01 	call	0x26c	; 0x26c <__udivmodqi4>
+ 1d6:	d8 2f       	mov	r29, r24
+ 1d8:	89 2f       	mov	r24, r25
+ 1da:	61 e0       	ldi	r22, 0x01	; 1
+ 1dc:	0e 94 49 00 	call	0x92	; 0x92 <digitTO7segencoder>
+ 1e0:	88 bb       	out	0x18, r24	; 24
+	  segcntrlport = ~0x04;
+ 1e2:	e5 ba       	out	0x15, r14	; 21
+	  segdataport = digitTO7segencoder(minutes/10,1);
+ 1e4:	8d 2f       	mov	r24, r29
+ 1e6:	61 e0       	ldi	r22, 0x01	; 1
+ 1e8:	0e 94 49 00 	call	0x92	; 0x92 <digitTO7segencoder>
+ 1ec:	88 bb       	out	0x18, r24	; 24
+	  segcntrlport = ~0x08;
+ 1ee:	f5 ba       	out	0x15, r15	; 21
+	  
+	  segdataport = digitTO7segencoder(hours%10,1);
+ 1f0:	80 91 62 00 	lds	r24, 0x0062
+ 1f4:	6c 2f       	mov	r22, r28
+ 1f6:	0e 94 36 01 	call	0x26c	; 0x26c <__udivmodqi4>
+ 1fa:	d8 2f       	mov	r29, r24
+ 1fc:	89 2f       	mov	r24, r25
+ 1fe:	61 e0       	ldi	r22, 0x01	; 1
+ 200:	0e 94 49 00 	call	0x92	; 0x92 <digitTO7segencoder>
+ 204:	88 bb       	out	0x18, r24	; 24
+	  segcntrlport = ~0x10;
+ 206:	05 bb       	out	0x15, r16	; 21
+	  segdataport = digitTO7segencoder(hours/10,1);
+ 208:	8d 2f       	mov	r24, r29
+ 20a:	61 e0       	ldi	r22, 0x01	; 1
+ 20c:	0e 94 49 00 	call	0x92	; 0x92 <digitTO7segencoder>
+ 210:	88 bb       	out	0x18, r24	; 24
+	  segcntrlport = ~0x20;
+ 212:	15 bb       	out	0x15, r17	; 21
+    }
+ 214:	b1 cf       	rjmp	.-158    	; 0x178 <main+0x32>
+
+00000216 <__vector_6>:
+	}
+	return segval;
+}
+
+ISR(TIMER1_COMPA_vect)
+{
+ 216:	1f 92       	push	r1
+ 218:	0f 92       	push	r0
+ 21a:	0f b6       	in	r0, 0x3f	; 63
+ 21c:	0f 92       	push	r0
+ 21e:	11 24       	eor	r1, r1
+ 220:	8f 93       	push	r24
+	seconds++;
+ 222:	80 91 60 00 	lds	r24, 0x0060
+ 226:	8f 5f       	subi	r24, 0xFF	; 255
+ 228:	80 93 60 00 	sts	0x0060, r24
+	if (seconds == 60)
+ 22c:	8c 33       	cpi	r24, 0x3C	; 60
+ 22e:	39 f4       	brne	.+14     	; 0x23e <__vector_6+0x28>
+	{
+		seconds = 0;
+ 230:	10 92 60 00 	sts	0x0060, r1
+		minutes++;
+ 234:	80 91 61 00 	lds	r24, 0x0061
+ 238:	8f 5f       	subi	r24, 0xFF	; 255
+ 23a:	80 93 61 00 	sts	0x0061, r24
+	}
+	if (minutes == 60)
+ 23e:	80 91 61 00 	lds	r24, 0x0061
+ 242:	8c 33       	cpi	r24, 0x3C	; 60
+ 244:	39 f4       	brne	.+14     	; 0x254 <__vector_6+0x3e>
+	{
+		minutes = 0;
+ 246:	10 92 61 00 	sts	0x0061, r1
+		hours++;
+ 24a:	80 91 62 00 	lds	r24, 0x0062
+ 24e:	8f 5f       	subi	r24, 0xFF	; 255
+ 250:	80 93 62 00 	sts	0x0062, r24
+	}
+	if(hours > 23)
+ 254:	80 91 62 00 	lds	r24, 0x0062
+ 258:	88 31       	cpi	r24, 0x18	; 24
+ 25a:	10 f0       	brcs	.+4      	; 0x260 <__vector_6+0x4a>
+	hours = 0;
+ 25c:	10 92 62 00 	sts	0x0062, r1
+ 260:	8f 91       	pop	r24
+ 262:	0f 90       	pop	r0
+ 264:	0f be       	out	0x3f, r0	; 63
+ 266:	0f 90       	pop	r0
+ 268:	1f 90       	pop	r1
+ 26a:	18 95       	reti
+
+0000026c <__udivmodqi4>:
+ 26c:	99 1b       	sub	r25, r25
+ 26e:	79 e0       	ldi	r23, 0x09	; 9
+ 270:	04 c0       	rjmp	.+8      	; 0x27a <__udivmodqi4_ep>
+
+00000272 <__udivmodqi4_loop>:
+ 272:	99 1f       	adc	r25, r25
+ 274:	96 17       	cp	r25, r22
+ 276:	08 f0       	brcs	.+2      	; 0x27a <__udivmodqi4_ep>
+ 278:	96 1b       	sub	r25, r22
+
+0000027a <__udivmodqi4_ep>:
+ 27a:	88 1f       	adc	r24, r24
+ 27c:	7a 95       	dec	r23
+ 27e:	c9 f7       	brne	.-14     	; 0x272 <__udivmodqi4_loop>
+ 280:	80 95       	com	r24
+ 282:	08 95       	ret
+
+00000284 <_exit>:
+ 284:	f8 94       	cli
+
+00000286 <__stop_program>:
+ 286:	ff cf       	rjmp	.-2      	; 0x286 <__stop_program>

@@ -1,0 +1,91 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+E:\CETPA\Classes\Rough files\keypad.uvproj
+Project File Date:  01/30/2013
+
+<h2>Output:</h2>
+compiling dk3.c...
+dk3.c(14): error C231: 'P0': redefinition
+dk3.c(34): error C202: 'col2': undefined identifier
+dk3.c(42): error C202: 'row4': undefined identifier
+dk3.c(45): error C202: 'col2': undefined identifier
+dk3.c(53): error C202: 'row4': undefined identifier
+dk3.c(56): error C202: 'col2': undefined identifier
+dk3.c(64): error C202: 'row4': undefined identifier
+dk3.c - 7 Error(s), 0 Warning(s).
+compiling dk3.c...
+dk3.c(14): error C231: 'P0': redefinition
+dk3.c(34): error C202: 'col2': undefined identifier
+dk3.c(45): error C202: 'col2': undefined identifier
+dk3.c(56): error C202: 'col2': undefined identifier
+dk3.c - 4 Error(s), 0 Warning(s).
+compiling dk3.c...
+dk3.c(14): error C231: 'P0': redefinition
+dk3.c(34): error C202: 'col2': undefined identifier
+dk3.c(45): error C202: 'col2': undefined identifier
+dk3.c(56): error C202: 'col2': undefined identifier
+dk3.c - 4 Error(s), 0 Warning(s).
+compiling dk3.c...
+dk3.c(14): error C231: 'P0': redefinition
+dk3.c(34): error C202: 'col2': undefined identifier
+dk3.c(45): error C202: 'col2': undefined identifier
+dk3.c(56): error C202: 'col2': undefined identifier
+dk3.c - 4 Error(s), 0 Warning(s).
+compiling dk3.c...
+dk3.c(16): error C231: 'P0': redefinition
+dk3.c(36): error C202: 'col2': undefined identifier
+dk3.c(47): error C202: 'col2': undefined identifier
+dk3.c(58): error C202: 'col2': undefined identifier
+dk3.c(112): error C231: 'P0': redefinition
+dk3.c(118): error C231: 'P0': redefinition
+dk3.c(124): error C211: call not to a function
+dk3.c - 7 Error(s), 0 Warning(s).
+compiling dk3.c...
+dk3.c(36): error C202: 'col2': undefined identifier
+dk3.c(47): error C202: 'col2': undefined identifier
+dk3.c(58): error C202: 'col2': undefined identifier
+dk3.c - 3 Error(s), 0 Warning(s).
+compiling dk3.c...
+dk3.c(36): error C202: 'col2': undefined identifier
+dk3.c(47): error C202: 'col2': undefined identifier
+dk3.c(58): error C202: 'col2': undefined identifier
+dk3.c - 3 Error(s), 0 Warning(s).
+compiling dk3.c...
+dk3.c(36): error C202: 'col2': undefined identifier
+dk3.c(47): error C202: 'col2': undefined identifier
+dk3.c(58): error C202: 'col2': undefined identifier
+dk3.c - 3 Error(s), 0 Warning(s).
+compiling dk3.c...
+dk3.c(36): error C202: 'col2': undefined identifier
+dk3.c(47): error C202: 'col2': undefined identifier
+dk3.c(58): error C202: 'col2': undefined identifier
+dk3.c - 3 Error(s), 0 Warning(s).
+compiling dk3.c...
+dk3.c - 0 Error(s), 0 Warning(s).
+compiling dk3.c...
+dk3.c - 0 Error(s), 0 Warning(s).
+compiling dk3.c...
+dk3.c - 0 Error(s), 0 Warning(s).
+compiling dk3.c...
+dk3.c - 0 Error(s), 0 Warning(s).
+compiling dk3.c...
+dk3.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling dk3.c...
+linking...
+Program Size: data=25.0 xdata=0 code=979
+"keypad" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling dk3.c...
+linking...
+Program Size: data=25.0 xdata=0 code=979
+"keypad" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=25.0 xdata=0 code=979
+creating hex file from "keypad"...
+"keypad" - 0 Error(s), 0 Warning(s).

@@ -1,0 +1,20 @@
+STACK                                                                                                         PAGE 1
+
+                       1    $mod51
+0000                   2    org 00h
+0000 758130            3    mov SP, #30h
+0003 7825              4    mov r0,#25h
+0005 753512            5    mov 35h,#12h
+0008 7BAA              6    mov r3,#0aah
+000A C003              7    PUSH 03h
+000C C035              8    PUSH 35h
+000E C000              9    PUSH 0
+0010 D005             10    POP 5
+0012 D006             11    POP 06h
+0014 D007             12    POP 07h
+                      13    END
+
+VERSION 1.2h ASSEMBLY COMPLETE, 0 ERRORS FOUND
+STACK                                                                                                         PAGE 2
+
+SP . . . . . . . . . . . . . . .  D ADDR  0081H  PREDEFINED  

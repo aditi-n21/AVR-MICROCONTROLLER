@@ -1,0 +1,2301 @@
+
+hotal menu enter choice.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000eaa  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         0000017e  00800060  00000eaa  00000f1e  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .stab         000006cc  00000000  00000000  0000109c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  3 .stabstr      00000085  00000000  00000000  00001768  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_aranges 000000a0  00000000  00000000  000017f0  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   000013cb  00000000  00000000  00001890  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000226  00000000  00000000  00002c5b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000795  00000000  00000000  00002e81  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  000000f0  00000000  00000000  00003618  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    0000013c  00000000  00000000  00003708  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000013b0  00000000  00000000  00003844  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d4 e0       	ldi	r29, 0x04	; 4
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	11 e0       	ldi	r17, 0x01	; 1
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	ea ea       	ldi	r30, 0xAA	; 170
+  68:	fe e0       	ldi	r31, 0x0E	; 14
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	ae 3d       	cpi	r26, 0xDE	; 222
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+
+00000076 <__do_clear_bss>:
+  76:	11 e0       	ldi	r17, 0x01	; 1
+  78:	ae ed       	ldi	r26, 0xDE	; 222
+  7a:	b1 e0       	ldi	r27, 0x01	; 1
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	ae 3d       	cpi	r26, 0xDE	; 222
+  82:	b1 07       	cpc	r27, r17
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 17 01 	call	0x22e	; 0x22e <main>
+  8a:	0c 94 53 07 	jmp	0xea6	; 0xea6 <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <lcd_init>:
+#define col3 PB2
+#define keyin PINB
+#define key PORTB
+
+void lcd_init(void)
+{
+  92:	cf 93       	push	r28
+  94:	df 93       	push	r29
+	cmndbrk(0x02);
+  96:	c4 e7       	ldi	r28, 0x74	; 116
+  98:	d0 e0       	ldi	r29, 0x00	; 0
+  9a:	82 e0       	ldi	r24, 0x02	; 2
+  9c:	90 e0       	ldi	r25, 0x00	; 0
+  9e:	fe 01       	movw	r30, r28
+  a0:	09 95       	icall
+	cmndbrk(0x28);
+  a2:	88 e2       	ldi	r24, 0x28	; 40
+  a4:	90 e0       	ldi	r25, 0x00	; 0
+  a6:	fe 01       	movw	r30, r28
+  a8:	09 95       	icall
+	cmndbrk(0x01);
+  aa:	81 e0       	ldi	r24, 0x01	; 1
+  ac:	90 e0       	ldi	r25, 0x00	; 0
+  ae:	fe 01       	movw	r30, r28
+  b0:	09 95       	icall
+	cmndbrk(0x06);
+  b2:	86 e0       	ldi	r24, 0x06	; 6
+  b4:	90 e0       	ldi	r25, 0x00	; 0
+  b6:	fe 01       	movw	r30, r28
+  b8:	09 95       	icall
+	cmndbrk(0x0e);
+  ba:	8e e0       	ldi	r24, 0x0E	; 14
+  bc:	90 e0       	ldi	r25, 0x00	; 0
+  be:	fe 01       	movw	r30, r28
+  c0:	09 95       	icall
+	cmndbrk(0x80);
+  c2:	80 e8       	ldi	r24, 0x80	; 128
+  c4:	90 e0       	ldi	r25, 0x00	; 0
+  c6:	fe 01       	movw	r30, r28
+  c8:	09 95       	icall
+}
+  ca:	df 91       	pop	r29
+  cc:	cf 91       	pop	r28
+  ce:	08 95       	ret
+
+000000d0 <cmnd>:
+
+void cmnd(unsigned char c)
+{
+	data=c;
+  d0:	82 bb       	out	0x12, r24	; 18
+	control&=~(1<<rs);
+  d2:	90 98       	cbi	0x12, 0	; 18
+	control&=~(1<<rw);
+  d4:	91 98       	cbi	0x12, 1	; 18
+	control|=(1<<en);
+  d6:	92 9a       	sbi	0x12, 2	; 18
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  d8:	83 ed       	ldi	r24, 0xD3	; 211
+  da:	90 e3       	ldi	r25, 0x30	; 48
+  dc:	01 97       	sbiw	r24, 0x01	; 1
+  de:	f1 f7       	brne	.-4      	; 0xdc <cmnd+0xc>
+  e0:	00 c0       	rjmp	.+0      	; 0xe2 <cmnd+0x12>
+  e2:	00 00       	nop
+	_delay_ms(50);
+	control&=~(1<<en);
+  e4:	92 98       	cbi	0x12, 2	; 18
+	
+}
+  e6:	08 95       	ret
+
+000000e8 <cmndbrk>:
+	control&=~(1<<en);
+}
+
+
+void cmndbrk(unsigned char r)
+{
+  e8:	cf 93       	push	r28
+  ea:	c8 2f       	mov	r28, r24
+	unsigned char k;
+	k=r&0xf0;
+	cmnd(k);
+  ec:	80 7f       	andi	r24, 0xF0	; 240
+  ee:	0e 94 68 00 	call	0xd0	; 0xd0 <cmnd>
+	r=r<<4;
+	k=r&0xf0;
+	cmnd(k);
+  f2:	8c 2f       	mov	r24, r28
+  f4:	82 95       	swap	r24
+  f6:	80 7f       	andi	r24, 0xF0	; 240
+  f8:	0e 94 68 00 	call	0xd0	; 0xd0 <cmnd>
+}
+  fc:	cf 91       	pop	r28
+  fe:	08 95       	ret
+
+00000100 <dat>:
+	
+}
+
+void dat(unsigned char d)
+{
+	data=d;
+ 100:	82 bb       	out	0x12, r24	; 18
+	control|=(1<<rs);
+ 102:	90 9a       	sbi	0x12, 0	; 18
+	control&=~(1<<rw);
+ 104:	91 98       	cbi	0x12, 1	; 18
+	control|=(1<<en);
+ 106:	92 9a       	sbi	0x12, 2	; 18
+ 108:	83 ed       	ldi	r24, 0xD3	; 211
+ 10a:	90 e3       	ldi	r25, 0x30	; 48
+ 10c:	01 97       	sbiw	r24, 0x01	; 1
+ 10e:	f1 f7       	brne	.-4      	; 0x10c <dat+0xc>
+ 110:	00 c0       	rjmp	.+0      	; 0x112 <dat+0x12>
+ 112:	00 00       	nop
+	_delay_ms(50);
+	control&=~(1<<en);
+ 114:	92 98       	cbi	0x12, 2	; 18
+}
+ 116:	08 95       	ret
+
+00000118 <datbrk>:
+	k=r&0xf0;
+	cmnd(k);
+}
+
+void datbrk(unsigned char o)
+{
+ 118:	cf 93       	push	r28
+ 11a:	c8 2f       	mov	r28, r24
+	unsigned char h;
+	h=o&0xf0;
+	dat(h);
+ 11c:	80 7f       	andi	r24, 0xF0	; 240
+ 11e:	0e 94 80 00 	call	0x100	; 0x100 <dat>
+	o=o<<4;
+	h=o&0xf0;
+	dat(h);
+ 122:	8c 2f       	mov	r24, r28
+ 124:	82 95       	swap	r24
+ 126:	80 7f       	andi	r24, 0xF0	; 240
+ 128:	0e 94 80 00 	call	0x100	; 0x100 <dat>
+}
+ 12c:	cf 91       	pop	r28
+ 12e:	08 95       	ret
+
+00000130 <str>:
+
+void str(unsigned char *s)
+{
+ 130:	cf 93       	push	r28
+ 132:	df 93       	push	r29
+ 134:	ec 01       	movw	r28, r24
+	while(*s)
+ 136:	88 81       	ld	r24, Y
+ 138:	88 23       	and	r24, r24
+ 13a:	61 f0       	breq	.+24     	; 0x154 <str+0x24>
+	o=o<<4;
+	h=o&0xf0;
+	dat(h);
+}
+
+void str(unsigned char *s)
+ 13c:	21 96       	adiw	r28, 0x01	; 1
+{
+	while(*s)
+	{
+		datbrk(*s);
+ 13e:	0e 94 8c 00 	call	0x118	; 0x118 <datbrk>
+ 142:	83 ed       	ldi	r24, 0xD3	; 211
+ 144:	90 e3       	ldi	r25, 0x30	; 48
+ 146:	01 97       	sbiw	r24, 0x01	; 1
+ 148:	f1 f7       	brne	.-4      	; 0x146 <str+0x16>
+ 14a:	00 c0       	rjmp	.+0      	; 0x14c <str+0x1c>
+ 14c:	00 00       	nop
+	dat(h);
+}
+
+void str(unsigned char *s)
+{
+	while(*s)
+ 14e:	89 91       	ld	r24, Y+
+ 150:	88 23       	and	r24, r24
+ 152:	a9 f7       	brne	.-22     	; 0x13e <str+0xe>
+		datbrk(*s);
+		s++;
+		_delay_ms(50);
+	}
+	
+}
+ 154:	df 91       	pop	r29
+ 156:	cf 91       	pop	r28
+ 158:	08 95       	ret
+
+0000015a <convert>:
+
+void convert(unsigned int val,unsigned char pos)
+{
+ 15a:	cf 92       	push	r12
+ 15c:	df 92       	push	r13
+ 15e:	ff 92       	push	r15
+ 160:	0f 93       	push	r16
+ 162:	1f 93       	push	r17
+ 164:	cf 93       	push	r28
+ 166:	df 93       	push	r29
+ 168:	18 2f       	mov	r17, r24
+ 16a:	d9 2f       	mov	r29, r25
+ 16c:	c6 2f       	mov	r28, r22
+		_delay_ms(50);
+	}
+	
+}
+
+void convert(unsigned int val,unsigned char pos)
+ 16e:	0f 2e       	mov	r0, r31
+ 170:	fc ef       	ldi	r31, 0xFC	; 252
+ 172:	ff 2e       	mov	r15, r31
+ 174:	f0 2d       	mov	r31, r0
+ 176:	f6 0e       	add	r15, r22
+{
+	unsigned char i,value;
+	for (i=0;i<4;i++)
+	{
+		value=val%10;
+ 178:	0f 2e       	mov	r0, r31
+ 17a:	fa e0       	ldi	r31, 0x0A	; 10
+ 17c:	cf 2e       	mov	r12, r31
+ 17e:	dd 24       	eor	r13, r13
+ 180:	f0 2d       	mov	r31, r0
+ 182:	81 2f       	mov	r24, r17
+ 184:	9d 2f       	mov	r25, r29
+ 186:	b6 01       	movw	r22, r12
+ 188:	0e 94 3f 07 	call	0xe7e	; 0xe7e <__udivmodhi4>
+ 18c:	08 2f       	mov	r16, r24
+		val=val/10;
+ 18e:	16 2f       	mov	r17, r22
+ 190:	d7 2f       	mov	r29, r23
+		cmndbrk(pos);
+ 192:	8c 2f       	mov	r24, r28
+ 194:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+		datbrk(value+48);
+ 198:	80 2f       	mov	r24, r16
+ 19a:	80 5d       	subi	r24, 0xD0	; 208
+ 19c:	0e 94 8c 00 	call	0x118	; 0x118 <datbrk>
+		pos--;
+ 1a0:	c1 50       	subi	r28, 0x01	; 1
+}
+
+void convert(unsigned int val,unsigned char pos)
+{
+	unsigned char i,value;
+	for (i=0;i<4;i++)
+ 1a2:	cf 15       	cp	r28, r15
+ 1a4:	71 f7       	brne	.-36     	; 0x182 <convert+0x28>
+		val=val/10;
+		cmndbrk(pos);
+		datbrk(value+48);
+		pos--;
+	}
+}
+ 1a6:	df 91       	pop	r29
+ 1a8:	cf 91       	pop	r28
+ 1aa:	1f 91       	pop	r17
+ 1ac:	0f 91       	pop	r16
+ 1ae:	ff 90       	pop	r15
+ 1b0:	df 90       	pop	r13
+ 1b2:	cf 90       	pop	r12
+ 1b4:	08 95       	ret
+
+000001b6 <keysense>:
+unsigned char keysense(void)
+{
+	while(1)
+	{
+		key&=~(1<<col1);
+ 1b6:	c0 98       	cbi	0x18, 0	; 24
+		key|=(1<<col2)|(1<<col3);
+ 1b8:	88 b3       	in	r24, 0x18	; 24
+ 1ba:	86 60       	ori	r24, 0x06	; 6
+ 1bc:	88 bb       	out	0x18, r24	; 24
+		
+		if (bit_is_clear(keyin,row1))
+ 1be:	b3 9b       	sbis	0x16, 3	; 22
+ 1c0:	20 c0       	rjmp	.+64     	; 0x202 <keysense+0x4c>
+		{
+			return 1;
+		}
+		
+		if (bit_is_clear(keyin,row2))
+ 1c2:	b4 9b       	sbis	0x16, 4	; 22
+ 1c4:	20 c0       	rjmp	.+64     	; 0x206 <keysense+0x50>
+		{
+			return 4;
+		}
+		
+		if (bit_is_clear(keyin,row3))
+ 1c6:	b5 9b       	sbis	0x16, 5	; 22
+ 1c8:	20 c0       	rjmp	.+64     	; 0x20a <keysense+0x54>
+		{
+			return 7;
+		}
+		
+		if (bit_is_clear(keyin,row4))
+ 1ca:	b6 9b       	sbis	0x16, 6	; 22
+ 1cc:	20 c0       	rjmp	.+64     	; 0x20e <keysense+0x58>
+		{
+			return 0;
+		}
+		
+		key&=~(1<<col2);
+ 1ce:	c1 98       	cbi	0x18, 1	; 24
+		key|=(1<<col1)|(1<<col3);
+ 1d0:	88 b3       	in	r24, 0x18	; 24
+ 1d2:	85 60       	ori	r24, 0x05	; 5
+ 1d4:	88 bb       	out	0x18, r24	; 24
+		
+		if (bit_is_clear(keyin,row1))
+ 1d6:	b3 9b       	sbis	0x16, 3	; 22
+ 1d8:	1c c0       	rjmp	.+56     	; 0x212 <keysense+0x5c>
+		{
+			return 2;
+		}
+		
+		if (bit_is_clear(keyin,row2))
+ 1da:	b4 9b       	sbis	0x16, 4	; 22
+ 1dc:	1c c0       	rjmp	.+56     	; 0x216 <keysense+0x60>
+		{
+			return 5;
+		}
+		
+		if (bit_is_clear(keyin,row3))
+ 1de:	b5 9b       	sbis	0x16, 5	; 22
+ 1e0:	1c c0       	rjmp	.+56     	; 0x21a <keysense+0x64>
+		{
+			
+			return 8;
+		}
+		
+		if (bit_is_clear(keyin,row4))
+ 1e2:	b6 9b       	sbis	0x16, 6	; 22
+ 1e4:	1c c0       	rjmp	.+56     	; 0x21e <keysense+0x68>
+			return 0;
+		}
+		
+		
+		
+		key&=~(1<<col3);
+ 1e6:	c2 98       	cbi	0x18, 2	; 24
+		key|=(1<<col1)|(1<<col2);
+ 1e8:	88 b3       	in	r24, 0x18	; 24
+ 1ea:	83 60       	ori	r24, 0x03	; 3
+ 1ec:	88 bb       	out	0x18, r24	; 24
+		
+		if (bit_is_clear(keyin,row1))
+ 1ee:	b3 9b       	sbis	0x16, 3	; 22
+ 1f0:	18 c0       	rjmp	.+48     	; 0x222 <keysense+0x6c>
+		{
+			return 3;
+		}
+		
+		if (bit_is_clear(keyin,row2))
+ 1f2:	b4 9b       	sbis	0x16, 4	; 22
+ 1f4:	18 c0       	rjmp	.+48     	; 0x226 <keysense+0x70>
+		{
+			return 6;
+		}
+		
+		if (bit_is_clear(keyin,row3))
+ 1f6:	b5 9b       	sbis	0x16, 5	; 22
+ 1f8:	18 c0       	rjmp	.+48     	; 0x22a <keysense+0x74>
+		{
+			return 9;
+		}
+		
+		if (bit_is_clear(keyin,row4))
+ 1fa:	b6 99       	sbic	0x16, 6	; 22
+ 1fc:	dc cf       	rjmp	.-72     	; 0x1b6 <keysense>
+		{
+			return 0;
+ 1fe:	80 e0       	ldi	r24, 0x00	; 0
+ 200:	08 95       	ret
+		key&=~(1<<col1);
+		key|=(1<<col2)|(1<<col3);
+		
+		if (bit_is_clear(keyin,row1))
+		{
+			return 1;
+ 202:	81 e0       	ldi	r24, 0x01	; 1
+ 204:	08 95       	ret
+		}
+		
+		if (bit_is_clear(keyin,row2))
+		{
+			return 4;
+ 206:	84 e0       	ldi	r24, 0x04	; 4
+ 208:	08 95       	ret
+		}
+		
+		if (bit_is_clear(keyin,row3))
+		{
+			return 7;
+ 20a:	87 e0       	ldi	r24, 0x07	; 7
+ 20c:	08 95       	ret
+		}
+		
+		if (bit_is_clear(keyin,row4))
+		{
+			return 0;
+ 20e:	80 e0       	ldi	r24, 0x00	; 0
+ 210:	08 95       	ret
+		key&=~(1<<col2);
+		key|=(1<<col1)|(1<<col3);
+		
+		if (bit_is_clear(keyin,row1))
+		{
+			return 2;
+ 212:	82 e0       	ldi	r24, 0x02	; 2
+ 214:	08 95       	ret
+		}
+		
+		if (bit_is_clear(keyin,row2))
+		{
+			return 5;
+ 216:	85 e0       	ldi	r24, 0x05	; 5
+ 218:	08 95       	ret
+		}
+		
+		if (bit_is_clear(keyin,row3))
+		{
+			
+			return 8;
+ 21a:	88 e0       	ldi	r24, 0x08	; 8
+ 21c:	08 95       	ret
+		}
+		
+		if (bit_is_clear(keyin,row4))
+		{
+			
+			return 0;
+ 21e:	80 e0       	ldi	r24, 0x00	; 0
+ 220:	08 95       	ret
+		key&=~(1<<col3);
+		key|=(1<<col1)|(1<<col2);
+		
+		if (bit_is_clear(keyin,row1))
+		{
+			return 3;
+ 222:	83 e0       	ldi	r24, 0x03	; 3
+ 224:	08 95       	ret
+		}
+		
+		if (bit_is_clear(keyin,row2))
+		{
+			return 6;
+ 226:	86 e0       	ldi	r24, 0x06	; 6
+ 228:	08 95       	ret
+		}
+		
+		if (bit_is_clear(keyin,row3))
+		{
+			return 9;
+ 22a:	89 e0       	ldi	r24, 0x09	; 9
+		if (bit_is_clear(keyin,row4))
+		{
+			return 0;
+		}
+	}
+}
+ 22c:	08 95       	ret
+
+0000022e <main>:
+
+int main(void)
+{
+	unsigned char k,a,b,c;
+	unsigned int sum;
+	DDRB&=~((1<<PB0)|(1<<PB3)|(1<<PB4)|(1<<PB5)|(1<<PB6));
+ 22e:	87 b3       	in	r24, 0x17	; 23
+ 230:	86 78       	andi	r24, 0x86	; 134
+ 232:	87 bb       	out	0x17, r24	; 23
+	DDRB|=(1<<PB0)|(1<<PB1)|(1<<PB2);
+ 234:	87 b3       	in	r24, 0x17	; 23
+ 236:	87 60       	ori	r24, 0x07	; 7
+ 238:	87 bb       	out	0x17, r24	; 23
+	PORTB|=(1<<PB3)|(1<<PB4)|(1<<PB5)|(1<<PB6);
+ 23a:	88 b3       	in	r24, 0x18	; 24
+ 23c:	88 67       	ori	r24, 0x78	; 120
+ 23e:	88 bb       	out	0x18, r24	; 24
+	DDRD=0xff;
+ 240:	8f ef       	ldi	r24, 0xFF	; 255
+ 242:	81 bb       	out	0x11, r24	; 17
+	lcd_init();
+ 244:	0e 94 49 00 	call	0x92	; 0x92 <lcd_init>
+	while(1)
+	{
+		cmndbrk(0x01);
+		cmndbrk(0x80);
+		str("WELCOME TO HOTEL");
+ 248:	0f 2e       	mov	r0, r31
+ 24a:	f0 e6       	ldi	r31, 0x60	; 96
+ 24c:	ef 2e       	mov	r14, r31
+ 24e:	f0 e0       	ldi	r31, 0x00	; 0
+ 250:	ff 2e       	mov	r15, r31
+ 252:	f0 2d       	mov	r31, r0
+		cmndbrk(0xc2);
+		str("TRANSYLVANIA");
+ 254:	0f 2e       	mov	r0, r31
+ 256:	f1 e7       	ldi	r31, 0x71	; 113
+ 258:	cf 2e       	mov	r12, r31
+ 25a:	f0 e0       	ldi	r31, 0x00	; 0
+ 25c:	df 2e       	mov	r13, r31
+ 25e:	f0 2d       	mov	r31, r0
+		_delay_ms(50);
+		cmndbrk(0x01);
+		cmndbrk(0x80);
+		str("1.CHICKEN-Rs.250");
+ 260:	0f 2e       	mov	r0, r31
+ 262:	fe e7       	ldi	r31, 0x7E	; 126
+ 264:	af 2e       	mov	r10, r31
+ 266:	f0 e0       	ldi	r31, 0x00	; 0
+ 268:	bf 2e       	mov	r11, r31
+ 26a:	f0 2d       	mov	r31, r0
+		cmndbrk(0xc0);
+		str("2.MUTUN-Rs.350");
+ 26c:	0f 2e       	mov	r0, r31
+ 26e:	ff e8       	ldi	r31, 0x8F	; 143
+ 270:	8f 2e       	mov	r8, r31
+ 272:	f0 e0       	ldi	r31, 0x00	; 0
+ 274:	9f 2e       	mov	r9, r31
+ 276:	f0 2d       	mov	r31, r0
+		cmndbrk(0x90);
+		str("3.NAAN-Rs.30");
+ 278:	0f 2e       	mov	r0, r31
+ 27a:	fe e9       	ldi	r31, 0x9E	; 158
+ 27c:	6f 2e       	mov	r6, r31
+ 27e:	f0 e0       	ldi	r31, 0x00	; 0
+ 280:	7f 2e       	mov	r7, r31
+ 282:	f0 2d       	mov	r31, r0
+		cmndbrk(0xd0);
+		str("4.SABJI-Rs.60");
+ 284:	0f 2e       	mov	r0, r31
+ 286:	fb ea       	ldi	r31, 0xAB	; 171
+ 288:	4f 2e       	mov	r4, r31
+ 28a:	f0 e0       	ldi	r31, 0x00	; 0
+ 28c:	5f 2e       	mov	r5, r31
+ 28e:	f0 2d       	mov	r31, r0
+		_delay_ms(50);
+		cmndbrk(0x01);
+		cmndbrk(0x80);
+		str("5.PARANTHA-Rs.50");
+ 290:	0f 2e       	mov	r0, r31
+ 292:	f9 eb       	ldi	r31, 0xB9	; 185
+ 294:	2f 2e       	mov	r2, r31
+ 296:	f0 e0       	ldi	r31, 0x00	; 0
+ 298:	3f 2e       	mov	r3, r31
+ 29a:	f0 2d       	mov	r31, r0
+	PORTB|=(1<<PB3)|(1<<PB4)|(1<<PB5)|(1<<PB6);
+	DDRD=0xff;
+	lcd_init();
+	while(1)
+	{
+		cmndbrk(0x01);
+ 29c:	81 e0       	ldi	r24, 0x01	; 1
+ 29e:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+		cmndbrk(0x80);
+ 2a2:	80 e8       	ldi	r24, 0x80	; 128
+ 2a4:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+		str("WELCOME TO HOTEL");
+ 2a8:	c7 01       	movw	r24, r14
+ 2aa:	0e 94 98 00 	call	0x130	; 0x130 <str>
+		cmndbrk(0xc2);
+ 2ae:	82 ec       	ldi	r24, 0xC2	; 194
+ 2b0:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+		str("TRANSYLVANIA");
+ 2b4:	c6 01       	movw	r24, r12
+ 2b6:	0e 94 98 00 	call	0x130	; 0x130 <str>
+ 2ba:	83 ed       	ldi	r24, 0xD3	; 211
+ 2bc:	90 e3       	ldi	r25, 0x30	; 48
+ 2be:	01 97       	sbiw	r24, 0x01	; 1
+ 2c0:	f1 f7       	brne	.-4      	; 0x2be <main+0x90>
+ 2c2:	00 c0       	rjmp	.+0      	; 0x2c4 <main+0x96>
+ 2c4:	00 00       	nop
+		_delay_ms(50);
+		cmndbrk(0x01);
+ 2c6:	81 e0       	ldi	r24, 0x01	; 1
+ 2c8:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+		cmndbrk(0x80);
+ 2cc:	80 e8       	ldi	r24, 0x80	; 128
+ 2ce:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+		str("1.CHICKEN-Rs.250");
+ 2d2:	c5 01       	movw	r24, r10
+ 2d4:	0e 94 98 00 	call	0x130	; 0x130 <str>
+		cmndbrk(0xc0);
+ 2d8:	80 ec       	ldi	r24, 0xC0	; 192
+ 2da:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+		str("2.MUTUN-Rs.350");
+ 2de:	c4 01       	movw	r24, r8
+ 2e0:	0e 94 98 00 	call	0x130	; 0x130 <str>
+		cmndbrk(0x90);
+ 2e4:	80 e9       	ldi	r24, 0x90	; 144
+ 2e6:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+		str("3.NAAN-Rs.30");
+ 2ea:	c3 01       	movw	r24, r6
+ 2ec:	0e 94 98 00 	call	0x130	; 0x130 <str>
+		cmndbrk(0xd0);
+ 2f0:	80 ed       	ldi	r24, 0xD0	; 208
+ 2f2:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+		str("4.SABJI-Rs.60");
+ 2f6:	c2 01       	movw	r24, r4
+ 2f8:	0e 94 98 00 	call	0x130	; 0x130 <str>
+ 2fc:	a3 ed       	ldi	r26, 0xD3	; 211
+ 2fe:	b0 e3       	ldi	r27, 0x30	; 48
+ 300:	11 97       	sbiw	r26, 0x01	; 1
+ 302:	f1 f7       	brne	.-4      	; 0x300 <main+0xd2>
+ 304:	00 c0       	rjmp	.+0      	; 0x306 <main+0xd8>
+ 306:	00 00       	nop
+		_delay_ms(50);
+		cmndbrk(0x01);
+ 308:	81 e0       	ldi	r24, 0x01	; 1
+ 30a:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+		cmndbrk(0x80);
+ 30e:	80 e8       	ldi	r24, 0x80	; 128
+ 310:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+		str("5.PARANTHA-Rs.50");
+ 314:	c1 01       	movw	r24, r2
+ 316:	0e 94 98 00 	call	0x130	; 0x130 <str>
+		cmndbrk(0xc0);
+ 31a:	80 ec       	ldi	r24, 0xC0	; 192
+ 31c:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+		str("6.DAAL-Rs.70");
+ 320:	8a ec       	ldi	r24, 0xCA	; 202
+ 322:	90 e0       	ldi	r25, 0x00	; 0
+ 324:	0e 94 98 00 	call	0x130	; 0x130 <str>
+		cmndbrk(0x90);
+ 328:	80 e9       	ldi	r24, 0x90	; 144
+ 32a:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+		str("7.PANEER-Rs.150");
+ 32e:	87 ed       	ldi	r24, 0xD7	; 215
+ 330:	90 e0       	ldi	r25, 0x00	; 0
+ 332:	0e 94 98 00 	call	0x130	; 0x130 <str>
+		cmndbrk(0xd0);
+ 336:	80 ed       	ldi	r24, 0xD0	; 208
+ 338:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+		str("8.PAPAD-Rs.20");
+ 33c:	87 ee       	ldi	r24, 0xE7	; 231
+ 33e:	90 e0       	ldi	r25, 0x00	; 0
+ 340:	0e 94 98 00 	call	0x130	; 0x130 <str>
+ 344:	83 ed       	ldi	r24, 0xD3	; 211
+ 346:	90 e3       	ldi	r25, 0x30	; 48
+ 348:	01 97       	sbiw	r24, 0x01	; 1
+ 34a:	f1 f7       	brne	.-4      	; 0x348 <main+0x11a>
+ 34c:	00 c0       	rjmp	.+0      	; 0x34e <main+0x120>
+ 34e:	00 00       	nop
+		_delay_ms(50);
+		cmndbrk(0x01);
+ 350:	81 e0       	ldi	r24, 0x01	; 1
+ 352:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+		cmndbrk(0x83);
+ 356:	83 e8       	ldi	r24, 0x83	; 131
+ 358:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+		str("ENTER YOUR");
+ 35c:	85 ef       	ldi	r24, 0xF5	; 245
+ 35e:	90 e0       	ldi	r25, 0x00	; 0
+ 360:	0e 94 98 00 	call	0x130	; 0x130 <str>
+		cmndbrk(0xc5);
+ 364:	85 ec       	ldi	r24, 0xC5	; 197
+ 366:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+		str("CHOICE");
+ 36a:	80 e0       	ldi	r24, 0x00	; 0
+ 36c:	91 e0       	ldi	r25, 0x01	; 1
+ 36e:	0e 94 98 00 	call	0x130	; 0x130 <str>
+		cmndbrk(0x96);
+ 372:	86 e9       	ldi	r24, 0x96	; 150
+ 374:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+		k=keysense();
+ 378:	0e 94 db 00 	call	0x1b6	; 0x1b6 <keysense>
+ 37c:	c8 2f       	mov	r28, r24
+		datbrk(k+48);
+ 37e:	80 5d       	subi	r24, 0xD0	; 208
+ 380:	0e 94 8c 00 	call	0x118	; 0x118 <datbrk>
+ 384:	8f e3       	ldi	r24, 0x3F	; 63
+ 386:	9d e0       	ldi	r25, 0x0D	; 13
+ 388:	a3 e0       	ldi	r26, 0x03	; 3
+ 38a:	81 50       	subi	r24, 0x01	; 1
+ 38c:	90 40       	sbci	r25, 0x00	; 0
+ 38e:	a0 40       	sbci	r26, 0x00	; 0
+ 390:	e1 f7       	brne	.-8      	; 0x38a <main+0x15c>
+ 392:	00 c0       	rjmp	.+0      	; 0x394 <main+0x166>
+ 394:	00 00       	nop
+		_delay_ms(1000);
+		cmndbrk(0x01);
+ 396:	81 e0       	ldi	r24, 0x01	; 1
+ 398:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+		switch(k)
+ 39c:	c5 30       	cpi	r28, 0x05	; 5
+ 39e:	09 f4       	brne	.+2      	; 0x3a2 <main+0x174>
+ 3a0:	b9 c2       	rjmp	.+1394   	; 0x914 <__stack+0x4b5>
+ 3a2:	c6 30       	cpi	r28, 0x06	; 6
+ 3a4:	80 f4       	brcc	.+32     	; 0x3c6 <main+0x198>
+ 3a6:	c2 30       	cpi	r28, 0x02	; 2
+ 3a8:	09 f4       	brne	.+2      	; 0x3ac <main+0x17e>
+ 3aa:	c1 c0       	rjmp	.+386    	; 0x52e <__stack+0xcf>
+ 3ac:	c3 30       	cpi	r28, 0x03	; 3
+ 3ae:	20 f4       	brcc	.+8      	; 0x3b8 <main+0x18a>
+ 3b0:	c1 30       	cpi	r28, 0x01	; 1
+ 3b2:	09 f0       	breq	.+2      	; 0x3b6 <main+0x188>
+ 3b4:	73 cf       	rjmp	.-282    	; 0x29c <main+0x6e>
+ 3b6:	14 c0       	rjmp	.+40     	; 0x3e0 <main+0x1b2>
+ 3b8:	c3 30       	cpi	r28, 0x03	; 3
+ 3ba:	09 f4       	brne	.+2      	; 0x3be <main+0x190>
+ 3bc:	5f c1       	rjmp	.+702    	; 0x67c <__stack+0x21d>
+ 3be:	c4 30       	cpi	r28, 0x04	; 4
+ 3c0:	09 f0       	breq	.+2      	; 0x3c4 <main+0x196>
+ 3c2:	6c cf       	rjmp	.-296    	; 0x29c <main+0x6e>
+ 3c4:	01 c2       	rjmp	.+1026   	; 0x7c8 <__stack+0x369>
+ 3c6:	c7 30       	cpi	r28, 0x07	; 7
+ 3c8:	09 f4       	brne	.+2      	; 0x3cc <main+0x19e>
+ 3ca:	f1 c3       	rjmp	.+2018   	; 0xbae <__stack+0x74f>
+ 3cc:	c7 30       	cpi	r28, 0x07	; 7
+ 3ce:	08 f4       	brcc	.+2      	; 0x3d2 <main+0x1a4>
+ 3d0:	47 c3       	rjmp	.+1678   	; 0xa60 <__stack+0x601>
+ 3d2:	c8 30       	cpi	r28, 0x08	; 8
+ 3d4:	09 f4       	brne	.+2      	; 0x3d8 <main+0x1aa>
+ 3d6:	92 c4       	rjmp	.+2340   	; 0xcfc <__stack+0x89d>
+ 3d8:	c9 30       	cpi	r28, 0x09	; 9
+ 3da:	09 f0       	breq	.+2      	; 0x3de <main+0x1b0>
+ 3dc:	5f cf       	rjmp	.-322    	; 0x29c <main+0x6e>
+ 3de:	34 c5       	rjmp	.+2664   	; 0xe48 <__stack+0x9e9>
+		{
+			case 1:
+			cmndbrk(0x80);
+ 3e0:	80 e8       	ldi	r24, 0x80	; 128
+ 3e2:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("YOU HAVE SELECTD");
+ 3e6:	87 e0       	ldi	r24, 0x07	; 7
+ 3e8:	91 e0       	ldi	r25, 0x01	; 1
+ 3ea:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0xc0);
+ 3ee:	80 ec       	ldi	r24, 0xC0	; 192
+ 3f0:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("1. CHICKEN");
+ 3f4:	88 e1       	ldi	r24, 0x18	; 24
+ 3f6:	91 e0       	ldi	r25, 0x01	; 1
+ 3f8:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0x90);
+ 3fc:	80 e9       	ldi	r24, 0x90	; 144
+ 3fe:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("PLZ PAY RUPEE");
+ 402:	83 e2       	ldi	r24, 0x23	; 35
+ 404:	91 e0       	ldi	r25, 0x01	; 1
+ 406:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0xd5);
+ 40a:	85 ed       	ldi	r24, 0xD5	; 213
+ 40c:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("250");
+ 410:	81 e3       	ldi	r24, 0x31	; 49
+ 412:	91 e0       	ldi	r25, 0x01	; 1
+ 414:	0e 94 98 00 	call	0x130	; 0x130 <str>
+ 418:	8f e9       	ldi	r24, 0x9F	; 159
+ 41a:	96 e8       	ldi	r25, 0x86	; 134
+ 41c:	a1 e0       	ldi	r26, 0x01	; 1
+ 41e:	81 50       	subi	r24, 0x01	; 1
+ 420:	90 40       	sbci	r25, 0x00	; 0
+ 422:	a0 40       	sbci	r26, 0x00	; 0
+ 424:	e1 f7       	brne	.-8      	; 0x41e <main+0x1f0>
+ 426:	00 c0       	rjmp	.+0      	; 0x428 <main+0x1fa>
+ 428:	00 00       	nop
+			_delay_ms(500);
+			cmndbrk(0x01);
+ 42a:	81 e0       	ldi	r24, 0x01	; 1
+ 42c:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			cmndbrk(0x80);
+ 430:	80 e8       	ldi	r24, 0x80	; 128
+ 432:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("AMT GIVEN- ");
+ 436:	85 e3       	ldi	r24, 0x35	; 53
+ 438:	91 e0       	ldi	r25, 0x01	; 1
+ 43a:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			a=keysense();
+ 43e:	0e 94 db 00 	call	0x1b6	; 0x1b6 <keysense>
+ 442:	c8 2f       	mov	r28, r24
+			datbrk(a+48);
+ 444:	80 5d       	subi	r24, 0xD0	; 208
+ 446:	0e 94 8c 00 	call	0x118	; 0x118 <datbrk>
+ 44a:	8f e9       	ldi	r24, 0x9F	; 159
+ 44c:	96 e8       	ldi	r25, 0x86	; 134
+ 44e:	a1 e0       	ldi	r26, 0x01	; 1
+ 450:	81 50       	subi	r24, 0x01	; 1
+ 452:	90 40       	sbci	r25, 0x00	; 0
+ 454:	a0 40       	sbci	r26, 0x00	; 0
+ 456:	e1 f7       	brne	.-8      	; 0x450 <main+0x222>
+ 458:	00 c0       	rjmp	.+0      	; 0x45a <main+0x22c>
+ 45a:	00 00       	nop
+			_delay_ms(500);
+			b=keysense();
+ 45c:	0e 94 db 00 	call	0x1b6	; 0x1b6 <keysense>
+ 460:	18 2f       	mov	r17, r24
+			datbrk(b+48);
+ 462:	80 5d       	subi	r24, 0xD0	; 208
+ 464:	0e 94 8c 00 	call	0x118	; 0x118 <datbrk>
+ 468:	8f e9       	ldi	r24, 0x9F	; 159
+ 46a:	96 e8       	ldi	r25, 0x86	; 134
+ 46c:	a1 e0       	ldi	r26, 0x01	; 1
+ 46e:	81 50       	subi	r24, 0x01	; 1
+ 470:	90 40       	sbci	r25, 0x00	; 0
+ 472:	a0 40       	sbci	r26, 0x00	; 0
+ 474:	e1 f7       	brne	.-8      	; 0x46e <__stack+0xf>
+ 476:	00 c0       	rjmp	.+0      	; 0x478 <__stack+0x19>
+ 478:	00 00       	nop
+			_delay_ms(500);
+			c=keysense();
+ 47a:	0e 94 db 00 	call	0x1b6	; 0x1b6 <keysense>
+ 47e:	08 2f       	mov	r16, r24
+			datbrk(c+48);
+ 480:	80 5d       	subi	r24, 0xD0	; 208
+ 482:	0e 94 8c 00 	call	0x118	; 0x118 <datbrk>
+ 486:	8f e9       	ldi	r24, 0x9F	; 159
+ 488:	96 e8       	ldi	r25, 0x86	; 134
+ 48a:	a1 e0       	ldi	r26, 0x01	; 1
+ 48c:	81 50       	subi	r24, 0x01	; 1
+ 48e:	90 40       	sbci	r25, 0x00	; 0
+ 490:	a0 40       	sbci	r26, 0x00	; 0
+ 492:	e1 f7       	brne	.-8      	; 0x48c <__stack+0x2d>
+ 494:	00 c0       	rjmp	.+0      	; 0x496 <__stack+0x37>
+ 496:	00 00       	nop
+			_delay_ms(500);
+			sum=100*a+10*b+c;
+ 498:	d0 e0       	ldi	r29, 0x00	; 0
+ 49a:	84 e6       	ldi	r24, 0x64	; 100
+ 49c:	90 e0       	ldi	r25, 0x00	; 0
+ 49e:	c8 9f       	mul	r28, r24
+ 4a0:	a0 01       	movw	r20, r0
+ 4a2:	c9 9f       	mul	r28, r25
+ 4a4:	50 0d       	add	r21, r0
+ 4a6:	d8 9f       	mul	r29, r24
+ 4a8:	50 0d       	add	r21, r0
+ 4aa:	11 24       	eor	r1, r1
+ 4ac:	81 2f       	mov	r24, r17
+ 4ae:	90 e0       	ldi	r25, 0x00	; 0
+ 4b0:	88 0f       	add	r24, r24
+ 4b2:	99 1f       	adc	r25, r25
+ 4b4:	9c 01       	movw	r18, r24
+ 4b6:	22 0f       	add	r18, r18
+ 4b8:	33 1f       	adc	r19, r19
+ 4ba:	22 0f       	add	r18, r18
+ 4bc:	33 1f       	adc	r19, r19
+ 4be:	82 0f       	add	r24, r18
+ 4c0:	93 1f       	adc	r25, r19
+ 4c2:	84 0f       	add	r24, r20
+ 4c4:	95 1f       	adc	r25, r21
+ 4c6:	ec 01       	movw	r28, r24
+ 4c8:	c0 0f       	add	r28, r16
+ 4ca:	d1 1d       	adc	r29, r1
+			sum=sum-250;
+			cmndbrk(0x90);
+ 4cc:	80 e9       	ldi	r24, 0x90	; 144
+ 4ce:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("PLZ Collect ");
+ 4d2:	81 e4       	ldi	r24, 0x41	; 65
+ 4d4:	91 e0       	ldi	r25, 0x01	; 1
+ 4d6:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0xd0);
+ 4da:	80 ed       	ldi	r24, 0xD0	; 208
+ 4dc:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("Rs.frm counter   ");
+ 4e0:	8e e4       	ldi	r24, 0x4E	; 78
+ 4e2:	91 e0       	ldi	r25, 0x01	; 1
+ 4e4:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			convert(sum,0xd5);
+ 4e8:	ce 01       	movw	r24, r28
+ 4ea:	8a 5f       	subi	r24, 0xFA	; 250
+ 4ec:	90 40       	sbci	r25, 0x00	; 0
+ 4ee:	65 ed       	ldi	r22, 0xD5	; 213
+ 4f0:	0e 94 ad 00 	call	0x15a	; 0x15a <convert>
+ 4f4:	8f e3       	ldi	r24, 0x3F	; 63
+ 4f6:	9d e0       	ldi	r25, 0x0D	; 13
+ 4f8:	a3 e0       	ldi	r26, 0x03	; 3
+ 4fa:	81 50       	subi	r24, 0x01	; 1
+ 4fc:	90 40       	sbci	r25, 0x00	; 0
+ 4fe:	a0 40       	sbci	r26, 0x00	; 0
+ 500:	e1 f7       	brne	.-8      	; 0x4fa <__stack+0x9b>
+ 502:	00 c0       	rjmp	.+0      	; 0x504 <__stack+0xa5>
+ 504:	00 00       	nop
+			_delay_ms(1000);
+			cmndbrk(0x01);
+ 506:	81 e0       	ldi	r24, 0x01	; 1
+ 508:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			cmndbrk(0xc6);
+ 50c:	86 ec       	ldi	r24, 0xC6	; 198
+ 50e:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("THANK YOU");
+ 512:	80 e6       	ldi	r24, 0x60	; 96
+ 514:	91 e0       	ldi	r25, 0x01	; 1
+ 516:	0e 94 98 00 	call	0x130	; 0x130 <str>
+ 51a:	8f e3       	ldi	r24, 0x3F	; 63
+ 51c:	9d e0       	ldi	r25, 0x0D	; 13
+ 51e:	a3 e0       	ldi	r26, 0x03	; 3
+ 520:	81 50       	subi	r24, 0x01	; 1
+ 522:	90 40       	sbci	r25, 0x00	; 0
+ 524:	a0 40       	sbci	r26, 0x00	; 0
+ 526:	e1 f7       	brne	.-8      	; 0x520 <__stack+0xc1>
+ 528:	00 c0       	rjmp	.+0      	; 0x52a <__stack+0xcb>
+ 52a:	00 00       	nop
+ 52c:	b7 ce       	rjmp	.-658    	; 0x29c <main+0x6e>
+			_delay_ms(1000);
+			break;
+			case 2:
+			cmndbrk(0x80);
+ 52e:	80 e8       	ldi	r24, 0x80	; 128
+ 530:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("YOU HAVE SELECTD");
+ 534:	87 e0       	ldi	r24, 0x07	; 7
+ 536:	91 e0       	ldi	r25, 0x01	; 1
+ 538:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0xc0);
+ 53c:	80 ec       	ldi	r24, 0xC0	; 192
+ 53e:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("2. MUTTON");
+ 542:	8a e6       	ldi	r24, 0x6A	; 106
+ 544:	91 e0       	ldi	r25, 0x01	; 1
+ 546:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0x90);
+ 54a:	80 e9       	ldi	r24, 0x90	; 144
+ 54c:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("PLZ PAY RUPEE");
+ 550:	83 e2       	ldi	r24, 0x23	; 35
+ 552:	91 e0       	ldi	r25, 0x01	; 1
+ 554:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0xd5);
+ 558:	85 ed       	ldi	r24, 0xD5	; 213
+ 55a:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("350");
+ 55e:	84 e7       	ldi	r24, 0x74	; 116
+ 560:	91 e0       	ldi	r25, 0x01	; 1
+ 562:	0e 94 98 00 	call	0x130	; 0x130 <str>
+ 566:	8f e9       	ldi	r24, 0x9F	; 159
+ 568:	96 e8       	ldi	r25, 0x86	; 134
+ 56a:	a1 e0       	ldi	r26, 0x01	; 1
+ 56c:	81 50       	subi	r24, 0x01	; 1
+ 56e:	90 40       	sbci	r25, 0x00	; 0
+ 570:	a0 40       	sbci	r26, 0x00	; 0
+ 572:	e1 f7       	brne	.-8      	; 0x56c <__stack+0x10d>
+ 574:	00 c0       	rjmp	.+0      	; 0x576 <__stack+0x117>
+ 576:	00 00       	nop
+			_delay_ms(500);
+			cmndbrk(0x01);
+ 578:	81 e0       	ldi	r24, 0x01	; 1
+ 57a:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			cmndbrk(0x80);
+ 57e:	80 e8       	ldi	r24, 0x80	; 128
+ 580:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("AMT GIVEN- ");
+ 584:	85 e3       	ldi	r24, 0x35	; 53
+ 586:	91 e0       	ldi	r25, 0x01	; 1
+ 588:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			a=keysense();
+ 58c:	0e 94 db 00 	call	0x1b6	; 0x1b6 <keysense>
+ 590:	c8 2f       	mov	r28, r24
+			datbrk(a+48);
+ 592:	80 5d       	subi	r24, 0xD0	; 208
+ 594:	0e 94 8c 00 	call	0x118	; 0x118 <datbrk>
+ 598:	8f e9       	ldi	r24, 0x9F	; 159
+ 59a:	96 e8       	ldi	r25, 0x86	; 134
+ 59c:	a1 e0       	ldi	r26, 0x01	; 1
+ 59e:	81 50       	subi	r24, 0x01	; 1
+ 5a0:	90 40       	sbci	r25, 0x00	; 0
+ 5a2:	a0 40       	sbci	r26, 0x00	; 0
+ 5a4:	e1 f7       	brne	.-8      	; 0x59e <__stack+0x13f>
+ 5a6:	00 c0       	rjmp	.+0      	; 0x5a8 <__stack+0x149>
+ 5a8:	00 00       	nop
+			_delay_ms(500);
+			b=keysense();
+ 5aa:	0e 94 db 00 	call	0x1b6	; 0x1b6 <keysense>
+ 5ae:	18 2f       	mov	r17, r24
+			datbrk(b+48);
+ 5b0:	80 5d       	subi	r24, 0xD0	; 208
+ 5b2:	0e 94 8c 00 	call	0x118	; 0x118 <datbrk>
+ 5b6:	8f e9       	ldi	r24, 0x9F	; 159
+ 5b8:	96 e8       	ldi	r25, 0x86	; 134
+ 5ba:	a1 e0       	ldi	r26, 0x01	; 1
+ 5bc:	81 50       	subi	r24, 0x01	; 1
+ 5be:	90 40       	sbci	r25, 0x00	; 0
+ 5c0:	a0 40       	sbci	r26, 0x00	; 0
+ 5c2:	e1 f7       	brne	.-8      	; 0x5bc <__stack+0x15d>
+ 5c4:	00 c0       	rjmp	.+0      	; 0x5c6 <__stack+0x167>
+ 5c6:	00 00       	nop
+			_delay_ms(500);
+			c=keysense();
+ 5c8:	0e 94 db 00 	call	0x1b6	; 0x1b6 <keysense>
+ 5cc:	08 2f       	mov	r16, r24
+			datbrk(c+48);
+ 5ce:	80 5d       	subi	r24, 0xD0	; 208
+ 5d0:	0e 94 8c 00 	call	0x118	; 0x118 <datbrk>
+ 5d4:	8f e9       	ldi	r24, 0x9F	; 159
+ 5d6:	96 e8       	ldi	r25, 0x86	; 134
+ 5d8:	a1 e0       	ldi	r26, 0x01	; 1
+ 5da:	81 50       	subi	r24, 0x01	; 1
+ 5dc:	90 40       	sbci	r25, 0x00	; 0
+ 5de:	a0 40       	sbci	r26, 0x00	; 0
+ 5e0:	e1 f7       	brne	.-8      	; 0x5da <__stack+0x17b>
+ 5e2:	00 c0       	rjmp	.+0      	; 0x5e4 <__stack+0x185>
+ 5e4:	00 00       	nop
+			_delay_ms(500);
+			sum=100*a+10*b+c;
+ 5e6:	d0 e0       	ldi	r29, 0x00	; 0
+ 5e8:	84 e6       	ldi	r24, 0x64	; 100
+ 5ea:	90 e0       	ldi	r25, 0x00	; 0
+ 5ec:	c8 9f       	mul	r28, r24
+ 5ee:	a0 01       	movw	r20, r0
+ 5f0:	c9 9f       	mul	r28, r25
+ 5f2:	50 0d       	add	r21, r0
+ 5f4:	d8 9f       	mul	r29, r24
+ 5f6:	50 0d       	add	r21, r0
+ 5f8:	11 24       	eor	r1, r1
+ 5fa:	81 2f       	mov	r24, r17
+ 5fc:	90 e0       	ldi	r25, 0x00	; 0
+ 5fe:	88 0f       	add	r24, r24
+ 600:	99 1f       	adc	r25, r25
+ 602:	9c 01       	movw	r18, r24
+ 604:	22 0f       	add	r18, r18
+ 606:	33 1f       	adc	r19, r19
+ 608:	22 0f       	add	r18, r18
+ 60a:	33 1f       	adc	r19, r19
+ 60c:	82 0f       	add	r24, r18
+ 60e:	93 1f       	adc	r25, r19
+ 610:	84 0f       	add	r24, r20
+ 612:	95 1f       	adc	r25, r21
+ 614:	ec 01       	movw	r28, r24
+ 616:	c0 0f       	add	r28, r16
+ 618:	d1 1d       	adc	r29, r1
+			sum=sum-350;
+			cmndbrk(0x90);
+ 61a:	80 e9       	ldi	r24, 0x90	; 144
+ 61c:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("PLZ Collect ");
+ 620:	81 e4       	ldi	r24, 0x41	; 65
+ 622:	91 e0       	ldi	r25, 0x01	; 1
+ 624:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0xd0);
+ 628:	80 ed       	ldi	r24, 0xD0	; 208
+ 62a:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("Rs     frm counter");
+ 62e:	88 e7       	ldi	r24, 0x78	; 120
+ 630:	91 e0       	ldi	r25, 0x01	; 1
+ 632:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			convert(sum,0xd5);
+ 636:	ce 01       	movw	r24, r28
+ 638:	8e 55       	subi	r24, 0x5E	; 94
+ 63a:	91 40       	sbci	r25, 0x01	; 1
+ 63c:	65 ed       	ldi	r22, 0xD5	; 213
+ 63e:	0e 94 ad 00 	call	0x15a	; 0x15a <convert>
+ 642:	8f e3       	ldi	r24, 0x3F	; 63
+ 644:	9d e0       	ldi	r25, 0x0D	; 13
+ 646:	a3 e0       	ldi	r26, 0x03	; 3
+ 648:	81 50       	subi	r24, 0x01	; 1
+ 64a:	90 40       	sbci	r25, 0x00	; 0
+ 64c:	a0 40       	sbci	r26, 0x00	; 0
+ 64e:	e1 f7       	brne	.-8      	; 0x648 <__stack+0x1e9>
+ 650:	00 c0       	rjmp	.+0      	; 0x652 <__stack+0x1f3>
+ 652:	00 00       	nop
+			_delay_ms(1000);
+			cmndbrk(0x01);
+ 654:	81 e0       	ldi	r24, 0x01	; 1
+ 656:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			cmndbrk(0xc5);
+ 65a:	85 ec       	ldi	r24, 0xC5	; 197
+ 65c:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("THANK YOU");
+ 660:	80 e6       	ldi	r24, 0x60	; 96
+ 662:	91 e0       	ldi	r25, 0x01	; 1
+ 664:	0e 94 98 00 	call	0x130	; 0x130 <str>
+ 668:	8f e3       	ldi	r24, 0x3F	; 63
+ 66a:	9d e0       	ldi	r25, 0x0D	; 13
+ 66c:	a3 e0       	ldi	r26, 0x03	; 3
+ 66e:	81 50       	subi	r24, 0x01	; 1
+ 670:	90 40       	sbci	r25, 0x00	; 0
+ 672:	a0 40       	sbci	r26, 0x00	; 0
+ 674:	e1 f7       	brne	.-8      	; 0x66e <__stack+0x20f>
+ 676:	00 c0       	rjmp	.+0      	; 0x678 <__stack+0x219>
+ 678:	00 00       	nop
+ 67a:	10 ce       	rjmp	.-992    	; 0x29c <main+0x6e>
+			_delay_ms(1000);
+			break;
+			case 3:
+			cmndbrk(0x80);
+ 67c:	80 e8       	ldi	r24, 0x80	; 128
+ 67e:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("YOU HAVE SELECTD");
+ 682:	87 e0       	ldi	r24, 0x07	; 7
+ 684:	91 e0       	ldi	r25, 0x01	; 1
+ 686:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0xc0);
+ 68a:	80 ec       	ldi	r24, 0xC0	; 192
+ 68c:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("3. NAAN");
+ 690:	8b e8       	ldi	r24, 0x8B	; 139
+ 692:	91 e0       	ldi	r25, 0x01	; 1
+ 694:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0x90);
+ 698:	80 e9       	ldi	r24, 0x90	; 144
+ 69a:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("PLZ PAY RUPEE");
+ 69e:	83 e2       	ldi	r24, 0x23	; 35
+ 6a0:	91 e0       	ldi	r25, 0x01	; 1
+ 6a2:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0xd5);
+ 6a6:	85 ed       	ldi	r24, 0xD5	; 213
+ 6a8:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("30");
+ 6ac:	83 e9       	ldi	r24, 0x93	; 147
+ 6ae:	91 e0       	ldi	r25, 0x01	; 1
+ 6b0:	0e 94 98 00 	call	0x130	; 0x130 <str>
+ 6b4:	8f e9       	ldi	r24, 0x9F	; 159
+ 6b6:	96 e8       	ldi	r25, 0x86	; 134
+ 6b8:	a1 e0       	ldi	r26, 0x01	; 1
+ 6ba:	81 50       	subi	r24, 0x01	; 1
+ 6bc:	90 40       	sbci	r25, 0x00	; 0
+ 6be:	a0 40       	sbci	r26, 0x00	; 0
+ 6c0:	e1 f7       	brne	.-8      	; 0x6ba <__stack+0x25b>
+ 6c2:	00 c0       	rjmp	.+0      	; 0x6c4 <__stack+0x265>
+ 6c4:	00 00       	nop
+			_delay_ms(500);
+			cmndbrk(0x01);
+ 6c6:	81 e0       	ldi	r24, 0x01	; 1
+ 6c8:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			cmndbrk(0x80);
+ 6cc:	80 e8       	ldi	r24, 0x80	; 128
+ 6ce:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("AMT GIVEN- ");
+ 6d2:	85 e3       	ldi	r24, 0x35	; 53
+ 6d4:	91 e0       	ldi	r25, 0x01	; 1
+ 6d6:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			a=keysense();
+ 6da:	0e 94 db 00 	call	0x1b6	; 0x1b6 <keysense>
+ 6de:	c8 2f       	mov	r28, r24
+			datbrk(a+48);
+ 6e0:	80 5d       	subi	r24, 0xD0	; 208
+ 6e2:	0e 94 8c 00 	call	0x118	; 0x118 <datbrk>
+ 6e6:	8f e9       	ldi	r24, 0x9F	; 159
+ 6e8:	96 e8       	ldi	r25, 0x86	; 134
+ 6ea:	a1 e0       	ldi	r26, 0x01	; 1
+ 6ec:	81 50       	subi	r24, 0x01	; 1
+ 6ee:	90 40       	sbci	r25, 0x00	; 0
+ 6f0:	a0 40       	sbci	r26, 0x00	; 0
+ 6f2:	e1 f7       	brne	.-8      	; 0x6ec <__stack+0x28d>
+ 6f4:	00 c0       	rjmp	.+0      	; 0x6f6 <__stack+0x297>
+ 6f6:	00 00       	nop
+			_delay_ms(500);
+			b=keysense();
+ 6f8:	0e 94 db 00 	call	0x1b6	; 0x1b6 <keysense>
+ 6fc:	18 2f       	mov	r17, r24
+			datbrk(b+48);
+ 6fe:	80 5d       	subi	r24, 0xD0	; 208
+ 700:	0e 94 8c 00 	call	0x118	; 0x118 <datbrk>
+ 704:	8f e9       	ldi	r24, 0x9F	; 159
+ 706:	96 e8       	ldi	r25, 0x86	; 134
+ 708:	a1 e0       	ldi	r26, 0x01	; 1
+ 70a:	81 50       	subi	r24, 0x01	; 1
+ 70c:	90 40       	sbci	r25, 0x00	; 0
+ 70e:	a0 40       	sbci	r26, 0x00	; 0
+ 710:	e1 f7       	brne	.-8      	; 0x70a <__stack+0x2ab>
+ 712:	00 c0       	rjmp	.+0      	; 0x714 <__stack+0x2b5>
+ 714:	00 00       	nop
+			_delay_ms(500);
+			c=keysense();
+ 716:	0e 94 db 00 	call	0x1b6	; 0x1b6 <keysense>
+ 71a:	08 2f       	mov	r16, r24
+			datbrk(c+48);
+ 71c:	80 5d       	subi	r24, 0xD0	; 208
+ 71e:	0e 94 8c 00 	call	0x118	; 0x118 <datbrk>
+ 722:	8f e9       	ldi	r24, 0x9F	; 159
+ 724:	96 e8       	ldi	r25, 0x86	; 134
+ 726:	a1 e0       	ldi	r26, 0x01	; 1
+ 728:	81 50       	subi	r24, 0x01	; 1
+ 72a:	90 40       	sbci	r25, 0x00	; 0
+ 72c:	a0 40       	sbci	r26, 0x00	; 0
+ 72e:	e1 f7       	brne	.-8      	; 0x728 <__stack+0x2c9>
+ 730:	00 c0       	rjmp	.+0      	; 0x732 <__stack+0x2d3>
+ 732:	00 00       	nop
+			_delay_ms(500);
+			sum=100*a+10*b+c;
+ 734:	d0 e0       	ldi	r29, 0x00	; 0
+ 736:	84 e6       	ldi	r24, 0x64	; 100
+ 738:	90 e0       	ldi	r25, 0x00	; 0
+ 73a:	c8 9f       	mul	r28, r24
+ 73c:	a0 01       	movw	r20, r0
+ 73e:	c9 9f       	mul	r28, r25
+ 740:	50 0d       	add	r21, r0
+ 742:	d8 9f       	mul	r29, r24
+ 744:	50 0d       	add	r21, r0
+ 746:	11 24       	eor	r1, r1
+ 748:	81 2f       	mov	r24, r17
+ 74a:	90 e0       	ldi	r25, 0x00	; 0
+ 74c:	88 0f       	add	r24, r24
+ 74e:	99 1f       	adc	r25, r25
+ 750:	9c 01       	movw	r18, r24
+ 752:	22 0f       	add	r18, r18
+ 754:	33 1f       	adc	r19, r19
+ 756:	22 0f       	add	r18, r18
+ 758:	33 1f       	adc	r19, r19
+ 75a:	82 0f       	add	r24, r18
+ 75c:	93 1f       	adc	r25, r19
+ 75e:	84 0f       	add	r24, r20
+ 760:	95 1f       	adc	r25, r21
+ 762:	ec 01       	movw	r28, r24
+ 764:	c0 0f       	add	r28, r16
+ 766:	d1 1d       	adc	r29, r1
+			sum=sum-30;
+			cmndbrk(0x90);
+ 768:	80 e9       	ldi	r24, 0x90	; 144
+ 76a:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("PLZ Collect ");
+ 76e:	81 e4       	ldi	r24, 0x41	; 65
+ 770:	91 e0       	ldi	r25, 0x01	; 1
+ 772:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0xd0);
+ 776:	80 ed       	ldi	r24, 0xD0	; 208
+ 778:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("Rs     frm counter");
+ 77c:	88 e7       	ldi	r24, 0x78	; 120
+ 77e:	91 e0       	ldi	r25, 0x01	; 1
+ 780:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			convert(sum,0xd5);
+ 784:	ce 01       	movw	r24, r28
+ 786:	4e 97       	sbiw	r24, 0x1e	; 30
+ 788:	65 ed       	ldi	r22, 0xD5	; 213
+ 78a:	0e 94 ad 00 	call	0x15a	; 0x15a <convert>
+ 78e:	8f e3       	ldi	r24, 0x3F	; 63
+ 790:	9d e0       	ldi	r25, 0x0D	; 13
+ 792:	a3 e0       	ldi	r26, 0x03	; 3
+ 794:	81 50       	subi	r24, 0x01	; 1
+ 796:	90 40       	sbci	r25, 0x00	; 0
+ 798:	a0 40       	sbci	r26, 0x00	; 0
+ 79a:	e1 f7       	brne	.-8      	; 0x794 <__stack+0x335>
+ 79c:	00 c0       	rjmp	.+0      	; 0x79e <__stack+0x33f>
+ 79e:	00 00       	nop
+			_delay_ms(1000);
+			cmndbrk(0x01);
+ 7a0:	81 e0       	ldi	r24, 0x01	; 1
+ 7a2:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			cmndbrk(0xc5);
+ 7a6:	85 ec       	ldi	r24, 0xC5	; 197
+ 7a8:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("THANK YOU");
+ 7ac:	80 e6       	ldi	r24, 0x60	; 96
+ 7ae:	91 e0       	ldi	r25, 0x01	; 1
+ 7b0:	0e 94 98 00 	call	0x130	; 0x130 <str>
+ 7b4:	8f e3       	ldi	r24, 0x3F	; 63
+ 7b6:	9d e0       	ldi	r25, 0x0D	; 13
+ 7b8:	a3 e0       	ldi	r26, 0x03	; 3
+ 7ba:	81 50       	subi	r24, 0x01	; 1
+ 7bc:	90 40       	sbci	r25, 0x00	; 0
+ 7be:	a0 40       	sbci	r26, 0x00	; 0
+ 7c0:	e1 f7       	brne	.-8      	; 0x7ba <__stack+0x35b>
+ 7c2:	00 c0       	rjmp	.+0      	; 0x7c4 <__stack+0x365>
+ 7c4:	00 00       	nop
+ 7c6:	6a cd       	rjmp	.-1324   	; 0x29c <main+0x6e>
+			_delay_ms(1000);
+			break;
+			case 4:
+			cmndbrk(0x80);
+ 7c8:	80 e8       	ldi	r24, 0x80	; 128
+ 7ca:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("YOU HAVE SELECTD");
+ 7ce:	87 e0       	ldi	r24, 0x07	; 7
+ 7d0:	91 e0       	ldi	r25, 0x01	; 1
+ 7d2:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0xc0);
+ 7d6:	80 ec       	ldi	r24, 0xC0	; 192
+ 7d8:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("4. SABJI");
+ 7dc:	86 e9       	ldi	r24, 0x96	; 150
+ 7de:	91 e0       	ldi	r25, 0x01	; 1
+ 7e0:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0x90);
+ 7e4:	80 e9       	ldi	r24, 0x90	; 144
+ 7e6:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("PLZ PAY RUPEE");
+ 7ea:	83 e2       	ldi	r24, 0x23	; 35
+ 7ec:	91 e0       	ldi	r25, 0x01	; 1
+ 7ee:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0xd5);
+ 7f2:	85 ed       	ldi	r24, 0xD5	; 213
+ 7f4:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("60");
+ 7f8:	8f e9       	ldi	r24, 0x9F	; 159
+ 7fa:	91 e0       	ldi	r25, 0x01	; 1
+ 7fc:	0e 94 98 00 	call	0x130	; 0x130 <str>
+ 800:	8f e9       	ldi	r24, 0x9F	; 159
+ 802:	96 e8       	ldi	r25, 0x86	; 134
+ 804:	a1 e0       	ldi	r26, 0x01	; 1
+ 806:	81 50       	subi	r24, 0x01	; 1
+ 808:	90 40       	sbci	r25, 0x00	; 0
+ 80a:	a0 40       	sbci	r26, 0x00	; 0
+ 80c:	e1 f7       	brne	.-8      	; 0x806 <__stack+0x3a7>
+ 80e:	00 c0       	rjmp	.+0      	; 0x810 <__stack+0x3b1>
+ 810:	00 00       	nop
+			_delay_ms(500);
+			cmndbrk(0x01);
+ 812:	81 e0       	ldi	r24, 0x01	; 1
+ 814:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			cmndbrk(0x80);
+ 818:	80 e8       	ldi	r24, 0x80	; 128
+ 81a:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("AMT GIVEN- ");
+ 81e:	85 e3       	ldi	r24, 0x35	; 53
+ 820:	91 e0       	ldi	r25, 0x01	; 1
+ 822:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			a=keysense();
+ 826:	0e 94 db 00 	call	0x1b6	; 0x1b6 <keysense>
+ 82a:	c8 2f       	mov	r28, r24
+			datbrk(a+48);
+ 82c:	80 5d       	subi	r24, 0xD0	; 208
+ 82e:	0e 94 8c 00 	call	0x118	; 0x118 <datbrk>
+ 832:	8f e9       	ldi	r24, 0x9F	; 159
+ 834:	96 e8       	ldi	r25, 0x86	; 134
+ 836:	a1 e0       	ldi	r26, 0x01	; 1
+ 838:	81 50       	subi	r24, 0x01	; 1
+ 83a:	90 40       	sbci	r25, 0x00	; 0
+ 83c:	a0 40       	sbci	r26, 0x00	; 0
+ 83e:	e1 f7       	brne	.-8      	; 0x838 <__stack+0x3d9>
+ 840:	00 c0       	rjmp	.+0      	; 0x842 <__stack+0x3e3>
+ 842:	00 00       	nop
+			_delay_ms(500);
+			b=keysense();
+ 844:	0e 94 db 00 	call	0x1b6	; 0x1b6 <keysense>
+ 848:	18 2f       	mov	r17, r24
+			datbrk(b+48);
+ 84a:	80 5d       	subi	r24, 0xD0	; 208
+ 84c:	0e 94 8c 00 	call	0x118	; 0x118 <datbrk>
+ 850:	8f e9       	ldi	r24, 0x9F	; 159
+ 852:	96 e8       	ldi	r25, 0x86	; 134
+ 854:	a1 e0       	ldi	r26, 0x01	; 1
+ 856:	81 50       	subi	r24, 0x01	; 1
+ 858:	90 40       	sbci	r25, 0x00	; 0
+ 85a:	a0 40       	sbci	r26, 0x00	; 0
+ 85c:	e1 f7       	brne	.-8      	; 0x856 <__stack+0x3f7>
+ 85e:	00 c0       	rjmp	.+0      	; 0x860 <__stack+0x401>
+ 860:	00 00       	nop
+			_delay_ms(500);
+			c=keysense();
+ 862:	0e 94 db 00 	call	0x1b6	; 0x1b6 <keysense>
+ 866:	08 2f       	mov	r16, r24
+			datbrk(c+48);
+ 868:	80 5d       	subi	r24, 0xD0	; 208
+ 86a:	0e 94 8c 00 	call	0x118	; 0x118 <datbrk>
+ 86e:	8f e9       	ldi	r24, 0x9F	; 159
+ 870:	96 e8       	ldi	r25, 0x86	; 134
+ 872:	a1 e0       	ldi	r26, 0x01	; 1
+ 874:	81 50       	subi	r24, 0x01	; 1
+ 876:	90 40       	sbci	r25, 0x00	; 0
+ 878:	a0 40       	sbci	r26, 0x00	; 0
+ 87a:	e1 f7       	brne	.-8      	; 0x874 <__stack+0x415>
+ 87c:	00 c0       	rjmp	.+0      	; 0x87e <__stack+0x41f>
+ 87e:	00 00       	nop
+			_delay_ms(500);
+			sum=100*a+10*b+c;
+ 880:	d0 e0       	ldi	r29, 0x00	; 0
+ 882:	84 e6       	ldi	r24, 0x64	; 100
+ 884:	90 e0       	ldi	r25, 0x00	; 0
+ 886:	c8 9f       	mul	r28, r24
+ 888:	a0 01       	movw	r20, r0
+ 88a:	c9 9f       	mul	r28, r25
+ 88c:	50 0d       	add	r21, r0
+ 88e:	d8 9f       	mul	r29, r24
+ 890:	50 0d       	add	r21, r0
+ 892:	11 24       	eor	r1, r1
+ 894:	81 2f       	mov	r24, r17
+ 896:	90 e0       	ldi	r25, 0x00	; 0
+ 898:	88 0f       	add	r24, r24
+ 89a:	99 1f       	adc	r25, r25
+ 89c:	9c 01       	movw	r18, r24
+ 89e:	22 0f       	add	r18, r18
+ 8a0:	33 1f       	adc	r19, r19
+ 8a2:	22 0f       	add	r18, r18
+ 8a4:	33 1f       	adc	r19, r19
+ 8a6:	82 0f       	add	r24, r18
+ 8a8:	93 1f       	adc	r25, r19
+ 8aa:	84 0f       	add	r24, r20
+ 8ac:	95 1f       	adc	r25, r21
+ 8ae:	ec 01       	movw	r28, r24
+ 8b0:	c0 0f       	add	r28, r16
+ 8b2:	d1 1d       	adc	r29, r1
+			sum=sum-60;
+			cmndbrk(0x90);
+ 8b4:	80 e9       	ldi	r24, 0x90	; 144
+ 8b6:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("PLZ Collect ");
+ 8ba:	81 e4       	ldi	r24, 0x41	; 65
+ 8bc:	91 e0       	ldi	r25, 0x01	; 1
+ 8be:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0xd0);
+ 8c2:	80 ed       	ldi	r24, 0xD0	; 208
+ 8c4:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("Rs     frm counter");
+ 8c8:	88 e7       	ldi	r24, 0x78	; 120
+ 8ca:	91 e0       	ldi	r25, 0x01	; 1
+ 8cc:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			convert(sum,0xd5);
+ 8d0:	ce 01       	movw	r24, r28
+ 8d2:	cc 97       	sbiw	r24, 0x3c	; 60
+ 8d4:	65 ed       	ldi	r22, 0xD5	; 213
+ 8d6:	0e 94 ad 00 	call	0x15a	; 0x15a <convert>
+ 8da:	8f e3       	ldi	r24, 0x3F	; 63
+ 8dc:	9d e0       	ldi	r25, 0x0D	; 13
+ 8de:	a3 e0       	ldi	r26, 0x03	; 3
+ 8e0:	81 50       	subi	r24, 0x01	; 1
+ 8e2:	90 40       	sbci	r25, 0x00	; 0
+ 8e4:	a0 40       	sbci	r26, 0x00	; 0
+ 8e6:	e1 f7       	brne	.-8      	; 0x8e0 <__stack+0x481>
+ 8e8:	00 c0       	rjmp	.+0      	; 0x8ea <__stack+0x48b>
+ 8ea:	00 00       	nop
+			_delay_ms(1000);
+			cmndbrk(0x01);
+ 8ec:	81 e0       	ldi	r24, 0x01	; 1
+ 8ee:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			cmndbrk(0xc5);
+ 8f2:	85 ec       	ldi	r24, 0xC5	; 197
+ 8f4:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("THANK YOU");
+ 8f8:	80 e6       	ldi	r24, 0x60	; 96
+ 8fa:	91 e0       	ldi	r25, 0x01	; 1
+ 8fc:	0e 94 98 00 	call	0x130	; 0x130 <str>
+ 900:	8f e3       	ldi	r24, 0x3F	; 63
+ 902:	9d e0       	ldi	r25, 0x0D	; 13
+ 904:	a3 e0       	ldi	r26, 0x03	; 3
+ 906:	81 50       	subi	r24, 0x01	; 1
+ 908:	90 40       	sbci	r25, 0x00	; 0
+ 90a:	a0 40       	sbci	r26, 0x00	; 0
+ 90c:	e1 f7       	brne	.-8      	; 0x906 <__stack+0x4a7>
+ 90e:	00 c0       	rjmp	.+0      	; 0x910 <__stack+0x4b1>
+ 910:	00 00       	nop
+ 912:	c4 cc       	rjmp	.-1656   	; 0x29c <main+0x6e>
+			_delay_ms(1000);
+			break;
+			case 5:
+			cmndbrk(0x80);
+ 914:	80 e8       	ldi	r24, 0x80	; 128
+ 916:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("YOU HAVE SELECTD");
+ 91a:	87 e0       	ldi	r24, 0x07	; 7
+ 91c:	91 e0       	ldi	r25, 0x01	; 1
+ 91e:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0xc0);
+ 922:	80 ec       	ldi	r24, 0xC0	; 192
+ 924:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("5. PARANTHA");
+ 928:	82 ea       	ldi	r24, 0xA2	; 162
+ 92a:	91 e0       	ldi	r25, 0x01	; 1
+ 92c:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0x90);
+ 930:	80 e9       	ldi	r24, 0x90	; 144
+ 932:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("PLZ PAY RUPEE");
+ 936:	83 e2       	ldi	r24, 0x23	; 35
+ 938:	91 e0       	ldi	r25, 0x01	; 1
+ 93a:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0xd5);
+ 93e:	85 ed       	ldi	r24, 0xD5	; 213
+ 940:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("50");
+ 944:	8e ea       	ldi	r24, 0xAE	; 174
+ 946:	91 e0       	ldi	r25, 0x01	; 1
+ 948:	0e 94 98 00 	call	0x130	; 0x130 <str>
+ 94c:	8f e9       	ldi	r24, 0x9F	; 159
+ 94e:	96 e8       	ldi	r25, 0x86	; 134
+ 950:	a1 e0       	ldi	r26, 0x01	; 1
+ 952:	81 50       	subi	r24, 0x01	; 1
+ 954:	90 40       	sbci	r25, 0x00	; 0
+ 956:	a0 40       	sbci	r26, 0x00	; 0
+ 958:	e1 f7       	brne	.-8      	; 0x952 <__stack+0x4f3>
+ 95a:	00 c0       	rjmp	.+0      	; 0x95c <__stack+0x4fd>
+ 95c:	00 00       	nop
+			_delay_ms(500);
+			cmndbrk(0x01);
+ 95e:	81 e0       	ldi	r24, 0x01	; 1
+ 960:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			cmndbrk(0x80);
+ 964:	80 e8       	ldi	r24, 0x80	; 128
+ 966:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("AMT GIVEN- ");
+ 96a:	85 e3       	ldi	r24, 0x35	; 53
+ 96c:	91 e0       	ldi	r25, 0x01	; 1
+ 96e:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			a=keysense();
+ 972:	0e 94 db 00 	call	0x1b6	; 0x1b6 <keysense>
+ 976:	c8 2f       	mov	r28, r24
+			datbrk(a+48);
+ 978:	80 5d       	subi	r24, 0xD0	; 208
+ 97a:	0e 94 8c 00 	call	0x118	; 0x118 <datbrk>
+ 97e:	8f e9       	ldi	r24, 0x9F	; 159
+ 980:	96 e8       	ldi	r25, 0x86	; 134
+ 982:	a1 e0       	ldi	r26, 0x01	; 1
+ 984:	81 50       	subi	r24, 0x01	; 1
+ 986:	90 40       	sbci	r25, 0x00	; 0
+ 988:	a0 40       	sbci	r26, 0x00	; 0
+ 98a:	e1 f7       	brne	.-8      	; 0x984 <__stack+0x525>
+ 98c:	00 c0       	rjmp	.+0      	; 0x98e <__stack+0x52f>
+ 98e:	00 00       	nop
+			_delay_ms(500);
+			b=keysense();
+ 990:	0e 94 db 00 	call	0x1b6	; 0x1b6 <keysense>
+ 994:	18 2f       	mov	r17, r24
+			datbrk(b+48);
+ 996:	80 5d       	subi	r24, 0xD0	; 208
+ 998:	0e 94 8c 00 	call	0x118	; 0x118 <datbrk>
+ 99c:	8f e9       	ldi	r24, 0x9F	; 159
+ 99e:	96 e8       	ldi	r25, 0x86	; 134
+ 9a0:	a1 e0       	ldi	r26, 0x01	; 1
+ 9a2:	81 50       	subi	r24, 0x01	; 1
+ 9a4:	90 40       	sbci	r25, 0x00	; 0
+ 9a6:	a0 40       	sbci	r26, 0x00	; 0
+ 9a8:	e1 f7       	brne	.-8      	; 0x9a2 <__stack+0x543>
+ 9aa:	00 c0       	rjmp	.+0      	; 0x9ac <__stack+0x54d>
+ 9ac:	00 00       	nop
+			_delay_ms(500);
+			c=keysense();
+ 9ae:	0e 94 db 00 	call	0x1b6	; 0x1b6 <keysense>
+ 9b2:	08 2f       	mov	r16, r24
+			datbrk(c+48);
+ 9b4:	80 5d       	subi	r24, 0xD0	; 208
+ 9b6:	0e 94 8c 00 	call	0x118	; 0x118 <datbrk>
+ 9ba:	8f e9       	ldi	r24, 0x9F	; 159
+ 9bc:	96 e8       	ldi	r25, 0x86	; 134
+ 9be:	a1 e0       	ldi	r26, 0x01	; 1
+ 9c0:	81 50       	subi	r24, 0x01	; 1
+ 9c2:	90 40       	sbci	r25, 0x00	; 0
+ 9c4:	a0 40       	sbci	r26, 0x00	; 0
+ 9c6:	e1 f7       	brne	.-8      	; 0x9c0 <__stack+0x561>
+ 9c8:	00 c0       	rjmp	.+0      	; 0x9ca <__stack+0x56b>
+ 9ca:	00 00       	nop
+			_delay_ms(500);
+			sum=100*a+10*b+c;
+ 9cc:	d0 e0       	ldi	r29, 0x00	; 0
+ 9ce:	84 e6       	ldi	r24, 0x64	; 100
+ 9d0:	90 e0       	ldi	r25, 0x00	; 0
+ 9d2:	c8 9f       	mul	r28, r24
+ 9d4:	a0 01       	movw	r20, r0
+ 9d6:	c9 9f       	mul	r28, r25
+ 9d8:	50 0d       	add	r21, r0
+ 9da:	d8 9f       	mul	r29, r24
+ 9dc:	50 0d       	add	r21, r0
+ 9de:	11 24       	eor	r1, r1
+ 9e0:	81 2f       	mov	r24, r17
+ 9e2:	90 e0       	ldi	r25, 0x00	; 0
+ 9e4:	88 0f       	add	r24, r24
+ 9e6:	99 1f       	adc	r25, r25
+ 9e8:	9c 01       	movw	r18, r24
+ 9ea:	22 0f       	add	r18, r18
+ 9ec:	33 1f       	adc	r19, r19
+ 9ee:	22 0f       	add	r18, r18
+ 9f0:	33 1f       	adc	r19, r19
+ 9f2:	82 0f       	add	r24, r18
+ 9f4:	93 1f       	adc	r25, r19
+ 9f6:	84 0f       	add	r24, r20
+ 9f8:	95 1f       	adc	r25, r21
+ 9fa:	ec 01       	movw	r28, r24
+ 9fc:	c0 0f       	add	r28, r16
+ 9fe:	d1 1d       	adc	r29, r1
+			sum=sum-50;
+			cmndbrk(0x90);
+ a00:	80 e9       	ldi	r24, 0x90	; 144
+ a02:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("PLZ Collect ");
+ a06:	81 e4       	ldi	r24, 0x41	; 65
+ a08:	91 e0       	ldi	r25, 0x01	; 1
+ a0a:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0xd0);
+ a0e:	80 ed       	ldi	r24, 0xD0	; 208
+ a10:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("Rs     frm counter");
+ a14:	88 e7       	ldi	r24, 0x78	; 120
+ a16:	91 e0       	ldi	r25, 0x01	; 1
+ a18:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			convert(sum,0xd5);
+ a1c:	ce 01       	movw	r24, r28
+ a1e:	c2 97       	sbiw	r24, 0x32	; 50
+ a20:	65 ed       	ldi	r22, 0xD5	; 213
+ a22:	0e 94 ad 00 	call	0x15a	; 0x15a <convert>
+ a26:	8f e3       	ldi	r24, 0x3F	; 63
+ a28:	9d e0       	ldi	r25, 0x0D	; 13
+ a2a:	a3 e0       	ldi	r26, 0x03	; 3
+ a2c:	81 50       	subi	r24, 0x01	; 1
+ a2e:	90 40       	sbci	r25, 0x00	; 0
+ a30:	a0 40       	sbci	r26, 0x00	; 0
+ a32:	e1 f7       	brne	.-8      	; 0xa2c <__stack+0x5cd>
+ a34:	00 c0       	rjmp	.+0      	; 0xa36 <__stack+0x5d7>
+ a36:	00 00       	nop
+			_delay_ms(1000);
+			cmndbrk(0x01);
+ a38:	81 e0       	ldi	r24, 0x01	; 1
+ a3a:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			cmndbrk(0xc5);
+ a3e:	85 ec       	ldi	r24, 0xC5	; 197
+ a40:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("THANK YOU");
+ a44:	80 e6       	ldi	r24, 0x60	; 96
+ a46:	91 e0       	ldi	r25, 0x01	; 1
+ a48:	0e 94 98 00 	call	0x130	; 0x130 <str>
+ a4c:	8f e3       	ldi	r24, 0x3F	; 63
+ a4e:	9d e0       	ldi	r25, 0x0D	; 13
+ a50:	a3 e0       	ldi	r26, 0x03	; 3
+ a52:	81 50       	subi	r24, 0x01	; 1
+ a54:	90 40       	sbci	r25, 0x00	; 0
+ a56:	a0 40       	sbci	r26, 0x00	; 0
+ a58:	e1 f7       	brne	.-8      	; 0xa52 <__stack+0x5f3>
+ a5a:	00 c0       	rjmp	.+0      	; 0xa5c <__stack+0x5fd>
+ a5c:	00 00       	nop
+ a5e:	1e cc       	rjmp	.-1988   	; 0x29c <main+0x6e>
+			_delay_ms(1000);
+			break;
+			case 6:
+			cmndbrk(0x80);
+ a60:	80 e8       	ldi	r24, 0x80	; 128
+ a62:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("YOU HAVE SELECTD");
+ a66:	87 e0       	ldi	r24, 0x07	; 7
+ a68:	91 e0       	ldi	r25, 0x01	; 1
+ a6a:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0xc0);
+ a6e:	80 ec       	ldi	r24, 0xC0	; 192
+ a70:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("6. DAAL");
+ a74:	81 eb       	ldi	r24, 0xB1	; 177
+ a76:	91 e0       	ldi	r25, 0x01	; 1
+ a78:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0x90);
+ a7c:	80 e9       	ldi	r24, 0x90	; 144
+ a7e:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("PLZ PAY RUPEE");
+ a82:	83 e2       	ldi	r24, 0x23	; 35
+ a84:	91 e0       	ldi	r25, 0x01	; 1
+ a86:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0xd5);
+ a8a:	85 ed       	ldi	r24, 0xD5	; 213
+ a8c:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("70");
+ a90:	89 eb       	ldi	r24, 0xB9	; 185
+ a92:	91 e0       	ldi	r25, 0x01	; 1
+ a94:	0e 94 98 00 	call	0x130	; 0x130 <str>
+ a98:	8f e9       	ldi	r24, 0x9F	; 159
+ a9a:	96 e8       	ldi	r25, 0x86	; 134
+ a9c:	a1 e0       	ldi	r26, 0x01	; 1
+ a9e:	81 50       	subi	r24, 0x01	; 1
+ aa0:	90 40       	sbci	r25, 0x00	; 0
+ aa2:	a0 40       	sbci	r26, 0x00	; 0
+ aa4:	e1 f7       	brne	.-8      	; 0xa9e <__stack+0x63f>
+ aa6:	00 c0       	rjmp	.+0      	; 0xaa8 <__stack+0x649>
+ aa8:	00 00       	nop
+			_delay_ms(500);
+			cmndbrk(0x01);
+ aaa:	81 e0       	ldi	r24, 0x01	; 1
+ aac:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			cmndbrk(0x80);
+ ab0:	80 e8       	ldi	r24, 0x80	; 128
+ ab2:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("AMT GIVEN- ");
+ ab6:	85 e3       	ldi	r24, 0x35	; 53
+ ab8:	91 e0       	ldi	r25, 0x01	; 1
+ aba:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			a=keysense();
+ abe:	0e 94 db 00 	call	0x1b6	; 0x1b6 <keysense>
+ ac2:	c8 2f       	mov	r28, r24
+			datbrk(a+48);
+ ac4:	80 5d       	subi	r24, 0xD0	; 208
+ ac6:	0e 94 8c 00 	call	0x118	; 0x118 <datbrk>
+ aca:	8f e9       	ldi	r24, 0x9F	; 159
+ acc:	96 e8       	ldi	r25, 0x86	; 134
+ ace:	a1 e0       	ldi	r26, 0x01	; 1
+ ad0:	81 50       	subi	r24, 0x01	; 1
+ ad2:	90 40       	sbci	r25, 0x00	; 0
+ ad4:	a0 40       	sbci	r26, 0x00	; 0
+ ad6:	e1 f7       	brne	.-8      	; 0xad0 <__stack+0x671>
+ ad8:	00 c0       	rjmp	.+0      	; 0xada <__stack+0x67b>
+ ada:	00 00       	nop
+			_delay_ms(500);
+			b=keysense();
+ adc:	0e 94 db 00 	call	0x1b6	; 0x1b6 <keysense>
+ ae0:	18 2f       	mov	r17, r24
+			datbrk(b+48);
+ ae2:	80 5d       	subi	r24, 0xD0	; 208
+ ae4:	0e 94 8c 00 	call	0x118	; 0x118 <datbrk>
+ ae8:	8f e9       	ldi	r24, 0x9F	; 159
+ aea:	96 e8       	ldi	r25, 0x86	; 134
+ aec:	a1 e0       	ldi	r26, 0x01	; 1
+ aee:	81 50       	subi	r24, 0x01	; 1
+ af0:	90 40       	sbci	r25, 0x00	; 0
+ af2:	a0 40       	sbci	r26, 0x00	; 0
+ af4:	e1 f7       	brne	.-8      	; 0xaee <__stack+0x68f>
+ af6:	00 c0       	rjmp	.+0      	; 0xaf8 <__stack+0x699>
+ af8:	00 00       	nop
+			_delay_ms(500);
+			c=keysense();
+ afa:	0e 94 db 00 	call	0x1b6	; 0x1b6 <keysense>
+ afe:	08 2f       	mov	r16, r24
+			datbrk(c+48);
+ b00:	80 5d       	subi	r24, 0xD0	; 208
+ b02:	0e 94 8c 00 	call	0x118	; 0x118 <datbrk>
+ b06:	8f e9       	ldi	r24, 0x9F	; 159
+ b08:	96 e8       	ldi	r25, 0x86	; 134
+ b0a:	a1 e0       	ldi	r26, 0x01	; 1
+ b0c:	81 50       	subi	r24, 0x01	; 1
+ b0e:	90 40       	sbci	r25, 0x00	; 0
+ b10:	a0 40       	sbci	r26, 0x00	; 0
+ b12:	e1 f7       	brne	.-8      	; 0xb0c <__stack+0x6ad>
+ b14:	00 c0       	rjmp	.+0      	; 0xb16 <__stack+0x6b7>
+ b16:	00 00       	nop
+			_delay_ms(500);
+			sum=100*a+10*b+c;
+ b18:	d0 e0       	ldi	r29, 0x00	; 0
+ b1a:	84 e6       	ldi	r24, 0x64	; 100
+ b1c:	90 e0       	ldi	r25, 0x00	; 0
+ b1e:	c8 9f       	mul	r28, r24
+ b20:	a0 01       	movw	r20, r0
+ b22:	c9 9f       	mul	r28, r25
+ b24:	50 0d       	add	r21, r0
+ b26:	d8 9f       	mul	r29, r24
+ b28:	50 0d       	add	r21, r0
+ b2a:	11 24       	eor	r1, r1
+ b2c:	81 2f       	mov	r24, r17
+ b2e:	90 e0       	ldi	r25, 0x00	; 0
+ b30:	88 0f       	add	r24, r24
+ b32:	99 1f       	adc	r25, r25
+ b34:	9c 01       	movw	r18, r24
+ b36:	22 0f       	add	r18, r18
+ b38:	33 1f       	adc	r19, r19
+ b3a:	22 0f       	add	r18, r18
+ b3c:	33 1f       	adc	r19, r19
+ b3e:	82 0f       	add	r24, r18
+ b40:	93 1f       	adc	r25, r19
+ b42:	84 0f       	add	r24, r20
+ b44:	95 1f       	adc	r25, r21
+ b46:	ec 01       	movw	r28, r24
+ b48:	c0 0f       	add	r28, r16
+ b4a:	d1 1d       	adc	r29, r1
+			sum=sum-70;
+			cmndbrk(0x90);
+ b4c:	80 e9       	ldi	r24, 0x90	; 144
+ b4e:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("PLZ Collect ");
+ b52:	81 e4       	ldi	r24, 0x41	; 65
+ b54:	91 e0       	ldi	r25, 0x01	; 1
+ b56:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0xd0);
+ b5a:	80 ed       	ldi	r24, 0xD0	; 208
+ b5c:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("Rs     frm counter");
+ b60:	88 e7       	ldi	r24, 0x78	; 120
+ b62:	91 e0       	ldi	r25, 0x01	; 1
+ b64:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			convert(sum,0xd5);
+ b68:	ce 01       	movw	r24, r28
+ b6a:	86 54       	subi	r24, 0x46	; 70
+ b6c:	90 40       	sbci	r25, 0x00	; 0
+ b6e:	65 ed       	ldi	r22, 0xD5	; 213
+ b70:	0e 94 ad 00 	call	0x15a	; 0x15a <convert>
+ b74:	8f e3       	ldi	r24, 0x3F	; 63
+ b76:	9d e0       	ldi	r25, 0x0D	; 13
+ b78:	a3 e0       	ldi	r26, 0x03	; 3
+ b7a:	81 50       	subi	r24, 0x01	; 1
+ b7c:	90 40       	sbci	r25, 0x00	; 0
+ b7e:	a0 40       	sbci	r26, 0x00	; 0
+ b80:	e1 f7       	brne	.-8      	; 0xb7a <__stack+0x71b>
+ b82:	00 c0       	rjmp	.+0      	; 0xb84 <__stack+0x725>
+ b84:	00 00       	nop
+			_delay_ms(1000);
+			cmndbrk(0x01);
+ b86:	81 e0       	ldi	r24, 0x01	; 1
+ b88:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			cmndbrk(0xc5);
+ b8c:	85 ec       	ldi	r24, 0xC5	; 197
+ b8e:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("THANK YOU");
+ b92:	80 e6       	ldi	r24, 0x60	; 96
+ b94:	91 e0       	ldi	r25, 0x01	; 1
+ b96:	0e 94 98 00 	call	0x130	; 0x130 <str>
+ b9a:	8f e3       	ldi	r24, 0x3F	; 63
+ b9c:	9d e0       	ldi	r25, 0x0D	; 13
+ b9e:	a3 e0       	ldi	r26, 0x03	; 3
+ ba0:	81 50       	subi	r24, 0x01	; 1
+ ba2:	90 40       	sbci	r25, 0x00	; 0
+ ba4:	a0 40       	sbci	r26, 0x00	; 0
+ ba6:	e1 f7       	brne	.-8      	; 0xba0 <__stack+0x741>
+ ba8:	00 c0       	rjmp	.+0      	; 0xbaa <__stack+0x74b>
+ baa:	00 00       	nop
+ bac:	77 cb       	rjmp	.-2322   	; 0x29c <main+0x6e>
+			_delay_ms(1000);
+			break;
+			case 7:
+			cmndbrk(0x80);
+ bae:	80 e8       	ldi	r24, 0x80	; 128
+ bb0:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("YOU HAVE SELECTD");
+ bb4:	87 e0       	ldi	r24, 0x07	; 7
+ bb6:	91 e0       	ldi	r25, 0x01	; 1
+ bb8:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0xc0);
+ bbc:	80 ec       	ldi	r24, 0xC0	; 192
+ bbe:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("7. PANEER");
+ bc2:	8c eb       	ldi	r24, 0xBC	; 188
+ bc4:	91 e0       	ldi	r25, 0x01	; 1
+ bc6:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0x90);
+ bca:	80 e9       	ldi	r24, 0x90	; 144
+ bcc:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("PLZ PAY RUPEE");
+ bd0:	83 e2       	ldi	r24, 0x23	; 35
+ bd2:	91 e0       	ldi	r25, 0x01	; 1
+ bd4:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0xd5);
+ bd8:	85 ed       	ldi	r24, 0xD5	; 213
+ bda:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("150");
+ bde:	86 ec       	ldi	r24, 0xC6	; 198
+ be0:	91 e0       	ldi	r25, 0x01	; 1
+ be2:	0e 94 98 00 	call	0x130	; 0x130 <str>
+ be6:	8f e9       	ldi	r24, 0x9F	; 159
+ be8:	96 e8       	ldi	r25, 0x86	; 134
+ bea:	a1 e0       	ldi	r26, 0x01	; 1
+ bec:	81 50       	subi	r24, 0x01	; 1
+ bee:	90 40       	sbci	r25, 0x00	; 0
+ bf0:	a0 40       	sbci	r26, 0x00	; 0
+ bf2:	e1 f7       	brne	.-8      	; 0xbec <__stack+0x78d>
+ bf4:	00 c0       	rjmp	.+0      	; 0xbf6 <__stack+0x797>
+ bf6:	00 00       	nop
+			_delay_ms(500);
+			cmndbrk(0x01);
+ bf8:	81 e0       	ldi	r24, 0x01	; 1
+ bfa:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			cmndbrk(0x80);
+ bfe:	80 e8       	ldi	r24, 0x80	; 128
+ c00:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("AMT GIVEN- ");
+ c04:	85 e3       	ldi	r24, 0x35	; 53
+ c06:	91 e0       	ldi	r25, 0x01	; 1
+ c08:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			a=keysense();
+ c0c:	0e 94 db 00 	call	0x1b6	; 0x1b6 <keysense>
+ c10:	c8 2f       	mov	r28, r24
+			datbrk(a+48);
+ c12:	80 5d       	subi	r24, 0xD0	; 208
+ c14:	0e 94 8c 00 	call	0x118	; 0x118 <datbrk>
+ c18:	8f e9       	ldi	r24, 0x9F	; 159
+ c1a:	96 e8       	ldi	r25, 0x86	; 134
+ c1c:	a1 e0       	ldi	r26, 0x01	; 1
+ c1e:	81 50       	subi	r24, 0x01	; 1
+ c20:	90 40       	sbci	r25, 0x00	; 0
+ c22:	a0 40       	sbci	r26, 0x00	; 0
+ c24:	e1 f7       	brne	.-8      	; 0xc1e <__stack+0x7bf>
+ c26:	00 c0       	rjmp	.+0      	; 0xc28 <__stack+0x7c9>
+ c28:	00 00       	nop
+			_delay_ms(500);
+			b=keysense();
+ c2a:	0e 94 db 00 	call	0x1b6	; 0x1b6 <keysense>
+ c2e:	18 2f       	mov	r17, r24
+			datbrk(b+48);
+ c30:	80 5d       	subi	r24, 0xD0	; 208
+ c32:	0e 94 8c 00 	call	0x118	; 0x118 <datbrk>
+ c36:	8f e9       	ldi	r24, 0x9F	; 159
+ c38:	96 e8       	ldi	r25, 0x86	; 134
+ c3a:	a1 e0       	ldi	r26, 0x01	; 1
+ c3c:	81 50       	subi	r24, 0x01	; 1
+ c3e:	90 40       	sbci	r25, 0x00	; 0
+ c40:	a0 40       	sbci	r26, 0x00	; 0
+ c42:	e1 f7       	brne	.-8      	; 0xc3c <__stack+0x7dd>
+ c44:	00 c0       	rjmp	.+0      	; 0xc46 <__stack+0x7e7>
+ c46:	00 00       	nop
+			_delay_ms(500);
+			c=keysense();
+ c48:	0e 94 db 00 	call	0x1b6	; 0x1b6 <keysense>
+ c4c:	08 2f       	mov	r16, r24
+			datbrk(c+48);
+ c4e:	80 5d       	subi	r24, 0xD0	; 208
+ c50:	0e 94 8c 00 	call	0x118	; 0x118 <datbrk>
+ c54:	8f e9       	ldi	r24, 0x9F	; 159
+ c56:	96 e8       	ldi	r25, 0x86	; 134
+ c58:	a1 e0       	ldi	r26, 0x01	; 1
+ c5a:	81 50       	subi	r24, 0x01	; 1
+ c5c:	90 40       	sbci	r25, 0x00	; 0
+ c5e:	a0 40       	sbci	r26, 0x00	; 0
+ c60:	e1 f7       	brne	.-8      	; 0xc5a <__stack+0x7fb>
+ c62:	00 c0       	rjmp	.+0      	; 0xc64 <__stack+0x805>
+ c64:	00 00       	nop
+			_delay_ms(500);
+			sum=100*a+10*b+c;
+ c66:	d0 e0       	ldi	r29, 0x00	; 0
+ c68:	84 e6       	ldi	r24, 0x64	; 100
+ c6a:	90 e0       	ldi	r25, 0x00	; 0
+ c6c:	c8 9f       	mul	r28, r24
+ c6e:	a0 01       	movw	r20, r0
+ c70:	c9 9f       	mul	r28, r25
+ c72:	50 0d       	add	r21, r0
+ c74:	d8 9f       	mul	r29, r24
+ c76:	50 0d       	add	r21, r0
+ c78:	11 24       	eor	r1, r1
+ c7a:	81 2f       	mov	r24, r17
+ c7c:	90 e0       	ldi	r25, 0x00	; 0
+ c7e:	88 0f       	add	r24, r24
+ c80:	99 1f       	adc	r25, r25
+ c82:	9c 01       	movw	r18, r24
+ c84:	22 0f       	add	r18, r18
+ c86:	33 1f       	adc	r19, r19
+ c88:	22 0f       	add	r18, r18
+ c8a:	33 1f       	adc	r19, r19
+ c8c:	82 0f       	add	r24, r18
+ c8e:	93 1f       	adc	r25, r19
+ c90:	84 0f       	add	r24, r20
+ c92:	95 1f       	adc	r25, r21
+ c94:	ec 01       	movw	r28, r24
+ c96:	c0 0f       	add	r28, r16
+ c98:	d1 1d       	adc	r29, r1
+			sum=sum-150;
+			cmndbrk(0x90);
+ c9a:	80 e9       	ldi	r24, 0x90	; 144
+ c9c:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("PLZ Collect ");
+ ca0:	81 e4       	ldi	r24, 0x41	; 65
+ ca2:	91 e0       	ldi	r25, 0x01	; 1
+ ca4:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0xd0);
+ ca8:	80 ed       	ldi	r24, 0xD0	; 208
+ caa:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("Rs     frm counter");
+ cae:	88 e7       	ldi	r24, 0x78	; 120
+ cb0:	91 e0       	ldi	r25, 0x01	; 1
+ cb2:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			convert(sum,0xd5);
+ cb6:	ce 01       	movw	r24, r28
+ cb8:	86 59       	subi	r24, 0x96	; 150
+ cba:	90 40       	sbci	r25, 0x00	; 0
+ cbc:	65 ed       	ldi	r22, 0xD5	; 213
+ cbe:	0e 94 ad 00 	call	0x15a	; 0x15a <convert>
+ cc2:	8f e3       	ldi	r24, 0x3F	; 63
+ cc4:	9d e0       	ldi	r25, 0x0D	; 13
+ cc6:	a3 e0       	ldi	r26, 0x03	; 3
+ cc8:	81 50       	subi	r24, 0x01	; 1
+ cca:	90 40       	sbci	r25, 0x00	; 0
+ ccc:	a0 40       	sbci	r26, 0x00	; 0
+ cce:	e1 f7       	brne	.-8      	; 0xcc8 <__stack+0x869>
+ cd0:	00 c0       	rjmp	.+0      	; 0xcd2 <__stack+0x873>
+ cd2:	00 00       	nop
+			_delay_ms(1000);
+			cmndbrk(0x01);
+ cd4:	81 e0       	ldi	r24, 0x01	; 1
+ cd6:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			cmndbrk(0xc5);
+ cda:	85 ec       	ldi	r24, 0xC5	; 197
+ cdc:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("THANK YOU");
+ ce0:	80 e6       	ldi	r24, 0x60	; 96
+ ce2:	91 e0       	ldi	r25, 0x01	; 1
+ ce4:	0e 94 98 00 	call	0x130	; 0x130 <str>
+ ce8:	8f e3       	ldi	r24, 0x3F	; 63
+ cea:	9d e0       	ldi	r25, 0x0D	; 13
+ cec:	a3 e0       	ldi	r26, 0x03	; 3
+ cee:	81 50       	subi	r24, 0x01	; 1
+ cf0:	90 40       	sbci	r25, 0x00	; 0
+ cf2:	a0 40       	sbci	r26, 0x00	; 0
+ cf4:	e1 f7       	brne	.-8      	; 0xcee <__stack+0x88f>
+ cf6:	00 c0       	rjmp	.+0      	; 0xcf8 <__stack+0x899>
+ cf8:	00 00       	nop
+ cfa:	d0 ca       	rjmp	.-2656   	; 0x29c <main+0x6e>
+			_delay_ms(1000);
+			break;
+			case 8:
+			cmndbrk(0x80);
+ cfc:	80 e8       	ldi	r24, 0x80	; 128
+ cfe:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("YOU HAVE SELECTD");
+ d02:	87 e0       	ldi	r24, 0x07	; 7
+ d04:	91 e0       	ldi	r25, 0x01	; 1
+ d06:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0xc0);
+ d0a:	80 ec       	ldi	r24, 0xC0	; 192
+ d0c:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("8. PAPAD");
+ d10:	8a ec       	ldi	r24, 0xCA	; 202
+ d12:	91 e0       	ldi	r25, 0x01	; 1
+ d14:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0x90);
+ d18:	80 e9       	ldi	r24, 0x90	; 144
+ d1a:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("PLZ PAY RUPEE");
+ d1e:	83 e2       	ldi	r24, 0x23	; 35
+ d20:	91 e0       	ldi	r25, 0x01	; 1
+ d22:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0xd5);
+ d26:	85 ed       	ldi	r24, 0xD5	; 213
+ d28:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("20");
+ d2c:	83 ed       	ldi	r24, 0xD3	; 211
+ d2e:	91 e0       	ldi	r25, 0x01	; 1
+ d30:	0e 94 98 00 	call	0x130	; 0x130 <str>
+ d34:	8f e9       	ldi	r24, 0x9F	; 159
+ d36:	96 e8       	ldi	r25, 0x86	; 134
+ d38:	a1 e0       	ldi	r26, 0x01	; 1
+ d3a:	81 50       	subi	r24, 0x01	; 1
+ d3c:	90 40       	sbci	r25, 0x00	; 0
+ d3e:	a0 40       	sbci	r26, 0x00	; 0
+ d40:	e1 f7       	brne	.-8      	; 0xd3a <__stack+0x8db>
+ d42:	00 c0       	rjmp	.+0      	; 0xd44 <__stack+0x8e5>
+ d44:	00 00       	nop
+			_delay_ms(500);
+			cmndbrk(0x01);
+ d46:	81 e0       	ldi	r24, 0x01	; 1
+ d48:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			cmndbrk(0x80);
+ d4c:	80 e8       	ldi	r24, 0x80	; 128
+ d4e:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("AMT GIVEN- ");
+ d52:	85 e3       	ldi	r24, 0x35	; 53
+ d54:	91 e0       	ldi	r25, 0x01	; 1
+ d56:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			a=keysense();
+ d5a:	0e 94 db 00 	call	0x1b6	; 0x1b6 <keysense>
+ d5e:	c8 2f       	mov	r28, r24
+			datbrk(a+48);
+ d60:	80 5d       	subi	r24, 0xD0	; 208
+ d62:	0e 94 8c 00 	call	0x118	; 0x118 <datbrk>
+ d66:	8f e9       	ldi	r24, 0x9F	; 159
+ d68:	96 e8       	ldi	r25, 0x86	; 134
+ d6a:	a1 e0       	ldi	r26, 0x01	; 1
+ d6c:	81 50       	subi	r24, 0x01	; 1
+ d6e:	90 40       	sbci	r25, 0x00	; 0
+ d70:	a0 40       	sbci	r26, 0x00	; 0
+ d72:	e1 f7       	brne	.-8      	; 0xd6c <__stack+0x90d>
+ d74:	00 c0       	rjmp	.+0      	; 0xd76 <__stack+0x917>
+ d76:	00 00       	nop
+			_delay_ms(500);
+			b=keysense();
+ d78:	0e 94 db 00 	call	0x1b6	; 0x1b6 <keysense>
+ d7c:	18 2f       	mov	r17, r24
+			datbrk(b+48);
+ d7e:	80 5d       	subi	r24, 0xD0	; 208
+ d80:	0e 94 8c 00 	call	0x118	; 0x118 <datbrk>
+ d84:	8f e9       	ldi	r24, 0x9F	; 159
+ d86:	96 e8       	ldi	r25, 0x86	; 134
+ d88:	a1 e0       	ldi	r26, 0x01	; 1
+ d8a:	81 50       	subi	r24, 0x01	; 1
+ d8c:	90 40       	sbci	r25, 0x00	; 0
+ d8e:	a0 40       	sbci	r26, 0x00	; 0
+ d90:	e1 f7       	brne	.-8      	; 0xd8a <__stack+0x92b>
+ d92:	00 c0       	rjmp	.+0      	; 0xd94 <__stack+0x935>
+ d94:	00 00       	nop
+			_delay_ms(500);
+			c=keysense();
+ d96:	0e 94 db 00 	call	0x1b6	; 0x1b6 <keysense>
+ d9a:	08 2f       	mov	r16, r24
+			datbrk(c+48);
+ d9c:	80 5d       	subi	r24, 0xD0	; 208
+ d9e:	0e 94 8c 00 	call	0x118	; 0x118 <datbrk>
+ da2:	8f e9       	ldi	r24, 0x9F	; 159
+ da4:	96 e8       	ldi	r25, 0x86	; 134
+ da6:	a1 e0       	ldi	r26, 0x01	; 1
+ da8:	81 50       	subi	r24, 0x01	; 1
+ daa:	90 40       	sbci	r25, 0x00	; 0
+ dac:	a0 40       	sbci	r26, 0x00	; 0
+ dae:	e1 f7       	brne	.-8      	; 0xda8 <__stack+0x949>
+ db0:	00 c0       	rjmp	.+0      	; 0xdb2 <__stack+0x953>
+ db2:	00 00       	nop
+			_delay_ms(500);
+			sum=100*a+10*b+c;
+ db4:	d0 e0       	ldi	r29, 0x00	; 0
+ db6:	84 e6       	ldi	r24, 0x64	; 100
+ db8:	90 e0       	ldi	r25, 0x00	; 0
+ dba:	c8 9f       	mul	r28, r24
+ dbc:	a0 01       	movw	r20, r0
+ dbe:	c9 9f       	mul	r28, r25
+ dc0:	50 0d       	add	r21, r0
+ dc2:	d8 9f       	mul	r29, r24
+ dc4:	50 0d       	add	r21, r0
+ dc6:	11 24       	eor	r1, r1
+ dc8:	81 2f       	mov	r24, r17
+ dca:	90 e0       	ldi	r25, 0x00	; 0
+ dcc:	88 0f       	add	r24, r24
+ dce:	99 1f       	adc	r25, r25
+ dd0:	9c 01       	movw	r18, r24
+ dd2:	22 0f       	add	r18, r18
+ dd4:	33 1f       	adc	r19, r19
+ dd6:	22 0f       	add	r18, r18
+ dd8:	33 1f       	adc	r19, r19
+ dda:	82 0f       	add	r24, r18
+ ddc:	93 1f       	adc	r25, r19
+ dde:	84 0f       	add	r24, r20
+ de0:	95 1f       	adc	r25, r21
+ de2:	ec 01       	movw	r28, r24
+ de4:	c0 0f       	add	r28, r16
+ de6:	d1 1d       	adc	r29, r1
+			sum=sum-20;
+			cmndbrk(0x90);
+ de8:	80 e9       	ldi	r24, 0x90	; 144
+ dea:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("PLZ Collect ");
+ dee:	81 e4       	ldi	r24, 0x41	; 65
+ df0:	91 e0       	ldi	r25, 0x01	; 1
+ df2:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0xd0);
+ df6:	80 ed       	ldi	r24, 0xD0	; 208
+ df8:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("Rs     frm counter");
+ dfc:	88 e7       	ldi	r24, 0x78	; 120
+ dfe:	91 e0       	ldi	r25, 0x01	; 1
+ e00:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			convert(sum,0xd5);
+ e04:	ce 01       	movw	r24, r28
+ e06:	44 97       	sbiw	r24, 0x14	; 20
+ e08:	65 ed       	ldi	r22, 0xD5	; 213
+ e0a:	0e 94 ad 00 	call	0x15a	; 0x15a <convert>
+ e0e:	8f e3       	ldi	r24, 0x3F	; 63
+ e10:	9d e0       	ldi	r25, 0x0D	; 13
+ e12:	a3 e0       	ldi	r26, 0x03	; 3
+ e14:	81 50       	subi	r24, 0x01	; 1
+ e16:	90 40       	sbci	r25, 0x00	; 0
+ e18:	a0 40       	sbci	r26, 0x00	; 0
+ e1a:	e1 f7       	brne	.-8      	; 0xe14 <__stack+0x9b5>
+ e1c:	00 c0       	rjmp	.+0      	; 0xe1e <__stack+0x9bf>
+ e1e:	00 00       	nop
+			_delay_ms(1000);
+			cmndbrk(0x01);
+ e20:	81 e0       	ldi	r24, 0x01	; 1
+ e22:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			cmndbrk(0xc5);
+ e26:	85 ec       	ldi	r24, 0xC5	; 197
+ e28:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("THANK YOU");
+ e2c:	80 e6       	ldi	r24, 0x60	; 96
+ e2e:	91 e0       	ldi	r25, 0x01	; 1
+ e30:	0e 94 98 00 	call	0x130	; 0x130 <str>
+ e34:	8f e3       	ldi	r24, 0x3F	; 63
+ e36:	9d e0       	ldi	r25, 0x0D	; 13
+ e38:	a3 e0       	ldi	r26, 0x03	; 3
+ e3a:	81 50       	subi	r24, 0x01	; 1
+ e3c:	90 40       	sbci	r25, 0x00	; 0
+ e3e:	a0 40       	sbci	r26, 0x00	; 0
+ e40:	e1 f7       	brne	.-8      	; 0xe3a <__stack+0x9db>
+ e42:	00 c0       	rjmp	.+0      	; 0xe44 <__stack+0x9e5>
+ e44:	00 00       	nop
+ e46:	2a ca       	rjmp	.-2988   	; 0x29c <main+0x6e>
+			_delay_ms(1000);
+			break;
+			case 9:
+			cmndbrk(0x01);
+ e48:	81 e0       	ldi	r24, 0x01	; 1
+ e4a:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			cmndbrk(0x80);
+ e4e:	80 e8       	ldi	r24, 0x80	; 128
+ e50:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("NINE");
+ e54:	86 ed       	ldi	r24, 0xD6	; 214
+ e56:	91 e0       	ldi	r25, 0x01	; 1
+ e58:	0e 94 98 00 	call	0x130	; 0x130 <str>
+			cmndbrk(0xc8);
+ e5c:	88 ec       	ldi	r24, 0xC8	; 200
+ e5e:	0e 94 74 00 	call	0xe8	; 0xe8 <cmndbrk>
+			str("9");
+ e62:	8b ed       	ldi	r24, 0xDB	; 219
+ e64:	91 e0       	ldi	r25, 0x01	; 1
+ e66:	0e 94 98 00 	call	0x130	; 0x130 <str>
+ e6a:	8f e9       	ldi	r24, 0x9F	; 159
+ e6c:	96 e8       	ldi	r25, 0x86	; 134
+ e6e:	a1 e0       	ldi	r26, 0x01	; 1
+ e70:	81 50       	subi	r24, 0x01	; 1
+ e72:	90 40       	sbci	r25, 0x00	; 0
+ e74:	a0 40       	sbci	r26, 0x00	; 0
+ e76:	e1 f7       	brne	.-8      	; 0xe70 <__stack+0xa11>
+ e78:	00 c0       	rjmp	.+0      	; 0xe7a <__stack+0xa1b>
+ e7a:	00 00       	nop
+ e7c:	0f ca       	rjmp	.-3042   	; 0x29c <main+0x6e>
+
+00000e7e <__udivmodhi4>:
+ e7e:	aa 1b       	sub	r26, r26
+ e80:	bb 1b       	sub	r27, r27
+ e82:	51 e1       	ldi	r21, 0x11	; 17
+ e84:	07 c0       	rjmp	.+14     	; 0xe94 <__udivmodhi4_ep>
+
+00000e86 <__udivmodhi4_loop>:
+ e86:	aa 1f       	adc	r26, r26
+ e88:	bb 1f       	adc	r27, r27
+ e8a:	a6 17       	cp	r26, r22
+ e8c:	b7 07       	cpc	r27, r23
+ e8e:	10 f0       	brcs	.+4      	; 0xe94 <__udivmodhi4_ep>
+ e90:	a6 1b       	sub	r26, r22
+ e92:	b7 0b       	sbc	r27, r23
+
+00000e94 <__udivmodhi4_ep>:
+ e94:	88 1f       	adc	r24, r24
+ e96:	99 1f       	adc	r25, r25
+ e98:	5a 95       	dec	r21
+ e9a:	a9 f7       	brne	.-22     	; 0xe86 <__udivmodhi4_loop>
+ e9c:	80 95       	com	r24
+ e9e:	90 95       	com	r25
+ ea0:	bc 01       	movw	r22, r24
+ ea2:	cd 01       	movw	r24, r26
+ ea4:	08 95       	ret
+
+00000ea6 <_exit>:
+ ea6:	f8 94       	cli
+
+00000ea8 <__stop_program>:
+ ea8:	ff cf       	rjmp	.-2      	; 0xea8 <__stop_program>

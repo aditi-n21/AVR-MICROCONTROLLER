@@ -1,0 +1,241 @@
+C51 COMPILER V9.05   LCD_DISPLAY                                                           09/08/2012 09:11:57 PAGE 1   
+
+
+C51 COMPILER V9.05, COMPILATION OF MODULE LCD_DISPLAY
+OBJECT MODULE PLACED IN lcd_display.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE lcd_display.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #include<string.h>
+   3          
+   4          sbit RS=P3^3;
+   5          sbit RW=P3^4;
+   6          sbit EN=P1^7;
+   7          sbit row1=P3^0;
+   8          sbit row2=P3^1;
+   9          sbit row3=P3^2;
+  10          sbit row4=P2^3;
+  11          sbit col1=P3^5;
+  12          sbit col2=P3^6;
+  13          sbit col3=P3^7;
+  14          
+  15          void lcd(void);
+  16          void writecmd(unsigned char);
+  17          void writedata(unsigned char);
+  18          void delaylcd(unsigned char);
+  19          void writestr(unsigned char *s);
+  20          void msdelay(unsigned int value);
+  21          unsigned char keysense(void);
+  22          
+  23          void delaylcd(unsigned char a)
+  24          {
+  25   1        int i,j;
+  26   1        for(i=0;i<a;i++)
+  27   1                      for(j=0;j<1275;j++);
+  28   1      }
+  29          
+  30          unsigned char keysense(void)
+  31          {
+  32   1              while(1)
+  33   1              {
+  34   2                      col1=0;
+  35   2                      col2=1;
+  36   2                      col3=1;
+  37   2                      if(row1==0)     
+  38   2                              return(1);
+  39   2                      if(row2==0)
+  40   2                              return(4);
+  41   2                      if(row3==0)
+  42   2                              return(7);
+  43   2                      if(row4==0)
+  44   2                              return('*');
+  45   2                      col1=1;
+  46   2                      col2=0;
+  47   2                      col3=1;
+  48   2                      if(row1==0)
+  49   2                              return(2);
+  50   2                      if(row2==0)
+  51   2                              return(5);
+  52   2                      if(row3==0)
+  53   2                              return(8);
+  54   2                      if(row4==0)
+  55   2                              return(0);              
+C51 COMPILER V9.05   LCD_DISPLAY                                                           09/08/2012 09:11:57 PAGE 2   
+
+  56   2                      col1=1;
+  57   2                      col2=1;
+  58   2                      col3=0;
+  59   2                      if(row1==0)
+  60   2                              return(3);
+  61   2                      if(row2==0)
+  62   2                              return(6);
+  63   2                      if(row3==0)
+  64   2                              return(9);
+  65   2                      if(row4==0)
+  66   2                              return('#');
+  67   2                      msdelay(50);
+  68   2              };
+  69   1      }        
+  70          
+  71          void msdelay(unsigned int value)
+  72          {
+  73   1              unsigned int x,y;
+  74   1              for(x=0;x<value;x++)
+  75   1                      for(y=0;y<325;y++);
+  76   1      }  
+  77          void writestr(unsigned char *s)
+  78          {       
+  79   1              unsigned char l,i;
+  80   1              l=strlen(s);
+  81   1              for(i=0;i<l;i++)
+  82   1              {
+  83   2                      writedata(*s);
+  84   2                      s++;
+  85   2                      msdelay(50);
+  86   2              }
+  87   1      }
+  88          
+  89          void writecmd(unsigned char a)
+  90          {
+  91   1              RS=0;
+  92   1              P0=a;
+  93   1              RW=0;
+  94   1              EN=1;
+  95   1              delaylcd(5);
+  96   1              EN=0;
+  97   1              return;
+  98   1      }
+  99          
+ 100          void writedata(unsigned char b)
+ 101          {
+ 102   1              RS=1;
+ 103   1              P0=b;
+ 104   1              RW=0;
+ 105   1              EN=1;
+ 106   1              delaylcd(5);
+ 107   1              EN=0;
+ 108   1              return;
+ 109   1      }
+ 110          void lcd(void)
+ 111          {
+ 112   1              writecmd(0x38);
+ 113   1              writecmd(0x0e);
+ 114   1              writecmd(0x01);
+ 115   1              writecmd(0x06);
+ 116   1              writecmd(0x80);
+ 117   1      }
+C51 COMPILER V9.05   LCD_DISPLAY                                                           09/08/2012 09:11:57 PAGE 3   
+
+ 118          
+ 119          void main()
+ 120          {
+ 121   1              unsigned char a;
+ 122   1              char arr[]={0xC0,0xF9,0xA4,0xB0,0x99,0x92,0x82,0xF8,0x80,0x90};
+ 123   1                      lcd();
+ 124   1               writestr("WELCOME");
+ 125   1              writecmd(0xc5);
+ 126   1              writestr("        CETPA");
+ 127   1              writecmd(0x01);
+ 128   1      /*      writestr("MANOJ");
+ 129   1              writecmd(0xc5);
+ 130   1              writestr("KUMAR");
+ 131   1              writecmd(0x01);
+ 132   1              writestr("KEY SENSED"); 
+ 133   1              writecmd(0xc6);
+ 134   1              writedata('A');
+ 135   1              keysense();              */
+ 136   1       
+ 137   1              while(1)
+ 138   1              {
+ 139   2               writecmd(0x80);
+ 140   2              writestr("KEY SENSED"); 
+ 141   2              
+ 142   2              a=keysense();
+ 143   2              switch(a)
+ 144   2              {
+ 145   3         case 0: 
+ 146   3                      P0=arr[a];
+ 147   3                      //      msdelay(10);
+ 148   3                              writecmd(0xc5);
+ 149   3                              writestr("KEY 0");
+ 150   3                              msdelay(50);
+ 151   3                              break;
+ 152   3              case 1: writecmd(0xc5);
+ 153   3                      P0=arr[a];
+ 154   3                              //msdelay(10);
+ 155   3                              writestr("KEY 1");
+ 156   3                              msdelay(50);
+ 157   3                              break;
+ 158   3              case 2: writecmd(0xc5);
+ 159   3                      P0=arr[a];
+ 160   3                              //msdelay(10);
+ 161   3                              writestr("KEY 2");
+ 162   3                              msdelay(50);
+ 163   3                              break;
+ 164   3          case 3: writecmd(0xc5);
+ 165   3                              P0=arr[a];
+ 166   3                              //msdelay(10);
+ 167   3                              writestr("KEY 3");
+ 168   3                              msdelay(50);
+ 169   3                              break;
+ 170   3              case 4:  writecmd(0xc5);
+ 171   3                              P0=arr[a];
+ 172   3                              //msdelay(10);
+ 173   3                              writestr("KEY 4");
+ 174   3                              msdelay(50);
+ 175   3                              break;
+ 176   3              case 5:   writecmd(0xc5);
+ 177   3                              P0=arr[a];
+ 178   3                              //msdelay(10);
+ 179   3                              writestr("KEY 5");
+C51 COMPILER V9.05   LCD_DISPLAY                                                           09/08/2012 09:11:57 PAGE 4   
+
+ 180   3                              msdelay(50);
+ 181   3                              break;
+ 182   3              case 6:  writecmd(0xc5);
+ 183   3                              P0=arr[a];
+ 184   3                              //msdelay(10);
+ 185   3                              writestr("KEY 6");
+ 186   3                              msdelay(50);
+ 187   3                              break;
+ 188   3              case 7:  writecmd(0xc5);
+ 189   3                              P0=arr[a];
+ 190   3                              //msdelay(10);
+ 191   3                              writestr("KEY 7");
+ 192   3                              msdelay(50);
+ 193   3                              break;
+ 194   3              case 8:  writecmd(0xc5);
+ 195   3                              P0=arr[a];
+ 196   3                              writestr("KEY 8");
+ 197   3                              msdelay(50);
+ 198   3                              break;
+ 199   3              case 9: writecmd(0xc5);
+ 200   3                              P0=arr[a];
+ 201   3                              writestr("KEY 9");
+ 202   3                  msdelay(50);
+ 203   3                              break;
+ 204   3              default:
+ 205   3                              break;
+ 206   3      
+ 207   3      }
+ 208   2           }
+ 209   1      
+ 210   1      }
+ 211          
+ 212          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    609    ----
+   CONSTANT SIZE    =     98    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      16
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

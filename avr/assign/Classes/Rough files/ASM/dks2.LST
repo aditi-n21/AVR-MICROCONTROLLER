@@ -1,0 +1,136 @@
+C51 COMPILER V9.05   DKS2                                                                  01/28/2013 18:12:54 PAGE 1   
+
+
+C51 COMPILER V9.05, COMPILATION OF MODULE DKS2
+OBJECT MODULE PLACED IN dks2.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE dks2.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #include<string.h>
+   3          #define lcd P0
+   4          sbit rs=P3^0 ;
+   5          sbit rw=P3^1;
+   6          sbit en=P3^2;
+   7          void character(void);
+   8          void lcd_str(unsigned char *);
+   9          void lcd_cmd(unsigned char);
+  10          void lcd_data(unsigned char);
+  11          void lcd_data1(unsigned char);
+  12          void delay(unsigned char);
+  13          void lcd_cmd1(unsigned char);
+  14          void lcd_init(void);
+  15          
+  16          void main()
+  17          {
+  18   1      unsigned int i; 
+  19   1      lcd_init();
+  20   1      while(1)
+  21   1      { lcd_cmd1(0x80);
+  22   2        lcd_str("WELCOME");
+  23   2        for(i=0;i<16;i++)
+  24   2           { lcd_cmd1(0x18);
+  25   3                 delay(100);
+  26   3               }
+  27   2        for(i=0;i<16;i++)
+  28   2            {
+  29   3                lcd_cmd1(0x1C);
+  30   3                delay(100);
+  31   3                }
+  32   2      }
+  33   1      }
+  34          void lcd_cmd1(unsigned char value)
+  35          {
+  36   1      unsigned char cd1;
+  37   1      cd1=value & 0xf0;
+  38   1      lcd_cmd(cd1);
+  39   1      cd1=(value<<4) & 0xf0;
+  40   1      lcd_cmd(cd1);
+  41   1      }
+  42          
+  43          void lcd_cmd(unsigned char a)
+  44          {  
+  45   1      lcd=a;
+  46   1      rs=0;
+  47   1      rw=0;
+  48   1      en=1;
+  49   1      delay(1);
+  50   1      en=0;
+  51   1      }
+  52          void lcd_data1(unsigned char value)
+  53          {
+  54   1      unsigned char cd1;
+  55   1      cd1=value & 0xf0;
+C51 COMPILER V9.05   DKS2                                                                  01/28/2013 18:12:54 PAGE 2   
+
+  56   1      lcd_data(cd1);
+  57   1      cd1=(value<<4) & 0xf0;
+  58   1      lcd_data(cd1);
+  59   1      }
+  60          
+  61          void lcd_data(unsigned char b)
+  62          {
+  63   1      lcd=b;
+  64   1      rs=1;
+  65   1      rw=0;
+  66   1      en=1;
+  67   1      delay(1);
+  68   1      en=0;
+  69   1      }
+  70          void delay(unsigned char msec)
+  71          {
+  72   1      unsigned int i,j;
+  73   1      for(i=0;i<msec;i++)
+  74   1      for(j=0;j<1275;j++);
+  75   1      }
+  76          void lcd_init(void)
+  77          {
+  78   1      lcd_cmd1(0x02);
+  79   1      lcd_cmd1(0x28);
+  80   1      lcd_cmd1(0x01);
+  81   1      lcd_cmd1(0x06);
+  82   1      lcd_cmd1(0x0e);
+  83   1      lcd_cmd1(0x80);
+  84   1      }
+  85          void character(void)
+  86          {
+  87   1      lcd_cmd1(64);
+  88   1      lcd_data1(2);
+  89   1      lcd_data1(6);
+  90   1      lcd_data1(14);
+  91   1      lcd_data1(11);
+  92   1      lcd_data1(11);
+  93   1      lcd_data1(24);
+  94   1      lcd_data1(24);
+  95   1      lcd_cmd1(0x85);
+  96   1      lcd_data1(0);
+  97   1      delay(2);
+  98   1      }
+  99          
+ 100          void lcd_str(unsigned char *s)
+ 101          {
+ 102   1              unsigned char l,i;
+ 103   1              l=strlen(s);
+ 104   1              for(i=0;i<l;i++)
+ 105   1              {
+ 106   2              lcd_data1(*s);
+ 107   2              s++;
+ 108   2              }
+ 109   1      }                          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    319    ----
+   CONSTANT SIZE    =      8    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       9
+C51 COMPILER V9.05   DKS2                                                                  01/28/2013 18:12:54 PAGE 3   
+
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

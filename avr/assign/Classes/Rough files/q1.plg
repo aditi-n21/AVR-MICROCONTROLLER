@@ -1,0 +1,12 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+E:\CETPA\Classes\Rough files\q1.uvproj
+Project File Date:  03/12/2013
+
+<h2>Output:</h2>
+compiling ques1.c...
+ques1.c(2): error C231: 'P1': redefinition
+ques1.c - 1 Error(s), 0 Warning(s).

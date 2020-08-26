@@ -1,0 +1,181 @@
+   1               		.file	"mseg.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	main
+  18               	main:
+  19               	.LFB6:
+  20               	.LM1:
+  21 0000 0F93      		push r16
+  22 0002 1F93      		push r17
+  23 0004 DF93      		push r29
+  24 0006 CF93      		push r28
+  25 0008 CDB7      		in r28,__SP_L__
+  26 000a DEB7      		in r29,__SP_H__
+  27 000c 2A97      		sbiw r28,10
+  28 000e 0FB6      		in __tmp_reg__,__SREG__
+  29 0010 F894      		cli
+  30 0012 DEBF      		out __SP_H__,r29
+  31 0014 0FBE      		out __SREG__,__tmp_reg__
+  32 0016 CDBF      		out __SP_L__,r28
+  33               	/* prologue: function */
+  34               	/* frame size = 10 */
+  35               	.LM2:
+  36 0018 DE01      		movw r26,r28
+  37 001a 1196      		adiw r26,1
+  38 001c E0E0      		ldi r30,lo8(C.0.1254)
+  39 001e F0E0      		ldi r31,hi8(C.0.1254)
+  40 0020 8AE0      		ldi r24,lo8(10)
+  41               	.L2:
+  42 0022 0190      		ld r0,Z+
+  43 0024 0D92      		st X+,r0
+  44 0026 8150      		subi r24,lo8(-(-1))
+  45 0028 01F4      		brne .L2
+  46               	.LM3:
+  47 002a 8FEF      		ldi r24,lo8(-1)
+  48 002c 87BB      		out 55-32,r24
+  49               	.LM4:
+  50 002e 8ABB      		out 58-32,r24
+  51               	.LM5:
+  52 0030 D898      		cbi 59-32,0
+  53               	.LM6:
+  54 0032 D998      		cbi 59-32,1
+  55 0034 20E0      		ldi r18,lo8(0)
+  56               	.LVL0:
+  57               	.LM7:
+  58 0036 BE01      		movw r22,r28
+  59 0038 6F5F      		subi r22,lo8(-(1))
+  60 003a 7F4F      		sbci r23,hi8(-(1))
+  61               	.LBB18:
+  62               	.LBB19:
+  63               	.LBB20:
+  64               	.LBB21:
+  65               	.LM8:
+  66 003c 48EC      		ldi r20,lo8(200)
+  67 003e 50E0      		ldi r21,hi8(200)
+  68               	.LBE21:
+  69               	.LBE20:
+  70               	.LBE19:
+  71               	.LBE18:
+  72               	.LM9:
+  73 0040 8E01      		movw r16,r28
+  74 0042 055F      		subi r16,lo8(-(11))
+  75 0044 1F4F      		sbci r17,hi8(-(11))
+  76 0046 00C0      		rjmp .L14
+  77               	.LVL1:
+  78               	.L6:
+  79               	.LM10:
+  80 0048 D89A      		sbi 59-32,0
+  81               	.LM11:
+  82 004a 8081      		ld r24,Z
+  83               	.LVL2:
+  84 004c 8095      		com r24
+  85 004e 88BB      		out 56-32,r24
+  86 0050 8CEB      		ldi r24,lo8(700)
+  87 0052 92E0      		ldi r25,hi8(700)
+  88               	.LVL3:
+  89               	.L4:
+  90               	.LBB25:
+  91               	.LBB24:
+  92               	.LBB23:
+  93               	.LBB22:
+  94               	.LM12:
+  95 0054 DA01      		movw r26,r20
+  96               	.LVL4:
+  97               	/* #APP */
+  98               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+  99 0056 1197      		1: sbiw r26,1
+ 100 0058 01F4      		brne 1b
+ 101               	 ;  0 "" 2
+ 102               	/* #NOAPP */
+ 103               	.LBE22:
+ 104               	.LBE23:
+ 105               	.LM13:
+ 106 005a 0197      		sbiw r24,1
+ 107               	.LM14:
+ 108 005c 01F4      		brne .L4
+ 109               	.LBE24:
+ 110               	.LBE25:
+ 111               	.LM15:
+ 112 005e D898      		cbi 59-32,0
+ 113               	.LM16:
+ 114 0060 D99A      		sbi 59-32,1
+ 115               	.LM17:
+ 116 0062 38BB      		out 56-32,r19
+ 117 0064 88EE      		ldi r24,lo8(1000)
+ 118 0066 93E0      		ldi r25,hi8(1000)
+ 119               	.LVL5:
+ 120               	.L5:
+ 121               	.LBB26:
+ 122               	.LBB27:
+ 123               	.LBB28:
+ 124               	.LBB29:
+ 125               	.LM18:
+ 126 0068 DA01      		movw r26,r20
+ 127               	.LVL6:
+ 128               	/* #APP */
+ 129               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+ 130 006a 1197      		1: sbiw r26,1
+ 131 006c 01F4      		brne 1b
+ 132               	 ;  0 "" 2
+ 133               	/* #NOAPP */
+ 134               	.LBE29:
+ 135               	.LBE28:
+ 136               	.LM19:
+ 137 006e 0197      		sbiw r24,1
+ 138               	.LM20:
+ 139 0070 01F4      		brne .L5
+ 140               	.LBE27:
+ 141               	.LBE26:
+ 142               	.LM21:
+ 143 0072 D998      		cbi 59-32,1
+ 144 0074 3196      		adiw r30,1
+ 145               	.LM22:
+ 146 0076 E017      		cp r30,r16
+ 147 0078 F107      		cpc r31,r17
+ 148 007a 01F4      		brne .L6
+ 149               	.LM23:
+ 150 007c 2F5F      		subi r18,lo8(-(1))
+ 151 007e 2A30      		cpi r18,lo8(10)
+ 152 0080 00F0      		brlo .L14
+ 153 0082 20E0      		ldi r18,lo8(0)
+ 154               	.L14:
+ 155               	.LM24:
+ 156 0084 FB01      		movw r30,r22
+ 157 0086 E20F      		add r30,r18
+ 158 0088 F11D      		adc r31,__zero_reg__
+ 159 008a 3081      		ld r19,Z
+ 160 008c 3095      		com r19
+ 161 008e FB01      		movw r30,r22
+ 162 0090 00C0      		rjmp .L6
+ 163               	.LFE6:
+ 165               		.data
+ 168               	C.0.1254:
+ 169 0000 C0        		.byte	-64
+ 170 0001 F9        		.byte	-7
+ 171 0002 A4        		.byte	-92
+ 172 0003 B0        		.byte	-80
+ 173 0004 99        		.byte	-103
+ 174 0005 92        		.byte	-110
+ 175 0006 82        		.byte	-126
+ 176 0007 F8        		.byte	-8
+ 177 0008 80        		.byte	-128
+ 178 0009 90        		.byte	-112
+ 203               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 mseg.c
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/ccgqRF6D.s:2      *ABS*:0000003f __SREG__
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/ccgqRF6D.s:3      *ABS*:0000003e __SP_H__
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/ccgqRF6D.s:4      *ABS*:0000003d __SP_L__
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/ccgqRF6D.s:5      *ABS*:00000034 __CCP__
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/ccgqRF6D.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/ccgqRF6D.s:7      *ABS*:00000001 __zero_reg__
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/ccgqRF6D.s:18     .text:00000000 main
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/ccgqRF6D.s:168    .data:00000000 C.0.1254
+
+UNDEFINED SYMBOLS
+__do_copy_data

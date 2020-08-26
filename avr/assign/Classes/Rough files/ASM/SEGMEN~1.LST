@@ -1,0 +1,42 @@
+SEGMEN^1                                                                                                      PAGE 1
+
+                       1    
+                       2    $mod51
+0000                   3    org 00h
+0000 E4                4    clr a
+0001                   5    here1:
+0001 900150            6    mov dptr, #150h
+0004                   7    here: 
+0004 F590              8    mov P1, a
+0006 E4                9    clr a
+0007 93               10    movc a,@a+dptr
+0008 A3               11    inc dptr
+0009 1110             12    acall delay
+000B B400F6           13    cjne a,#0,here
+000E 80F1             14    sjmp here1
+0010                  15    delay:
+0010 78FF             16    mov r0,#255
+0012 79FF             17    ag2: mov r1,#255
+0014 7A19             18    ag1: mov r2,#25
+0016 DAFE             19    ag: djnz r2,ag
+0018 D9FA             20    djnz r1,ag1
+001A D8F6             21    djnz r0,ag2
+001C 22               22    ret
+                      23    
+0150                  24    org 150h
+0150 C0065B4F         25    DB 0c0h,06h,5bh,4fh,66h,6dh,7dh,07h,7fh,6fh,0
+0154 666D7D07   
+0158 7F6F00     
+                      26    END
+                      27    
+
+VERSION 1.2h ASSEMBLY COMPLETE, 0 ERRORS FOUND
+SEGMEN^1                                                                                                      PAGE 2
+
+AG . . . . . . . . . . . . . . .  C ADDR  0016H  
+AG1. . . . . . . . . . . . . . .  C ADDR  0014H  
+AG2. . . . . . . . . . . . . . .  C ADDR  0012H  
+DELAY. . . . . . . . . . . . . .  C ADDR  0010H  
+HERE . . . . . . . . . . . . . .  C ADDR  0004H  
+HERE1. . . . . . . . . . . . . .  C ADDR  0001H  
+P1 . . . . . . . . . . . . . . .  D ADDR  0090H  PREDEFINED  

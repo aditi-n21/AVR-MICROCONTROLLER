@@ -1,0 +1,97 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        06/06/2016  18:46:59  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE single_switch.obj TO single_switch
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  single_switch.obj (SINGLE_SWITCH)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  single_switch (SINGLE_SWITCH)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     000EH     UNIT         ?DT?SINGLE_SWITCH
+            IDATA   0016H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     008CH     UNIT         ?C_C51STARTUP
+            CODE    088CH     0052H     UNIT         ?PR?MAIN?SINGLE_SWITCH
+            CODE    08DEH     0011H     UNIT         ?C_INITSEG
+
+
+
+OVERLAY MAP OF MODULE:   single_switch (SINGLE_SWITCH)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?SINGLE_SWITCH
+  +--> ?C_INITSEG
+
+
+
+SYMBOL TABLE OF MODULE:  single_switch (SINGLE_SWITCH)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        SINGLE_SWITCH
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  B:0098H.1       PUBLIC        TI
+  C:088CH         PUBLIC        main
+  D:0099H         PUBLIC        SBUF
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0008H         PUBLIC        arr
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/06/2016  18:46:59  PAGE 2
+
+
+  D:008DH         PUBLIC        TH1
+  B:0088H.6       PUBLIC        TR1
+  D:0012H         PUBLIC        i
+  D:0014H         PUBLIC        j
+  -------         PROC          MAIN
+  C:088CH         LINE#         4
+  C:088CH         LINE#         5
+  C:088CH         LINE#         6
+  C:088FH         LINE#         7
+  C:0892H         LINE#         8
+  C:0895H         LINE#         9
+  C:0897H         LINE#         10
+  C:0897H         LINE#         11
+  C:0897H         LINE#         12
+  C:089CH         LINE#         13
+  C:089CH         LINE#         14
+  C:08A4H         LINE#         15
+  C:08A7H         LINE#         16
+  C:08A9H         LINE#         17
+  C:08ACH         LINE#         18
+  C:08AFH         LINE#         19
+  C:08B2H         LINE#         20
+  C:08B4H         LINE#         21
+  C:08C2H         LINE#         22
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        SINGLE_SWITCH
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0062H BYTE ( 4%) *
+******************************************************************************
+
+Program Size: data=23.0 xdata=0 code=242
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

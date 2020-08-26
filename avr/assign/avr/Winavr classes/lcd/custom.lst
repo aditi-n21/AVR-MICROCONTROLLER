@@ -1,0 +1,703 @@
+   1               		.file	"custom.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	writecmd
+  18               	writecmd:
+  19               	.LFB8:
+  20               	.LM1:
+  21               	.LVL0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	.LM2:
+  25 0000 88BB      		out 56-32,r24
+  26               	.LM3:
+  27 0002 D898      		cbi 59-32,0
+  28               	.LM4:
+  29 0004 D998      		cbi 59-32,1
+  30               	.LM5:
+  31 0006 DA9A      		sbi 59-32,2
+  32               	.LBB66:
+  33               	.LBB67:
+  34               	.LBB68:
+  35               	.LBB69:
+  36               	.LM6:
+  37 0008 80E1      		ldi r24,lo8(10000)
+  38 000a 97E2      		ldi r25,hi8(10000)
+  39               	.LVL1:
+  40               	/* #APP */
+  41               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+  42 000c 0197      		1: sbiw r24,1
+  43 000e 01F4      		brne 1b
+  44               	 ;  0 "" 2
+  45               	/* #NOAPP */
+  46               	.LBE69:
+  47               	.LBE68:
+  48               	.LBE67:
+  49               	.LBE66:
+  50               	.LM7:
+  51 0010 DA98      		cbi 59-32,2
+  52               	/* epilogue start */
+  53               	.LM8:
+  54 0012 0895      		ret
+  55               	.LFE8:
+  57               	.global	lcdinit
+  59               	lcdinit:
+  60               	.LFB7:
+  61               	.LM9:
+  62               	/* prologue: function */
+  63               	/* frame size = 0 */
+  64               	.LM10:
+  65 0014 88E3      		ldi r24,lo8(56)
+  66 0016 0E94 0000 		call writecmd
+  67               	.LM11:
+  68 001a 8CE0      		ldi r24,lo8(12)
+  69 001c 0E94 0000 		call writecmd
+  70               	.LM12:
+  71 0020 81E0      		ldi r24,lo8(1)
+  72 0022 0E94 0000 		call writecmd
+  73               	.LM13:
+  74 0026 86E0      		ldi r24,lo8(6)
+  75 0028 0E94 0000 		call writecmd
+  76               	.LM14:
+  77 002c 80E8      		ldi r24,lo8(-128)
+  78 002e 0E94 0000 		call writecmd
+  79               	/* epilogue start */
+  80               	.LM15:
+  81 0032 0895      		ret
+  82               	.LFE7:
+  84               	.global	writedata
+  86               	writedata:
+  87               	.LFB9:
+  88               	.LM16:
+  89               	.LVL2:
+  90               	/* prologue: function */
+  91               	/* frame size = 0 */
+  92               	.LM17:
+  93 0034 88BB      		out 56-32,r24
+  94               	.LM18:
+  95 0036 D89A      		sbi 59-32,0
+  96               	.LM19:
+  97 0038 D998      		cbi 59-32,1
+  98               	.LM20:
+  99 003a DA9A      		sbi 59-32,2
+ 100               	.LBB70:
+ 101               	.LBB71:
+ 102               	.LBB72:
+ 103               	.LBB73:
+ 104               	.LM21:
+ 105 003c 80E1      		ldi r24,lo8(10000)
+ 106 003e 97E2      		ldi r25,hi8(10000)
+ 107               	.LVL3:
+ 108               	/* #APP */
+ 109               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+ 110 0040 0197      		1: sbiw r24,1
+ 111 0042 01F4      		brne 1b
+ 112               	 ;  0 "" 2
+ 113               	/* #NOAPP */
+ 114               	.LBE73:
+ 115               	.LBE72:
+ 116               	.LBE71:
+ 117               	.LBE70:
+ 118               	.LM22:
+ 119 0044 DA98      		cbi 59-32,2
+ 120               	/* epilogue start */
+ 121               	.LM23:
+ 122 0046 0895      		ret
+ 123               	.LFE9:
+ 125               	.global	character
+ 127               	character:
+ 128               	.LFB11:
+ 129               	.LM24:
+ 130               	/* prologue: function */
+ 131               	/* frame size = 0 */
+ 132               	.LM25:
+ 133 0048 80E4      		ldi r24,lo8(64)
+ 134 004a 0E94 0000 		call writecmd
+ 135               	.LM26:
+ 136 004e 80E0      		ldi r24,lo8(0)
+ 137 0050 0E94 0000 		call writedata
+ 138               	.LM27:
+ 139 0054 8AE0      		ldi r24,lo8(10)
+ 140 0056 0E94 0000 		call writedata
+ 141               	.LM28:
+ 142 005a 85E1      		ldi r24,lo8(21)
+ 143 005c 0E94 0000 		call writedata
+ 144               	.LM29:
+ 145 0060 81E1      		ldi r24,lo8(17)
+ 146 0062 0E94 0000 		call writedata
+ 147               	.LM30:
+ 148 0066 8AE0      		ldi r24,lo8(10)
+ 149 0068 0E94 0000 		call writedata
+ 150               	.LM31:
+ 151 006c 84E0      		ldi r24,lo8(4)
+ 152 006e 0E94 0000 		call writedata
+ 153               	.LM32:
+ 154 0072 80E0      		ldi r24,lo8(0)
+ 155 0074 0E94 0000 		call writedata
+ 156               	.LM33:
+ 157 0078 80E0      		ldi r24,lo8(0)
+ 158 007a 0E94 0000 		call writedata
+ 159               	.LM34:
+ 160 007e 80EC      		ldi r24,lo8(-64)
+ 161 0080 0E94 0000 		call writecmd
+ 162               	.LM35:
+ 163 0084 80E0      		ldi r24,lo8(0)
+ 164 0086 0E94 0000 		call writedata
+ 165 008a 84EF      		ldi r24,lo8(500)
+ 166 008c 91E0      		ldi r25,hi8(500)
+ 167               	.LVL4:
+ 168               	.LBB74:
+ 169               	.LBB75:
+ 170               	.LBB76:
+ 171               	.LBB77:
+ 172               	.LM36:
+ 173 008e 28EC      		ldi r18,lo8(200)
+ 174 0090 30E0      		ldi r19,hi8(200)
+ 175               	.L8:
+ 176 0092 F901      		movw r30,r18
+ 177               	.LVL5:
+ 178               	/* #APP */
+ 179               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+ 180 0094 3197      		1: sbiw r30,1
+ 181 0096 01F4      		brne 1b
+ 182               	 ;  0 "" 2
+ 183               	/* #NOAPP */
+ 184               	.LBE77:
+ 185               	.LBE76:
+ 186               	.LM37:
+ 187 0098 0197      		sbiw r24,1
+ 188               	.LM38:
+ 189 009a 01F4      		brne .L8
+ 190               	.LBE75:
+ 191               	.LBE74:
+ 192               	.LM39:
+ 193 009c 88E4      		ldi r24,lo8(72)
+ 194               	.LVL6:
+ 195 009e 0E94 0000 		call writecmd
+ 196               	.LVL7:
+ 197               	.LM40:
+ 198 00a2 80E0      		ldi r24,lo8(0)
+ 199 00a4 0E94 0000 		call writedata
+ 200               	.LM41:
+ 201 00a8 80E0      		ldi r24,lo8(0)
+ 202 00aa 0E94 0000 		call writedata
+ 203               	.LM42:
+ 204 00ae 80E0      		ldi r24,lo8(0)
+ 205 00b0 0E94 0000 		call writedata
+ 206               	.LM43:
+ 207 00b4 8AE0      		ldi r24,lo8(10)
+ 208 00b6 0E94 0000 		call writedata
+ 209               	.LM44:
+ 210 00ba 80E0      		ldi r24,lo8(0)
+ 211 00bc 0E94 0000 		call writedata
+ 212               	.LM45:
+ 213 00c0 84E0      		ldi r24,lo8(4)
+ 214 00c2 0E94 0000 		call writedata
+ 215               	.LM46:
+ 216 00c6 81E1      		ldi r24,lo8(17)
+ 217 00c8 0E94 0000 		call writedata
+ 218               	.LM47:
+ 219 00cc 8EE0      		ldi r24,lo8(14)
+ 220 00ce 0E94 0000 		call writedata
+ 221               	.LM48:
+ 222 00d2 80E8      		ldi r24,lo8(-128)
+ 223 00d4 0E94 0000 		call writecmd
+ 224               	.LM49:
+ 225 00d8 81E0      		ldi r24,lo8(1)
+ 226 00da 0E94 0000 		call writedata
+ 227 00de 84EF      		ldi r24,lo8(500)
+ 228 00e0 91E0      		ldi r25,hi8(500)
+ 229               	.LVL8:
+ 230               	.LBB78:
+ 231               	.LBB79:
+ 232               	.LBB80:
+ 233               	.LBB81:
+ 234               	.LM50:
+ 235 00e2 28EC      		ldi r18,lo8(200)
+ 236 00e4 30E0      		ldi r19,hi8(200)
+ 237               	.L9:
+ 238 00e6 F901      		movw r30,r18
+ 239               	.LVL9:
+ 240               	/* #APP */
+ 241               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+ 242 00e8 3197      		1: sbiw r30,1
+ 243 00ea 01F4      		brne 1b
+ 244               	 ;  0 "" 2
+ 245               	/* #NOAPP */
+ 246               	.LBE81:
+ 247               	.LBE80:
+ 248               	.LM51:
+ 249 00ec 0197      		sbiw r24,1
+ 250               	.LM52:
+ 251 00ee 01F4      		brne .L9
+ 252               	.LBE79:
+ 253               	.LBE78:
+ 254               	.LM53:
+ 255 00f0 80E5      		ldi r24,lo8(80)
+ 256               	.LVL10:
+ 257 00f2 0E94 0000 		call writecmd
+ 258               	.LVL11:
+ 259               	.LM54:
+ 260 00f6 80E0      		ldi r24,lo8(0)
+ 261 00f8 0E94 0000 		call writedata
+ 262               	.LM55:
+ 263 00fc 80E0      		ldi r24,lo8(0)
+ 264 00fe 0E94 0000 		call writedata
+ 265               	.LM56:
+ 266 0102 8AE0      		ldi r24,lo8(10)
+ 267 0104 0E94 0000 		call writedata
+ 268               	.LM57:
+ 269 0108 80E0      		ldi r24,lo8(0)
+ 270 010a 0E94 0000 		call writedata
+ 271               	.LM58:
+ 272 010e 84E0      		ldi r24,lo8(4)
+ 273 0110 0E94 0000 		call writedata
+ 274               	.LM59:
+ 275 0114 80E0      		ldi r24,lo8(0)
+ 276 0116 0E94 0000 		call writedata
+ 277               	.LM60:
+ 278 011a 8EE0      		ldi r24,lo8(14)
+ 279 011c 0E94 0000 		call writedata
+ 280               	.LM61:
+ 281 0120 81E1      		ldi r24,lo8(17)
+ 282 0122 0E94 0000 		call writedata
+ 283               	.LM62:
+ 284 0126 82E8      		ldi r24,lo8(-126)
+ 285 0128 0E94 0000 		call writecmd
+ 286               	.LM63:
+ 287 012c 82E0      		ldi r24,lo8(2)
+ 288 012e 0E94 0000 		call writedata
+ 289 0132 84EF      		ldi r24,lo8(500)
+ 290 0134 91E0      		ldi r25,hi8(500)
+ 291               	.LVL12:
+ 292               	.LBB82:
+ 293               	.LBB83:
+ 294               	.LBB84:
+ 295               	.LBB85:
+ 296               	.LM64:
+ 297 0136 28EC      		ldi r18,lo8(200)
+ 298 0138 30E0      		ldi r19,hi8(200)
+ 299               	.L10:
+ 300 013a F901      		movw r30,r18
+ 301               	.LVL13:
+ 302               	/* #APP */
+ 303               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+ 304 013c 3197      		1: sbiw r30,1
+ 305 013e 01F4      		brne 1b
+ 306               	 ;  0 "" 2
+ 307               	/* #NOAPP */
+ 308               	.LBE85:
+ 309               	.LBE84:
+ 310               	.LM65:
+ 311 0140 0197      		sbiw r24,1
+ 312               	.LM66:
+ 313 0142 01F4      		brne .L10
+ 314               	.LBE83:
+ 315               	.LBE82:
+ 316               	.LM67:
+ 317 0144 88E5      		ldi r24,lo8(88)
+ 318               	.LVL14:
+ 319 0146 0E94 0000 		call writecmd
+ 320               	.LVL15:
+ 321               	.LM68:
+ 322 014a 81E0      		ldi r24,lo8(1)
+ 323 014c 0E94 0000 		call writedata
+ 324               	.LM69:
+ 325 0150 83E0      		ldi r24,lo8(3)
+ 326 0152 0E94 0000 		call writedata
+ 327               	.LM70:
+ 328 0156 85E0      		ldi r24,lo8(5)
+ 329 0158 0E94 0000 		call writedata
+ 330               	.LM71:
+ 331 015c 89E0      		ldi r24,lo8(9)
+ 332 015e 0E94 0000 		call writedata
+ 333               	.LM72:
+ 334 0162 89E0      		ldi r24,lo8(9)
+ 335 0164 0E94 0000 		call writedata
+ 336               	.LM73:
+ 337 0168 8BE0      		ldi r24,lo8(11)
+ 338 016a 0E94 0000 		call writedata
+ 339               	.LM74:
+ 340 016e 8BE1      		ldi r24,lo8(27)
+ 341 0170 0E94 0000 		call writedata
+ 342               	.LM75:
+ 343 0174 88E1      		ldi r24,lo8(24)
+ 344 0176 0E94 0000 		call writedata
+ 345               	.LM76:
+ 346 017a 84E8      		ldi r24,lo8(-124)
+ 347 017c 0E94 0000 		call writecmd
+ 348               	.LM77:
+ 349 0180 83E0      		ldi r24,lo8(3)
+ 350 0182 0E94 0000 		call writedata
+ 351 0186 84EF      		ldi r24,lo8(500)
+ 352 0188 91E0      		ldi r25,hi8(500)
+ 353               	.LVL16:
+ 354               	.LBB86:
+ 355               	.LBB87:
+ 356               	.LBB88:
+ 357               	.LBB89:
+ 358               	.LM78:
+ 359 018a 28EC      		ldi r18,lo8(200)
+ 360 018c 30E0      		ldi r19,hi8(200)
+ 361               	.L11:
+ 362 018e F901      		movw r30,r18
+ 363               	.LVL17:
+ 364               	/* #APP */
+ 365               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+ 366 0190 3197      		1: sbiw r30,1
+ 367 0192 01F4      		brne 1b
+ 368               	 ;  0 "" 2
+ 369               	/* #NOAPP */
+ 370               	.LBE89:
+ 371               	.LBE88:
+ 372               	.LM79:
+ 373 0194 0197      		sbiw r24,1
+ 374               	.LM80:
+ 375 0196 01F4      		brne .L11
+ 376               	.LBE87:
+ 377               	.LBE86:
+ 378               	.LM81:
+ 379 0198 80E6      		ldi r24,lo8(96)
+ 380               	.LVL18:
+ 381 019a 0E94 0000 		call writecmd
+ 382               	.LVL19:
+ 383               	.LM82:
+ 384 019e 80E0      		ldi r24,lo8(0)
+ 385 01a0 0E94 0000 		call writedata
+ 386               	.LM83:
+ 387 01a4 8AE0      		ldi r24,lo8(10)
+ 388 01a6 0E94 0000 		call writedata
+ 389               	.LM84:
+ 390 01aa 80E0      		ldi r24,lo8(0)
+ 391 01ac 0E94 0000 		call writedata
+ 392               	.LM85:
+ 393 01b0 8FE1      		ldi r24,lo8(31)
+ 394 01b2 0E94 0000 		call writedata
+ 395               	.LM86:
+ 396 01b6 81E1      		ldi r24,lo8(17)
+ 397 01b8 0E94 0000 		call writedata
+ 398               	.LM87:
+ 399 01bc 8EE0      		ldi r24,lo8(14)
+ 400 01be 0E94 0000 		call writedata
+ 401               	.LM88:
+ 402 01c2 80E0      		ldi r24,lo8(0)
+ 403 01c4 0E94 0000 		call writedata
+ 404               	.LM89:
+ 405 01c8 80E0      		ldi r24,lo8(0)
+ 406 01ca 0E94 0000 		call writedata
+ 407               	.LM90:
+ 408 01ce 86E8      		ldi r24,lo8(-122)
+ 409 01d0 0E94 0000 		call writecmd
+ 410               	.LM91:
+ 411 01d4 84E0      		ldi r24,lo8(4)
+ 412 01d6 0E94 0000 		call writedata
+ 413 01da 84EF      		ldi r24,lo8(500)
+ 414 01dc 91E0      		ldi r25,hi8(500)
+ 415               	.LVL20:
+ 416               	.LBB90:
+ 417               	.LBB91:
+ 418               	.LBB92:
+ 419               	.LBB93:
+ 420               	.LM92:
+ 421 01de 28EC      		ldi r18,lo8(200)
+ 422 01e0 30E0      		ldi r19,hi8(200)
+ 423               	.L12:
+ 424 01e2 F901      		movw r30,r18
+ 425               	.LVL21:
+ 426               	/* #APP */
+ 427               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+ 428 01e4 3197      		1: sbiw r30,1
+ 429 01e6 01F4      		brne 1b
+ 430               	 ;  0 "" 2
+ 431               	/* #NOAPP */
+ 432               	.LBE93:
+ 433               	.LBE92:
+ 434               	.LM93:
+ 435 01e8 0197      		sbiw r24,1
+ 436               	.LM94:
+ 437 01ea 01F4      		brne .L12
+ 438               	.LBE91:
+ 439               	.LBE90:
+ 440               	.LM95:
+ 441 01ec 88E6      		ldi r24,lo8(104)
+ 442               	.LVL22:
+ 443 01ee 0E94 0000 		call writecmd
+ 444               	.LVL23:
+ 445               	.LM96:
+ 446 01f2 8AE0      		ldi r24,lo8(10)
+ 447 01f4 0E94 0000 		call writedata
+ 448               	.LM97:
+ 449 01f8 80E0      		ldi r24,lo8(0)
+ 450 01fa 0E94 0000 		call writedata
+ 451               	.LM98:
+ 452 01fe 84E0      		ldi r24,lo8(4)
+ 453 0200 0E94 0000 		call writedata
+ 454               	.LM99:
+ 455 0204 80E0      		ldi r24,lo8(0)
+ 456 0206 0E94 0000 		call writedata
+ 457               	.LM100:
+ 458 020a 8EE0      		ldi r24,lo8(14)
+ 459 020c 0E94 0000 		call writedata
+ 460               	.LM101:
+ 461 0210 81E1      		ldi r24,lo8(17)
+ 462 0212 0E94 0000 		call writedata
+ 463               	.LM102:
+ 464 0216 81E1      		ldi r24,lo8(17)
+ 465 0218 0E94 0000 		call writedata
+ 466               	.LM103:
+ 467 021c 8EE0      		ldi r24,lo8(14)
+ 468 021e 0E94 0000 		call writedata
+ 469               	.LM104:
+ 470 0222 82EC      		ldi r24,lo8(-62)
+ 471 0224 0E94 0000 		call writecmd
+ 472               	.LM105:
+ 473 0228 85E0      		ldi r24,lo8(5)
+ 474 022a 0E94 0000 		call writedata
+ 475 022e 84EF      		ldi r24,lo8(500)
+ 476 0230 91E0      		ldi r25,hi8(500)
+ 477               	.LVL24:
+ 478               	.LBB94:
+ 479               	.LBB95:
+ 480               	.LBB96:
+ 481               	.LBB97:
+ 482               	.LM106:
+ 483 0232 28EC      		ldi r18,lo8(200)
+ 484 0234 30E0      		ldi r19,hi8(200)
+ 485               	.L13:
+ 486 0236 F901      		movw r30,r18
+ 487               	.LVL25:
+ 488               	/* #APP */
+ 489               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+ 490 0238 3197      		1: sbiw r30,1
+ 491 023a 01F4      		brne 1b
+ 492               	 ;  0 "" 2
+ 493               	/* #NOAPP */
+ 494               	.LBE97:
+ 495               	.LBE96:
+ 496               	.LM107:
+ 497 023c 0197      		sbiw r24,1
+ 498               	.LM108:
+ 499 023e 01F4      		brne .L13
+ 500               	.LBE95:
+ 501               	.LBE94:
+ 502               	.LM109:
+ 503 0240 80E7      		ldi r24,lo8(112)
+ 504               	.LVL26:
+ 505 0242 0E94 0000 		call writecmd
+ 506               	.LVL27:
+ 507               	.LM110:
+ 508 0246 80E0      		ldi r24,lo8(0)
+ 509 0248 0E94 0000 		call writedata
+ 510               	.LM111:
+ 511 024c 8AE0      		ldi r24,lo8(10)
+ 512 024e 0E94 0000 		call writedata
+ 513               	.LM112:
+ 514 0252 80E0      		ldi r24,lo8(0)
+ 515 0254 0E94 0000 		call writedata
+ 516               	.LM113:
+ 517 0258 80E0      		ldi r24,lo8(0)
+ 518 025a 0E94 0000 		call writedata
+ 519               	.LM114:
+ 520 025e 84E0      		ldi r24,lo8(4)
+ 521 0260 0E94 0000 		call writedata
+ 522               	.LM115:
+ 523 0264 80E0      		ldi r24,lo8(0)
+ 524 0266 0E94 0000 		call writedata
+ 525               	.LM116:
+ 526 026a 8FE1      		ldi r24,lo8(31)
+ 527 026c 0E94 0000 		call writedata
+ 528               	.LM117:
+ 529 0270 80E0      		ldi r24,lo8(0)
+ 530 0272 0E94 0000 		call writedata
+ 531               	.LM118:
+ 532 0276 84EC      		ldi r24,lo8(-60)
+ 533 0278 0E94 0000 		call writecmd
+ 534               	.LM119:
+ 535 027c 86E0      		ldi r24,lo8(6)
+ 536 027e 0E94 0000 		call writedata
+ 537 0282 84EF      		ldi r24,lo8(500)
+ 538 0284 91E0      		ldi r25,hi8(500)
+ 539               	.LVL28:
+ 540               	.LBB98:
+ 541               	.LBB99:
+ 542               	.LBB100:
+ 543               	.LBB101:
+ 544               	.LM120:
+ 545 0286 28EC      		ldi r18,lo8(200)
+ 546 0288 30E0      		ldi r19,hi8(200)
+ 547               	.L14:
+ 548 028a F901      		movw r30,r18
+ 549               	.LVL29:
+ 550               	/* #APP */
+ 551               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+ 552 028c 3197      		1: sbiw r30,1
+ 553 028e 01F4      		brne 1b
+ 554               	 ;  0 "" 2
+ 555               	/* #NOAPP */
+ 556               	.LBE101:
+ 557               	.LBE100:
+ 558               	.LM121:
+ 559 0290 0197      		sbiw r24,1
+ 560               	.LM122:
+ 561 0292 01F4      		brne .L14
+ 562               	.LBE99:
+ 563               	.LBE98:
+ 564               	.LM123:
+ 565 0294 88E7      		ldi r24,lo8(120)
+ 566               	.LVL30:
+ 567 0296 0E94 0000 		call writecmd
+ 568               	.LVL31:
+ 569               	.LM124:
+ 570 029a 80E0      		ldi r24,lo8(0)
+ 571 029c 0E94 0000 		call writedata
+ 572               	.LM125:
+ 573 02a0 81E1      		ldi r24,lo8(17)
+ 574 02a2 0E94 0000 		call writedata
+ 575               	.LM126:
+ 576 02a6 8AE0      		ldi r24,lo8(10)
+ 577 02a8 0E94 0000 		call writedata
+ 578               	.LM127:
+ 579 02ac 81E1      		ldi r24,lo8(17)
+ 580 02ae 0E94 0000 		call writedata
+ 581               	.LM128:
+ 582 02b2 84E0      		ldi r24,lo8(4)
+ 583 02b4 0E94 0000 		call writedata
+ 584               	.LM129:
+ 585 02b8 80E0      		ldi r24,lo8(0)
+ 586 02ba 0E94 0000 		call writedata
+ 587               	.LM130:
+ 588 02be 8EE0      		ldi r24,lo8(14)
+ 589 02c0 0E94 0000 		call writedata
+ 590               	.LM131:
+ 591 02c4 81E1      		ldi r24,lo8(17)
+ 592 02c6 0E94 0000 		call writedata
+ 593               	.LM132:
+ 594 02ca 86EC      		ldi r24,lo8(-58)
+ 595 02cc 0E94 0000 		call writecmd
+ 596               	.LM133:
+ 597 02d0 87E0      		ldi r24,lo8(7)
+ 598 02d2 0E94 0000 		call writedata
+ 599 02d6 84EF      		ldi r24,lo8(500)
+ 600 02d8 91E0      		ldi r25,hi8(500)
+ 601               	.LVL32:
+ 602               	.LBB102:
+ 603               	.LBB103:
+ 604               	.LBB104:
+ 605               	.LBB105:
+ 606               	.LM134:
+ 607 02da 28EC      		ldi r18,lo8(200)
+ 608 02dc 30E0      		ldi r19,hi8(200)
+ 609               	.L15:
+ 610 02de F901      		movw r30,r18
+ 611               	.LVL33:
+ 612               	/* #APP */
+ 613               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+ 614 02e0 3197      		1: sbiw r30,1
+ 615 02e2 01F4      		brne 1b
+ 616               	 ;  0 "" 2
+ 617               	/* #NOAPP */
+ 618               	.LBE105:
+ 619               	.LBE104:
+ 620               	.LM135:
+ 621 02e4 0197      		sbiw r24,1
+ 622               	.LM136:
+ 623 02e6 01F4      		brne .L15
+ 624               	/* epilogue start */
+ 625               	.LBE103:
+ 626               	.LBE102:
+ 627               	.LM137:
+ 628 02e8 0895      		ret
+ 629               	.LFE11:
+ 631               	.global	main
+ 633               	main:
+ 634               	.LFB6:
+ 635               	.LM138:
+ 636               	/* prologue: function */
+ 637               	/* frame size = 0 */
+ 638               	.LM139:
+ 639 02ea 8FEF      		ldi r24,lo8(-1)
+ 640 02ec 87BB      		out 55-32,r24
+ 641               	.LM140:
+ 642 02ee 8ABB      		out 58-32,r24
+ 643               	.LM141:
+ 644 02f0 0E94 0000 		call lcdinit
+ 645               	.L26:
+ 646               	.LM142:
+ 647 02f4 0E94 0000 		call character
+ 648 02f8 00C0      		rjmp .L26
+ 649               	.LFE6:
+ 651               	.global	writestr
+ 653               	writestr:
+ 654               	.LFB10:
+ 655               	.LM143:
+ 656               	.LVL34:
+ 657 02fa 0F93      		push r16
+ 658 02fc 1F93      		push r17
+ 659 02fe CF93      		push r28
+ 660 0300 DF93      		push r29
+ 661               	/* prologue: function */
+ 662               	/* frame size = 0 */
+ 663 0302 182F      		mov r17,r24
+ 664               	.LM144:
+ 665 0304 A82F      		mov r26,r24
+ 666 0306 B92F      		mov r27,r25
+ 667               	.LVL35:
+ 668 0308 FD01      		movw r30,r26
+ 669 030a 0190      		ld __tmp_reg__,Z+
+ 670 030c 0020      		tst __tmp_reg__
+ 671 030e 01F4      		brne .-6
+ 672 0310 3197      		sbiw r30,1
+ 673 0312 0E2F      		mov r16,r30
+ 674               	.LVL36:
+ 675 0314 081B      		sub r16,r24
+ 676 0316 282F      		mov r18,r24
+ 677 0318 392F      		mov r19,r25
+ 678 031a C901      		movw r24,r18
+ 679               	.LVL37:
+ 680 031c EC01      		movw r28,r24
+ 681 031e 00C0      		rjmp .L29
+ 682               	.LVL38:
+ 683               	.L30:
+ 684               	.LM145:
+ 685 0320 8991      		ld r24,Y+
+ 686 0322 0E94 0000 		call writedata
+ 687               	.LVL39:
+ 688               	.L29:
+ 689               	.LM146:
+ 690 0326 9E01      		movw r18,r28
+ 691 0328 211B      		sub r18,r17
+ 692 032a 2017      		cp r18,r16
+ 693 032c 00F0      		brlo .L30
+ 694               	.LVL40:
+ 695               	/* epilogue start */
+ 696               	.LM147:
+ 697 032e DF91      		pop r29
+ 698 0330 CF91      		pop r28
+ 699 0332 1F91      		pop r17
+ 700               	.LVL41:
+ 701 0334 0F91      		pop r16
+ 702               	.LVL42:
+ 703 0336 0895      		ret
+ 704               	.LFE10:
+ 770               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 custom.c
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/ccv7fZXa.s:2      *ABS*:0000003f __SREG__
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/ccv7fZXa.s:3      *ABS*:0000003e __SP_H__
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/ccv7fZXa.s:4      *ABS*:0000003d __SP_L__
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/ccv7fZXa.s:5      *ABS*:00000034 __CCP__
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/ccv7fZXa.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/ccv7fZXa.s:7      *ABS*:00000001 __zero_reg__
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/ccv7fZXa.s:18     .text:00000000 writecmd
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/ccv7fZXa.s:59     .text:00000014 lcdinit
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/ccv7fZXa.s:86     .text:00000034 writedata
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/ccv7fZXa.s:127    .text:00000048 character
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/ccv7fZXa.s:633    .text:000002ea main
+C:\DOCUME~1\CETPA\LOCALS~1\Temp/ccv7fZXa.s:653    .text:000002fa writestr
+
+NO UNDEFINED SYMBOLS

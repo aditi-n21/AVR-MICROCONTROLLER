@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"lcd_4.obj" 
+TO "lcd_4" 
+CODE( 0X0000-0X0FFF )

@@ -1,0 +1,142 @@
+C51 COMPILER V9.01   ATE                                                                   05/12/2014 19:15:49 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE ATE
+OBJECT MODULE PLACED IN ate.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ate.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1           #include<reg51.h>
+   2          #include<string.h>
+   3           void delay();
+   4          sbit green= P1^0;
+   5          sbit red= P1^1;
+   6          sbit yellow= P1^2;
+   7          sbit motor= P2^4;
+   8          sbit objects= P2^1;
+   9          sbit gates=P2^0;
+  10          sbit motorg1=P2^6;
+  11          sbit motorg=P2^7;
+  12          sbit buzz=P3^0;
+  13          sbit sig=P1^7;
+  14          sbit intp= P3^2;
+  15          unsigned char keysense(void);
+  16          
+  17          unsigned char pwm_width;
+  18          bit pwm_flag = 0;
+  19          
+  20          void timer0() interrupt 1 {
+  21   1              if(!pwm_flag) { //Start of High level
+  22   2                      pwm_flag = 1;   //Set flag
+  23   2                      motor = 1;     //Set PWM o/p pin
+  24   2                      TH0 = pwm_width;        //Load timer
+  25   2                      TF0 = 0;                //Clear interrupt flag
+  26   2                      return;         //Return
+  27   2              }
+  28   1              else {  //Start of Low level
+  29   2                      pwm_flag = 0;   //Clear flag
+  30   2                      motor = 0;     //Clear PWM o/p pin
+  31   2                      TH0 = 255 - pwm_width;  //Load timer
+  32   2                      TF0 = 0;        //Clear Interrupt flag
+  33   2                      return;         //return
+  34   2              }
+  35   1      }
+  36          void extint() interrupt 0
+  37          {
+  38   1              pwm_width=10;
+  39   1      }
+  40          void main()
+  41          {
+  42   1      //  unsigned char k;  
+  43   1         objects=gates=green=red=yellow=1;
+  44   1              buzz=1;
+  45   1              intp=1;
+  46   1               TMOD = 0x02;
+  47   1              EA = 1;
+  48   1              ET0 = 1;
+  49   1              TR0 = 1;
+  50   1                      EX0=1;
+  51   1                      motorg=0;
+  52   1                      motorg1=0;
+  53   1                      pwm_width=10;
+  54   1                      sig=1;
+  55   1               while(1)
+C51 COMPILER V9.01   ATE                                                                   05/12/2014 19:15:49 PAGE 2   
+
+  56   1              { 
+  57   2                      if(green==0)
+  58   2                      pwm_width=240;
+  59   2                      if(yellow==0)
+  60   2                      pwm_width=120;
+  61   2                      if(red==0)
+  62   2                      pwm_width=10;  
+  63   2                      if(objects==1)
+  64   2                      pwm_width=10; 
+  65   2                      if(gates==1) 
+  66   2                      {
+  67   3                              motorg=1;
+  68   3                              motorg1=0;
+  69   3                              delay();
+  70   3                              delay();
+  71   3                              delay();
+  72   3                              delay();
+  73   3                              motorg=0;
+  74   3                              motorg1=1;
+  75   3                              delay();
+  76   3                              motorg=0;
+  77   3                              motorg1=0;
+  78   3                      }
+  79   2                /*k=keysense();
+  80   2         switch(k)
+  81   2         {
+  82   2              case 1:  
+  83   2                           pwm_width = 10;
+  84   2                       break;
+  85   2              case 2:
+  86   2           pwm_width = 100;
+  87   2              buzz=0;
+  88   2                       break;
+  89   2              case 3:          
+  90   2              pwm_width = 250; break;
+  91   2          default:   
+  92   2                               break;
+  93   2         }    */
+  94   2      
+  95   2              } 
+  96   1      }
+  97          
+  98          unsigned char keysense(void)
+  99          {
+ 100   1       if(red==0)
+ 101   1         return(1);
+ 102   1          if(objects==1)
+ 103   1         return(1);
+ 104   1      else if(yellow==0)
+ 105   1         return(2);
+ 106   1         else if(green==0)
+ 107   1         return(3);
+ 108   1      else
+ 109   1                return (0);
+ 110   1      }
+ 111          void delay()
+ 112          {
+ 113   1              unsigned int i;
+ 114   1              for(i=0;i<65535;i++);
+ 115   1      }
+
+
+C51 COMPILER V9.01   ATE                                                                   05/12/2014 19:15:49 PAGE 3   
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    183    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

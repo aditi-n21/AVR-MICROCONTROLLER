@@ -1,0 +1,12 @@
+org 00h
+here: mov P2,#00h
+acall delay
+mov P2,#0ffh
+acall delay
+sjmp here
+
+delay:
+       mov r0,#5
+	   back: djnz r0,back
+	   ret
+	   end

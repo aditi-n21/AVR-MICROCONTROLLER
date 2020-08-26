@@ -1,0 +1,519 @@
+C51 COMPILER V7.20   EACPEE                                                                01/04/2013 15:38:25 PAGE 1   
+
+
+C51 COMPILER V7.20, COMPILATION OF MODULE EACPEE
+OBJECT MODULE PLACED IN eacpee.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE eacpee.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #include<string.h>
+   3          #include<stdio.h>
+   4          
+   5          #define LCD P0
+   6          sbit rs = P0^2;
+   7          //sbit rw = P3^1;
+   8          sbit en = P0^3;
+   9          sbit red = P1^4;
+  10          sbit green = P1^5;
+  11          sbit buzz = P3^0;
+  12          sbit row0 = P2^2;
+  13          sbit row1 = P2^3;
+  14          sbit row2 = P2^4;
+  15          sbit col0 = P2^5;
+  16          sbit col1 = P2^6;
+  17          sbit col2 = P2^7;
+  18          sbit rs1=P1^2;
+  19          sbit en1=P1^3;
+  20          //sbit sense3=P1^2;
+  21          //sbit sense4=P1^3;
+  22          sbit rotor_a = P3^4;
+  23          sbit rotor_b = P3^5;
+  24          sbit rotor_c = P3^6;
+  25          sbit rotor_d = P3^7;
+  26          
+  27          bit cake;
+  28          
+  29          void lcd_cmd(unsigned char);
+  30          void lcd_cmd1(unsigned char);
+  31          void lcd_data(unsigned char);
+  32          void lcd_data1(unsigned char);
+  33          void lcd_str(unsigned char *);
+  34          void lcd_init(void);
+  35          unsigned char keysense(void);
+  36          void delay(unsigned char);
+  37          unsigned int insert(void);
+  38          void right(void);
+  39          void stepperf(void);
+  40          void stepperb(void);
+  41          void enter(void);
+  42          //void ex_out(void);
+  43          void convertAndDisplay(unsigned int);
+  44          unsigned search(unsigned int);
+  45          
+  46          unsigned char no=0;
+  47          
+  48          struct detail
+  49          {
+  50                   unsigned int cn,pwd;
+  51          }st[10];
+  52          
+  53          void external0(void) interrupt 0 
+  54          {
+  55   1            cake=0;
+C51 COMPILER V7.20   EACPEE                                                                01/04/2013 15:38:25 PAGE 2   
+
+  56   1            enter();
+  57   1                //    no++;
+  58   1      }
+  59          
+  60          void external1(void) interrupt 2  
+  61          {          cake=1;
+  62   1       enter();
+  63   1            
+  64   1          
+  65   1      }
+  66          
+  67          unsigned search(unsigned int match)
+  68          {
+  69   1         unsigned char i=1,ct=0;
+  70   1         unsigned int k;
+  71   1         lcd_cmd(0x01);
+  72   1                       lcd_cmd(0x80);
+  73   1                          lcd_data(no+48);            
+  74   1                              lcd_cmd(0x85);
+  75   1                               convertAndDisplay(st[i].cn);
+  76   1         while(i<=no)
+  77   1                {
+  78   2                           
+  79   2                              lcd_cmd(0xc0);
+  80   2                          lcd_data(i+48);             
+  81   2                              lcd_cmd(0xc5);
+  82   2                               convertAndDisplay(st[i].pwd);
+  83   2      
+  84   2      
+  85   2                 if(match==st[i].cn)
+  86   2                       {
+  87   3                        lcd_cmd(0x01);
+  88   3                       lcd_cmd(0x80);
+  89   3                          lcd_data(no+48);            
+  90   3                              lcd_cmd(0x85);
+  91   3                               convertAndDisplay(st[i].cn);
+  92   3                           
+  93   3                              lcd_cmd(0xc0);
+  94   3                          lcd_data(i+48);             
+  95   3                              lcd_cmd(0xc5);
+  96   3                               convertAndDisplay(st[i].pwd);
+  97   3                        aa:lcd_cmd(0x01);
+  98   3                          lcd_str(" Enter Password");
+  99   3                          k=insert();
+ 100   3                              if(k==st[i].pwd)
+ 101   3                                 {
+ 102   4                                 return 1;
+ 103   4                                 }
+ 104   3                              else
+ 105   3                                 {
+ 106   4                                  if(ct<3)
+ 107   4                                      {       lcd_cmd(0x01);
+ 108   5                                      lcd_str(" Wrong Password");
+ 109   5                                              lcd_cmd(0xc0);
+ 110   5                                  lcd_str(" Enter it again");
+ 111   5                                              buzz=0;
+ 112   5                                              delay(20);
+ 113   5                                      ct++;
+ 114   5                                               goto aa;
+ 115   5                                  }
+ 116   4                                      else
+ 117   4                                         {
+C51 COMPILER V7.20   EACPEE                                                                01/04/2013 15:38:25 PAGE 3   
+
+ 118   5                                          ct=0;
+ 119   5                                              lcd_cmd(0x01);
+ 120   5                                      lcd_str("Forget Password");
+ 121   5                                              lcd_cmd(0xc0);
+ 122   5                                  lcd_str("Contact Security");
+ 123   5                                              buzz=0;
+ 124   5                                              delay(500);
+ 125   5                                              break;
+ 126   5                                         }
+ 127   4                              }
+ 128   3                              }
+ 129   2                 else
+ 130   2                   {
+ 131   3                          i++;
+ 132   3                        }
+ 133   2                }
+ 134   1      
+ 135   1                return 0;
+ 136   1      }
+ 137          
+ 138          void convertAndDisplay(unsigned int value)
+ 139                   
+ 140                   {
+ 141   1                  unsigned char x,y,d1,d2,d3,d4;
+ 142   1                      x=value/10;
+ 143   1                      d1=value%10;
+ 144   1                      d2=x%10;
+ 145   1              y=x/10;
+ 146   1                       d3=y%10;
+ 147   1                       d4=y/10;
+ 148   1                  //lcd_cmd(0x88);
+ 149   1                      //lcd_cmd(0x06);
+ 150   1                      //lcd_cmd(0x0E);
+ 151   1                      lcd_data(d4+48);                
+ 152   1                      lcd_data(d3+48);
+ 153   1                      lcd_data(d2+48);                
+ 154   1                      lcd_data(d1+48);
+ 155   1                      
+ 156   1                      delay(250);
+ 157   1                      
+ 158   1      }
+ 159          void delay(unsigned char time)
+ 160          {
+ 161   1      int i,j;
+ 162   1      for(j=0;j<time;j++)
+ 163   1      for(i=0;i<1275;i++);
+ 164   1      }
+ 165          unsigned char keysense(void)
+ 166          {
+ 167   1      while(1)
+ 168   1      {
+ 169   2      col0=0;
+ 170   2      col1=1;
+ 171   2      col2=1;
+ 172   2      if(row0==0)
+ 173   2      return(1);
+ 174   2      if(row1==0)
+ 175   2      return(4);
+ 176   2      if(row2==0)
+ 177   2      return(7);
+ 178   2      col0=1;
+ 179   2      col1=0;
+C51 COMPILER V7.20   EACPEE                                                                01/04/2013 15:38:25 PAGE 4   
+
+ 180   2      col2=1;
+ 181   2      if(row0==0)
+ 182   2      return(2);
+ 183   2      if(row1==0)
+ 184   2      return(5);
+ 185   2      if(row2==0)
+ 186   2      return(8);
+ 187   2      col0=1;
+ 188   2      col1=1;
+ 189   2      col2=0;
+ 190   2      if(row0==0)
+ 191   2      return(3);
+ 192   2      if(row1==0)
+ 193   2      return(6);
+ 194   2      if(row2==0)
+ 195   2      return(9);
+ 196   2      delay(10);
+ 197   2      };
+ 198   1      }
+ 199          
+ 200          void lcd_init() 
+ 201          {
+ 202   1      lcd_cmd(0x20);
+ 203   1      lcd_cmd(0x28);
+ 204   1      lcd_cmd(0x01);
+ 205   1      lcd_cmd(0x06);
+ 206   1      lcd_cmd(0x0E);
+ 207   1      lcd_cmd(0x80);
+ 208   1      }
+ 209          void lcd_data1(unsigned char value)
+ 210          {
+ 211   1              LCD=value;
+ 212   1              rs=1;
+ 213   1      //      rw=0;
+ 214   1              en=1;
+ 215   1              delay(2);
+ 216   1              en=0;
+ 217   1              delay(2);
+ 218   1      }
+ 219          void lcd_data(unsigned char value)
+ 220          {
+ 221   1              unsigned char cd1;
+ 222   1              cd1=value & 0xf0;
+ 223   1              lcd_data1(cd1);
+ 224   1              cd1=(value<<4) & 0xf0;
+ 225   1              lcd_data1(cd1);
+ 226   1      }       
+ 227          
+ 228          void lcd_cmd1(unsigned char value)
+ 229          {
+ 230   1              LCD=value;
+ 231   1              rs=0;
+ 232   1      //      rw=0;
+ 233   1              en=1;
+ 234   1              delay(2);
+ 235   1              en=0;
+ 236   1      }
+ 237          void lcd_cmd(unsigned char value)
+ 238          {
+ 239   1              unsigned char cd1;
+ 240   1              cd1=value & 0xf0;
+ 241   1              lcd_cmd1(cd1);
+C51 COMPILER V7.20   EACPEE                                                                01/04/2013 15:38:25 PAGE 5   
+
+ 242   1              cd1=(value<<4) & 0xf0;
+ 243   1              lcd_cmd1(cd1);
+ 244   1      }       
+ 245          
+ 246          void lcd_str(unsigned char *s)
+ 247          {
+ 248   1              unsigned char l,j;
+ 249   1              l=strlen(s);
+ 250   1              for(j=0;j<l;j++)
+ 251   1                      {
+ 252   2                              lcd_data(*s);
+ 253   2                              s++;
+ 254   2                      delay(5);
+ 255   2                      }
+ 256   1      }
+ 257          unsigned int insert(void)
+ 258           {              
+ 259   1                      unsigned int input;
+ 260   1              unsigned char t1,t2,t3,t4;
+ 261   1                      //lcd_init();
+ 262   1              //      lcd_str("Enter password");
+ 263   1                      t1=keysense();
+ 264   1                      lcd_cmd(0xc6);
+ 265   1                      lcd_data(t1+48);
+ 266   1                      delay(50);
+ 267   1                      lcd_cmd(0xc6);
+ 268   1                      lcd_data('#');
+ 269   1                      t2=keysense();
+ 270   1                      lcd_cmd(0xc7);
+ 271   1                      lcd_data(t2+48);
+ 272   1                      delay(50);
+ 273   1                      lcd_cmd(0xc7);
+ 274   1                      lcd_data('#');
+ 275   1                      t3=keysense();
+ 276   1                      lcd_cmd(0xc8);
+ 277   1                      lcd_data(t3+48);
+ 278   1                      delay(50);
+ 279   1                      lcd_cmd(0xc8);
+ 280   1                      lcd_data('#');
+ 281   1                      t4=keysense();
+ 282   1                      lcd_cmd(0xc9);
+ 283   1                      lcd_data(t4+48);
+ 284   1                      delay(50);
+ 285   1                      lcd_cmd(0xc9);
+ 286   1                      lcd_data('#');
+ 287   1                      input=1000*t1+100*t2+10*t3+t4;
+ 288   1                      return(input);
+ 289   1      }
+ 290          void enter(void)
+ 291          {  unsigned int car_no;
+ 292   1          bit h;
+ 293   1          if(cake==0)
+ 294   1              {  no++;
+ 295   2              if(no<=9)
+ 296   2              {
+ 297   3              lcd_cmd(0x01);
+ 298   3              lcd_str("Enter Car No.");
+ 299   3              st[no].cn=insert();
+ 300   3              lcd_cmd(0x01);
+ 301   3              lcd_str(" Set Password");
+ 302   3              st[no].pwd=insert();
+ 303   3              lcd_cmd(0x01);
+C51 COMPILER V7.20   EACPEE                                                                01/04/2013 15:38:25 PAGE 6   
+
+ 304   3               lcd_str("Barrier Opening");
+ 305   3              stepperf();
+ 306   3              lcd_cmd(0xc0);
+ 307   3              lcd_str("Ur WELCOME");
+ 308   3              lcd_cmd(0x01);
+ 309   3               lcd_str("Barrier Closing");
+ 310   3              stepperb();
+ 311   3              lcd_cmd(0xc0);
+ 312   3              lcd_str("Barrier Closed");
+ 313   3      
+ 314   3              lcd_cmd(0x01);
+ 315   3              return;
+ 316   3              }
+ 317   2        else
+ 318   2          {
+ 319   3               lcd_cmd(0x01);
+ 320   3               lcd_str("Parking Full ");
+ 321   3        
+ 322   3          }
+ 323   2          }
+ 324   1      else
+ 325   1          { 
+ 326   2              if(no>0)
+ 327   2              { 
+ 328   3              lcd_cmd(0x01);
+ 329   3              lcd_str("Enter Car No.");
+ 330   3              car_no=insert();
+ 331   3              h=search(car_no);
+ 332   3                if(h==1)
+ 333   3                      {
+ 334   4                              lcd_cmd(0x01);
+ 335   4                              lcd_str("Barrier Opening");
+ 336   4                              stepperf();
+ 337   4                              lcd_cmd(0xc0);
+ 338   4                              lcd_str("Ur WELCOME");
+ 339   4                              lcd_cmd(0x01);
+ 340   4                              lcd_str("Barrier Closing");
+ 341   4                              stepperb();
+ 342   4                              lcd_cmd(0xc0);
+ 343   4                              lcd_str("Barrier Closed");
+ 344   4                              no--;
+ 345   4                       }
+ 346   3                else
+ 347   3                  {
+ 348   4                       lcd_cmd(0x01);
+ 349   4                      lcd_str("Car Not Found");          
+ 350   4                  }
+ 351   3              lcd_cmd(0x01);
+ 352   3                       
+ 353   3              return;
+ 354   3              }
+ 355   2         else
+ 356   2          {
+ 357   3               lcd_cmd(0x01);
+ 358   3               lcd_str(" ~~STOP~~ ");
+ 359   3                  buzz=0;
+ 360   3                 delay(500);
+ 361   3                      lcd_cmd(0x01);  
+ 362   3          }
+ 363   2         }
+ 364   1      }                               
+ 365          void stepperf(void)
+C51 COMPILER V7.20   EACPEE                                                                01/04/2013 15:38:25 PAGE 7   
+
+ 366          {
+ 367   1              unsigned int i;
+ 368   1              for(i=0;i<10;i++)
+ 369   1                      {
+ 370   2                              rotor_a=1;
+ 371   2      rotor_b=0;
+ 372   2      rotor_c=0;
+ 373   2      rotor_d=0;
+ 374   2                              delay(10);
+ 375   2                              rotor_a=0;
+ 376   2      rotor_b=1;
+ 377   2      rotor_c=0;
+ 378   2      rotor_d=0;
+ 379   2                              delay(10);
+ 380   2                              rotor_a=0;
+ 381   2      rotor_b=0;
+ 382   2      rotor_c=1;
+ 383   2      rotor_d=0;
+ 384   2                              delay(10);
+ 385   2                              rotor_a=0;
+ 386   2      rotor_b=0;
+ 387   2      rotor_c=0;
+ 388   2      rotor_d=1;
+ 389   2                              delay(10);
+ 390   2                      }
+ 391   1      }
+ 392          void stepperb(void)
+ 393          {
+ 394   1              unsigned int i;
+ 395   1              for(i=0;i<10;i++)
+ 396   1                      {
+ 397   2                              rotor_a=0;
+ 398   2      rotor_b=0;
+ 399   2      rotor_c=0;
+ 400   2      rotor_d=1;
+ 401   2                              delay(10);
+ 402   2                              rotor_a=0;
+ 403   2      rotor_b=0;
+ 404   2      rotor_c=1;
+ 405   2      rotor_d=0;
+ 406   2                              delay(10);
+ 407   2                              rotor_a=0;
+ 408   2      rotor_b=1;
+ 409   2      rotor_c=0;
+ 410   2      rotor_d=0;
+ 411   2                              delay(10);
+ 412   2                              rotor_a=1;
+ 413   2      rotor_b=0;
+ 414   2      rotor_c=0;
+ 415   2      rotor_d=0;
+ 416   2                              delay(10);
+ 417   2                      }
+ 418   1      }
+ 419          void right(void)
+ 420                          {
+ 421   1                      lcd_init();
+ 422   1                      lcd_str("Correct Password");
+ 423   1                      delay(10);
+ 424   1                      lcd_init();
+ 425   1                      lcd_str("Opening Door");
+ 426   1                      green=0;
+ 427   1                      red=0;
+C51 COMPILER V7.20   EACPEE                                                                01/04/2013 15:38:25 PAGE 8   
+
+ 428   1                      stepperf();
+ 429   1                      lcd_cmd(0xc0);
+ 430   1                      lcd_str("  Ur Welcome");
+ 431   1                      delay(100);
+ 432   1                      lcd_cmd(0x01);
+ 433   1                      lcd_cmd(0x80);
+ 434   1                      lcd_str("Closing Door");
+ 435   1                      delay(10);
+ 436   1                      stepperb();
+ 437   1                      delay(10);
+ 438   1                      lcd_cmd(0xc0);
+ 439   1                      lcd_str("Door Closed");
+ 440   1                      delay(10);
+ 441   1                      green=1;
+ 442   1                      delay(10);
+ 443   1                      red=0;
+ 444   1                      delay(10);
+ 445   1                      delay(10);
+ 446   1                      lcd_cmd(0x80);
+ 447   1                      lcd_str("Security System");
+ 448   1              delay(10);
+ 449   1             } 
+ 450          
+ 451          void main()
+ 452          {
+ 453   1       //unsigned char a=0,cnt=0,user=0;
+ 454   1      //unsigned int ca,pw,ca2,pw2;
+ 455   1      
+ 456   1      red=0;
+ 457   1      P2=0x1c;
+ 458   1      IE=0x85;
+ 459   1      IP=0x01;
+ 460   1      green=1;
+ 461   1      buzz=1;
+ 462   1      delay(10);
+ 463   1      lcd_init();
+ 464   1      cake = 0;   
+ 465   1      while(1)
+ 466   1      {
+ 467   2              /* st[0].cn=1;
+ 468   2               st[0].pwd=2;
+ 469   2               st1[0].cn=3;
+ 470   2               st1[0].pwd=4;  */
+ 471   2      
+ 472   2      
+ 473   2              lcd_str("  ##STOP## ");
+ 474   2      lcd_cmd(0xc0);
+ 475   2      lcd_str("Press Enter key");
+ 476   2      
+ 477   2      
+ 478   2      }
+ 479   1      
+ 480   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1497    ----
+   CONSTANT SIZE    =    318    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     41      16
+   IDATA SIZE       =   ----    ----
+C51 COMPILER V7.20   EACPEE                                                                01/04/2013 15:38:25 PAGE 9   
+
+   BIT SIZE         =      1       1
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

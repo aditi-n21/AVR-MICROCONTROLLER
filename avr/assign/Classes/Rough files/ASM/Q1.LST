@@ -1,0 +1,15 @@
+Q1                                                                                                            PAGE 1
+
+                       1    $mod51
+0000                   2    org 00h
+0000 78A5              3    mov r0,#0a5h
+0002 7922              4    mov r1,#22h
+0004 E8                5    mov a,r0
+0005 FB                6    mov r3,a
+0006 E9                7    mov a,r1
+0007 FC                8    mov r4,a
+                       9    end
+
+VERSION 1.2h ASSEMBLY COMPLETE, 0 ERRORS FOUND
+Q1                                                                                                            PAGE 2
+

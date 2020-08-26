@@ -1,0 +1,236 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        01/24/2013  17:39:55  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE STARTUP.obj, dk7.obj TO dk6
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  STARTUP.obj (?C_STARTUP)
+  dk7.obj (DK7)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CLDPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (STRLEN)
+
+
+LINK MAP OF MODULE:  dk6 (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0005H     UNIT         ?DT?_LCD_STR?DK7
+            IDATA   000DH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0037H     UNIT         ?PR?CHARACTER?DK7
+            CODE    0837H     0032H     UNIT         ?PR?_LCD_STR?DK7
+            CODE    0869H     0023H     UNIT         ?PR?_DELAY?DK7
+            CODE    088CH     0019H     UNIT         ?PR?LCD_INIT?DK7
+            CODE    08A5H     0019H     UNIT         ?C?LIB_CODE
+            CODE    08BEH     0015H     UNIT         ?PR?_STRLEN?STRLEN
+            CODE    08D3H     000EH     UNIT         ?PR?_LCD_CMD?DK7
+            CODE    08E1H     000EH     UNIT         ?PR?_LCD_DATA?DK7
+            CODE    08EFH     000CH     UNIT         ?C_C51STARTUP
+            CODE    08FBH     0008H     UNIT         ?PR?MAIN?DK7
+
+
+
+OVERLAY MAP OF MODULE:   dk6 (?C_STARTUP)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?DK7
+
+?PR?MAIN?DK7
+  +--> ?PR?LCD_INIT?DK7
+  +--> ?PR?CHARACTER?DK7
+
+?PR?LCD_INIT?DK7
+  +--> ?PR?_LCD_CMD?DK7
+
+?PR?_LCD_CMD?DK7
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/24/2013  17:39:55  PAGE 2
+
+
+  +--> ?PR?_DELAY?DK7
+
+?PR?CHARACTER?DK7
+  +--> ?PR?_LCD_CMD?DK7
+  +--> ?PR?_LCD_DATA?DK7
+  +--> ?PR?_DELAY?DK7
+
+?PR?_LCD_DATA?DK7
+  +--> ?PR?_DELAY?DK7
+
+
+
+SYMBOL TABLE OF MODULE:  dk6 (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:08EFH         SEGMENT       ?C_C51STARTUP
+  I:000DH         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:08F2H         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:08EFH         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:08EFH         LINE#         133
+  C:08F1H         LINE#         134
+  C:08F2H         LINE#         135
+  C:08F3H         LINE#         136
+  C:08F5H         LINE#         185
+  C:08F8H         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        DK7
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:00B0H         PUBLIC        P3
+  C:0869H         PUBLIC        _delay
+  C:08FBH         PUBLIC        main
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/24/2013  17:39:55  PAGE 3
+
+
+  C:08E1H         PUBLIC        _lcd_data
+  C:0800H         PUBLIC        character
+  C:08D3H         PUBLIC        _lcd_cmd
+  C:088CH         PUBLIC        lcd_init
+  B:00B0H.7       PUBLIC        en
+  B:00B0H.6       PUBLIC        rs
+  C:0837H         PUBLIC        _lcd_str
+  -------         PROC          MAIN
+  C:08FBH         LINE#         13
+  C:08FBH         LINE#         14
+  C:08FBH         LINE#         15
+  C:08FEH         LINE#         16
+  C:08FEH         LINE#         17
+  C:08FEH         LINE#         18
+  C:0901H         LINE#         19
+  -------         ENDPROC       MAIN
+  -------         PROC          _LCD_CMD
+  D:0007H         SYMBOL        a
+  C:08D3H         LINE#         21
+  C:08D3H         LINE#         22
+  C:08D3H         LINE#         23
+  C:08D5H         LINE#         24
+  C:08D7H         LINE#         26
+  C:08D9H         LINE#         27
+  C:08DEH         LINE#         28
+  C:08E0H         LINE#         29
+  -------         ENDPROC       _LCD_CMD
+  -------         PROC          _LCD_DATA
+  D:0007H         SYMBOL        b
+  C:08E1H         LINE#         30
+  C:08E1H         LINE#         31
+  C:08E1H         LINE#         32
+  C:08E3H         LINE#         33
+  C:08E5H         LINE#         35
+  C:08E7H         LINE#         36
+  C:08ECH         LINE#         37
+  C:08EEH         LINE#         38
+  -------         ENDPROC       _LCD_DATA
+  -------         PROC          _DELAY
+  D:0007H         SYMBOL        msec
+  -------         DO            
+  D:0004H         SYMBOL        i
+  D:0002H         SYMBOL        j
+  -------         ENDDO         
+  C:0869H         LINE#         39
+  C:0869H         LINE#         40
+  C:0869H         LINE#         42
+  C:0876H         LINE#         43
+  C:088BH         LINE#         44
+  -------         ENDPROC       _DELAY
+  -------         PROC          LCD_INIT
+  C:088CH         LINE#         45
+  C:088CH         LINE#         46
+  C:088CH         LINE#         47
+  C:0891H         LINE#         48
+  C:0896H         LINE#         49
+  C:089BH         LINE#         50
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/24/2013  17:39:55  PAGE 4
+
+
+  C:08A0H         LINE#         51
+  -------         ENDPROC       LCD_INIT
+  -------         PROC          CHARACTER
+  C:0800H         LINE#         53
+  C:0800H         LINE#         54
+  C:0800H         LINE#         55
+  C:0805H         LINE#         56
+  C:080AH         LINE#         57
+  C:080FH         LINE#         58
+  C:0814H         LINE#         59
+  C:0819H         LINE#         60
+  C:081EH         LINE#         61
+  C:0823H         LINE#         62
+  C:0828H         LINE#         63
+  C:082DH         LINE#         64
+  C:0832H         LINE#         65
+  -------         ENDPROC       CHARACTER
+  -------         PROC          _LCD_STR
+  D:0008H         SYMBOL        s
+  -------         DO            
+  D:000BH         SYMBOL        l
+  D:000CH         SYMBOL        i
+  -------         ENDDO         
+  C:0837H         LINE#         68
+  C:083DH         LINE#         69
+  C:083DH         LINE#         71
+  C:0842H         LINE#         72
+  C:084CH         LINE#         73
+  C:084CH         LINE#         74
+  C:0859H         LINE#         75
+  C:0864H         LINE#         76
+  C:0868H         LINE#         77
+  -------         ENDPROC       _LCD_STR
+  -------         ENDMOD        DK7
+
+  -------         MODULE        ?C?CLDPTR
+  C:08A5H         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        STRLEN
+  C:08BEH         PUBLIC        _STRLEN
+  -------         ENDMOD        STRLEN
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_LCD_STR?DK7
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 00D8H BYTE (10%) *
+******************************************************************************
+
+Program Size: data=14.0 xdata=0 code=262
+LINK/LOCATE RUN COMPLETE.  1 WARNING(S),  0 ERROR(S)

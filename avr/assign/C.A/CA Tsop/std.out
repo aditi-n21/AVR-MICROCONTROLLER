@@ -1,0 +1,123 @@
+License request failed for feature
+
+Requesting PROE_LND ...
+C:\Documents and Settings\CETPA\My Documents\license.dat: (-9) Invalid host.
+C:\LICENSE.DAT: (111) Attempting to connect to non-PTC daemon.
+C:\Modeltech_5.4a\win32\license.dat: (111) Attempting to connect to non-PTC daemon.
+c:\flexlm\license.dat: (111) Attempting to connect to non-PTC daemon.
+
+Displaying status for license file: C:\Documents and Settings\CETPA\My Documents\license.dat
+License Server is UP: 
+
+  Warning (-3): No license server system for this feature.
+There is a license server manager/vendor daemon running, but it's for
+other vendors.
+Feature:       PROE_LND
+License path:  C:\Documents and Settings\CETPA\My Documents\license.dat;
+FLEXnet Licensing error:-3,278.  System Error: 22 "Invalid argument"
+For further information, refer to the FLEXnet Licensing End User Guide,
+available at "www.macrovision.com".
+
+                       License    In Use   Free   Version    Expire Date        SCN 
+                       -------    ------   ----   -------    -----------       -----
+                MATHCAD_IMPROC       Uncounted      14.1         None         Locked to: D0-27-88-62-49-75
+              MATHCAD_DATAPACK       Uncounted      14.1         None         Locked to: D0-27-88-62-49-75
+                MATHCAD_SIGNAL       Uncounted      14.1         None         Locked to: D0-27-88-62-49-75
+              MATHCAD_WAVELETS       Uncounted      14.1         None         Locked to: D0-27-88-62-49-75
+                      MECFATUI       Uncounted      31.0         None         Locked to: D0-27-88-62-49-75
+                     MECFATENG       Uncounted      31.0         None         Locked to: D0-27-88-62-49-75
+                Mecui_Advanced       Uncounted      31.0         None         Locked to: D0-27-88-62-49-75
+               Meceng_Advanced       Uncounted      29.0         None         Locked to: D0-27-88-62-49-75
+             Pro/MEC-Cus-Loads       Uncounted      31.0         None         Locked to: D0-27-88-62-49-75
+                      PROE_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+          ILINK_CLIENT_License       Uncounted       3.4         None       01042011 Locked to: D0-27-88-62-49-75
+                       Mathcad       Uncounted      14.1         None       01042011 Locked to: D0-27-88-62-49-75
+           MECBASICENG_License       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+            MECBASICUI_License       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+            RSDESIGNER_License       Uncounted       9.0         None       01042011 Locked to: D0-27-88-62-49-75
+               VERICUT_License       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                   2DGS-OA_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                  ANIMATOR_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                       CDM_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                CDRSRENDER_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                   CONCEPT_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                  DESIGNER_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                    DS_MANAGER       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                    DS_SERVICE       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                   FLYTHRU_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                  ICEMAFFS_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                 ICEMCADDS_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                 ICEMCATIA_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                   ICEMDXF_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                   ICEMFFS_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                  ICEMIGES_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+               ICEMPLOTSRV_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                  ICEMSURF_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                    ICEMUG_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                   ICEMVDA_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+              ILINK_CLIENT_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+           ILINK_TK_ACCESS_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+               MECBASICENG_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                MECBASICUI_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                  MECEQRUN_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+               MECINTERFCE_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                 MECMOTENG_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                  MECMOTUI_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+               MECSTRUCENG_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                MECSTRUCUI_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+               MECTHERMENG_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                MECTHERMUI_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                MECTIREMOD_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                     MECUG_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+           MOCKUPCONVERTER_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                    MOCKUP_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                 MODELVIEW_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                    NCPOST_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                     PAINT_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                       PDM_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                 PROETRAIN_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                     PVIEW_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                    REFLEX_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                RSDESIGNER_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+             SSILINKCLIENT_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                   TMSINDA_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                   VERICUT_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                WEBPUBLISH_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+           Electro_Mech_Bundle       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                     NC_Bundle       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+            NC-Advanced_Bundle       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                 PIPING_Bundle       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+            Routed_Systems_SET       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+               Tool_Design_SET       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+          Struc_Simulation_SET       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+              NC_Machining_SET       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+          NC_Adv_Machining_SET       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+             NC_Sheetmetal_SET       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+          Comp-Aided_Verif_SET       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+       Behavioral_Modeling_SET       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+        Pro/EXPERT-MACHINE_SET       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+           Pro/NC-COMPLETE_SET       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+         Pro/NC-PRODUCTION_SET       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+         Pro/Mold_Designer_SET       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+        Pro/Mold_Machinist_SET       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+          Advanced_Surface_SET       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+         Advanced_Assembly_SET       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+        Behavioral_Modeler_SET       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+         Industrial_Design_SET       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+           Pro/InterfaceII_SET       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+           Advanced_Design_SET       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                   ISDO_II_SET       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                       EAS_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                EDACONDUIT_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+              EDACONNECTOR_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                 FLYPLUGIN_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                 FLYVIEWER_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                 INTERCOMM_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                     JLINK_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                PROPACKENG_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+                 PROPACKUI_LND       Uncounted      31.0         None       01042011 Locked to: D0-27-88-62-49-75
+
+
+WARNING: Ethernet Adapter was not detected
+An ethernet adapter was not detected.  Please install and configure an ethernet adapter.
+Please refer to your Microsoft documentation or hardware vendor for assistance.

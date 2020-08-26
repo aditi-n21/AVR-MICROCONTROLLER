@@ -1,0 +1,1 @@
+sseg.o: sseg.c

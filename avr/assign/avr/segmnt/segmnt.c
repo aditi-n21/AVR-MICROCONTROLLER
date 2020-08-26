@@ -1,0 +1,24 @@
+/*
+ * segmnt.c
+ *
+ * Created: 28-01-2013 PM 4:53:05
+ *  Author: MANOJ
+ */ 
+
+#include <avr/io.h>
+#include <util/delay.h>
+int main(void)
+{   DDRB=0xff;
+	//PORTB=0xff;
+	//char num[]={0xC0,0xF9,0xA4,0xB0,0x99,0x92,0x82,0xF8,0x80,0x90};		//(anode)
+		char num[]={0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x07,0x7F,0x6F};		//(cathode) H
+	unsigned int c;
+	while(1)
+	{
+		for(c=0;c<10;c++)
+		{
+		PORTB=num[c]; // anode
+		_delay_ms(1000);
+		}
+	}
+}

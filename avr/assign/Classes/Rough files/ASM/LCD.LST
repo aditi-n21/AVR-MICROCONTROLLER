@@ -1,0 +1,78 @@
+LCD                                                                                                           PAGE 1
+
+                       1    $mod51
+0000                   2    org 00h
+  00A0                 3    rs equ P2.0
+  00A1                 4    rw equ P2.1
+  00A2                 5    en equ P2.2
+0000 900161            6    mov dptr,#mycmd
+0003 E4                7    back1: clr a
+0004 93                8    movc a,@a+dptr
+0005 1122              9    acall cmdwrt
+0007 113C             10    acall delay
+0009 A3               11    inc dptr
+000A B400F6           12    cjne a,#0,back1
+000D 900150           13    mov dptr,#mydata
+0010 E4               14    back: clr a
+0011 93               15    movc a,@a+dptr
+0012 112F             16    acall datawrt
+0014 113C             17    acall delay
+0016 A3               18    inc dptr
+0017 B400F6           19    cjne a,#0,back
+001A 741C             20    here: mov a,#1ch
+001C 1122             21    acall cmdwrt
+001E 113C             22    acall delay
+0020 80F8             23    sjmp here
+0022                  24    cmdwrt:
+0022 F590             25    mov P1,A
+0024 C2A0             26    clr rs
+0026 C2A1             27    clr rw
+0028 D2A2             28    setb en
+002A 113C             29    acall delay
+002C C2A2             30    clr en
+002E 22               31    ret
+                      32    
+002F                  33    datawrt:
+002F F590             34    mov P1,A
+0031 D2A0             35    setb rs
+0033 C2A1             36    clr rw
+0035 D2A2             37    setb en
+0037 113C             38    acall delay
+0039 C2A2             39    clr en
+003B 22               40    ret
+                      41    
+003C                  42    delay:
+003C 78FF             43    mov r0,#255
+003E 79FF             44    ag1: mov r1,#255
+0040 D9FE             45    ag: djnz r1,ag
+0042 D8FA             46     djnz r0,ag1
+0044 22               47    ret
+                      48    
+0150                  49    org 150h
+0150 57656C63         50    mydata: DB 'Welcome to CETPA',0
+0154 6F6D6520   
+0158 746F2043   
+015C 45545041   
+0160 00         
+0161 3801060E         51    mycmd: DB 38h,01h,06h,0eh,80h,0
+0165 8000       
+                      52    END
+
+VERSION 1.2h ASSEMBLY COMPLETE, 0 ERRORS FOUND
+LCD                                                                                                           PAGE 2
+
+AG . . . . . . . . . . . . . . .  C ADDR  0040H  
+AG1. . . . . . . . . . . . . . .  C ADDR  003EH  
+BACK . . . . . . . . . . . . . .  C ADDR  0010H  
+BACK1. . . . . . . . . . . . . .  C ADDR  0003H  
+CMDWRT . . . . . . . . . . . . .  C ADDR  0022H  
+DATAWRT. . . . . . . . . . . . .  C ADDR  002FH  
+DELAY. . . . . . . . . . . . . .  C ADDR  003CH  
+EN . . . . . . . . . . . . . . .    NUMB  00A2H  
+HERE . . . . . . . . . . . . . .  C ADDR  001AH  
+MYCMD. . . . . . . . . . . . . .  C ADDR  0161H  
+MYDATA . . . . . . . . . . . . .  C ADDR  0150H  
+P1 . . . . . . . . . . . . . . .  D ADDR  0090H  PREDEFINED  
+P2 . . . . . . . . . . . . . . .  D ADDR  00A0H  PREDEFINED  
+RS . . . . . . . . . . . . . . .    NUMB  00A0H  
+RW . . . . . . . . . . . . . . .    NUMB  00A1H  

@@ -1,0 +1,56 @@
+﻿------ Build started: Project: ADC_multi, Configuration: Debug AVR ------
+Build started.
+Project "ADC_multi.cproj" (default targets):
+Target "PreBuildEvent" skipped, due to false condition; ('$(PreBuildEvent)'!='') was evaluated as (''!='').
+Target "CoreBuild" in file "C:\Program Files\Atmel\Atmel Studio 6.0\Vs\Compiler.targets" from project "E:\Emb Soft\avr\ADC\ADC_multi\ADC_multi.cproj" (target "Build" depends on it):
+	Task "RunCompilerTask"
+		C:\Program Files\Atmel\Atmel Studio 6.0\make\make.exe all 
+		Building file: .././ADC_multi.c
+		Invoking: AVR/GNU C Compiler : (AVR_8_bit_GNU_Toolchain_3.4.0_663) 4.6.2
+		"C:\Program Files\Atmel\Atmel Studio 6.0\extensions\Atmel\AVRGCC\3.4.0.65\AVRToolchain\bin\avr-gcc.exe" -funsigned-char -funsigned-bitfields -O0 -fpack-struct -fshort-enums -g2 -Wall -c -std=gnu99 -MD -MP -MF "ADC_multi.d" -MT"ADC_multi.d" -MT"ADC_multi.o"  -mmcu=atmega16   -o"ADC_multi.o" ".././ADC_multi.c" 
+		In file included from .././ADC_multi.c:11:0:
+c:\program files\atmel\atmel studio 6.0\extensions\atmel\avrgcc\3.4.0.65\avrtoolchain\bin\../lib/gcc/avr/4.6.2/../../../../avr/include/util/delay.h(90,3): #warning "F_CPU not defined for <util/delay.h>" [-Wcpp]
+c:\program files\atmel\atmel studio 6.0\extensions\atmel\avrgcc\3.4.0.65\avrtoolchain\bin\../lib/gcc/avr/4.6.2/../../../../avr/include/util/delay.h(95,3): #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed" [-Wcpp]
+		.././ADC_multi.c: In function 'main':
+E:\Emb Soft\avr\ADC\ADC_multi\ADC_multi.c(54,4): pointer targets in passing argument 1 of 'lcdstr' differ in signedness [-Wpointer-sign]
+E:\Emb Soft\avr\ADC\ADC_multi\ADC_multi.c(32,6): expected 'unsigned char *' but argument is of type 'char *'
+E:\Emb Soft\avr\ADC\ADC_multi\ADC_multi.c(59,4): pointer targets in passing argument 1 of 'lcdstr' differ in signedness [-Wpointer-sign]
+E:\Emb Soft\avr\ADC\ADC_multi\ADC_multi.c(32,6): expected 'unsigned char *' but argument is of type 'char *'
+		.././ADC_multi.c: In function 'lcdstr':
+E:\Emb Soft\avr\ADC\ADC_multi\ADC_multi.c(159,2): pointer targets in passing argument 1 of 'strlen' differ in signedness [-Wpointer-sign]
+c:\program files\atmel\atmel studio 6.0\extensions\atmel\avrgcc\3.4.0.65\avrtoolchain\bin\../lib/gcc/avr/4.6.2/../../../../avr/include/string.h(133,15): expected 'const char *' but argument is of type 'unsigned char *'
+		.././ADC_multi.c: In function 'val_chk':
+E:\Emb Soft\avr\ADC\ADC_multi\ADC_multi.c(188,4): pointer targets in passing argument 1 of 'lcdstr' differ in signedness [-Wpointer-sign]
+E:\Emb Soft\avr\ADC\ADC_multi\ADC_multi.c(156,6): expected 'unsigned char *' but argument is of type 'char *'
+E:\Emb Soft\avr\ADC\ADC_multi\ADC_multi.c(197,4): pointer targets in passing argument 1 of 'lcdstr' differ in signedness [-Wpointer-sign]
+E:\Emb Soft\avr\ADC\ADC_multi\ADC_multi.c(156,6): expected 'unsigned char *' but argument is of type 'char *'
+E:\Emb Soft\avr\ADC\ADC_multi\ADC_multi.c(206,4): pointer targets in passing argument 1 of 'lcdstr' differ in signedness [-Wpointer-sign]
+E:\Emb Soft\avr\ADC\ADC_multi\ADC_multi.c(156,6): expected 'unsigned char *' but argument is of type 'char *'
+E:\Emb Soft\avr\ADC\ADC_multi\ADC_multi.c(215,4): pointer targets in passing argument 1 of 'lcdstr' differ in signedness [-Wpointer-sign]
+E:\Emb Soft\avr\ADC\ADC_multi\ADC_multi.c(156,6): expected 'unsigned char *' but argument is of type 'char *'
+E:\Emb Soft\avr\ADC\ADC_multi\ADC_multi.c(224,4): pointer targets in passing argument 1 of 'lcdstr' differ in signedness [-Wpointer-sign]
+E:\Emb Soft\avr\ADC\ADC_multi\ADC_multi.c(156,6): expected 'unsigned char *' but argument is of type 'char *'
+		Finished building: .././ADC_multi.c
+		Building target: ADC_multi.elf
+		Invoking: AVR/GNU Linker : (AVR_8_bit_GNU_Toolchain_3.4.0_663) 4.6.2
+		"C:\Program Files\Atmel\Atmel Studio 6.0\extensions\Atmel\AVRGCC\3.4.0.65\AVRToolchain\bin\avr-gcc.exe" -o ADC_multi.elf  ADC_multi.o   -Wl,-Map="ADC_multi.map" -Wl,--start-group -Wl,-lm  -Wl,--end-group  -mmcu=atmega16  
+		Finished building target: ADC_multi.elf
+		"C:\Program Files\Atmel\Atmel Studio 6.0\extensions\Atmel\AVRGCC\3.4.0.65\AVRToolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature  "ADC_multi.elf" "ADC_multi.hex"
+		"C:\Program Files\Atmel\Atmel Studio 6.0\extensions\Atmel\AVRGCC\3.4.0.65\AVRToolchain\bin\avr-objcopy.exe" -j .eeprom  --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0  --no-change-warnings -O ihex "ADC_multi.elf" "ADC_multi.eep" || exit 0
+		"C:\Program Files\Atmel\Atmel Studio 6.0\extensions\Atmel\AVRGCC\3.4.0.65\AVRToolchain\bin\avr-objdump.exe" -h -S "ADC_multi.elf" > "ADC_multi.lss"
+		"C:\Program Files\Atmel\Atmel Studio 6.0\extensions\Atmel\AVRGCC\3.4.0.65\AVRToolchain\bin\avr-size.exe" "ADC_multi.elf"
+		   text	   data	    bss	    dec	    hex	filename
+		   7746	     58	      2	   7806	   1e7e	ADC_multi.elf
+	Done executing task "RunCompilerTask".
+	Task "RunOutputFileVerifyTask"
+				Program Memory Usage 	:	7804 bytes   47.6 % Full
+				Data Memory Usage 		:	60 bytes   5.9 % Full
+	Done executing task "RunOutputFileVerifyTask".
+Done building target "CoreBuild" in project "ADC_multi.cproj".
+Target "PostBuildEvent" skipped, due to false condition; ('$(PostBuildEvent)' != '') was evaluated as ('' != '').
+Target "Build" in file "C:\Program Files\Atmel\Atmel Studio 6.0\Vs\Avr.common.targets" from project "E:\Emb Soft\avr\ADC\ADC_multi\ADC_multi.cproj" (entry point):
+Done building target "Build" in project "ADC_multi.cproj".
+Done building project "ADC_multi.cproj".
+
+Build succeeded.
+========== Build: 1 succeeded or up-to-date, 0 failed, 0 skipped ==========

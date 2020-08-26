@@ -1,0 +1,143 @@
+C51 COMPILER V9.02   SFFA                                                                  05/01/2013 18:00:55 PAGE 1   
+
+
+C51 COMPILER V9.02, COMPILATION OF MODULE SFFA
+OBJECT MODULE PLACED IN sffa.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE sffa.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //Program to display numeric digit 0-9 on LCD
+   2          #include<reg51.h>
+   3          #include<string.h>
+   4          #define LCD P1
+   5          sbit RS = P3^7;   //Register select (RS) pin
+   6          sbit RW = P3^6;   //Read write (RW) pin
+   7          sbit EN = P3^5;   //Enable (EN) pin
+   8          sbit sense1= P3^0;
+   9          sbit sense2= P3^1;
+  10          sbit mot1a=P2^0;
+  11          sbit mot1b=P2^1;
+  12          sbit mot2a=P2^2;
+  13          sbit mot2b=P2^3;
+  14          void delay(unsigned int);
+  15          void writecmd(unsigned char);
+  16          void writedata(unsigned char);
+  17          void writestr(unsigned char *);
+  18          void lcd(void);
+  19          
+  20          void delay(unsigned int delay_time)    // Time delay function
+  21          {
+  22   1      unsigned int j,k;
+  23   1      for(j=0;j<=delay_time;j++)
+  24   1        for(k=0;k<=1275;k++);          
+  25   1      }
+  26          void writecmd(unsigned char a)
+  27          {
+  28   1              RS=0;
+  29   1              LCD=a;
+  30   1              RW=0;
+  31   1              EN=1;
+  32   1              delay(5);
+  33   1              EN=0;
+  34   1              return;
+  35   1      }
+  36          void writedata(unsigned char b)
+  37          {
+  38   1              RS=1;
+  39   1              LCD=b;
+  40   1              RW=0;
+  41   1              EN=1;
+  42   1              delay(5);
+  43   1              EN=0;
+  44   1              return;
+  45   1      }
+  46          void writestr(unsigned char *s)
+  47          {       
+  48   1              unsigned char l,i;
+  49   1              l=strlen(s);
+  50   1              for(i=0;i<l;i++)
+  51   1              {
+  52   2                      writedata(*s);
+  53   2                      s++;
+  54   2              }
+  55   1      }
+C51 COMPILER V9.02   SFFA                                                                  05/01/2013 18:00:55 PAGE 2   
+
+  56          
+  57          void lcd(void)
+  58          {
+  59   1              writecmd(0x38);
+  60   1              writecmd(0x0c);
+  61   1              writecmd(0x01);
+  62   1              writecmd(0x06);
+  63   1              writecmd(0x85);
+  64   1      }
+  65                  
+  66          
+  67          void main()
+  68          { 
+  69   1              unsigned char cnt;
+  70   1              sense1=sense2=1;
+  71   1              lcd();
+  72   1      writecmd(0x82);
+  73   1      writestr("WELCOME TO");
+  74   1      writecmd(0xc0);
+  75   1      writestr("AUTOMATIC RAILWAY");
+  76   1      writecmd(0x01);
+  77   1      writecmd(0x82);
+  78   1      writestr("GATE CONTROL");
+  79   1      writecmd(0xc5);
+  80   1      writestr("PROJECT");
+  81   1      
+  82   1       
+  83   1              while(1)
+  84   1      {
+  85   2              
+  86   2      mot1a=0;mot1b=0;mot2a=0;mot2b=0;
+  87   2              writecmd(0x82);
+  88   2      writestr("SCANNING>>>>>>");
+  89   2      
+  90   2              if((sense1==1)||(sense2==1))
+  91   2              {
+  92   3                      if(cnt==1)
+  93   3                      {
+  94   4                      writecmd(0x01);
+  95   4      writecmd(0x82);
+  96   4      writestr(" CLOSING GATE ");
+  97   4        mot1a=1;mot1b=0;mot2a=1;mot2b=0;
+  98   4      delay(500);
+  99   4                              cnt=0;
+ 100   4                      }                       
+ 101   3      }
+ 102   2      else 
+ 103   2      {
+ 104   3              if(cnt==0)
+ 105   3              {
+ 106   4      writecmd(0x01);
+ 107   4      writecmd(0x82);
+ 108   4      writestr("OPENING GATE");
+ 109   4      mot1a=0;mot1b=1;mot2a=0;mot2b=1;
+ 110   4      delay(500);
+ 111   4      cnt=1;
+ 112   4              }
+ 113   3                      
+ 114   3      }
+ 115   2      }
+ 116   1      }
+
+C51 COMPILER V9.02   SFFA                                                                  05/01/2013 18:00:55 PAGE 3   
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    302    ----
+   CONSTANT SIZE    =     93    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       6
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,61 @@
+T3                                                                                                            PAGE 1
+
+                       1    $mod51
+0000                   2    org 00h
+0000 75A0FF            3    mov p2,#0ffh
+0003 E5A0              4    ag: mov a,p2
+0005 5407              5            anl a,#07h
+0007 B40105            6            cjne a,#01h,la1
+000A 759002            7            mov p1,#02h
+000D 80F4              8            sjmp ag
+000F                   9    la1:
+000F E5A0             10            mov a,p2
+0011 5407             11            anl a,#07h
+0013 B40205           12            cjne a,#02h,la2
+0016 759002           13            mov p1,#02h
+0019 80E8             14            sjmp ag
+001B                  15    la2:
+001B E5A0             16            mov a,p2
+001D 5407             17            anl a,#07h
+001F B40405           18            cjne a,#04h,la3
+0022 759002           19            mov p1,#02h
+0025 80DC             20            sjmp ag         
+0027                  21    la3:
+0027 E5A0             22            mov a,p2
+0029 5407             23            anl a,#07h
+002B B40005           24            cjne a,#00h,la4
+002E 759014           25            mov p1,#00010100b
+0031 80D0             26            sjmp ag 
+0033                  27    la4:
+0033 E5A0             28            mov a,p2
+0035 5407             29            anl a,#07h
+0037 B40705           30            cjne a,#07h,la5
+003A 75900A           31            mov p1,#0ah
+003D 80C4             32            sjmp ag 
+003F                  33    la5:
+003F E5A0             34          mov a,p2
+0041 5407             35          anl a,#07h
+0043 B40305           36          cjne a,#03h,la6
+0046 75900C           37          mov p1,#00001100b      
+0049 80B8             38          sjmp ag
+004B                  39    la6:
+004B E5A0             40          mov a,p2
+004D 5407             41            anl a,#07h
+004F B406B1           42            cjne a,#06h,ag
+0052 759012           43            mov p1,#00010010b
+0055 80AC             44            sjmp ag 
+                      45    end
+                      46    
+
+VERSION 1.2h ASSEMBLY COMPLETE, 0 ERRORS FOUND
+T3                                                                                                            PAGE 2
+
+AG . . . . . . . . . . . . . . .  C ADDR  0003H  
+LA1. . . . . . . . . . . . . . .  C ADDR  000FH  
+LA2. . . . . . . . . . . . . . .  C ADDR  001BH  
+LA3. . . . . . . . . . . . . . .  C ADDR  0027H  
+LA4. . . . . . . . . . . . . . .  C ADDR  0033H  
+LA5. . . . . . . . . . . . . . .  C ADDR  003FH  
+LA6. . . . . . . . . . . . . . .  C ADDR  004BH  
+P1 . . . . . . . . . . . . . . .  D ADDR  0090H  PREDEFINED  
+P2 . . . . . . . . . . . . . . .  D ADDR  00A0H  PREDEFINED  

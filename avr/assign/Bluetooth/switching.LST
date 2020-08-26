@@ -1,0 +1,64 @@
+C51 COMPILER V9.02   SWITCHING                                                             12/08/2012 12:52:57 PAGE 1   
+
+
+C51 COMPILER V9.02, COMPILATION OF MODULE SWITCHING
+OBJECT MODULE PLACED IN switching.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE switching.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg51.h>
+   2          
+   3          #define dtmf P0
+   4          sbit led1=P2^0;
+   5          sbit led2=P2^1;
+   6          sbit led3=P2^2;
+   7          sbit led4=P2^3;
+   8          
+   9          
+  10          void main()
+  11          {
+  12   1         P2=0x00;
+  13   1        dtmf=0x0f;
+  14   1        while(1)
+  15   1        {
+  16   2               if(dtmf==0x08)
+  17   2                   {
+  18   3                        led1=1;led2=0;led3=0;led4=0;
+  19   3                       }
+  20   2              else if(dtmf==0x04)
+  21   2                   {
+  22   3                        led1=0;led2=1;led3=0;led4=0;
+  23   3                       }
+  24   2              else if(dtmf==0x0c)
+  25   2                   {
+  26   3                        led1=0;led2=0;led3=1;led4=0;
+  27   3                       }
+  28   2              else if(dtmf==0x02)
+  29   2                   {
+  30   3                        led1=0;led2=0;led3=0;led4=1;
+  31   3                       }
+  32   2              else if(dtmf==0x0a)
+  33   2                   {
+  34   3                        led1=1;led2=1;led3=1;led4=1;
+  35   3                       }
+  36   2              else
+  37   2                   {
+  38   3                        led1=0;led2=0;led3=0;led4=0;
+  39   3                       }
+  40   2        }
+  41   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     87    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

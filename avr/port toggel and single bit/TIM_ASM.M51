@@ -1,0 +1,58 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        06/02/2016  18:04:41  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE MAIN.obj TO TIM_ASM
+
+
+INPUT MODULES INCLUDED:
+  MAIN.obj (MAIN)
+
+
+LINK MAP OF MODULE:  TIM_ASM (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     030DH     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  TIM_ASM (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0300H         SYMBOL        DELAY
+  C:0008H         SYMBOL        LOOP
+  D:0090H         SYMBOL        P1
+  C:0304H         SYMBOL        SECOND
+  C:0302H         SYMBOL        THIRD
+  C:0000H         LINE#         5
+  C:0003H         LINE#         6
+  C:0005H         LINE#         7
+  C:0008H         LINE#         9
+  C:000AH         LINE#         10
+  C:000DH         LINE#         11
+  C:000EH         LINE#         12
+  C:0300H         LINE#         15
+  C:0302H         LINE#         16
+  C:0304H         LINE#         17
+  C:0306H         LINE#         18
+  C:0308H         LINE#         19
+  C:030AH         LINE#         20
+  C:030CH         LINE#         22
+  -------         ENDMOD        MAIN
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 001EH BYTE ( 1%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=781
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

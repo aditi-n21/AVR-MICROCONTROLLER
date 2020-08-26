@@ -1,0 +1,358 @@
+C51 COMPILER V9.05   EACP2                                                                 12/31/2012 19:21:50 PAGE 1   
+
+
+C51 COMPILER V9.05, COMPILATION OF MODULE EACP2
+OBJECT MODULE PLACED IN eacp2.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE eacp2.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #include<string.h>
+   3          #include<stdio.h>
+   4          #define LCD P0
+   5          sbit rs = P0^2;
+   6          //sbit rw = P3^1;
+   7          sbit en = P0^3;
+   8          sbit red = P1^4;
+   9          sbit green = P1^5;
+  10          sbit buzz = P3^0;
+  11          sbit row0 = P2^2;
+  12          sbit row1 = P2^3;
+  13          sbit row2 = P2^4;
+  14          sbit col0 = P2^5;
+  15          sbit col1 = P2^6;
+  16          sbit col2 = P2^7;
+  17          sbit sense1=P1^0;
+  18          sbit sense2=P1^1;
+  19          sbit sense3=P1^2;
+  20          sbit sense4=P1^3;
+  21          sbit rotor_a = P3^4;
+  22          sbit rotor_b = P3^5;
+  23          sbit rotor_c = P3^6;
+  24          sbit rotor_d = P3^7;
+  25          
+  26          void lcd_cmd(unsigned char);
+  27          void lcd_cmd1(unsigned char);
+  28          void lcd_data(unsigned char);
+  29          void lcd_data1(unsigned char);
+  30          void lcd_str(unsigned char *);
+  31          void lcd_init(void);
+  32          unsigned char keysense(void);
+  33          void delay(unsigned char);
+  34          unsigned int insert(void);
+  35          void right(void);
+  36          void stepperf(void);
+  37          void stepperb(void);
+  38          void enter(void);
+  39                  unsigned char no=0;
+  40          struct detail
+  41          {
+  42                   unsigned int cn,pwd;
+  43          }st[10],st1[10];
+  44          
+  45          void external0(void) interrupt 0 
+  46          {
+  47   1            
+  48   1            enter();
+  49   1                      no++;
+  50   1      }
+  51          void delay(unsigned char time)
+  52          {
+  53   1      int i,j;
+  54   1      for(j=0;j<time;j++)
+  55   1      for(i=0;i<1275;i++);
+C51 COMPILER V9.05   EACP2                                                                 12/31/2012 19:21:50 PAGE 2   
+
+  56   1      }
+  57          unsigned char keysense(void)
+  58          {
+  59   1      while(1)
+  60   1      {
+  61   2      col0=0;
+  62   2      col1=1;
+  63   2      col2=1;
+  64   2      if(row0==0)
+  65   2      return(1);
+  66   2      if(row1==0)
+  67   2      return(4);
+  68   2      if(row2==0)
+  69   2      return(7);
+  70   2      col0=1;
+  71   2      col1=0;
+  72   2      col2=1;
+  73   2      if(row0==0)
+  74   2      return(2);
+  75   2      if(row1==0)
+  76   2      return(5);
+  77   2      if(row2==0)
+  78   2      return(8);
+  79   2      col0=1;
+  80   2      col1=1;
+  81   2      col2=0;
+  82   2      if(row0==0)
+  83   2      return(3);
+  84   2      if(row1==0)
+  85   2      return(6);
+  86   2      if(row2==0)
+  87   2      return(9);
+  88   2      delay(10);
+  89   2      };
+  90   1      }
+  91          
+  92          void lcd_init() 
+  93          {
+  94   1      lcd_cmd(0x20);
+  95   1      lcd_cmd(0x28);
+  96   1      lcd_cmd(0x01);
+  97   1      lcd_cmd(0x06);
+  98   1      lcd_cmd(0x0E);
+  99   1      lcd_cmd(0x80);
+ 100   1      }
+ 101          void lcd_data1(unsigned char value)
+ 102          {
+ 103   1              LCD=value;
+ 104   1              rs=1;
+ 105   1      //      rw=0;
+ 106   1              en=1;
+ 107   1              delay(2);
+ 108   1              en=0;
+ 109   1              delay(2);
+ 110   1      }
+ 111          void lcd_data(unsigned char value)
+ 112          {
+ 113   1              unsigned char cd1;
+ 114   1              cd1=value & 0xf0;
+ 115   1              lcd_data1(cd1);
+ 116   1              cd1=(value<<4) & 0xf0;
+ 117   1              lcd_data1(cd1);
+C51 COMPILER V9.05   EACP2                                                                 12/31/2012 19:21:50 PAGE 3   
+
+ 118   1      }       
+ 119          
+ 120          void lcd_cmd1(unsigned char value)
+ 121          {
+ 122   1              LCD=value;
+ 123   1              rs=0;
+ 124   1      //      rw=0;
+ 125   1              en=1;
+ 126   1              delay(2);
+ 127   1              en=0;
+ 128   1      }
+ 129          void lcd_cmd(unsigned char value)
+ 130          {
+ 131   1              unsigned char cd1;
+ 132   1              cd1=value & 0xf0;
+ 133   1              lcd_cmd1(cd1);
+ 134   1              cd1=(value<<4) & 0xf0;
+ 135   1              lcd_cmd1(cd1);
+ 136   1      }       
+ 137          
+ 138          void lcd_str(unsigned char *s)
+ 139          {
+ 140   1              unsigned char l,j;
+ 141   1              l=strlen(s);
+ 142   1              for(j=0;j<l;j++)
+ 143   1                      {
+ 144   2                              lcd_data(*s);
+ 145   2                              s++;
+ 146   2                      delay(5);
+ 147   2                      }
+ 148   1      }
+ 149          unsigned int insert(void)
+ 150           {              
+ 151   1                      unsigned int input;
+ 152   1              unsigned char t1,t2,t3,t4;
+ 153   1                      //lcd_init();
+ 154   1              //      lcd_str("Enter password");
+ 155   1                      t1=keysense();
+ 156   1                      lcd_cmd(0xc6);
+ 157   1                      lcd_data(t1+48);
+ 158   1                      delay(50);
+ 159   1                      lcd_cmd(0xc6);
+ 160   1                      lcd_data('#');
+ 161   1                      t2=keysense();
+ 162   1                      lcd_cmd(0xc7);
+ 163   1                      lcd_data(t2+48);
+ 164   1                      delay(50);
+ 165   1                      lcd_cmd(0xc7);
+ 166   1                      lcd_data('#');
+ 167   1                      t3=keysense();
+ 168   1                      lcd_cmd(0xc8);
+ 169   1                      lcd_data(t3+48);
+ 170   1                      delay(50);
+ 171   1                      lcd_cmd(0xc8);
+ 172   1                      lcd_data('#');
+ 173   1                      t4=keysense();
+ 174   1                      lcd_cmd(0xc9);
+ 175   1                      lcd_data(t4+48);
+ 176   1                      delay(50);
+ 177   1                      lcd_cmd(0xc9);
+ 178   1                      lcd_data('#');
+ 179   1                      input=1000*t1+100*t2+10*t3+t4;
+C51 COMPILER V9.05   EACP2                                                                 12/31/2012 19:21:50 PAGE 4   
+
+ 180   1                      return(input);
+ 181   1      }
+ 182          void enter(void)
+ 183          {
+ 184   1              if(no<=9)
+ 185   1              {
+ 186   2              lcd_cmd(0x01);
+ 187   2              lcd_str("Enter Car No.");
+ 188   2              st[no].cn=insert();
+ 189   2              lcd_cmd(0x01);
+ 190   2              lcd_str(" Set Password");
+ 191   2              st[no].pwd=insert();
+ 192   2              lcd_cmd(0x01);
+ 193   2               lcd_str("Barrier Opening");
+ 194   2              stepperf();
+ 195   2              lcd_cmd(0xc0);
+ 196   2              lcd_str("Ur WELCOME");
+ 197   2              lcd_cmd(0x01);
+ 198   2               lcd_str("Barrier Closing");
+ 199   2              stepperb();
+ 200   2              lcd_cmd(0xc0);
+ 201   2              lcd_str("Barrier Closed");
+ 202   2      
+ 203   2              lcd_cmd(0x01);
+ 204   2              return;
+ 205   2              }
+ 206   1        else
+ 207   1        {
+ 208   2               lcd_cmd(0x01);
+ 209   2               lcd_str("Parking Full ");
+ 210   2        
+ 211   2        }
+ 212   1      }                               
+ 213          void stepperf(void)
+ 214          {
+ 215   1              unsigned int i;
+ 216   1              for(i=0;i<10;i++)
+ 217   1                      {
+ 218   2                              rotor_a=1;
+ 219   2      rotor_b=0;
+ 220   2      rotor_c=0;
+ 221   2      rotor_d=0;
+ 222   2                              delay(10);
+ 223   2                              rotor_a=0;
+ 224   2      rotor_b=1;
+ 225   2      rotor_c=0;
+ 226   2      rotor_d=0;
+ 227   2                              delay(10);
+ 228   2                              rotor_a=0;
+ 229   2      rotor_b=0;
+ 230   2      rotor_c=1;
+ 231   2      rotor_d=0;
+ 232   2                              delay(10);
+ 233   2                              rotor_a=0;
+ 234   2      rotor_b=0;
+ 235   2      rotor_c=0;
+ 236   2      rotor_d=1;
+ 237   2                              delay(10);
+ 238   2                      }
+ 239   1      }
+ 240          void stepperb(void)
+ 241          {
+C51 COMPILER V9.05   EACP2                                                                 12/31/2012 19:21:50 PAGE 5   
+
+ 242   1              unsigned int i;
+ 243   1              for(i=0;i<10;i++)
+ 244   1                      {
+ 245   2                              rotor_a=0;
+ 246   2      rotor_b=0;
+ 247   2      rotor_c=0;
+ 248   2      rotor_d=1;
+ 249   2                              delay(10);
+ 250   2                              rotor_a=0;
+ 251   2      rotor_b=0;
+ 252   2      rotor_c=1;
+ 253   2      rotor_d=0;
+ 254   2                              delay(10);
+ 255   2                              rotor_a=0;
+ 256   2      rotor_b=1;
+ 257   2      rotor_c=0;
+ 258   2      rotor_d=0;
+ 259   2                              delay(10);
+ 260   2                              rotor_a=1;
+ 261   2      rotor_b=0;
+ 262   2      rotor_c=0;
+ 263   2      rotor_d=0;
+ 264   2                              delay(10);
+ 265   2                      }
+ 266   1      }
+ 267          void right(void)
+ 268                          {
+ 269   1                      lcd_init();
+ 270   1                      lcd_str("Correct Password");
+ 271   1                      delay(10);
+ 272   1                      lcd_init();
+ 273   1                      lcd_str("Opening Door");
+ 274   1                      green=0;
+ 275   1                      red=0;
+ 276   1                      stepperf();
+ 277   1                      lcd_cmd(0xc0);
+ 278   1                      lcd_str("  Ur Welcome");
+ 279   1                      delay(100);
+ 280   1                      lcd_cmd(0x01);
+ 281   1                      lcd_cmd(0x80);
+ 282   1                      lcd_str("Closing Door");
+ 283   1                      delay(10);
+ 284   1                      stepperb();
+ 285   1                      delay(10);
+ 286   1                      lcd_cmd(0xc0);
+ 287   1                      lcd_str("Door Closed");
+ 288   1                      delay(10);
+ 289   1                      green=1;
+ 290   1                      delay(10);
+ 291   1                      red=0;
+ 292   1                      delay(10);
+ 293   1                      delay(10);
+ 294   1                      lcd_cmd(0x80);
+ 295   1                      lcd_str("Security System");
+ 296   1              delay(10);
+ 297   1             } 
+ 298          
+ 299          void main()
+ 300          {
+ 301   1       //unsigned char a=0,cnt=0,user=0;
+ 302   1      //unsigned int ca,pw,ca2,pw2;
+ 303   1      
+C51 COMPILER V9.05   EACP2                                                                 12/31/2012 19:21:50 PAGE 6   
+
+ 304   1      red=0;
+ 305   1      P2=0x1c;
+ 306   1      IE=0x81;
+ 307   1      green=1;
+ 308   1      buzz=1;
+ 309   1      delay(10);
+ 310   1      lcd_init();
+ 311   1         
+ 312   1      while(1)
+ 313   1      {
+ 314   2              /* st[0].cn=1;
+ 315   2               st[0].pwd=2;
+ 316   2               st1[0].cn=3;
+ 317   2               st1[0].pwd=4;  */
+ 318   2              lcd_str("  ##STOP## ");
+ 319   2      lcd_cmd(0xc0);
+ 320   2      lcd_str("Press Enter key");
+ 321   2      
+ 322   2      
+ 323   2      }
+ 324   1      
+ 325   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    907    ----
+   CONSTANT SIZE    =    212    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     81       8
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

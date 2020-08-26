@@ -1,0 +1,75 @@
+7_SEG_^1                                                                                                      PAGE 1
+
+                       1    ;WAP to display value from 0 to 99 with a proper delay.
+                       2    
+                       3    
+                       4            $MOD51
+0000                   5            ORG 00H
+0000 7590C0            6    AG:     MOV     P1,#0C0H
+0003 12003F            7            LCALL   DIGIT
+0006 7590F9            8            MOV     P1,#0F9H
+0009 12003F            9            LCALL   DIGIT
+000C 7590A4           10            MOV     P1,#0A4H
+000F 12003F           11            LCALL   DIGIT
+0012 7590B0           12            MOV     P1,#0B0H
+0015 12003F           13            LCALL   DIGIT
+0018 759099           14            MOV     P1,#99H
+001B 12003F           15            LCALL   DIGIT
+001E 759092           16            MOV     P1,#92H
+0021 12003F           17            LCALL   DIGIT
+0024 759082           18            MOV     P1,#82H
+0027 12003F           19            LCALL   DIGIT
+002A 7590F8           20            MOV     P1,#0F8H
+002D 12003F           21            LCALL   DIGIT
+0030 759080           22            MOV     P1,#80H
+0033 12003F           23            LCALL   DIGIT
+0036 759098           24            MOV     P1,#98H
+0039 12003F           25            LCALL   DIGIT
+003C 020000           26            LJMP    AG
+003F                  27    DIGIT:
+003F 7580C0           28            MOV     P0,#0C0H
+0042 1172             29            ACALL   DELAY
+0044 7580F9           30            MOV     P0,#0F9H
+0047 1172             31            ACALL   DELAY
+0049 7580A4           32            MOV     P0,#0A4H
+004C 1172             33            ACALL   DELAY
+004E 7580B0           34            MOV     P0,#0B0H
+0051 1172             35            ACALL   DELAY
+0053 758099           36            MOV     P0,#99H
+0056 1172             37            ACALL   DELAY
+0058 758092           38            MOV     P0,#92H
+005B 1172             39            ACALL   DELAY
+005D 758082           40            MOV     P0,#82H
+0060 1172             41            ACALL   DELAY
+0062 7580F8           42            MOV     P0,#0F8H
+0065 1172             43            ACALL   DELAY
+0067 758080           44            MOV     P0,#80H
+006A 1172             45            ACALL   DELAY
+006C 758098           46            MOV     P0,#98H
+006F 1172             47            ACALL   DELAY
+0071 22               48            RET
+                      49    
+0072                  50    DELAY:
+0072 7919             51            MOV     R1,#25
+0074 7AFF             52    L3:     MOV     R2,#255
+0076 7BFF             53    L2:     MOV     R3,#255
+0078 DBFE             54    L1:     DJNZ    R3,L1
+007A DAFA             55            DJNZ    R2,L2
+007C D9F6             56            DJNZ    R1,L3
+007E 22               57            RET
+                      58            END
+7_SEG_^1                                                                                                      PAGE 2
+
+                      59    
+
+VERSION 1.2h ASSEMBLY COMPLETE, 0 ERRORS FOUND
+7_SEG_^1                                                                                                      PAGE 3
+
+AG . . . . . . . . . . . . . . .  C ADDR  0000H  
+DELAY. . . . . . . . . . . . . .  C ADDR  0072H  
+DIGIT. . . . . . . . . . . . . .  C ADDR  003FH  
+L1 . . . . . . . . . . . . . . .  C ADDR  0078H  
+L2 . . . . . . . . . . . . . . .  C ADDR  0076H  
+L3 . . . . . . . . . . . . . . .  C ADDR  0074H  
+P0 . . . . . . . . . . . . . . .  D ADDR  0080H  PREDEFINED  
+P1 . . . . . . . . . . . . . . .  D ADDR  0090H  PREDEFINED  

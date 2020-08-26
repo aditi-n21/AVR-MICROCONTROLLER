@@ -1,0 +1,22 @@
+HBDHD                                                                                                         PAGE 1
+
+                       1    $mod51
+0000                   2    org 00h
+0000 D290              3    here: setb P1.0
+0002 110A              4    ACALL Delay
+0004 C290              5    Clr P1.0
+0006 110A              6    ACALL Delay
+0008 80F6              7    Sjmp here
+                       8    
+000A 7805              9    Delay: Mov r0,#5
+000C D8FE             10    ag: djnz r0,ag
+000E 22               11    ret
+                      12    end
+
+VERSION 1.2h ASSEMBLY COMPLETE, 0 ERRORS FOUND
+HBDHD                                                                                                         PAGE 2
+
+AG . . . . . . . . . . . . . . .  C ADDR  000CH  
+DELAY. . . . . . . . . . . . . .  C ADDR  000AH  
+HERE . . . . . . . . . . . . . .  C ADDR  0000H  
+P1 . . . . . . . . . . . . . . .  D ADDR  0090H  PREDEFINED  

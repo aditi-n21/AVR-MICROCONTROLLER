@@ -1,0 +1,468 @@
+C51 COMPILER V9.05   EACP                                                                  12/19/2012 15:40:59 PAGE 1   
+
+
+C51 COMPILER V9.05, COMPILATION OF MODULE EACP
+OBJECT MODULE PLACED IN eacp.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE eacp.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #include<string.h>
+   3          #define LCD P0
+   4          sbit RS = P2^0;
+   5          //sbit RW = P3^1;
+   6          sbit EN = P2^1;
+   7          sbit red = P1^4;
+   8          sbit green = P1^5;
+   9          sbit buzz = P3^5;
+  10          sbit row0 = P2^2;
+  11          sbit row1 = P2^3;
+  12          sbit row2 = P2^4;
+  13          sbit col0 = P2^5;
+  14          sbit col1 = P2^6;
+  15          sbit col2 = P2^7;
+  16          sbit sense1=P1^0;
+  17          sbit sense2=P1^1;
+  18          sbit sense3=P1^2;
+  19          sbit sense4=P1^3;
+  20          sbit rotor_a = P2^0;
+  21          sbit rotor_b = P2^1;
+  22          sbit rotor_c = P2^2;
+  23          sbit rotor_d = P2^3;
+  24          
+  25          void lcd_cmd(unsigned char);
+  26          void lcd_data(unsigned char);
+  27          void lcd_str(unsigned char *);
+  28          void lcd_init(void);
+  29          unsigned char keysense(void);
+  30          void delay(unsigned char);
+  31          unsigned int insert(void);
+  32          unsigned char cardread(void);
+  33          void right(void);
+  34          void stepperf(void);
+  35          void stepperb(void);
+  36          //char arr[10] = {0x40,0x79,0x24,0x30,0x19,0x12,0x02,0x78,0x00,0x10};
+  37          
+  38          void delay(unsigned char time)
+  39          {
+  40   1      int i,j;
+  41   1      for(j=0;j<time;j++)
+  42   1      for(i=0;i<1275;i++);
+  43   1      }
+  44          unsigned char keysense(void)
+  45          {
+  46   1      while(1)
+  47   1      {
+  48   2      col0=0;
+  49   2      col1=1;
+  50   2      col2=1;
+  51   2      if(row0==0)
+  52   2      return(1);
+  53   2      if(row1==0)
+  54   2      return(4);
+  55   2      if(row2==0)
+C51 COMPILER V9.05   EACP                                                                  12/19/2012 15:40:59 PAGE 2   
+
+  56   2      return(7);
+  57   2      col0=1;
+  58   2      col1=0;
+  59   2      col2=1;
+  60   2      if(row0==0)
+  61   2      return(2);
+  62   2      if(row1==0)
+  63   2      return(5);
+  64   2      if(row2==0)
+  65   2      return(8);
+  66   2      col0=1;
+  67   2      col1=1;
+  68   2      col2=0;
+  69   2      if(row0==0)
+  70   2      return(3);
+  71   2      if(row1==0)
+  72   2      return(6);
+  73   2      if(row2==0)
+  74   2      return(9);
+  75   2      delay(10);
+  76   2      };
+  77   1      }
+  78          
+  79          void lcd_init() 
+  80          {
+  81   1      lcd_cmd(0x38);
+  82   1      lcd_cmd(0x01);
+  83   1      lcd_cmd(0x06);
+  84   1      lcd_cmd(0x0E);
+  85   1      lcd_cmd(0x80);
+  86   1      }
+  87          void lcd_cmd(unsigned char value) 
+  88          {
+  89   1      LCD=value;
+  90   1      RS=0;
+  91   1      //RW=0;
+  92   1      EN=1;
+  93   1      delay(2);
+  94   1      EN=0;
+  95   1      }
+  96          void lcd_str(unsigned char *s)
+  97          {
+  98   1              unsigned char l,j;
+  99   1              l=strlen(s);
+ 100   1              for(j=0;j<l;j++)
+ 101   1                      {
+ 102   2                              lcd_data(*s);
+ 103   2                              s++;
+ 104   2                      delay(10);
+ 105   2                      }
+ 106   1      }
+ 107          void lcd_data(unsigned char value) 
+ 108          {
+ 109   1      LCD=value;
+ 110   1      RS=1;
+ 111   1      //RW=0;
+ 112   1      EN=1;
+ 113   1      delay(2);
+ 114   1      EN=0;
+ 115   1      }
+ 116          unsigned int insert(void)
+ 117           {              
+C51 COMPILER V9.05   EACP                                                                  12/19/2012 15:40:59 PAGE 3   
+
+ 118   1                      unsigned int input;
+ 119   1              unsigned char t1,t2,t3,t4;
+ 120   1                      //lcd_init();
+ 121   1              //      lcd_str("Enter password");
+ 122   1                      t1=keysense();
+ 123   1                      lcd_cmd(0xc6);
+ 124   1                      lcd_data(t1+48);
+ 125   1                      delay(100);
+ 126   1                      lcd_cmd(0xc6);
+ 127   1                      lcd_data('#');
+ 128   1                      t2=keysense();
+ 129   1                      lcd_cmd(0xc7);
+ 130   1                      lcd_data(t2+48);
+ 131   1                      delay(100);
+ 132   1                      lcd_cmd(0xc7);
+ 133   1                      lcd_data('#');
+ 134   1                      t3=keysense();
+ 135   1                      lcd_cmd(0xc8);
+ 136   1                      lcd_data(t3+48);
+ 137   1                      delay(100);
+ 138   1                      lcd_cmd(0xc8);
+ 139   1                      lcd_data('#');
+ 140   1                      t4=keysense();
+ 141   1                      lcd_cmd(0xc9);
+ 142   1                      lcd_data(t4+48);
+ 143   1                      delay(100);
+ 144   1                      lcd_cmd(0xc9);
+ 145   1                      lcd_data('#');
+ 146   1                      input=1000*t1+100*t2+10*t3+t4;
+ 147   1                      return(input);
+ 148   1      }
+ 149                                          
+ 150          
+ 151          void stepperf(void)
+ 152          {
+ 153   1              unsigned int i;
+ 154   1              for(i=0;i<30;i++)
+ 155   1                      {
+ 156   2                              rotor_a=1;
+ 157   2      rotor_b=0;
+ 158   2      rotor_c=0;
+ 159   2      rotor_d=0;
+ 160   2                              delay(10);
+ 161   2                              rotor_a=0;
+ 162   2      rotor_b=1;
+ 163   2      rotor_c=0;
+ 164   2      rotor_d=0;
+ 165   2                              delay(10);
+ 166   2                              rotor_a=0;
+ 167   2      rotor_b=0;
+ 168   2      rotor_c=1;
+ 169   2      rotor_d=0;
+ 170   2                              delay(10);
+ 171   2                              rotor_a=0;
+ 172   2      rotor_b=0;
+ 173   2      rotor_c=0;
+ 174   2      rotor_d=1;
+ 175   2                              delay(10);
+ 176   2                      }
+ 177   1      }
+ 178          void stepperb(void)
+ 179          {
+C51 COMPILER V9.05   EACP                                                                  12/19/2012 15:40:59 PAGE 4   
+
+ 180   1              unsigned int i;
+ 181   1              for(i=0;i<30;i++)
+ 182   1                      {
+ 183   2                              rotor_a=0;
+ 184   2      rotor_b=0;
+ 185   2      rotor_c=0;
+ 186   2      rotor_d=1;
+ 187   2                              delay(10);
+ 188   2                              rotor_a=0;
+ 189   2      rotor_b=0;
+ 190   2      rotor_c=1;
+ 191   2      rotor_d=0;
+ 192   2                              delay(10);
+ 193   2                              rotor_a=0;
+ 194   2      rotor_b=1;
+ 195   2      rotor_c=0;
+ 196   2      rotor_d=0;
+ 197   2                              delay(10);
+ 198   2                              rotor_a=1;
+ 199   2      rotor_b=0;
+ 200   2      rotor_c=0;
+ 201   2      rotor_d=0;
+ 202   2                              delay(10);
+ 203   2                      }
+ 204   1      }
+ 205          void right(void)
+ 206                          {
+ 207   1                      lcd_init();
+ 208   1                      lcd_str("Correct Password");
+ 209   1                      delay(10);
+ 210   1                      lcd_init();
+ 211   1                      lcd_str("Opening Door");
+ 212   1                      green=0;
+ 213   1                      red=0;
+ 214   1                      stepperf();
+ 215   1                      lcd_cmd(0xc0);
+ 216   1                      lcd_str("  Ur Welcome");
+ 217   1                      delay(100);
+ 218   1                      lcd_cmd(0x01);
+ 219   1                      lcd_cmd(0x80);
+ 220   1                      lcd_str("Closing Door");
+ 221   1                      delay(10);
+ 222   1                      stepperb();
+ 223   1                      delay(10);
+ 224   1                      lcd_cmd(0xc0);
+ 225   1                      lcd_str("Door Closed");
+ 226   1                      delay(10);
+ 227   1                      green=1;
+ 228   1                      delay(10);
+ 229   1                      red=0;
+ 230   1                      delay(10);
+ 231   1                      delay(10);
+ 232   1                      lcd_cmd(0x80);
+ 233   1                      lcd_str("Security System");
+ 234   1              delay(10);
+ 235   1             } 
+ 236          unsigned char cardread(void)
+ 237          {
+ 238   1             if(sense1==1)
+ 239   1                      return('1');
+ 240   1                 else if(sense2==1)
+ 241   1                      return('2');
+C51 COMPILER V9.05   EACP                                                                  12/19/2012 15:40:59 PAGE 5   
+
+ 242   1                 else if(sense3==1)
+ 243   1                      return('3');
+ 244   1                 else if(sense4==1)
+ 245   1                      return('4');
+ 246   1                 else
+ 247   1                      return('0');
+ 248   1      }
+ 249          void main()
+ 250          {
+ 251   1      unsigned char a=0,cnt=0,user=0;
+ 252   1      unsigned int ca,pw,ca2,pw2;
+ 253   1      red=0;
+ 254   1      P2=0x1c;
+ 255   1      green=1;
+ 256   1      buzz=1;
+ 257   1      delay(10);
+ 258   1      lcd_init();
+ 259   1      while(1)
+ 260   1      {
+ 261   2              a=cardread();
+ 262   2      //      lcd_cmd(0x01);
+ 263   2      //      lcd_data(a+48);
+ 264   2      //      delay(100);
+ 265   2              switch(a)
+ 266   2                      {
+ 267   3                         case '0':
+ 268   3                              //lcd_cmd(0x01);
+ 269   3                              lcd_cmd(0xc0);
+ 270   3                lcd_str("DETECTING>>>>");
+ 271   3                    delay(10);
+ 272   3                                      break;
+ 273   3                              
+ 274   3                         case '1':
+ 275   3                               lcd_cmd(0x01); 
+ 276   3                               user++;        
+ 277   3                               lcd_str("Welcome user ");
+ 278   3                               lcd_data(user+48);
+ 279   3                               delay(10);
+ 280   3                               lcd_cmd(0x01);
+ 281   3                               lcd_str("Enter Ur Car No.");
+ 282   3                               //lcd_cmd(0x01);
+ 283   3                               ca=insert();
+ 284   3                               lcd_cmd(0x01);
+ 285   3                               lcd_str("SET UR PASSWORD");
+ 286   3                               delay(10);
+ 287   3                              pw=insert();
+ 288   3                                lcd_cmd(0x01);
+ 289   3                               lcd_str("PASSWORD SET");
+ 290   3                               delay(10);
+ 291   3                              break;
+ 292   3                         case '2':
+ 293   3                                lcd_cmd(0x01);        
+ 294   3                               user++;        
+ 295   3                               lcd_str("Welcome user ");
+ 296   3                               lcd_data(user+48);
+ 297   3                               delay(10);
+ 298   3                               lcd_cmd(0x01);
+ 299   3                               lcd_str("Enter Ur Car No.");
+ 300   3                               //lcd_cmd(0x01);
+ 301   3                               ca=insert();
+ 302   3                               lcd_cmd(0x01);
+ 303   3                               lcd_str("SET UR PASSWORD");
+C51 COMPILER V9.05   EACP                                                                  12/19/2012 15:40:59 PAGE 6   
+
+ 304   3                               delay(10);
+ 305   3                              pw=insert();
+ 306   3                                lcd_cmd(0x01);
+ 307   3                               lcd_str("PASSWORD SET");
+ 308   3                               delay(10);
+ 309   3                              break;
+ 310   3                         
+ 311   3                         case '3':     
+ 312   3                                        buzz=0;
+ 313   3                                        lcd_cmd(0x01);
+ 314   3                                        lcd_str("Enter Ur Car no");
+ 315   3                                        ca2=insert();
+ 316   3                                        if(ca2==ca)
+ 317   3                                            {
+ 318   4                                                        lcd_cmd(0x01);
+ 319   4                                        lcd_str("Enter Password");
+ 320   4                              aa:        pw2=insert();
+ 321   4                                         if(pw2==pw)
+ 322   4                                         {
+ 323   5                                               right();
+ 324   5                                         }
+ 325   4                                          else
+ 326   4                                     {
+ 327   5                                              lcd_cmd(0x01);
+ 328   5                                              lcd_str(" Wrong Password");
+ 329   5                                              buzz=0;
+ 330   5                                              red=1;
+ 331   5                                              delay(10);
+ 332   5                                              buzz=1;
+ 333   5                                              cnt++;
+ 334   5                                              if(cnt<=2)
+ 335   5                                              {
+ 336   6                                               lcd_cmd(0xc0);
+ 337   6                                               lcd_str(" ENTER IT AGAIN");
+ 338   6                                               red=0;
+ 339   6                                               goto aa;
+ 340   6                                              }
+ 341   5                                              else
+ 342   5                                              {
+ 343   6                                                lcd_cmd(0x01);
+ 344   6                                                lcd_str("   3rd time");
+ 345   6                                                lcd_cmd(0xc0);
+ 346   6                                                lcd_str(" Wrong Password");
+ 347   6                                            buzz=0;
+ 348   6                                                delay(10);
+ 349   6                                                lcd_cmd(0x01);
+ 350   6                                red = 0;
+ 351   6                                                lcd_str(" System Exiting!!!!");
+ 352   6                                                delay(10);
+ 353   6                                                buzz=1;
+ 354   6                                                break;
+ 355   6                                                }
+ 356   5                                        }
+ 357   4                                      }
+ 358   3                                        else
+ 359   3                                           {
+ 360   4                                                lcd_cmd(0x01);
+ 361   4                                            lcd_str("Car doesn't exist");
+ 362   4                                        lcd_cmd(0xc0);
+ 363   4                                        lcd_str("in database");
+ 364   4                              
+ 365   4                                               }
+C51 COMPILER V9.05   EACP                                                                  12/19/2012 15:40:59 PAGE 7   
+
+ 366   3                                       break;
+ 367   3      
+ 368   3                         case '4':     
+ 369   3                                        buzz=0;
+ 370   3                                        lcd_cmd(0x01);
+ 371   3                                        lcd_str("Enter Ur Car no");
+ 372   3                                        ca2=insert();
+ 373   3                                        if(ca2==ca)
+ 374   3                                    {
+ 375   4                                                        lcd_cmd(0x01);
+ 376   4                                                        lcd_str("Enter Password");
+ 377   4                                              aa1:       pw2=insert();
+ 378   4                                                         if(pw2==pw)
+ 379   4                                                 {
+ 380   5                                                       right();
+ 381   5                                                 }
+ 382   4                                                          else
+ 383   4                                                  {
+ 384   5                                                              lcd_cmd(0x01);
+ 385   5                                                              lcd_str(" Wrong Password");
+ 386   5                                                              buzz=0;
+ 387   5                                                              red=1;
+ 388   5                                                              delay(10);
+ 389   5                                                              buzz=1;
+ 390   5                                                              cnt++;
+ 391   5                                                              if(cnt<=2)
+ 392   5                                                      {
+ 393   6                                                               lcd_cmd(0xc0);
+ 394   6                                                               lcd_str(" ENTER IT AGAIN");
+ 395   6                                                               red=0;
+ 396   6                                                               goto aa1;
+ 397   6                                                      }
+ 398   5                                                              else
+ 399   5                                                      {
+ 400   6                                                               lcd_cmd(0x01);
+ 401   6                                                               lcd_str("   3rd time");
+ 402   6                                                                lcd_cmd(0xc0);
+ 403   6                                                                lcd_str(" Wrong Password");
+ 404   6                                                            buzz=0;
+ 405   6                                                                delay(10);
+ 406   6                                                                lcd_cmd(0x01);
+ 407   6                                          red = 0;
+ 408   6                                                                lcd_str(" System Exiting!!!!");
+ 409   6                                                                delay(10);
+ 410   6                                                                buzz=1;
+ 411   6                                                                break;
+ 412   6                                                        }
+ 413   5                                                }
+ 414   4                                       }
+ 415   3                                        else
+ 416   3                                           {
+ 417   4                                                lcd_cmd(0x01);
+ 418   4                                            lcd_str("Car doesn't exist");
+ 419   4                                        lcd_cmd(0xc0);
+ 420   4                                        lcd_str("in database");
+ 421   4                              
+ 422   4                                               }
+ 423   3                                       break;
+ 424   3                        default:
+ 425   3                                  lcd_cmd(0x01);
+ 426   3                                            lcd_str("Invalid Option");
+ 427   3                              }
+C51 COMPILER V9.05   EACP                                                                  12/19/2012 15:40:59 PAGE 8   
+
+ 428   2                 lcd_cmd(0x01);
+ 429   2            cnt=0;  
+ 430   2        }
+ 431   1       }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1218    ----
+   CONSTANT SIZE    =    298    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      18
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

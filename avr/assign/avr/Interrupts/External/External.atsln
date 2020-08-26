@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "External", "External\External.cproj", "{D22A79F8-9572-4962-87F5-683EDC50FC48}"
+EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "external_lcd", "external_lcd\external_lcd.cproj", "{6E8A7F6D-C388-4CE2-B73F-774FC3EBDF87}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D22A79F8-9572-4962-87F5-683EDC50FC48}.Debug|AVR.ActiveCfg = Debug|AVR
+		{D22A79F8-9572-4962-87F5-683EDC50FC48}.Debug|AVR.Build.0 = Debug|AVR
+		{D22A79F8-9572-4962-87F5-683EDC50FC48}.Release|AVR.ActiveCfg = Release|AVR
+		{D22A79F8-9572-4962-87F5-683EDC50FC48}.Release|AVR.Build.0 = Release|AVR
+		{6E8A7F6D-C388-4CE2-B73F-774FC3EBDF87}.Debug|AVR.ActiveCfg = Debug|AVR
+		{6E8A7F6D-C388-4CE2-B73F-774FC3EBDF87}.Debug|AVR.Build.0 = Debug|AVR
+		{6E8A7F6D-C388-4CE2-B73F-774FC3EBDF87}.Release|AVR.ActiveCfg = Release|AVR
+		{6E8A7F6D-C388-4CE2-B73F-774FC3EBDF87}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,15 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\vipul\Desktop\89c2051 micro\lcd.uvproj
+Project File Date:  06/09/2016
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling lcd.c...
+linking...
+Program Size: data=9.0 xdata=0 code=58
+creating hex file from "lcd"...
+"lcd" - 0 Error(s), 0 Warning(s).

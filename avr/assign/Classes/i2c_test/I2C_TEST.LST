@@ -1,0 +1,104 @@
+I2C_TEST                                                                                                      PAGE 1
+
+                       1    $mod51
+  00A1                 2    sda equ p2.1
+  00A2                 3    scl equ p2.2
+0000                   4    org 00h
+0000 7F40              5    mov r7,#40h
+0002 7E0F              6    mov r6,#0fh
+0004 112F              7    acall i2cstart
+0006 74A0              8    mov a,#10100000b
+0008 112F              9    acall i2cstart
+000A 1149             10    acall i2cwrite
+000C EF               11    mov a,r7                     ;location from 03 to 07.
+000D 1149             12    acall i2cwrite
+000F EE               13    mov a,r6
+0010 1149             14    acall i2cwrite
+0012 113C             15    acall i2cstop
+                      16    ;&&&&&&&&&&&&&&&&&&&&&&&&&
+0014 112F             17    acall i2cstart
+0016 74A0             18    mov a,#10100000b
+0018 112F             19    acall i2cstart
+001A 1149             20    acall i2cwrite
+001C EF               21    mov a,r7
+001D 1149             22    acall i2cwrite
+001F 112F             23    acall i2cstart
+0021 74A1             24    mov a,#10100001b
+0023 1149             25    acall i2cwrite
+0025 115F             26    acall i2cread
+0027 F590             27    mov p1,a 
+0029 1170             28    acall delayone
+002B 113C             29    acall i2cstop
+002D 80FE             30    sjmp $
+                      31    
+002F                  32    i2cstart:       
+002F D2A1             33            setb sda
+0031 1170             34            acall delayone
+0033 D2A2             35            setb scl
+0035 1170             36            acall delayone
+0037 C2A1             37            clr sda
+0039 C2A2             38            clr scl
+003B 22               39            ret
+                      40    
+003C                  41    i2cstop:
+003C C2A2             42            clr scl
+003E C2A1             43            clr sda
+0040 D2A2             44            setb scl
+0042 1170             45            acall delayone
+0044 D2A1             46            setb sda
+0046 A2A1             47            mov c,sda
+0048 22               48            ret
+                      49    ;=======================
+0049                  50    i2cwrite:
+0049 7808             51            mov r0,#08h
+004B                  52    i2cwrite_loop:
+004B 33               53            rlc a
+004C 92A1             54            mov sda,c
+004E D2A2             55            setb scl
+0050 1170             56            acall delayone
+0052 C2A2             57            clr scl
+0054 D8F5             58            djnz r0,i2cwrite_loop   
+I2C_TEST                                                                                                      PAGE 2
+
+0056 A2A1             59            mov c,sda
+0058 D2A2             60            setb scl
+005A 1170             61            acall delayone             
+005C C2A2             62            clr scl
+005E 22               63            ret     
+                      64    ;=======================
+                      65    
+005F                  66    i2cread:
+005F A2A1             67            mov c,sda
+0061 7808             68            mov r0,#8
+0063 33               69            rlc a
+0064                  70    i2cread_loop:
+0064 D2A2             71            setb scl
+0066 A2A1             72            mov c,sda
+0068 33               73            rlc a
+0069 1170             74            acall delayone
+006B C2A2             75            clr scl
+006D D8F5             76            djnz r0,i2cread_loop
+006F 22               77            ret     
+                      78    
+0070                  79     delayone:      
+0070 7964             80            mov r1,#100
+0072                  81          loopa: 
+0072 D9FE             82            djnz r1,loopa
+0074 22               83            ret 
+                      84    end
+
+VERSION 1.2h ASSEMBLY COMPLETE, 0 ERRORS FOUND
+I2C_TEST                                                                                                      PAGE 3
+
+DELAYONE . . . . . . . . . . . .  C ADDR  0070H  
+I2CREAD. . . . . . . . . . . . .  C ADDR  005FH  
+I2CREAD_LOOP . . . . . . . . . .  C ADDR  0064H  
+I2CSTART . . . . . . . . . . . .  C ADDR  002FH  
+I2CSTOP. . . . . . . . . . . . .  C ADDR  003CH  
+I2CWRITE . . . . . . . . . . . .  C ADDR  0049H  
+I2CWRITE_LOOP. . . . . . . . . .  C ADDR  004BH  
+LOOPA. . . . . . . . . . . . . .  C ADDR  0072H  
+P1 . . . . . . . . . . . . . . .  D ADDR  0090H  PREDEFINED  
+P2 . . . . . . . . . . . . . . .  D ADDR  00A0H  PREDEFINED  
+SCL. . . . . . . . . . . . . . .    NUMB  00A2H  
+SDA. . . . . . . . . . . . . . .    NUMB  00A1H  

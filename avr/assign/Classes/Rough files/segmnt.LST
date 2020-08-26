@@ -1,0 +1,57 @@
+A51 MACRO ASSEMBLER  SEGMNT                                                               01/29/2013 18:31:02 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02a
+OBJECT MODULE PLACED IN segmnt.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE segmnt.a SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     
+0000                   2     org 00h
+0000 E4                3     clr a
+0001                   4     here1:
+0001 900150            5     mov dptr, #150h
+0004                   6     here: 
+0004 F590              7     mov P1, a
+0006 E4                8     clr a
+0007 93                9     movc a,@a+dptr
+0008 A3               10     inc dptr
+0009 1110             11     acall delay
+000B B400F6           12     cjne a,#0,here
+000E 80F1             13     sjmp here1
+0010                  14     delay:
+0010 78FF             15     mov r0,#255
+0012 79FF             16     ag2: mov r1,#255
+0014 7A0A             17     ag1: mov r2,#10
+0016 DAFE             18     ag: djnz r2,ag
+0018 D9FA             19     djnz r1,ag1
+001A D8F6             20     djnz r0,ag2
+001C 22               21     ret
+                      22     
+0150                  23     org 150h
+0150 C0F9A4B0         24     DB 0c0h,0f9h,0a4h,0b0h,99h,92h,82h,0f8h,80h,90h,0
+0154 999282F8                
+0158 809000                  
+                      25     END
+A51 MACRO ASSEMBLER  SEGMNT                                                               01/29/2013 18:31:02 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AG . . . . . . . .  C ADDR   0016H   A   
+AG1. . . . . . . .  C ADDR   0014H   A   
+AG2. . . . . . . .  C ADDR   0012H   A   
+DELAY. . . . . . .  C ADDR   0010H   A   
+HERE . . . . . . .  C ADDR   0004H   A   
+HERE1. . . . . . .  C ADDR   0001H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

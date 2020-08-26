@@ -1,0 +1,53 @@
+A51 MACRO ASSEMBLER  MAIN                                                                 06/02/2016 18:04:40 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02a
+OBJECT MODULE PLACED IN MAIN.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE MAIN.ASM SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     $mod51 
+                       2     
+0000                   3     ORG 0000H
+                       4            
+0000 759000            5                MOV P1,#00H
+0003 7455              6                MOV A,#55H
+0005 753214            7                MOV 32H,#20
+                       8     
+0008 F590              9     loop:      MOV P1,A
+000A 120300           10                LCALL DELAY
+000D F4               11            CPL A
+000E D532F7           12                DJNZ 32H,loop
+                      13               
+0300                  14         ORG 300H                          ;---------- this is delay subroutine ------------    
+                                             ;put DELAY at address 300H
+0300 7D0A             15     DELAY: MOV R5,#10
+0302 7EC8             16       third: MOV R6,#200
+0304 7FC8             17       second: MOV R7,#200
+0306 DFFE             18      DJNZ R7,$
+0308 DEFA             19      DJNZ R6,second
+030A DDF6             20      DJNZ R5,third
+                      21     
+030C 22               22      RET
+                      23             
+                      24     END
+A51 MACRO ASSEMBLER  MAIN                                                                 06/02/2016 18:04:40 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY. . . . . . .  C ADDR   0300H   A   
+LOOP . . . . . . .  C ADDR   0008H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+SECOND . . . . . .  C ADDR   0304H   A   
+THIRD. . . . . . .  C ADDR   0302H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

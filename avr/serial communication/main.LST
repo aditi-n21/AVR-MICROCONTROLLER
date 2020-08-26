@@ -1,0 +1,153 @@
+C51 COMPILER V9.05   MAIN                                                                  07/24/2016 05:31:32 PAGE 1   
+
+
+C51 COMPILER V9.05, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg51.h>
+   2          
+   3          #define         LCD             P1      // D0 - D7 connected to P2.0 to P2.7
+   4          sbit rs = P1^1;
+   5          //sbit rw = P1^1;
+   6          sbit en = P1^0;
+   7          
+   8                          
+   9          
+  10          void delay(unsigned char); 
+  11          void lcd_cmd(unsigned char);
+  12          void lcd_cmd1(unsigned char);
+  13          void lcd_data(unsigned char);
+  14          void lcd_data1(unsigned char);
+  15          void lcd_str(unsigned char *);
+  16          void lcd_init(void);
+  17           void delay(unsigned char time)
+  18          {
+  19   1      int i,j;
+  20   1      for(j=0;j<time;j++)
+  21   1      for(i=0;i<1275;i++);
+  22   1      }
+  23          
+  24          void lcd_init() 
+  25          {
+  26   1      lcd_cmd(0x02);
+  27   1      lcd_cmd(0x28);
+  28   1      lcd_cmd(0x01);
+  29   1      lcd_cmd(0x06);
+  30   1      lcd_cmd(0x0E);
+  31   1      lcd_cmd(0x80);
+  32   1      }
+  33          void lcd_data1(unsigned char value)
+  34          {
+  35   1              LCD=value;
+  36   1              rs=1;
+  37   1      //      rw=0;
+  38   1              en=1;
+  39   1              delay(5);
+  40   1              en=0;
+  41   1      }
+  42          void lcd_data(unsigned char value)
+  43          {
+  44   1              unsigned char cd1;
+  45   1              cd1=value & 0xf0;
+  46   1              lcd_data1(cd1);
+  47   1              cd1=(value<<4) & 0xf0;
+  48   1              lcd_data1(cd1);
+  49   1      }       
+  50          
+  51          void lcd_cmd1(unsigned char value)
+  52          {
+  53   1              LCD=value;
+  54   1              rs=0;
+  55   1              //rw=0;
+C51 COMPILER V9.05   MAIN                                                                  07/24/2016 05:31:32 PAGE 2   
+
+  56   1              en=1;
+  57   1              delay(5);
+  58   1              en=0;
+  59   1      }
+  60          void lcd_cmd(unsigned char value)
+  61          {
+  62   1              unsigned char cd1;
+  63   1              cd1=value & 0xf0;
+  64   1              lcd_cmd1(cd1);
+  65   1              cd1=(value<<4) & 0xf0;
+  66   1              lcd_cmd1(cd1);
+  67   1      }       
+  68           void lcd_str(unsigned char *s)
+  69          {
+  70   1                      while(*s!='\0') // string not equal to null character
+  71   1                      {
+  72   2                              lcd_data(*s++);
+  73   2                      }
+  74   1      }  
+  75          void main()
+  76           {
+  77   1       unsigned char i=0,j=0,k=0, mybyte;
+  78   1       unsigned char pos=0x80, ps=0xc0;
+  79   1       LCD=0x00;
+  80   1                  lcd_init();
+  81   1      TMOD=0x20; //use Timer 1, mode 2
+  82   1      TH1=0xFA; //4800 baud rate
+  83   1      SCON=0x50;
+  84   1      TR1=1; //start timer
+  85   1       lcd_str("welcome to auto");
+  86   1       delay(15);
+  87   1      lcd_cmd1(0xc0);
+  88   1      lcd_str("matic system");
+  89   1      delay(20);
+  90   1      lcd_cmd(0x01);
+  91   1      while (1) {        //repeat forever
+  92   2      while (RI==0); //wait to receive
+  93   2      mybyte=SBUF; //save value
+  94   2      lcd_cmd(0x10);
+  95   2      if(j<32)
+  96   2      {
+  97   3      if(k<16)
+  98   3      {
+  99   4      lcd_cmd(pos);
+ 100   4      lcd_data(mybyte); //write value to port
+ 101   4      k++;
+ 102   4      pos++;
+ 103   4      j++;
+ 104   4      }
+ 105   3      else if(k<32)
+ 106   3      {
+ 107   4      lcd_cmd(ps);
+ 108   4      lcd_data(mybyte);
+ 109   4      k++;
+ 110   4      ps++;
+ 111   4      j++;
+ 112   4      }
+ 113   3      }
+ 114   2      else if(k>=32)
+ 115   2      {
+ 116   3      k=0;
+ 117   3      j=0;
+C51 COMPILER V9.05   MAIN                                                                  07/24/2016 05:31:32 PAGE 3   
+
+ 118   3      pos=0x80; 
+ 119   3      ps=0xc0;
+ 120   3      lcd_cmd(0X01);
+ 121   3      }
+ 122   2      RI=0;
+ 123   2      
+ 124   2      }
+ 125   1      
+ 126   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    327    ----
+   CONSTANT SIZE    =     29    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       8
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,1 @@
+mseg.o: mseg.c

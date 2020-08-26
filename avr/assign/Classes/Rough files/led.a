@@ -1,0 +1,14 @@
+org 00h
+here: clr P2.0
+acall delay
+setb P2.0
+acall delay
+sjmp here
+
+delay: mov r0,#255
+back1: mov r1,#255
+back: djnz r1,back
+djnz r0,back1
+ret
+
+end

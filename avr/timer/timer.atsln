@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "50 perc duty cycel", "50 perc duty cycel\50 perc duty cycel.cproj", "{B9838556-595E-48B2-80DC-AC46C04F460C}"
+EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "1khz frequency genrate", "1khz frequency genrate\1khz frequency genrate.cproj", "{5A9ADEAA-E661-4110-BF81-2DD787B1393A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B9838556-595E-48B2-80DC-AC46C04F460C}.Debug|AVR.ActiveCfg = Debug|AVR
+		{B9838556-595E-48B2-80DC-AC46C04F460C}.Debug|AVR.Build.0 = Debug|AVR
+		{B9838556-595E-48B2-80DC-AC46C04F460C}.Release|AVR.ActiveCfg = Release|AVR
+		{B9838556-595E-48B2-80DC-AC46C04F460C}.Release|AVR.Build.0 = Release|AVR
+		{5A9ADEAA-E661-4110-BF81-2DD787B1393A}.Debug|AVR.ActiveCfg = Debug|AVR
+		{5A9ADEAA-E661-4110-BF81-2DD787B1393A}.Debug|AVR.Build.0 = Debug|AVR
+		{5A9ADEAA-E661-4110-BF81-2DD787B1393A}.Release|AVR.ActiveCfg = Release|AVR
+		{5A9ADEAA-E661-4110-BF81-2DD787B1393A}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

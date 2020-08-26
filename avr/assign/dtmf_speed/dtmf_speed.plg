@@ -1,0 +1,23 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+E:\uc\dtmf_speed\dtmf_speed.uvproj
+Project File Date:  12/01/2013
+
+<h2>Output:</h2>
+compiling dtmf_speed.c...
+dtmf_speed.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=10.1 xdata=0 code=261
+creating hex file from "dtmf_speed"...
+"dtmf_speed" - 0 Error(s), 0 Warning(s).
+Rebuild target 'Target 1'
+assembling STARTUP.A51...
+compiling dtmf_speed.c...
+linking...
+Program Size: data=10.1 xdata=0 code=261
+creating hex file from "dtmf_speed"...
+"dtmf_speed" - 0 Error(s), 0 Warning(s).
